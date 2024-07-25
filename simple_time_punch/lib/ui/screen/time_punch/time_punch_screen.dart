@@ -8,6 +8,8 @@ class TimePunchScreen extends StatefulWidget {
     super.key,
   });
 
+  static const route = '/';
+
   @override
   State<TimePunchScreen> createState() => _TimePunchScreenState();
 }
@@ -39,9 +41,11 @@ class _TimePunchScreenState extends State<TimePunchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      endDrawer: const MainMenu(),
+      drawer: const MainMenu(),
       body: Center(
-        child: SizedBox(height: MediaQuery.of(context).size.height / 3, child: Image.asset(kAssetRfidIconWhite)),
+        child: SizedBox(
+            height: MediaQuery.of(context).size.height / 3,
+            child: Image.asset(kAssetRfidIconWhite)),
       ),
     );
   }
