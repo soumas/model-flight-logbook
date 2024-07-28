@@ -15,6 +15,9 @@ class TimePunchScreen extends StatefulWidget {
 }
 
 class _TimePunchScreenState extends State<TimePunchScreen> {
+  var _input = '';
+  var _lastInput = '';
+
   @override
   void initState() {
     super.initState();
@@ -28,10 +31,17 @@ class _TimePunchScreenState extends State<TimePunchScreen> {
   }
 
   bool _onKey(KeyEvent event) {
-    final key = event.character;
-
     if (event is KeyDownEvent) {
-      debugPrint("Key down: $key");
+      _input += event.character!;
+      if ((event.character ?? '') == '\r') {
+        _lastInput = _input;
+        _input = '';
+        debugPrint(_input);
+        setState(() {
+          // update ui
+        });
+        _input = '';
+      }
     }
 
     return false;
@@ -42,10 +52,23 @@ class _TimePunchScreenState extends State<TimePunchScreen> {
     return Scaffold(
       appBar: AppBar(),
       drawer: const MainMenu(),
-      body: Center(
-        child: SizedBox(
-            height: MediaQuery.of(context).size.height / 3,
-            child: Image.asset(kAssetRfidIconWhite)),
+      body: Stack(
+        children: [
+          Center(
+              child: Text(
+            _lastInput,
+            style: const TextStyle(
+              color: Colors.green,
+              fontSize: 30,
+            ),
+          )),
+          Center(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height / 3,
+              child: Image.asset(kAssetRfidIconWhite),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:simple_time_punch/injector.dart';
 import 'package:simple_time_punch/l10n/generated/app_localizations.dart';
 import 'package:simple_time_punch/ui/screen/settings/settings_screen.dart';
 import 'package:simple_time_punch/ui/screen/time_punch/time_punch_screen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await initInjector();
   runApp(const MainApp());
 }
 
@@ -27,6 +28,7 @@ class MainApp extends StatelessWidget {
       localizationsDelegates: const [
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
         AppLocalizations.delegate,
       ],
     );
