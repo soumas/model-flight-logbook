@@ -17,10 +17,6 @@ class MainMenu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           ListTile(
-            title: const Text('Manuell stempeln'),
-            onTap: () {},
-          ),
-          ListTile(
             title: Text(AppLocalizations.of(context)!.settings),
             onTap: () {
               Navigator.of(context).pushNamed(SettingsScreen.route);
