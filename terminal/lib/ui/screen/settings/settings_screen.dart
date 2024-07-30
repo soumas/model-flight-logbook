@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_time_punch/injector.dart';
-import 'package:simple_time_punch/l10n/generated/app_localizations.dart';
-import 'package:simple_time_punch/ui/screen/settings/cubit/local_settings_cubit.dart';
-import 'package:simple_time_punch/ui/screen/settings/cubit/local_settings_state.dart';
+import 'package:simple_time_punch_terminal/injector.dart';
+import 'package:simple_time_punch_terminal/l10n/generated/app_localizations.dart';
+import 'package:simple_time_punch_terminal/ui/screen/settings/cubit/local_settings_cubit.dart';
+import 'package:simple_time_punch_terminal/ui/screen/settings/cubit/local_settings_state.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

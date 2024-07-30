@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:simple_time_punch/l10n/generated/app_localizations.dart';
-import 'package:simple_time_punch/ui/screen/settings/settings_screen.dart';
+import 'package:simple_time_punch_terminal/l10n/generated/app_localizations.dart';
+import 'package:simple_time_punch_terminal/ui/screen/settings/settings_screen.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({

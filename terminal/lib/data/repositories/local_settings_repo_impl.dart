@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_time_punch/constants.dart';
-import 'package:simple_time_punch/domain/entities/local_settings.dart';
-import 'package:simple_time_punch/domain/repositories/local_settings_repo.dart';
+import 'package:simple_time_punch_terminal/constants.dart';
+import 'package:simple_time_punch_terminal/domain/entities/local_settings.dart';
+import 'package:simple_time_punch_terminal/domain/repositories/local_settings_repo.dart';
 
 class LocalSettingsRepoImpl extends LocalSettingsRepo {
   @override

@@ -1,5 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:simple_time_punch/mappable.dart';
+import 'package:simple_time_punch_terminal/mappable.dart';
 
 part 'local_settings.mapper.dart';
 

@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "simple_time_punch",
+            "name": "simple_time_punch_terminal",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "simple_time_punch (profile mode)",
+            "name": "simple_time_punch_terminal (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "simple_time_punch (release mode)",
+            "name": "simple_time_punch_terminal (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

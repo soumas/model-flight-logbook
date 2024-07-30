@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:simple_time_punch/injector.dart';
-import 'package:simple_time_punch/l10n/generated/app_localizations.dart';
-import 'package:simple_time_punch/ui/screen/settings/settings_screen.dart';
-import 'package:simple_time_punch/ui/screen/time_punch/time_punch_screen.dart';
+import 'package:simple_time_punch_terminal/injector.dart';
+import 'package:simple_time_punch_terminal/l10n/generated/app_localizations.dart';
+import 'package:simple_time_punch_terminal/ui/screen/settings/settings_screen.dart';
+import 'package:simple_time_punch_terminal/ui/screen/time_punch/time_punch_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
