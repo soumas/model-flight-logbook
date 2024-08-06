@@ -1,3 +1,5 @@
+from config.loader import config
+
 # Import necessary modules and classes
 import datetime
 from fastapi import FastAPI, Depends, HTTPException
@@ -7,15 +9,17 @@ from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
 from typing import Optional
 
-TODO:
-https://fastapi.tiangolo.com/tutorial/security/get-current-user/
+
+
+
+#TODO:
+#https://fastapi.tiangolo.com/tutorial/security/get-current-user/
 
 # FastAPI app instance
 app = FastAPI()
  
 # Database setup
-DATABASE_URL = "sqlite:///./data.db"
-engine = create_engine(DATABASE_URL)
+engine = create_engine(config['sqlalchemy']['url'])
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = sqlalchemy.orm.declarative_base()
 
@@ -93,4 +97,4 @@ async def read_user(user_id: str, db: Session = Depends(get_db)):
 
 if __name__ == "__main__":
 	import uvicorn
-	uvicorn.run(app, host="127.0.0.1", port=8000)
+	uvicorn.run(app, host=config['api']['hostname'], port=int(config['api']['port']))
