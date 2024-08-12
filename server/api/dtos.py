@@ -1,16 +1,25 @@
 import datetime
+from typing import Optional
 
 from pydantic import BaseModel
-from typing import Optional
+from sqlalchemy import DateTime
+
+from db.entities import FlightPlanStatus
 
 class PilotDTO(BaseModel):
     id: str
     firstname: str
     lastname: str
     phonenumber: str
+    active: bool
 
-class RecordDTO(BaseModel):
-    user_id: str
-    start: datetime.datetime
-    end: Optional[datetime.datetime] = None
-    comment: Optional[str] = None
+class FlightSessionStatusDTO(BaseModel):
+    pilot_name: str
+    current_session_id: Optional[int]=None
+    current_session_starttime: Optional[datetime.datetime]=None
+    flight_plan_status: Optional[FlightPlanStatus]=None
+
+class EndFlightSessionDTO(BaseModel):
+    id: str
+    takeoffcount: Optional[int]=None
+    comment: Optional[str]=None

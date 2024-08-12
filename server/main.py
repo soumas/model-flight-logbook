@@ -1,6 +1,8 @@
 from config.manager import *
 from db.entities import *
-from api.endpoints import *
+from api.manager import *
+from api.endpoints_admin import *
+from api.endpoints_terminal import *
 
 if __name__ == "__main__":
 	import uvicorn
