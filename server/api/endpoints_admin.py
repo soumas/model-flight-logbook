@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from config.manager import config
 from api.dtos import PilotDTO
 from api.manager import api, api_key_header
-from api.exceptions import invalid_api_key, primary_key_violation, item_not_found
+from api.exceptions import invalid_api_key
 from db.entities import PilotEntity
 from db.manager import get_db
 

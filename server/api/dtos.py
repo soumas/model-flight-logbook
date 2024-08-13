@@ -20,6 +20,5 @@ class FlightSessionStatusDTO(BaseModel):
     flight_plan_status: Optional[FlightPlanStatus]=None
 
 class EndFlightSessionDTO(BaseModel):
-    id: str
     takeoffcount: Optional[int]=None
     comment: Optional[str]=None
