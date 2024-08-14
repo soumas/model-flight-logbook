@@ -12,6 +12,7 @@ from api.manager import api, api_key_header
 from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, utm_action_running
 from db.entities import FlightPlanStatus, FlightSessionEntity, PilotEntity
 from db.manager import get_db, SessionLocal
+from features.send_mail import send_mail
 
 def __terminalauth(api_key_header:str = Security(api_key_header)):
     if api_key_header == config.get('api','apikey_terminal'):
@@ -92,10 +93,11 @@ async def start_flight_session(x_pilot_id:Annotated[str, Header()], background_t
     fsession.pilot_id = x_pilot_id
     fsession.start = datetime.now()
     fsession.flightplan_status = FlightPlanStatus.initial if config.getboolean('utm','enable') else FlightPlanStatus.unsupported
-    db.add(fsession)
-    db.commit()
-    if config.getboolean('utm','enable'):
-        background_tasks.add_task(__start_utm_task, fsession, FlightPlanStatus.active)
+    #db.add(fsession)
+    #db.commit()
+    send_mail(background_tasks=background_tasks, subject='Testnachricht', email_to='office@soumasoft.com', body={'title':'Hello World', 'name':'John Doe'})
+    # if config.getboolean('utm','enable'):
+    #     background_tasks.add_task(__start_utm_task, fsession, FlightPlanStatus.active)
 
 
 @api.post("/flightsession/end", dependencies=[Security(__terminalauth)], response_model=None)
@@ -110,5 +112,5 @@ async def end_flight_session(data:EndFlightSessionDTO, x_pilot_id:Annotated[str,
     fsession.takeoffcount = data.takeoffcount
     fsession.comment = data.comment
     db.commit()
-    if config.getboolean('utm','enable'):
-        background_tasks.add_task(__start_utm_task, fsession, FlightPlanStatus.closed)
+    # if config.getboolean('utm','enable'):
+    #     background_tasks.add_task(__start_utm_task, fsession, FlightPlanStatus.closed)
