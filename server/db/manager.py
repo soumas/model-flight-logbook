@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from config.manager import config
  
 # Database setup
-engine = create_engine(config['sqlalchemy']['url'])
+engine = create_engine(config.db.url)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Dependency to get the database session

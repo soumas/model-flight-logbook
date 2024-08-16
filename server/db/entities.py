@@ -7,10 +7,9 @@ from db.manager import engine
 Base = sqlalchemy.orm.declarative_base()
 
 class FlightPlanStatus(enum.Enum):
-    unsupported = 'unsupported'
-    initial = 'initial'
+    new = 'new'
     pending = 'pending'
-    active = 'active'
+    flying = 'flying'
     closed = 'closed'
     error = 'error'
 
@@ -20,6 +19,7 @@ class PilotEntity(Base):
     firstname = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
     phonenumber = Column(String, nullable=False)
+    email = Column(String, nullable=False)
     active = Column(Boolean, nullable=False)
 
 class FlightSessionEntity(Base):

@@ -13,7 +13,8 @@ pip install fastapi
 pip install pydantic
 pip install sqlalchemy
 pip install uvicorn
-pip install fastapi_mail
+pip install fastapi-mail
+
 ```
 
 ## Selenium (utm login)

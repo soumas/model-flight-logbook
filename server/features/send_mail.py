@@ -4,21 +4,24 @@ from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from config.manager import config
 
 conf = ConnectionConfig(
-    MAIL_USERNAME=config.get('smtp', 'username'),
-    MAIL_PASSWORD=config.get('smtp', 'password'),
-    MAIL_SERVER=config.get('smtp', 'server'),
-    MAIL_PORT=config.getint('smtp', 'port'),
-    MAIL_FROM=config.get('smtp', 'from_email'),
-    MAIL_FROM_NAME=config.get('smtp', 'from_name'),
-    MAIL_STARTTLS=config.getboolean('smtp', 'starttls'),
-    MAIL_SSL_TLS=config.getboolean('smtp', 'ssl_tls'),
-    USE_CREDENTIALS=config.getboolean('smtp', 'use_credentials'),
-    VALIDATE_CERTS=config.getboolean('smtp', 'validate_certs'),
-    TIMEOUT=config.getint('smtp', 'timeout'),
-    TEMPLATE_FOLDER=config.get('smtp', 'template_folder') # DirectoryPath
+    MAIL_USERNAME=config.smtp.username,
+    MAIL_PASSWORD=config.smtp.password,
+    MAIL_SERVER=config.smtp.server,
+    MAIL_PORT=config.smtp.port,
+    MAIL_FROM=config.smtp.from_email,
+    MAIL_FROM_NAME=config.smtp.from_name,
+    MAIL_STARTTLS=config.smtp.starttls,
+    MAIL_SSL_TLS=config.smtp.ssl_tls,
+    MAIL_DEBUG=config.smtp.debug,
+    USE_CREDENTIALS=config.smtp.use_credentials,
+    VALIDATE_CERTS=config.smtp.validate_certs,
+    TIMEOUT=config.smtp.timeout,
+    TEMPLATE_FOLDER=config.smtp.template_folder,
+    SUPPRESS_SEND=config.smtp.suppress_send,
+
 )
 
-def send_mail(background_tasks: BackgroundTasks, subject: str, email_to: str, body: dict):
+def send_mail(background_tasks: BackgroundTasks, template_name:str, subject: str, email_to: str, body: dict):
     message = MessageSchema(
         subject=subject,
         recipients=[email_to],
@@ -26,4 +29,4 @@ def send_mail(background_tasks: BackgroundTasks, subject: str, email_to: str, bo
         subtype=MessageType.html
     )
     fm = FastMail(conf)
-    background_tasks.add_task(fm.send_message, message, template_name='utm_started.html')
+    background_tasks.add_task(fm.send_message, message, template_name=template_name)

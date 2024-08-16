@@ -10,7 +10,7 @@ from db.manager import get_db
 
 
 def __adminauth(api_key_header: str = Security(api_key_header)):
-    if api_key_header == config.get('api','apikey_admin'):
+    if api_key_header == config.api.apikey_admin:
         return api_key_header
     raise invalid_api_key
 

@@ -11,6 +11,7 @@ class PilotDTO(BaseModel):
     firstname: str
     lastname: str
     phonenumber: str
+    email: str
     active: bool
 
 class FlightSessionStatusDTO(BaseModel):
