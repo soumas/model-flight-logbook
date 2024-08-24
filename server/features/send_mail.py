@@ -1,7 +1,7 @@
 import os
 from fastapi import BackgroundTasks
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
-from config.manager import config
+from config.configmanager import config
 
 conf = ConnectionConfig(
     MAIL_USERNAME=config.smtp.username,

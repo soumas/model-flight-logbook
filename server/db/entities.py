@@ -2,7 +2,7 @@ import enum
 import sqlalchemy
 
 from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey, Integer, String
-from db.manager import engine
+from db.dbmanager import engine
 
 Base = sqlalchemy.orm.declarative_base()
 

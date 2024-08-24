@@ -1,12 +1,12 @@
 from fastapi import Depends, Response, Security, status
 from requests import Session
 from sqlalchemy.exc import IntegrityError
-from config.manager import config
+from config.configmanager import config
 from api.dtos import PilotDTO
-from api.manager import api, api_key_header
+from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key
 from db.entities import PilotEntity
-from db.manager import get_db
+from db.dbmanager import get_db
 
 
 def __adminauth(api_key_header: str = Security(api_key_header)):

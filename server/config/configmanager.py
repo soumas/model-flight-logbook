@@ -49,6 +49,7 @@ class UtmConfig:
         self.max_altitude_m = _ini.get('utm','max_altitude_m')
         self.mtom_g = _ini.get('utm','mtom_g')
         self.notify_pilot = _ini.getboolean('utm','notify_pilot')
+        self.simulate = _ini.getboolean('utm','simulate')
 
 class Config:
     def __init__(self):

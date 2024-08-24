@@ -1,6 +1,6 @@
-from config.manager import *
+from config.configmanager import *
 from db.entities import *
-from api.manager import *
+from api.apimanager import *
 from api.endpoints_admin import *
 from api.endpoints_terminal import *
 

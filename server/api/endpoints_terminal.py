@@ -5,11 +5,11 @@ from fastapi.params import Header
 from requests import Session
 from sqlalchemy import and_
 from api.dtos import EndFlightSessionDTO, FlightSessionStatusDTO
-from config.manager import config
-from api.manager import api, api_key_header
+from config.configmanager import config
+from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, utm_action_running
 from db.entities import FlightPlanStatus, FlightSessionEntity, PilotEntity
-from db.manager import get_db
+from db.dbmanager import get_db
 from features import utm
 
 def __terminalauth(api_key_header:str = Security(api_key_header)):
