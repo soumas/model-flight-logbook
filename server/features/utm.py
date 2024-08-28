@@ -21,7 +21,7 @@ DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 
 def __create_driver():
     options = FirefoxOptions()
-    #options.add_argument("--headless")
+    options.add_argument("--headless")
     return webdriver.Firefox(options=options)
 
 def __dispose_driver(driver):
