@@ -5,8 +5,10 @@ from utils.logger import log
 
 # config setup
 _ini = configparser.ConfigParser()
+log.debug('loading config-default.ini')
 _ini.read('config-default.ini')
 if(os.path.isfile('config.ini')):
+    log.debug('loading config.ini')
     _ini.read('config.ini')
 
 def _read_version():
