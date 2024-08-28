@@ -23,3 +23,10 @@ pip install selenium
 ```
 
 Unzip latest version of geckodriver for your platform to /usr/local/bin: https://github.com/mozilla/geckodriver/releases
+
+
+## Run
+
+```shell
+uvicorn main:app --port 8065 --log-config ./logconfig-prod.ini
+```
