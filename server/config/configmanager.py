@@ -1,21 +1,27 @@
 import os.path
 import configparser
 
+from utils.logger import log
+
 # config setup
 _ini = configparser.ConfigParser()
 _ini.read('config-defaults.ini')
 if(os.path.isfile('config.ini')):
     _ini.read('config.ini')
 
+def _read_version():
+    with open('version') as f:
+        return f.readline()
+
 class CommonConfig:
     def __init__(self):
+        self.version = _read_version()
         self.clubname = _ini.get('common','clubname')
         self.admin_email = _ini.get('common','admin_email')
+        self.debug = _ini.getboolean('common','debug')
 
 class ApiConfig:
     def __init__(self):
-        self.hostname = _ini.get('api','hostname')
-        self.port = _ini.getint('api','port')
         self.apikey_admin = _ini.get('api','apikey_admin')
         self.apikey_terminal = _ini.get('api','apikey_terminal')
 

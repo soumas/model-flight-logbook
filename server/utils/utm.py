@@ -12,7 +12,7 @@ import traceback
 from db.entities import FlightPlanStatus, FlightSessionEntity, PilotEntity
 from config.configmanager import config
 from db.dbmanager import SessionLocal
-from features.send_mail import send_mail
+from utils.send_mail import send_mail
 
  
 DEFAULT_WAIT_TIME = 5

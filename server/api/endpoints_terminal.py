@@ -10,7 +10,7 @@ from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, utm_action_running
 from db.entities import FlightPlanStatus, FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
-from features import utm
+from utils import utm
 
 def __terminalauth(api_key_header:str = Security(api_key_header)):
     if api_key_header == config.api.apikey_terminal:
@@ -27,6 +27,7 @@ def __findPilot(pilot_id:str, db:Session, raiseOnInactive:bool = True):
     if(pilot.active != True and raiseOnInactive == True):
         raise inactive_pilot
     return pilot
+
 
 
 @api.get("/flightsession/status", dependencies=[Security(__terminalauth)], response_model=FlightSessionStatusDTO)
