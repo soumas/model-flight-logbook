@@ -1,4 +1,5 @@
 from fastapi import BackgroundTasks
+import selenium
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -113,7 +114,7 @@ def __notify_pilot(background_tasks: BackgroundTasks, pilot: PilotEntity, fsessi
                 {'time':datetime.now().strftime(DATETIME_FORMAT_WITH_SECONDS), 'status':fsession.flightplan_status.value, 'flightname':__build_flight_title(pilot)})
         except:
             # don't throw exception when notification fails
-            traceback.print_exc()    
+            log.error(traceback.format_exc())
 
 
 def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity):
@@ -174,7 +175,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
         fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.flying)
 
     except:
-        traceback.print_exc()
+        log.error(traceback.format_exc())
         fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.error)
     finally:
         __notify_pilot(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession)
@@ -199,9 +200,14 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
             __utm_login(driver)
             log.debug('navigate to flightplan with id part {}'.format(__build_flight_title_id_part(pilot.id)))
             __utm_open_menu(driver)
-            __wait_and_click(driver, "//span[normalize-space()='Flight plans and log']")        
-            __wait_and_click(driver, "//div[@class='operation-plans']/div[@class='operation-plan']/div[@class='status ACTIVATED']/following-sibling::p[contains(normalize-space(.), '" + __build_flight_title_id_part(pilot.id) + "')]")
-            __wait_and_click(driver, "//button[normalize-space()='End flight']")
+            __wait_and_click(driver, "//span[normalize-space()='Flight plans and log']")
+            try:
+                __wait_and_click(driver, "//div[@class='operation-plans']/div[@class='operation-plan']/div[@class='status ACTIVATED']/following-sibling::p[contains(normalize-space(.), '" + __build_flight_title_id_part(pilot.id) + "')]")
+                __wait_and_click(driver, "//button[normalize-space()='End flight']")
+            except selenium.common.exceptions.TimeoutException:
+                log.warn('Flight with id part "{}" not found in active flights list. Maybe the flight ended earlier...?'.format(__build_flight_title_id_part(pilot.id)))
+                pass
+
             log.debug('flight plan ended')
             
         else:
@@ -211,7 +217,7 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
         fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.closed)
 
     except:
-        traceback.print_exc()
+        log.error(traceback.format_exc())
         fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.error)  
     finally:
         __notify_pilot(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession)
