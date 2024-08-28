@@ -16,7 +16,6 @@ def __adminauth(api_key_header: str = Security(api_key_header)):
 
 @api.get("/pilot/all", dependencies=[Security(__adminauth)])
 async def get_all_pilots(db: Session = Depends(get_db)):
-    raise Exception('fuck')
     return db.query(PilotEntity).all()
 
 @api.post("/pilot/create_or_update", dependencies=[Security(__adminauth)], response_model=PilotDTO)

@@ -5,7 +5,7 @@ from utils.logger import log
 
 # config setup
 _ini = configparser.ConfigParser()
-_ini.read('config-defaults.ini')
+_ini.read('config-default.ini')
 if(os.path.isfile('config.ini')):
     _ini.read('config.ini')
 
