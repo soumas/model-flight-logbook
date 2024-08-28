@@ -50,7 +50,7 @@ class DbConfig:
 
 class UtmConfig:
     def __init__(self):
-        self.enabled = _ini.getboolean('utm','enabled')
+        self.starturl = _ini.get('utm','starturl')
         self.username = _ini.get('utm','username')
         self.password = _ini.get('utm','password')
         self.kml_path = _ini.get('utm','kml_path')
