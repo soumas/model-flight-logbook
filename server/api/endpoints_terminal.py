@@ -36,11 +36,11 @@ def get_flightsession_status(x_pilot_id:Annotated[str, Header()], db:Session = D
     pilot:PilotEntity = __findPilot(pilot_id=x_pilot_id, db=db)
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilot_id, db)
     return FlightSessionStatusDTO(
-        pilot_name=pilot.firstname + ' ' + pilot.lastname,
-        current_session_id=None if fsession == None else fsession.id,
-        current_session_starttime=None if fsession == None else fsession.start,
-        current_session_endtime=None if fsession == None else fsession.end,
-        flight_plan_status=None if fsession == None else fsession.flightplan_status
+        pilotName=pilot.firstname + ' ' + pilot.lastname,
+        sessionId=None if fsession == None else fsession.id,
+        sessionStarttime=None if fsession == None else fsession.start,
+        sessionEndtime=None if fsession == None else fsession.end,
+        flightPlanStatus=None if fsession == None else fsession.flightplan_status
     )
 
 @api.post("/terminal/flightsession/start", dependencies=[Security(__terminalauth)], response_model=None)
