@@ -55,7 +55,7 @@ def __build_flight_title_id_part(pilot_id):
     return ' ({})'.format(pilot_id)
 
 def __build_flight_title(pilot: PilotEntity):
-    return 'Modellflugplatz {}, {} {} {}'.format(config.common.clubname, pilot.firstname, pilot.lastname, __build_flight_title_id_part(pilot.id))
+    return '{}, {} {} {}'.format(config.utm.airport, pilot.firstname, pilot.lastname, __build_flight_title_id_part(pilot.id))
 
 def __utm_login(driver):    
     log.debug('__utm_login')
@@ -101,20 +101,29 @@ def __set_flightplan_status(id:int, status:FlightPlanStatus):
     finally:
         db.close()
 
-def __notify_pilot(background_tasks: BackgroundTasks, pilot: PilotEntity, fsession:FlightSessionEntity):    
-    if config.utm.notify_pilot:
-        log.debug('__notify_pilot ({})'.format(pilot.id))
-        try:
-            background_tasks.add_task(
-                send_mail, 
-                background_tasks, 
-                "utm_status.html",
-                "UTM Status: " + fsession.flightplan_status.value,
-                pilot.email,
-                {'time':datetime.now().strftime(DATETIME_FORMAT_WITH_SECONDS), 'status':fsession.flightplan_status.value, 'flightname':__build_flight_title(pilot)})
-        except:
-            # don't throw exception when notification fails
-            log.error(traceback.format_exc())
+def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, fsession:FlightSessionEntity, error: str):    
+    log.debug('__send_notification ({})'.format(pilot.id))
+    try:
+        if config.utm.notify_pilot:
+            send_mail(
+                background_tasks=background_tasks,
+                template_name="pilot_utm_status.html",
+                email_to=pilot.email,
+                subject="UTM Status: " + fsession.flightplan_status.value,
+                body={'status':fsession.flightplan_status.value, 'flightname':__build_flight_title(pilot), 'adminmail':config.logbook.admin_email}
+            )
+        if fsession.flightplan_status == FlightPlanStatus.error:
+            send_mail(
+                background_tasks=background_tasks,
+                template_name="admin_notification.html",
+                email_to=config.logbook.admin_email,
+                subject="UTM Interaktion fehlgeschlagen!",
+                body={'message':'Bei einer Interaktion mit dem UTM System bzgl. dem Flug "' + __build_flight_title(pilot) + '" ist folgender Fehler aufgetreten:<br/>' + error }
+            )
+        
+    except:
+        # don't throw exception when notification fails
+        log.error(traceback.format_exc())
 
 
 def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity):
@@ -122,9 +131,10 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
     log.debug('start_flight (pilot: {})'.format(pilot.id))
     
     driver = None
+    error = None
 
     try:
-        __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.pending)
+        __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.start_pending)
 
         if config.utm.simulate != True:
 
@@ -171,14 +181,16 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
         else:
             log.warn('utm simulation mode is active - waiting some seconds and doing nothing')
             time.sleep(10)
+            raise Exception('Testfehler!')
 
         fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.flying)
 
     except:
-        log.error(traceback.format_exc())
+        error = traceback.format_exc()
+        log.error(error)
         fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.error)
-    finally:
-        __notify_pilot(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession)
+    finally:        
+        __send_notification(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession, error=error)
         if driver != None:
             __dispose_driver(driver)
 
@@ -188,10 +200,11 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
     log.debug('end_flight (pilot: {})'.format(pilot.id))
 
     driver = None
+    error = None
 
     try:
 
-        __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.pending)
+        __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.end_pending)
 
         if config.utm.simulate != True:
 
@@ -217,9 +230,10 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
         fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.closed)
 
     except:
-        log.error(traceback.format_exc())
-        fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.error)  
+        error = traceback.format_exc()
+        log.error(error)
+        fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.error)
     finally:
-        __notify_pilot(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession)
         if driver != None:
             __dispose_driver(driver) 
+        __send_notification(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession, error=error)

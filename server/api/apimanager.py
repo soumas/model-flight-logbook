@@ -7,7 +7,7 @@ from config.configmanager import config
 def on_startup():
     log.info('********************************************')
     log.info('Dronespace Logbook Server is up and running')
-    log.info('Version: ' + config.common.version)
+    log.info('Version: ' + config.logbook.version)
     log.info('https://github.com/soumas/dronespace-logbook')
     log.info('********************************************')
 

@@ -1,4 +1,4 @@
-import os
+#import os
 from fastapi import BackgroundTasks
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from config.configmanager import config
@@ -21,7 +21,7 @@ conf = ConnectionConfig(
 
 )
 
-def send_mail(background_tasks: BackgroundTasks, template_name:str, subject: str, email_to: str, body: dict):
+def send_mail(background_tasks: BackgroundTasks, template_name:str, subject: str, email_to: str,body: dict):
     message = MessageSchema(
         subject=subject,
         recipients=[email_to],

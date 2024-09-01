@@ -18,6 +18,7 @@ class FlightSessionStatusDTO(BaseModel):
     pilot_name: str
     current_session_id: Optional[int]=None
     current_session_starttime: Optional[datetime.datetime]=None
+    current_session_endtime: Optional[datetime.datetime]=None
     flight_plan_status: Optional[FlightPlanStatus]=None
 
 class EndFlightSessionDTO(BaseModel):

@@ -8,8 +8,9 @@ Base = sqlalchemy.orm.declarative_base()
 
 class FlightPlanStatus(enum.Enum):
     new = 'new'
-    pending = 'pending'
+    start_pending = 'start_pending'
     flying = 'flying'
+    end_pending = 'end_pending'
     closed = 'closed'
     error = 'error'
 

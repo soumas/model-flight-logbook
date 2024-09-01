@@ -121,15 +121,16 @@
                                 valign="top">
                                 <p
                                     style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
-                                    Flug: {{ flightname }}
+                                    <b>Flugbezeichnung:</b><br />{{ flightname }}
                                 </p>
                                 <p
                                     style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
-                                    Zeitpunkt: {{ time }}
-                                </p>
-                                <p
-                                    style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
-                                    Status: {{ status }}
+                                    <b>Status:</b><br />{{ status }}
+                                    {% if status == 'error' %}
+                                    ⚠ (Hinweis: Der Systemadministrator wird automatisch &uuml;ber diesen Fehler
+                                    informiert. Bitte
+                                    wende dich an <a href="mailto:{{adminmail}}">{{adminmail}}</a>)
+                                    {% endif %}
                                 </p>
                             </td>
                         </tr>

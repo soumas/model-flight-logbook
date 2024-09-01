@@ -15,17 +15,15 @@ def _read_version():
     with open('version') as f:
         return f.readline()
 
-class CommonConfig:
+class LogbookConfig:
     def __init__(self):
         self.version = _read_version()
-        self.clubname = _ini.get('common','clubname')
-        self.admin_email = _ini.get('common','admin_email')
-        self.debug = _ini.getboolean('common','debug')
-
-class ApiConfig:
-    def __init__(self):
-        self.apikey_admin = _ini.get('api','apikey_admin')
-        self.apikey_terminal = _ini.get('api','apikey_terminal')
+        self.dburl = _ini.get('logbook','dburl')
+        self.apikey_admin = _ini.get('logbook','apikey_admin')
+        self.apikey_terminal = _ini.get('logbook','apikey_terminal')
+        self.admin_email = _ini.get('logbook','admin_email')
+        self.forward_comment = _ini.getboolean('logbook','forward_comment')
+        self.debug = _ini.getboolean('logbook','debug')
 
 class SmtpConfig:
     def __init__(self):
@@ -44,16 +42,13 @@ class SmtpConfig:
         self.suppress_send = _ini.getboolean('smtp', 'suppress_send')
         self.debug = _ini.getboolean('smtp', 'debug')
 
-class DbConfig:
-    def __init__(self):
-        self.url = _ini.get('db','url')
-
 class UtmConfig:
     def __init__(self):
         self.starturl = _ini.get('utm','starturl')
         self.username = _ini.get('utm','username')
         self.password = _ini.get('utm','password')
         self.kml_path = _ini.get('utm','kml_path')
+        self.airport = _ini.get('utm','airport')
         self.max_altitude_m = _ini.get('utm','max_altitude_m')
         self.mtom_g = _ini.get('utm','mtom_g')
         self.notify_pilot = _ini.getboolean('utm','notify_pilot')
@@ -61,10 +56,8 @@ class UtmConfig:
 
 class Config:
     def __init__(self):
-        self.common = CommonConfig()
-        self.api = ApiConfig()
+        self.logbook = LogbookConfig()
         self.smtp = SmtpConfig()
-        self.db = DbConfig()
         self.utm = UtmConfig()
 
 config = Config()

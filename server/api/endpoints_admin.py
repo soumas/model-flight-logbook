@@ -10,15 +10,15 @@ from db.dbmanager import get_db
 
 
 def __adminauth(api_key_header: str = Security(api_key_header)):
-    if api_key_header == config.api.apikey_admin:
+    if api_key_header == config.logbook.apikey_admin:
         return api_key_header
     raise invalid_api_key
 
-@api.get("/pilot/all", dependencies=[Security(__adminauth)])
-async def get_all_pilots(db: Session = Depends(get_db)):
+@api.get("/admin/pilot/list", dependencies=[Security(__adminauth)])
+async def list_all_pilots(db: Session = Depends(get_db)):
     return db.query(PilotEntity).all()
 
-@api.post("/pilot/create_or_update", dependencies=[Security(__adminauth)], response_model=PilotDTO)
+@api.post("/admin/pilot/create_or_update", dependencies=[Security(__adminauth)], response_model=PilotDTO)
 async def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Session = Depends(get_db)):
     db_pilot : PilotEntity = db.query(PilotEntity).filter(PilotEntity.id == pilot.id).first()
     if db_pilot is None:
@@ -33,7 +33,7 @@ async def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Sessio
     db.commit()
     return db_pilot
 
-@api.post("/pilot/deactivate_all", dependencies=[Security(__adminauth)])
+@api.post("/admin/pilot/deactivate_all", dependencies=[Security(__adminauth)])
 async def deactivate_all_pilots(db: Session = Depends(get_db)):
     for pilot in db.query(PilotEntity).all():
         pilot.active = False
