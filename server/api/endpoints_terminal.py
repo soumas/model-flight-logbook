@@ -19,12 +19,12 @@ def __terminalauth(api_key_header:str = Security(api_key_header)):
         return api_key_header
     raise invalid_api_key
 
-def __findCurrentFlightSession(pilot_id:str, db:Session):
-    return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilot_id == pilot_id, or_(FlightSessionEntity.end == None, FlightSessionEntity.flightplan_status == FlightPlanStatus.flying, FlightSessionEntity.flightplan_status == FlightPlanStatus.start_pending, FlightSessionEntity.flightplan_status == FlightPlanStatus.end_pending ))).first()
+def __findCurrentFlightSession(pilotid:str, db:Session):
+    return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilotid, or_(FlightSessionEntity.end == None, FlightSessionEntity.flightplanstatus == FlightPlanStatus.flying, FlightSessionEntity.flightplanstatus == FlightPlanStatus.start_pending, FlightSessionEntity.flightplanstatus == FlightPlanStatus.end_pending ))).first()
 
-def __findPilot(pilot_id:str, db:Session, raiseOnInactive:bool = True):
-    logger.log.info('Pilot: ' + pilot_id) # log pilot to know the user related to an uvicorn.access log entry
-    pilot:PilotEntity = db.query(PilotEntity).filter(PilotEntity.id == pilot_id).first()
+def __findPilot(pilotid:str, db:Session, raiseOnInactive:bool = True):
+    logger.log.info('Pilot: ' + pilotid) # log pilot to know the user related to an uvicorn.access log entry
+    pilot:PilotEntity = db.query(PilotEntity).filter(PilotEntity.id == pilotid).first()
     if(pilot is None):
         raise unknown_pilot
     if(pilot.active != True and raiseOnInactive == True):
@@ -32,26 +32,26 @@ def __findPilot(pilot_id:str, db:Session, raiseOnInactive:bool = True):
     return pilot
 
 @api.get("/terminal/flightsession/status", dependencies=[Security(__terminalauth)], response_model=FlightSessionStatusDTO)
-def get_flightsession_status(x_pilot_id:Annotated[str, Header()], db:Session = Depends(get_db)):
-    pilot:PilotEntity = __findPilot(pilot_id=x_pilot_id, db=db)
-    fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilot_id, db)
+def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = Depends(get_db)):
+    pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
+    fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
     return FlightSessionStatusDTO(
         pilotName=pilot.firstname + ' ' + pilot.lastname,
         sessionId=None if fsession == None else fsession.id,
         sessionStarttime=None if fsession == None else fsession.start,
         sessionEndtime=None if fsession == None else fsession.end,
-        flightPlanStatus=None if fsession == None else fsession.flightplan_status
+        flightPlanStatus=None if fsession == None else fsession.flightplanstatus
     )
 
 @api.post("/terminal/flightsession/start", dependencies=[Security(__terminalauth)], response_model=None)
-async def start_flight_session(x_pilot_id:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
-    pilot:PilotEntity = __findPilot(pilot_id=x_pilot_id, db=db)
-    if __findCurrentFlightSession(x_pilot_id, db) is not None:
+async def start_flight_session(x_pilotid:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
+    pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
+    if __findCurrentFlightSession(x_pilotid, db) is not None:
         raise active_flightsession_found
     fsession = FlightSessionEntity()
-    fsession.pilot_id = x_pilot_id
+    fsession.pilotid = x_pilotid
     fsession.start = datetime.now()
-    fsession.flightplan_status = FlightPlanStatus.new
+    fsession.flightplanstatus = FlightPlanStatus.new
     db.add(fsession)
     db.commit()
 
@@ -62,12 +62,12 @@ async def start_flight_session(x_pilot_id:Annotated[str, Header()], background_t
 
 
 @api.post("/terminal/flightsession/end", dependencies=[Security(__terminalauth)], response_model=None)
-async def end_flight_session(data:EndFlightSessionDTO, x_pilot_id:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
-    pilot:PilotEntity = __findPilot(pilot_id=x_pilot_id, db=db, raiseOnInactive=False) 
-    fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilot_id, db)
+async def end_flight_session(data:EndFlightSessionDTO, x_pilotid:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
+    pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db, raiseOnInactive=False) 
+    fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
     if(fsession is None):
         raise flightsession_not_found
-    if(fsession.flightplan_status == FlightPlanStatus.start_pending or fsession.flightplan_status == FlightPlanStatus.end_pending):
+    if(fsession.flightplanstatus == FlightPlanStatus.start_pending or fsession.flightplanstatus == FlightPlanStatus.end_pending):
         raise utm_action_running
     fsession.end = datetime.now()
     fsession.takeoffcount = data.takeoffcount

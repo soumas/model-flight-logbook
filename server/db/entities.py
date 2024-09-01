@@ -33,6 +33,5 @@ class FlightSessionEntity(Base):
     takeoffcount = Column(String, nullable=True)
     comment = Column(String, nullable=True)
 
-
 # Create tables
 Base.metadata.create_all(bind=engine)

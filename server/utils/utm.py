@@ -51,8 +51,8 @@ def __wait_and_send_key(driver, xpath, text, timeout=DEFAULT_WAIT_TIME):
     driver.find_element(By.XPATH, xpath).send_keys(Keys.DELETE)
     driver.find_element(By.XPATH, xpath).send_keys(text)
 
-def __build_flight_title_id_part(pilot_id):
-    return ' ({})'.format(pilot_id)
+def __build_flight_title_id_part(pilotid):
+    return ' ({})'.format(pilotid)
 
 def __build_flight_title(pilot: PilotEntity):
     return '{}, {} {} {}'.format(config.utm.airport, pilot.firstname, pilot.lastname, __build_flight_title_id_part(pilot.id))
@@ -86,12 +86,12 @@ def __utm_open_menu(driver):
             pass
 
 
-def __set_flightplan_status(id:int, status:FlightPlanStatus):
-    log.debug('__set_flightplan_status ({})'.format(status.value))
+def __set_flightplanstatus(id:int, status:FlightPlanStatus):
+    log.debug('__set_flightplanstatus ({})'.format(status.value))
     db = SessionLocal()
     try :
         fsession:FlightSessionEntity = db.query(FlightSessionEntity).filter(FlightSessionEntity.id == id).first()
-        fsession.flightplan_status = status
+        fsession.flightplanstatus = status
         db.commit()
         db.refresh(fsession)
         return fsession
@@ -109,10 +109,10 @@ def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, f
                 background_tasks=background_tasks,
                 template_name="pilot_utm_status.html",
                 email_to=pilot.email,
-                subject="UTM Status: " + fsession.flightplan_status.value,
-                body={'status':fsession.flightplan_status.value, 'flightname':__build_flight_title(pilot), 'adminmail':config.logbook.admin_email}
+                subject="UTM Status: " + fsession.flightplanstatus.value,
+                body={'status':fsession.flightplanstatus.value, 'flightname':__build_flight_title(pilot), 'adminmail':config.logbook.admin_email}
             )
-        if fsession.flightplan_status == FlightPlanStatus.error:
+        if fsession.flightplanstatus == FlightPlanStatus.error:
             send_mail(
                 background_tasks=background_tasks,
                 template_name="admin_notification.html",
@@ -134,7 +134,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
     error = None
 
     try:
-        __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.start_pending)
+        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.start_pending)
 
         if config.utm.simulate != True:
 
@@ -182,12 +182,12 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             log.warn('utm simulation mode is active - waiting some seconds and doing nothing')
             time.sleep(10)
 
-        fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.flying)
+        fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.flying)
 
     except:
         error = traceback.format_exc()
         log.error(error)
-        fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.error)
+        fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.error)
     finally:        
         if driver != None:
             __dispose_driver(driver)
@@ -203,7 +203,7 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
 
     try:
 
-        __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.end_pending)
+        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.end_pending)
 
         if config.utm.simulate != True:
 
@@ -226,12 +226,12 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
             log.warn('utm simulation mode is active - waiting some minutes and doing nothing')
             time.sleep(10)
 
-        fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.closed)
+        fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.closed)
 
     except:
         error = traceback.format_exc()
         log.error(error)
-        fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.error)
+        fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.error)
     finally:
         if driver != None:
             __dispose_driver(driver) 
