@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:simple_time_punch_terminal/constants.dart';
-import 'package:simple_time_punch_terminal/ui/screen/time_punch/fragments/main_menu.dart';
+import 'package:dronedpace_logbook_terminal/constants.dart';
+import 'package:dronedpace_logbook_terminal/ui/screen/time_punch/fragments/main_menu.dart';
 
 class TimePunchScreen extends StatefulWidget {
   const TimePunchScreen({

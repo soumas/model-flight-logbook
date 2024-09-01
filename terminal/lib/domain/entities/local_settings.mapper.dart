@@ -20,23 +20,22 @@ class LocalSettingsMapper extends ClassMapperBase<LocalSettings> {
   @override
   final String id = 'LocalSettings';
 
-  static String _$kimaiEndpoint(LocalSettings v) => v.kimaiEndpoint;
-  static const Field<LocalSettings, String> _f$kimaiEndpoint =
-      Field('kimaiEndpoint', _$kimaiEndpoint);
-  static String _$kimaiToken(LocalSettings v) => v.kimaiToken;
-  static const Field<LocalSettings, String> _f$kimaiToken =
-      Field('kimaiToken', _$kimaiToken);
+  static String _$apiEndpoint(LocalSettings v) => v.apiEndpoint;
+  static const Field<LocalSettings, String> _f$apiEndpoint =
+      Field('apiEndpoint', _$apiEndpoint);
+  static String _$apiKey(LocalSettings v) => v.apiKey;
+  static const Field<LocalSettings, String> _f$apiKey =
+      Field('apiKey', _$apiKey);
 
   @override
   final MappableFields<LocalSettings> fields = const {
-    #kimaiEndpoint: _f$kimaiEndpoint,
-    #kimaiToken: _f$kimaiToken,
+    #apiEndpoint: _f$apiEndpoint,
+    #apiKey: _f$apiKey,
   };
 
   static LocalSettings _instantiate(DecodingData data) {
     return LocalSettings(
-        kimaiEndpoint: data.dec(_f$kimaiEndpoint),
-        kimaiToken: data.dec(_f$kimaiToken));
+        apiEndpoint: data.dec(_f$apiEndpoint), apiKey: data.dec(_f$apiKey));
   }
 
   @override
@@ -92,7 +91,7 @@ extension LocalSettingsValueCopy<$R, $Out>
 
 abstract class LocalSettingsCopyWith<$R, $In extends LocalSettings, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? kimaiEndpoint, String? kimaiToken});
+  $R call({String? apiEndpoint, String? apiKey});
   LocalSettingsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -105,15 +104,14 @@ class _LocalSettingsCopyWithImpl<$R, $Out>
   late final ClassMapperBase<LocalSettings> $mapper =
       LocalSettingsMapper.ensureInitialized();
   @override
-  $R call({String? kimaiEndpoint, String? kimaiToken}) =>
-      $apply(FieldCopyWithData({
-        if (kimaiEndpoint != null) #kimaiEndpoint: kimaiEndpoint,
-        if (kimaiToken != null) #kimaiToken: kimaiToken
+  $R call({String? apiEndpoint, String? apiKey}) => $apply(FieldCopyWithData({
+        if (apiEndpoint != null) #apiEndpoint: apiEndpoint,
+        if (apiKey != null) #apiKey: apiKey
       }));
   @override
   LocalSettings $make(CopyWithData data) => LocalSettings(
-      kimaiEndpoint: data.get(#kimaiEndpoint, or: $value.kimaiEndpoint),
-      kimaiToken: data.get(#kimaiToken, or: $value.kimaiToken));
+      apiEndpoint: data.get(#apiEndpoint, or: $value.apiEndpoint),
+      apiKey: data.get(#apiKey, or: $value.apiKey));
 
   @override
   LocalSettingsCopyWith<$R2, LocalSettings, $Out2> $chain<$R2, $Out2>(

@@ -1,15 +1,15 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:simple_time_punch_terminal/mappable.dart';
+import 'package:dronedpace_logbook_terminal/mappable.dart';
 
 part 'local_settings.mapper.dart';
 
 @mappableModelClass
 class LocalSettings with LocalSettingsMappable {
   LocalSettings({
-    required this.kimaiEndpoint,
-    required this.kimaiToken,
+    required this.apiEndpoint,
+    required this.apiKey,
   });
 
-  final String kimaiEndpoint;
-  final String kimaiToken;
+  final String apiEndpoint;
+  final String apiKey;
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_time_punch_terminal/injector.dart';
-import 'package:simple_time_punch_terminal/l10n/generated/app_localizations.dart';
-import 'package:simple_time_punch_terminal/ui/screen/settings/cubit/local_settings_cubit.dart';
-import 'package:simple_time_punch_terminal/ui/screen/settings/cubit/local_settings_state.dart';
+import 'package:dronedpace_logbook_terminal/injector.dart';
+import 'package:dronedpace_logbook_terminal/l10n/generated/app_localizations.dart';
+import 'package:dronedpace_logbook_terminal/ui/screen/settings/cubit/local_settings_cubit.dart';
+import 'package:dronedpace_logbook_terminal/ui/screen/settings/cubit/local_settings_state.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -28,17 +28,17 @@ class SettingsScreen extends StatelessWidget {
               return ListView(
                 children: [
                   TextFormField(
-                    initialValue: state.settings!.kimaiEndpoint,
-                    decoration: const InputDecoration(label: Text('Kimai endpoint')),
+                    initialValue: state.settings!.apiEndpoint,
+                    decoration: const InputDecoration(label: Text('Api Endpoint')),
                     onChanged: (value) {
-                      context.read<LocalSettingsCubit>().setKimaiEndpoint(value);
+                      context.read<LocalSettingsCubit>().setApiEndpoint(value);
                     },
                   ),
                   TextFormField(
-                    initialValue: state.settings!.kimaiToken,
-                    decoration: const InputDecoration(label: Text('Kimai token')),
+                    initialValue: state.settings!.apiKey,
+                    decoration: const InputDecoration(label: Text('Api Key')),
                     onChanged: (value) {
-                      context.read<LocalSettingsCubit>().setKimaiToken(value);
+                      context.read<LocalSettingsCubit>().setApiKey(value);
                     },
                   ),
                   ElevatedButton(

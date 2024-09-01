@@ -1,4 +1,4 @@
-import 'package:simple_time_punch_terminal/domain/entities/local_settings.dart';
+import 'package:dronedpace_logbook_terminal/domain/entities/local_settings.dart';
 
 abstract class LocalSettingsRepo {
   Future<LocalSettings> load();

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_time_punch_terminal/domain/repositories/local_settings_repo.dart';
-import 'package:simple_time_punch_terminal/ui/screen/settings/cubit/local_settings_state.dart';
+import 'package:dronedpace_logbook_terminal/domain/repositories/local_settings_repo.dart';
+import 'package:dronedpace_logbook_terminal/ui/screen/settings/cubit/local_settings_state.dart';
 
 class LocalSettingsCubit extends Cubit<LocalSettingsState> {
   LocalSettingsCubit({required this.localSettingsRepo}) : super(LocalSettingsState());
@@ -29,11 +29,11 @@ class LocalSettingsCubit extends Cubit<LocalSettingsState> {
     }
   }
 
-  void setKimaiEndpoint(String value) {
-    emit(state.copyWith(settings: state.settings!.copyWith(kimaiEndpoint: value)));
+  void setApiEndpoint(String value) {
+    emit(state.copyWith(settings: state.settings!.copyWith(apiEndpoint: value)));
   }
 
-  void setKimaiToken(String value) {
-    emit(state.copyWith(settings: state.settings!.copyWith(kimaiToken: value)));
+  void setApiKey(String value) {
+    emit(state.copyWith(settings: state.settings!.copyWith(apiKey: value)));
   }
 }

@@ -1,3 +1,3 @@
-# simple_time_punch_terminal
+# dronedpace_logbook_terminal
 
 A new Flutter project.
