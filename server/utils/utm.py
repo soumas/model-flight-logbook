@@ -181,7 +181,6 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
         else:
             log.warn('utm simulation mode is active - waiting some seconds and doing nothing')
             time.sleep(10)
-            raise Exception('Testfehler!')
 
         fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.flying)
 
@@ -190,9 +189,9 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
         log.error(error)
         fligthsession = __set_flightplan_status(id=fligthsession.id, status=FlightPlanStatus.error)
     finally:        
-        __send_notification(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession, error=error)
         if driver != None:
             __dispose_driver(driver)
+        __send_notification(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession, error=error)
 
 
 def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity):
