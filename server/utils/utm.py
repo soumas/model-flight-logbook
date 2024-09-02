@@ -13,7 +13,7 @@ import traceback
 from db.entities import FlightPlanStatus, FlightSessionEntity, PilotEntity
 from config.configmanager import config
 from db.dbmanager import SessionLocal
-from utils.send_mail import send_mail
+from utils.send_mail import send_admin_notification, send_mail
 from utils.logger import log
 
  
@@ -103,6 +103,8 @@ def __set_flightplanstatus(id:int, status:FlightPlanStatus):
 
 def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, fsession:FlightSessionEntity, error: str):    
     log.debug('__send_notification ({})'.format(pilot.id))
+
+    # notify pilot
     try:
         if config.utm.notify_pilot:
             send_mail(
@@ -112,23 +114,32 @@ def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, f
                 subject="UTM Status: " + fsession.flightplanstatus.value,
                 body={'status':fsession.flightplanstatus.value, 'flightname':__build_flight_title(pilot), 'adminmail':config.logbook.admin_email}
             )
-        if fsession.flightplanstatus == FlightPlanStatus.error:
-            send_mail(
-                background_tasks=background_tasks,
-                template_name="admin_notification.html",
-                email_to=config.logbook.admin_email,
-                subject="UTM Interaktion fehlgeschlagen!",
-                body={'message':'Bei einer Interaktion mit dem UTM System bzgl. dem Flug "' + __build_flight_title(pilot) + '" ist folgender Fehler aufgetreten:<br/>' + error }
-            )
-        
     except:
         # don't throw exception when notification fails
         log.error(traceback.format_exc())
 
+    # notify admin in case of an error
+    try:
+        if fsession.flightplanstatus == FlightPlanStatus.error:
+            send_admin_notification(
+                background_tasks=background_tasks,
+                subject="UTM Interaktion fehlgeschlagen!",
+                body={'message':'Bei einer Interaktion mit dem UTM System bzgl. dem Flug <b>"' + __build_flight_title(pilot) + '"</b> ist folgender Fehler aufgetreten:<br/><br/>' + error }
+            )
+    except:
+        # don't throw exception when notification fails
+        log.error(traceback.format_exc())
+        
+
 
 def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity):
     
-    log.debug('start_flight (pilot: {})'.format(pilot.id))
+    log.debug('utm start flight for pilot: {}'.format(pilot.id))
+
+    if not config.utm.username:
+        log.debug('utm feature is not configured')
+        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.feature_disabled)
+        return
     
     driver = None
     error = None
@@ -196,7 +207,11 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
 
 def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity):
     
-    log.debug('end_flight (pilot: {})'.format(pilot.id))
+    log.debug('utm end flight for pilot {}'.format(pilot.id))
+    if not config.utm.username:
+        log.debug('utm feature is not configured')
+        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.feature_disabled)
+        return
 
     driver = None
     error = None

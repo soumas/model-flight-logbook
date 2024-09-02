@@ -18,7 +18,12 @@ class FlightSessionStatusScreen extends StatelessWidget {
       ),
       body: BlocProvider<FlightSessionStatusCubit>(
         create: (context) => injector.get<FlightSessionStatusCubit>()..load(pilotid),
-        child: BlocBuilder<FlightSessionStatusCubit, FlightSessionStatusState>(
+        child: BlocConsumer<FlightSessionStatusCubit, FlightSessionStatusState>(
+          listener: (context, state) {
+            if (state.completedAction != null) {
+              Navigator.of(context).pop(state.completedAction);
+            }
+          },
           builder: (context, state) {
             return Column(
               children: [
@@ -50,6 +55,12 @@ class FlightSessionStatusScreen extends StatelessWidget {
                   children: [
                     const Text('Flightplan Status: '),
                     Text(state.flightSessionStatus?.flightPlanStatus ?? ''),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text('Error: '),
+                    Text(state.error.toString()),
                   ],
                 ),
                 Row(

@@ -1,4 +1,4 @@
-from fastapi import Depends, Response, Security, status
+from fastapi import BackgroundTasks, Depends, Response, Security, status
 from requests import Session
 from sqlalchemy.exc import IntegrityError
 from config.configmanager import config
@@ -7,6 +7,7 @@ from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key
 from db.entities import PilotEntity
 from db.dbmanager import get_db
+from utils.send_mail import send_admin_notification
 
 
 def __adminauth(api_key_header: str = Security(api_key_header)):
@@ -38,3 +39,12 @@ async def deactivate_all_pilots(db: Session = Depends(get_db)):
     for pilot in db.query(PilotEntity).all():
         pilot.active = False
     db.commit()
+
+
+@api.get("/admin/test/admin_notification", dependencies=[Security(__adminauth)])
+async def send_test_admin_notification(background_tasks:BackgroundTasks):
+    send_admin_notification(
+        background_tasks=background_tasks, 
+        subject='Test Admin Notification', 
+        body={'message':'Die SMTP Server Konfiguration funktioniert - congrats!'}
+    )

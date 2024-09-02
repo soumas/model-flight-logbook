@@ -12,7 +12,7 @@ from api.exceptions import invalid_api_key, active_flightsession_found, unknown_
 from db.entities import FlightPlanStatus, FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
 from utils import logger, utm
-from utils.send_mail import send_mail
+from utils.send_mail import send_admin_notification, send_mail
 
 def __terminalauth(api_key_header:str = Security(api_key_header)):
     if api_key_header == config.logbook.apikey_terminal:
@@ -80,10 +80,8 @@ async def end_flight_session(data:EndFlightSessionDTO, x_pilotid:Annotated[str, 
     background_tasks.add_task(utm.end_flight, background_tasks, pilot, fsession)
 
     if(config.logbook.forward_comment and fsession.comment):
-        send_mail(
+        send_admin_notification(
             background_tasks=background_tasks, 
-            template_name='admin_notification.html', 
-            email_to=config.logbook.admin_email, 
             subject='Anmerkung von Pilot', 
             body={'message':'Der Pilot ' + pilot.firstname + ' ' + pilot.lastname + ' hat folgende Anmerkung im Dronespace Logbook hinterlassen: ' + fsession.comment }
         )

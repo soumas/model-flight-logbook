@@ -34,12 +34,16 @@ class _RfidScanScreenState extends State<RfidScanScreen> {
     if (event is KeyDownEvent) {
       if ((event.character ?? '') == '\r') {
         ServicesBinding.instance.keyboard.removeHandler(_onKey);
-        Navigator.of(context).pushNamed(FlightSessionStatusScreen.route, arguments: _input).then((value) {
+        final input = _input;
+        _input = '';
+        Navigator.of(context).pushNamed(FlightSessionStatusScreen.route, arguments: input).then((value) {
           ServicesBinding.instance.keyboard.addHandler(_onKey);
-          _input = '';
+          if (value != null) {
+            showAboutDialog(context: context, children: [Text(value.toString())]);
+          }
         });
       } else {
-        _input += event.character!;
+        _input += event.character ?? '';
       }
     }
 

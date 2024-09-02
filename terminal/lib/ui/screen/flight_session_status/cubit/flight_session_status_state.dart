@@ -10,10 +10,12 @@ final class FlightSessionStatusState with FlightSessionStatusStateMappable {
   final String pilotid;
   final FlightSessionStatus? flightSessionStatus;
   final dynamic error;
+  final String? completedAction;
   FlightSessionStatusState({
     this.loading = false,
     this.pilotid = '',
     this.flightSessionStatus,
     this.error,
+    this.completedAction,
   });
 }

@@ -22,7 +22,7 @@ class FlightSessionStatusCubit extends Cubit<FlightSessionStatusState> {
     try {
       emit(state.copyWith(loading: true));
       await logbookApiRepo.startFlightSession(pilotid: state.pilotid);
-      load(state.pilotid);
+      emit(state.copyWith(completedAction: 'startSession'));
     } catch (e) {
       emit(state.copyWith(loading: false, error: e));
       rethrow;
@@ -33,7 +33,7 @@ class FlightSessionStatusCubit extends Cubit<FlightSessionStatusState> {
     try {
       emit(state.copyWith(loading: true));
       await logbookApiRepo.endFlightSession(pilotid: state.pilotid);
-      load(state.pilotid);
+      emit(state.copyWith(completedAction: 'endSession'));
     } catch (e) {
       emit(state.copyWith(loading: false, error: e));
       rethrow;

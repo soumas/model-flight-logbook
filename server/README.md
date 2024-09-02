@@ -15,6 +15,10 @@ pip install sqlalchemy
 pip install uvicorn
 pip install fastapi-mail
 
+# for db password
+sudo apt install libsqlcipher-dev
+pip install pysqlcipher3
+
 ```
 
 ## Selenium (utm login)

@@ -38,6 +38,10 @@ class FlightSessionStatusStateMapper
   static dynamic _$error(FlightSessionStatusState v) => v.error;
   static const Field<FlightSessionStatusState, dynamic> _f$error =
       Field('error', _$error, opt: true);
+  static String? _$completedAction(FlightSessionStatusState v) =>
+      v.completedAction;
+  static const Field<FlightSessionStatusState, String> _f$completedAction =
+      Field('completedAction', _$completedAction, opt: true);
 
   @override
   final MappableFields<FlightSessionStatusState> fields = const {
@@ -45,6 +49,7 @@ class FlightSessionStatusStateMapper
     #pilotid: _f$pilotid,
     #flightSessionStatus: _f$flightSessionStatus,
     #error: _f$error,
+    #completedAction: _f$completedAction,
   };
 
   static FlightSessionStatusState _instantiate(DecodingData data) {
@@ -52,7 +57,8 @@ class FlightSessionStatusStateMapper
         loading: data.dec(_f$loading),
         pilotid: data.dec(_f$pilotid),
         flightSessionStatus: data.dec(_f$flightSessionStatus),
-        error: data.dec(_f$error));
+        error: data.dec(_f$error),
+        completedAction: data.dec(_f$completedAction));
   }
 
   @override
@@ -100,7 +106,8 @@ abstract class FlightSessionStatusStateCopyWith<
       {bool? loading,
       String? pilotid,
       FlightSessionStatus? flightSessionStatus,
-      dynamic error});
+      dynamic error,
+      String? completedAction});
   FlightSessionStatusStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -123,13 +130,15 @@ class _FlightSessionStatusStateCopyWithImpl<$R, $Out>
           {bool? loading,
           String? pilotid,
           Object? flightSessionStatus = $none,
-          Object? error = $none}) =>
+          Object? error = $none,
+          Object? completedAction = $none}) =>
       $apply(FieldCopyWithData({
         if (loading != null) #loading: loading,
         if (pilotid != null) #pilotid: pilotid,
         if (flightSessionStatus != $none)
           #flightSessionStatus: flightSessionStatus,
-        if (error != $none) #error: error
+        if (error != $none) #error: error,
+        if (completedAction != $none) #completedAction: completedAction
       }));
   @override
   FlightSessionStatusState $make(CopyWithData data) => FlightSessionStatusState(
@@ -137,7 +146,8 @@ class _FlightSessionStatusStateCopyWithImpl<$R, $Out>
       pilotid: data.get(#pilotid, or: $value.pilotid),
       flightSessionStatus:
           data.get(#flightSessionStatus, or: $value.flightSessionStatus),
-      error: data.get(#error, or: $value.error));
+      error: data.get(#error, or: $value.error),
+      completedAction: data.get(#completedAction, or: $value.completedAction));
 
   @override
   FlightSessionStatusStateCopyWith<$R2, FlightSessionStatusState, $Out2>

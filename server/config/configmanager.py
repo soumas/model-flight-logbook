@@ -3,13 +3,16 @@ import configparser
 
 from utils.logger import log
 
-# config setup
 _ini = configparser.ConfigParser()
-log.debug('loading config-default.ini')
-_ini.read('config-default.ini')
-if(os.path.isfile('config.ini')):
-    log.debug('loading config.ini')
-    _ini.read('config.ini')
+
+# config setup
+def __init():    
+    log.debug('loading config-default.ini')
+    _ini.read('config-default.ini')
+    if(os.path.isfile('config.ini')):
+        log.debug('loading config.ini')
+        _ini.read('config.ini')
+__init()
 
 def _read_version():
     with open('version') as f:
@@ -40,7 +43,6 @@ class SmtpConfig:
         self.timeout = _ini.getint('smtp','timeout')
         self.template_folder = _ini.get('smtp','template_folder')
         self.suppress_send = _ini.getboolean('smtp', 'suppress_send')
-        self.debug = _ini.getboolean('smtp', 'debug')
 
 class UtmConfig:
     def __init__(self):
@@ -61,3 +63,30 @@ class Config:
         self.utm = UtmConfig()
 
 config = Config()
+
+def __check_configurations():
+    log.info('********************************************')
+    log.info('        Dronespace Logbook Server')
+    log.info('             version: ' + config.logbook.version)    
+    log.info('********************************************')
+
+    if config.logbook.apikey_admin == 'admin':
+        log.warn('logbook.apikey_admin has default value --> specify unique key for security reason!')
+
+    if config.logbook.apikey_terminal == 'terminal':
+        log.warn('logbook.apikey_terminal has default value --> specify unique key for security reason!')
+
+    if not config.logbook.admin_email:
+        log.warn('logbook.admin_email is not defined --> define an email adress in order to get notifications')
+
+    if not config.smtp.server:
+        log.warn('smtp.server is not defined --> define smtp configurations in order to enable email notifications')
+    elif not config.smtp.from_email:
+        log.error('!!!!! smtp.from_email is not defined, but smtp.server is --> sending emails may not work !!!!!')
+
+    if not config.utm.username:
+        log.warn('utm.username is not defined --> define utm configurations in order to enable the utm feature')
+    elif not config.utm.airport or not config.utm.kml_path or not config.utm.max_altitude_m or not config.utm.mtom_g or not config.utm.password or not config.utm.starturl:
+        log.error('!!!!! utm.username is defined but not all required utm configurations are availabe --> check out the docs !!!!!')
+
+__check_configurations()
