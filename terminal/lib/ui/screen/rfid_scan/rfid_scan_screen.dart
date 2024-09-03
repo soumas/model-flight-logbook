@@ -1,8 +1,8 @@
-import 'package:dronedpace_logbook_terminal/ui/screen/flight_session_status/flight_session_status_screen.dart';
+import 'package:model_flight_logbook_terminal/ui/screen/flight_session_status/flight_session_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dronedpace_logbook_terminal/constants.dart';
-import 'package:dronedpace_logbook_terminal/ui/screen/rfid_scan/fragments/main_menu.dart';
+import 'package:model_flight_logbook_terminal/constants.dart';
+import 'package:model_flight_logbook_terminal/ui/screen/rfid_scan/fragments/main_menu.dart';
 
 class RfidScanScreen extends StatefulWidget {
   const RfidScanScreen({
@@ -31,13 +31,11 @@ class _RfidScanScreenState extends State<RfidScanScreen> {
   }
 
   bool _onKey(KeyEvent event) {
-    if (event is KeyDownEvent) {
+    if (event is KeyDownEvent && (ModalRoute.of(context)?.isCurrent ?? false)) {
       if ((event.character ?? '') == '\r') {
-        ServicesBinding.instance.keyboard.removeHandler(_onKey);
         final input = _input;
         _input = '';
         Navigator.of(context).pushNamed(FlightSessionStatusScreen.route, arguments: input).then((value) {
-          ServicesBinding.instance.keyboard.addHandler(_onKey);
           if (value != null) {
             showAboutDialog(context: context, children: [Text(value.toString())]);
           }

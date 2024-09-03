@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dronedpace_logbook_terminal/constants.dart';
-import 'package:dronedpace_logbook_terminal/domain/entities/local_settings.dart';
-import 'package:dronedpace_logbook_terminal/domain/repositories/local_settings_repo.dart';
+import 'package:model_flight_logbook_terminal/constants.dart';
+import 'package:model_flight_logbook_terminal/domain/entities/local_settings.dart';
+import 'package:model_flight_logbook_terminal/domain/repositories/local_settings_repo.dart';
 
 class LocalSettingsRepoImpl extends LocalSettingsRepo {
   static String cachedApiEndpoint = '';

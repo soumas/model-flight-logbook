@@ -1,5 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:dronedpace_logbook_terminal/mappable.dart';
+import 'package:model_flight_logbook_terminal/mappable.dart';
 
 part 'flight_session_status.mapper.dart';
 

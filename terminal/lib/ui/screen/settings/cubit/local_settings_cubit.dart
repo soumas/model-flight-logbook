@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dronedpace_logbook_terminal/domain/repositories/local_settings_repo.dart';
-import 'package:dronedpace_logbook_terminal/ui/screen/settings/cubit/local_settings_state.dart';
+import 'package:model_flight_logbook_terminal/domain/repositories/local_settings_repo.dart';
+import 'package:model_flight_logbook_terminal/ui/screen/settings/cubit/local_settings_state.dart';
 
 class LocalSettingsCubit extends Cubit<LocalSettingsState> {
   LocalSettingsCubit({required this.localSettingsRepo}) : super(LocalSettingsState());

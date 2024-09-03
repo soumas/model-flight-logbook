@@ -1,6 +1,6 @@
-import 'package:dronedpace_logbook_terminal/injector.dart';
-import 'package:dronedpace_logbook_terminal/ui/screen/flight_session_status/cubit/flight_session_status_cubit.dart';
-import 'package:dronedpace_logbook_terminal/ui/screen/flight_session_status/cubit/flight_session_status_state.dart';
+import 'package:model_flight_logbook_terminal/injector.dart';
+import 'package:model_flight_logbook_terminal/ui/screen/flight_session_status/cubit/flight_session_status_cubit.dart';
+import 'package:model_flight_logbook_terminal/ui/screen/flight_session_status/cubit/flight_session_status_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
