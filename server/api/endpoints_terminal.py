@@ -83,5 +83,5 @@ async def end_flight_session(data:EndFlightSessionDTO, x_pilotid:Annotated[str, 
         send_admin_notification(
             background_tasks=background_tasks, 
             subject='Anmerkung von Pilot', 
-            body={'message':'Der Pilot ' + pilot.firstname + ' ' + pilot.lastname + ' hat folgende Anmerkung im Dronespace Logbook hinterlassen: ' + fsession.comment }
+            body={'message':'Der Pilot ' + pilot.firstname + ' ' + pilot.lastname + ' hat folgende Anmerkung im Model Flight Logbook hinterlassen: ' + fsession.comment }
         )

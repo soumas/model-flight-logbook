@@ -46,7 +46,7 @@ class SmtpConfig:
 
 class UtmConfig:
     def __init__(self):
-        self.starturl = _ini.get('utm','starturl')
+        self.enabled = _ini.getboolean('utm','enabled')
         self.username = _ini.get('utm','username')
         self.password = _ini.get('utm','password')
         self.kml_path = _ini.get('utm','kml_path')
@@ -66,7 +66,7 @@ config = Config()
 
 def __check_configurations():
     log.info('********************************************')
-    log.info('        Dronespace Logbook Server')
+    log.info('        Model Flight Logbook Server')
     log.info('             version: ' + config.logbook.version)    
     log.info('********************************************')
 
@@ -84,9 +84,9 @@ def __check_configurations():
     elif not config.smtp.from_email:
         log.error('!!!!! smtp.from_email is not defined, but smtp.server is --> sending emails may not work !!!!!')
 
-    if not config.utm.username:
-        log.warn('utm.username is not defined --> define utm configurations in order to enable the utm feature')
-    elif not config.utm.airport or not config.utm.kml_path or not config.utm.max_altitude_m or not config.utm.mtom_g or not config.utm.password or not config.utm.starturl:
-        log.error('!!!!! utm.username is defined but not all required utm configurations are availabe --> check out the docs !!!!!')
+    if not config.utm.enabled:
+        log.info('utm feature is disabled --> define utm configurations in order to enable the feature')
+    elif not config.utm.airport or not config.utm.kml_path or not config.utm.max_altitude_m or not config.utm.mtom_g or not config.utm.password or not config.utm.username:
+        log.error('!!!!! utm feature is enabled but not all required utm configurations are availabe --> check out the docs !!!!!')
 
 __check_configurations()

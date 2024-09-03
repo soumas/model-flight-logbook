@@ -60,8 +60,7 @@ def __build_flight_title(pilot: PilotEntity):
 def __utm_login(driver):    
     log.debug('__utm_login')
 
-    log.debug('navigate to {})'.format(config.utm.starturl))
-    driver.get(config.utm.starturl)
+    driver.get('https://utm.dronespace.at/avm/?#p=5/47.74/13.23')
 
     log.debug('accept terms and conditions')
     __wait_and_click(driver, "//*[@class='button ok']") # agb akzeptieren
@@ -136,7 +135,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
     
     log.debug('utm start flight for pilot: {}'.format(pilot.id))
 
-    if not config.utm.username:
+    if not config.utm.enabled:
         log.debug('utm feature is not configured')
         __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.feature_disabled)
         return
@@ -208,7 +207,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
 def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity):
     
     log.debug('utm end flight for pilot {}'.format(pilot.id))
-    if not config.utm.username:
+    if not config.utm.enabled:
         log.debug('utm feature is not configured')
         __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.feature_disabled)
         return
