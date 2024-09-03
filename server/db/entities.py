@@ -21,7 +21,7 @@ class PilotEntity(Base):
     firstname = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
     phonenumber = Column(String, nullable=False)
-    email = Column(String, nullable=False)
+    email = Column(String, nullable=False)    
     active = Column(Boolean, nullable=False)
 
 class FlightSessionEntity(Base):
@@ -34,5 +34,3 @@ class FlightSessionEntity(Base):
     takeoffcount = Column(String, nullable=True)
     comment = Column(String, nullable=True)
 
-# Create tables
-Base.metadata.create_all(bind=engine)

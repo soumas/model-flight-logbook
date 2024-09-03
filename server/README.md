@@ -10,14 +10,11 @@ sudo apt install python3-pip
 
 // fastapi
 pip install fastapi
-pip install pydantic
-pip install sqlalchemy
-pip install uvicorn
 pip install fastapi-mail
-
-# for db password
-sudo apt install libsqlcipher-dev
-pip install pysqlcipher3
+pip install pydantic
+pip install uvicorn
+pip install sqlalchemy
+pip install alembic
 
 ```
 
@@ -28,6 +25,15 @@ pip install selenium
 
 Unzip latest version of geckodriver for your platform to /usr/local/bin: https://github.com/mozilla/geckodriver/releases
 
+## DB Migration
+```shell
+-- install update
+cd /db/migration
+alembic upgrade head
+
+-- create new migration script blueprint
+alembic revision -m "description of script action"
+```
 
 ## Run
 
