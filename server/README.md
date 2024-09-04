@@ -9,7 +9,7 @@ Simple Time Punch Server (Python FastAPI & SQLite Database)
 sudo apt install python3-pip
 
 // fastapi
-pip install fastapi
+pip install fastapi --> TODO: Fix versions
 pip install fastapi-mail
 pip install pydantic
 pip install uvicorn
