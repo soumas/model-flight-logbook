@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="2.3414313"
-     inkscape:cx="99.938871"
-     inkscape:cy="114.88699"
+     inkscape:zoom="1.5677146"
+     inkscape:cx="131.40147"
+     inkscape:cy="52.305439"
      inkscape:window-width="2560"
      inkscape:window-height="1368"
      inkscape:window-x="2560"
@@ -118,7 +118,7 @@
        xml:space="preserve"
        transform="matrix(0.47408031,0,0,0.47408031,-74.936959,-75.549873)"
        id="text1"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.2667px;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;white-space:pre;shape-inside:url(#rect2);display:inline;opacity:0.6;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.51181;stroke-linecap:round;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.2667px;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;white-space:pre;shape-inside:url(#rect2);display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.51181;stroke-linecap:round;stroke-opacity:1"
        x="35.309868"
        y="0"
        inkscape:transform-center-x="2.0161971"
@@ -130,7 +130,7 @@
            id="tspan1">MFL</tspan></tspan></text>
     <path
        id="rect3"
-       style="fill:none;stroke:#ffffff;stroke-width:1.31983;stroke-linecap:round;stroke-dasharray:none"
+       style="fill:none;stroke:#ffffff;stroke-width:1.2;stroke-linecap:round;stroke-dasharray:none"
        d="m 119.63591,82.585055 -47.955678,7.23e-4 c -2.958445,4.4e-5 -5.039215,-2.098873 -5.039215,-4.705102 0,-2.606228 2.08077,-4.703615 5.039215,-4.703659 l 47.955678,-7.23e-4"
        sodipodi:nodetypes="csssc" />
     <g
@@ -145,7 +145,7 @@
            cy="90.21505"
            cx="103.9253" />
         <path
-           style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1.20397;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1.20400114;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
            d="m 75.344543,84.045287 c 0,0 7.014741,2.779556 22.847826,2.917404 5.327871,0.04638 14.117291,-0.17104 14.344021,-4.854475 0.22673,-4.683435 -2.74263,-0.370149 -7.51913,-4.97838 -0.76498,-0.738029 -1.63257,-1.158936 -2.55028,-1.345368 -4.812473,-0.977647 -5.686916,3.069671 -9.516756,4.006382 -3.829839,0.936711 -13.144008,0.454289 -13.144008,0.454289 0,0 -0.787271,-3.672877 -2.275541,-5.335329 -0.519115,-0.579871 -2.123216,-0.489587 -2.435691,-0.498096 0,0 -0.783815,7.588415 -0.704618,8.516484 0.0792,0.928069 0.954177,1.117089 0.954177,1.117089 z"
            id="path5"
            sodipodi:nodetypes="cszsszcsczc" />
