@@ -1,9 +1,97 @@
-<mxfile host="app.diagrams.net" modified="2024-09-05T16:59:57.513Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0" version="24.6.4" etag="lIgSLi2zDC1N0qeT3s4u" type="github">
+<mxfile host="app.diagrams.net" modified="2024-09-05T17:30:25.706Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0" etag="4AnX1CLbqgEGyTQHJqUz" version="24.6.4" type="github">
   <diagram name="Seite-1" id="_jlWFF0QikaLQGhspJfP">
-    <mxGraphModel>
+    <mxGraphModel dx="864" dy="474" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="IfMmHu5kTRpGRYG7E5fg-20" target="IfMmHu5kTRpGRYG7E5fg-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="198" y="103.99500000000006" as="sourcePoint" />
+            <mxPoint x="460" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="270" y="104" />
+              <mxPoint x="410" y="105" />
+              <mxPoint x="410" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-10" value="Checkin / Checkout (HTTP)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IfMmHu5kTRpGRYG7E5fg-6">
+          <mxGeometry x="-0.5163" relative="1" as="geometry">
+            <mxPoint x="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="IfMmHu5kTRpGRYG7E5fg-3" target="IfMmHu5kTRpGRYG7E5fg-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="192.5" y="364.39999999999986" as="sourcePoint" />
+            <mxPoint x="530" y="140" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="410" y="270" />
+              <mxPoint x="410" y="191" />
+              <mxPoint x="533" y="191" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-8" value="Checkin / Checkout (HTTP)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IfMmHu5kTRpGRYG7E5fg-7">
+          <mxGeometry x="-0.4177" y="-2" relative="1" as="geometry">
+            <mxPoint x="-18" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-3" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.mobile;pointerEvents=1;" vertex="1" parent="1">
+          <mxGeometry x="161.5" y="241" width="31" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-15" value="&lt;div&gt;MFL Multi-User&lt;/div&gt;&lt;div&gt;RFID Terminal&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="83" width="96.25" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-16" value="&lt;div&gt;MFL Single-User&lt;/div&gt;&lt;div&gt;App Terminal&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="53.75" y="249" width="96.25" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IfMmHu5kTRpGRYG7E5fg-18" target="IfMmHu5kTRpGRYG7E5fg-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-35" value="Start / End Flight" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IfMmHu5kTRpGRYG7E5fg-34">
+          <mxGeometry x="-0.0407" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-18" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/database_server.svg;" vertex="1" parent="1">
+          <mxGeometry x="515.3" y="156.26" width="57.4" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-19" value="&lt;div&gt;MFL Server (REST API)&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="500" y="232.26" width="73.7" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-20" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.tablet;pointerEvents=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="79.73" width="78" height="48.53" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-21" value="" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.wireless_connection" vertex="1" parent="1">
+          <mxGeometry x="176.92" y="92" width="20.16" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-22" value="" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.wireless_connection;rotation=-180;" vertex="1" parent="1">
+          <mxGeometry x="161.5" y="92" width="20.16" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-23" value="" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/computer_and_terminals/Personal_Computer.svg;" vertex="1" parent="1">
+          <mxGeometry x="156" y="157" width="45.6" height="61.800000000000004" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-24" value="&lt;div&gt;MFL Multi-User&lt;/div&gt;&lt;div&gt;Keyboard Terminal&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="163.4" width="120" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1.013;exitY=0.558;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="IfMmHu5kTRpGRYG7E5fg-23" target="IfMmHu5kTRpGRYG7E5fg-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="223.60000000000002" y="189.90697674418607" as="sourcePoint" />
+            <mxPoint x="490" y="190" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="224" y="192" />
+              <mxPoint x="533" y="191" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-29" value="Checkin / Checkout (HTTP)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IfMmHu5kTRpGRYG7E5fg-28">
+          <mxGeometry x="-0.4577" y="-1" relative="1" as="geometry">
+            <mxPoint x="6" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-31" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/unicons-line-vol-4/24/map-128.png" vertex="1" parent="1">
+          <mxGeometry x="702" y="157.9" width="66" height="66" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
