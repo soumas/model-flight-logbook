@@ -1,6 +1,5 @@
-<h1>Model Flight Logbook</h1>
+<h1><img src="./terminal/_resources/images/Logo.svg" width="100"> Model Flight Logbook</h1>
 Digitales Flugbuch für Modellflugplätze mit Anbindung zum "Austro Control Dronespace"
-<img src="./terminal/_resources/images/Logo.svg" width="100">
 <div align="center">
     <table border="0">
         <tr>
