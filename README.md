@@ -11,9 +11,6 @@ Aktuell (09/2024) befindet sich das Projekt in einer fortgeschrittenen Entwicklu
 
 In erster Linie entwickeln wir MFL maßgeschneidert für unsere Bedürfnisse. Diese decken sich allerdings mit den gesetzlichen Anforderungen und sind wohl für viele Modellflugvereine identisch. Aus diesem Grund stellen wird das Projekt unter der MIT Lizenz quelloffen zur Verfügung. Bei Fragen wenden Sie sich gerne an info@msgu.at .
 
-# Haftungsausschluss
-Wir weisen darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt - wie in der Lizenz beschrieben - auf vollständiges Risiko des Betreibers.
-
 # Systemübersicht
 <br/>
 <br/>
@@ -24,3 +21,6 @@ Der Server wurde in Python programmiert und kann daher unter vielen Betriebssyst
 
 # MFL Terminal
 Das MFL Terminal wurde in Flutter programmiert und kann daher für Linux, Web, Windows, MacOS, iOS und MacOS kompiliert werden. Weitere Informationen und eine Installationsanleitung befinden sich im Unterordner [terminal](./terminal/).
+
+# Haftungsausschluss
+Wir weisen darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt - wie in der Lizenz beschrieben - auf vollständiges Risiko des Betreibers.
