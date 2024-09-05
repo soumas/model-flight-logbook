@@ -11,6 +11,8 @@ Seit der Einführung der EU Drohnenverordnung 2019/947 hat sich auf Österreichs
 
 # Systemübersicht
 
+<img src="./mfl_systemuebersicht.drawio.svg" height="100">
+
 # Server
 
 # Terminal
