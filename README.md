@@ -9,7 +9,7 @@ Neben umfangreichen organisatorischen Unterstützungsangeboten hat sich die "Mod
 # Projektstatus
 Aktuell (09/2024) befindet sich das Projekt in einer fortgeschrittenen Entwicklungsphase. Die Software ist großteils in der für uns passenden Variante entwickelt und die Hardware in Vorbereitung für die Erstinstallation (Server auf Raspberry Pi, Multi-User Terminal für Linux auf Raspberry Pi mit Touch-Screen und RFID Reader). Geplant ist eine Testphase mit eingeschränktem Benutzerkreis ehestmöglich bis Ende des Jahres. Ab 2025 möchten wir das System auf alle Mitglieder ausrollen.
 
-In erster Linie entwickeln wir MFL maßgeschneidert auf unsere Bedürfnisse. Diese decken sich allerdings mit den gesetzlichen Anforderungen und sind wohl für viele Modellflugvereine identisch. Aus diesem Grund stellen wird das Projekt unter der MIT Lizenz quelloffen zur Verfügung. Bei Fragen wenden Sie sich gerne an info@msgu.at .
+In erster Linie entwickeln wir MFL maßgeschneidert auf unsere Bedürfnisse. Diese decken sich allerdings mit den gesetzlichen Anforderungen und sind wohl für viele Modellflugvereine identisch. Aus diesem Grund stellen wird das Projekt unter der MIT Lizenz quelloffen zur freien Verfügung. Bei Fragen wenden Sie sich gerne an info@msgu.at .
 
 # Systemübersicht
 <br/>
