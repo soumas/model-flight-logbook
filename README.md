@@ -1,6 +1,6 @@
 <img src="./terminal/_resources/images/Logo.svg" width="100">
 
-# Model Flight Logbook
+# MFL - Model Flight Logbook
 
 <p>
     Digitales Flugbuch für Modellflugplätze mit Anbindung zum "Austro Control Dronespace"
