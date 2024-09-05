@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-09-05T17:30:25.706Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0" etag="4AnX1CLbqgEGyTQHJqUz" version="24.6.4" type="github">
+<mxfile host="app.diagrams.net" modified="2024-09-05T17:35:01.866Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0" etag="VXfRbq7tHIMNP7Iu47et" version="24.6.4" type="github">
   <diagram name="Seite-1" id="_jlWFF0QikaLQGhspJfP">
-    <mxGraphModel dx="864" dy="474" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1803" dy="990" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -56,6 +56,9 @@
         <mxCell id="IfMmHu5kTRpGRYG7E5fg-18" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/database_server.svg;" vertex="1" parent="1">
           <mxGeometry x="515.3" y="156.26" width="57.4" height="70" as="geometry" />
         </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-45" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IfMmHu5kTRpGRYG7E5fg-19" target="IfMmHu5kTRpGRYG7E5fg-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="IfMmHu5kTRpGRYG7E5fg-19" value="&lt;div&gt;MFL Server (REST API)&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="500" y="232.26" width="73.7" height="29" as="geometry" />
         </mxCell>
@@ -91,6 +94,18 @@
         </mxCell>
         <mxCell id="IfMmHu5kTRpGRYG7E5fg-31" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/unicons-line-vol-4/24/map-128.png" vertex="1" parent="1">
           <mxGeometry x="702" y="157.9" width="66" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-36" value="Austro Control UTM (Dronespace)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="698.15" y="226.26" width="73.7" height="47.74" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-39" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/identity/User_Settings.svg;" vertex="1" parent="1">
+          <mxGeometry x="610" y="230" width="68" height="56.92" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-44" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.mail;" vertex="1" parent="1">
+          <mxGeometry x="507.85" y="325" width="58" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="IfMmHu5kTRpGRYG7E5fg-46" value="&lt;div&gt;Notify Admin with SysEvents&lt;/div&gt;&lt;div&gt;Notify Pilot with UTM State Changes&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="421.85" y="370" width="230" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
