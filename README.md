@@ -23,4 +23,4 @@ Der Server wurde in Python programmiert und kann daher unter vielen Betriebssyst
 Das MFL Terminal wurde in Flutter programmiert und kann daher für Linux, Web, Windows, MacOS, iOS und MacOS kompiliert werden. Weitere Informationen und eine Installationsanleitung befinden sich im Unterordner [terminal](./terminal/).
 
 # Haftungsausschluss
-Wir weisen darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt - wie in der Lizenz beschrieben - auf vollständiges Risiko des Betreibers.
+Der Haftungsausschluss ist grundsätzlich bereits über die verwendete Lizenz geregelt. Trotzdem weisen wir an dieser Stelle noch einmal explizit darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt - wie in der Lizenz beschrieben - auf vollständiges Risiko des Betreibers.
