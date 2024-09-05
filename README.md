@@ -16,6 +16,8 @@ In erster Linie entwickeln wir MFL maßgeschneidert für unsere Bedürfnisse. Di
 Wir weisen darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt - wie in der Lizenz beschrieben - auf vollständiges Risiko des Betreibers.
 
 # Systemübersicht
+<br/>
+<br/>
 <img src="./mfl_systemuebersicht.drawio.svg" width="100%">
 
 # MFL Server
