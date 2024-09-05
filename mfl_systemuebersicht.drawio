@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-09-05T17:39:09.803Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0" etag="lxkjndN04GQ8rccv2xc5" version="24.6.4" type="github">
+<mxfile host="app.diagrams.net" modified="2024-09-05T17:39:25.489Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0" etag="EVAvzehJO8q7383Gbix5" version="24.6.4" type="github">
   <diagram name="Seite-1" id="_jlWFF0QikaLQGhspJfP">
-    <mxGraphModel dx="691" dy="379" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1728" dy="948" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -97,9 +97,6 @@
         </mxCell>
         <mxCell id="IfMmHu5kTRpGRYG7E5fg-36" value="Austro Control UTM (Dronespace)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="698.15" y="226.26" width="73.7" height="47.74" as="geometry" />
-        </mxCell>
-        <mxCell id="IfMmHu5kTRpGRYG7E5fg-39" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/identity/User_Settings.svg;" vertex="1" parent="1">
-          <mxGeometry x="610" y="230" width="68" height="56.92" as="geometry" />
         </mxCell>
         <mxCell id="IfMmHu5kTRpGRYG7E5fg-44" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.mail;" vertex="1" parent="1">
           <mxGeometry x="507.85" y="325" width="58" height="35" as="geometry" />
