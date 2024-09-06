@@ -36,4 +36,12 @@ class LocalSettingsCubit extends Cubit<LocalSettingsState> {
   void setApiKey(String value) {
     emit(state.copyWith(settings: state.settings!.copyWith(apiKey: value)));
   }
+
+  void setAdminPin(String value) {
+    emit(state.copyWith(settings: state.settings!.copyWith(adminPin: value)));
+  }
+
+  void unlock() {
+    emit(state.copyWith(locked: false));
+  }
 }

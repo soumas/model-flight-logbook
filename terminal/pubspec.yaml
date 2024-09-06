@@ -30,4 +30,5 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets/images/rfid_icon_white.png
+    - assets/images/mfl_logo_slim.png
+    - assets/images/rfid_icon_slim.png

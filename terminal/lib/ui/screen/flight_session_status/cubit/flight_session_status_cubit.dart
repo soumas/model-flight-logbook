@@ -10,7 +10,6 @@ class FlightSessionStatusCubit extends Cubit<FlightSessionStatusState> {
   load(String pilotid) async {
     try {
       emit(state.copyWith(loading: true, pilotid: pilotid));
-      await Future.delayed(Duration(seconds: 1));
       final fss = await logbookApiRepo.getFlightSessionStatus(pilotid: pilotid);
       emit(state.copyWith(loading: false, flightSessionStatus: fss));
     } catch (e) {

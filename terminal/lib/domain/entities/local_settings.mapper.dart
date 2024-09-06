@@ -20,6 +20,9 @@ class LocalSettingsMapper extends ClassMapperBase<LocalSettings> {
   @override
   final String id = 'LocalSettings';
 
+  static String _$adminPin(LocalSettings v) => v.adminPin;
+  static const Field<LocalSettings, String> _f$adminPin =
+      Field('adminPin', _$adminPin, opt: true, def: '0000');
   static String _$apiEndpoint(LocalSettings v) => v.apiEndpoint;
   static const Field<LocalSettings, String> _f$apiEndpoint =
       Field('apiEndpoint', _$apiEndpoint);
@@ -29,13 +32,16 @@ class LocalSettingsMapper extends ClassMapperBase<LocalSettings> {
 
   @override
   final MappableFields<LocalSettings> fields = const {
+    #adminPin: _f$adminPin,
     #apiEndpoint: _f$apiEndpoint,
     #apiKey: _f$apiKey,
   };
 
   static LocalSettings _instantiate(DecodingData data) {
     return LocalSettings(
-        apiEndpoint: data.dec(_f$apiEndpoint), apiKey: data.dec(_f$apiKey));
+        adminPin: data.dec(_f$adminPin),
+        apiEndpoint: data.dec(_f$apiEndpoint),
+        apiKey: data.dec(_f$apiKey));
   }
 
   @override
@@ -91,7 +97,7 @@ extension LocalSettingsValueCopy<$R, $Out>
 
 abstract class LocalSettingsCopyWith<$R, $In extends LocalSettings, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? apiEndpoint, String? apiKey});
+  $R call({String? adminPin, String? apiEndpoint, String? apiKey});
   LocalSettingsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -104,12 +110,15 @@ class _LocalSettingsCopyWithImpl<$R, $Out>
   late final ClassMapperBase<LocalSettings> $mapper =
       LocalSettingsMapper.ensureInitialized();
   @override
-  $R call({String? apiEndpoint, String? apiKey}) => $apply(FieldCopyWithData({
+  $R call({String? adminPin, String? apiEndpoint, String? apiKey}) =>
+      $apply(FieldCopyWithData({
+        if (adminPin != null) #adminPin: adminPin,
         if (apiEndpoint != null) #apiEndpoint: apiEndpoint,
         if (apiKey != null) #apiKey: apiKey
       }));
   @override
   LocalSettings $make(CopyWithData data) => LocalSettings(
+      adminPin: data.get(#adminPin, or: $value.adminPin),
       apiEndpoint: data.get(#apiEndpoint, or: $value.apiEndpoint),
       apiKey: data.get(#apiKey, or: $value.apiKey));
 

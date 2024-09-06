@@ -1,3 +1,4 @@
-const kAssetRfidIconWhite = 'assets/images/rfid_icon_white.png';
+const kAssetMflLogoSlim = 'assets/images/mfl_logo_slim.png';
+const kAssetRfidIconSlim = 'assets/images/rfid_icon_slim.png';
 
 const kLocalStorageKeySettings = 'localSettings';

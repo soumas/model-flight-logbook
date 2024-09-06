@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="14.668177mm"
+   height="7.5524921mm"
+   viewBox="0 0 14.668177 7.5524921"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="icon_rfid_slim.svg"
+   inkscape:version="1.3.2 (1:1.3.2+202311252150+091e20ef0f)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showguides="true"
+     inkscape:zoom="13.046227"
+     inkscape:cx="18.549424"
+     inkscape:cy="9.9645668"
+     inkscape:window-width="2560"
+     inkscape:window-height="1368"
+     inkscape:window-x="2560"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-89.514152,-142.27994)">
+    <path
+       style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.311512;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 101.03071,148.88854 c 1.43838,-1.69006 1.32179,-3.88936 0,-5.76579"
+       id="path2"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="../../assets/images/rfid_slim.png"
+       inkscape:export-xdpi="432.90997"
+       inkscape:export-ydpi="432.90997" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.311512;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 102.73025,149.67668 c 1.80639,-2.12247 1.65999,-4.88445 0,-7.24098"
+       id="path3"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.298828;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 99.253969,148.13923 c 1.207881,-1.26836 1.109991,-2.91889 0,-4.32712"
+       id="path4"
+       sodipodi:nodetypes="cc" />
+    <circle
+       style="opacity:0.9;fill:#4199b9;fill-opacity:1;stroke:#4199b9;stroke-width:0;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path5"
+       cx="96.969017"
+       cy="145.87112"
+       r="1.0194027" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.311512;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 92.66577,148.88854 c -1.43838,-1.69006 -1.32179,-3.88936 0,-5.76579"
+       id="path10"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.311512;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 90.96623,149.67668 c -1.80639,-2.12247 -1.65999,-4.88445 0,-7.24098"
+       id="path11"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.298828;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 94.442511,148.13923 c -1.207881,-1.26836 -1.109991,-2.91889 0,-4.32712"
+       id="path12"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

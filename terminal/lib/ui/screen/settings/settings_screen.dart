@@ -24,31 +24,62 @@ class SettingsScreen extends StatelessWidget {
               return const CircularProgressIndicator();
             } else if (state.error != null) {
               return Text('Error: ${state.error.toString()}');
-            } else if (state.settings != null) {
-              return ListView(
-                children: [
-                  TextFormField(
-                    initialValue: state.settings!.apiEndpoint,
-                    decoration: const InputDecoration(label: Text('Api Endpoint')),
-                    onChanged: (value) {
-                      context.read<LocalSettingsCubit>().setApiEndpoint(value);
-                    },
+            }
+            if (state.settings != null) {
+              if (state.locked) {
+                return Center(
+                  child: Card(
+                    child: ListView(
+                      children: [
+                        TextFormField(
+                          decoration: const InputDecoration(label: Text('Enter Admin PIN')),
+                          onChanged: (value) {
+                            if (state.settings!.adminPin.compareTo(value) == 0) {
+                              context.read<LocalSettingsCubit>().unlock();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                  TextFormField(
-                    initialValue: state.settings!.apiKey,
-                    decoration: const InputDecoration(label: Text('Api Key')),
-                    onChanged: (value) {
-                      context.read<LocalSettingsCubit>().setApiKey(value);
-                    },
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView(
+                    children: [
+                      TextFormField(
+                        initialValue: state.settings!.apiEndpoint,
+                        decoration: const InputDecoration(label: Text('Api Endpoint')),
+                        onChanged: (value) {
+                          context.read<LocalSettingsCubit>().setApiEndpoint(value);
+                        },
+                      ),
+                      TextFormField(
+                        initialValue: state.settings!.apiKey,
+                        decoration: const InputDecoration(label: Text('Api Key')),
+                        onChanged: (value) {
+                          context.read<LocalSettingsCubit>().setApiKey(value);
+                        },
+                      ),
+                      TextFormField(
+                        initialValue: state.settings!.adminPin,
+                        decoration: const InputDecoration(label: Text('Admin PIN')),
+                        obscureText: true,
+                        onChanged: (value) {
+                          context.read<LocalSettingsCubit>().setAdminPin(value);
+                        },
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<LocalSettingsCubit>().save();
+                        },
+                        child: const Text('save'),
+                      ),
+                    ],
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.read<LocalSettingsCubit>().save();
-                    },
-                    child: const Text('save'),
-                  ),
-                ],
-              );
+                );
+              }
             } else {
               return const SizedBox();
             }

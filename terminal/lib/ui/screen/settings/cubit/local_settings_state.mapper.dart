@@ -21,6 +21,9 @@ class LocalSettingsStateMapper extends ClassMapperBase<LocalSettingsState> {
   @override
   final String id = 'LocalSettingsState';
 
+  static bool _$locked(LocalSettingsState v) => v.locked;
+  static const Field<LocalSettingsState, bool> _f$locked =
+      Field('locked', _$locked, opt: true, def: true);
   static bool _$loading(LocalSettingsState v) => v.loading;
   static const Field<LocalSettingsState, bool> _f$loading =
       Field('loading', _$loading, opt: true, def: false);
@@ -33,6 +36,7 @@ class LocalSettingsStateMapper extends ClassMapperBase<LocalSettingsState> {
 
   @override
   final MappableFields<LocalSettingsState> fields = const {
+    #locked: _f$locked,
     #loading: _f$loading,
     #settings: _f$settings,
     #error: _f$error,
@@ -40,6 +44,7 @@ class LocalSettingsStateMapper extends ClassMapperBase<LocalSettingsState> {
 
   static LocalSettingsState _instantiate(DecodingData data) {
     return LocalSettingsState(
+        locked: data.dec(_f$locked),
         loading: data.dec(_f$loading),
         settings: data.dec(_f$settings),
         error: data.dec(_f$error));
@@ -83,7 +88,8 @@ extension LocalSettingsStateValueCopy<$R, $Out>
 abstract class LocalSettingsStateCopyWith<$R, $In extends LocalSettingsState,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
   LocalSettingsCopyWith<$R, LocalSettings, LocalSettings>? get settings;
-  $R call({bool? loading, LocalSettings? settings, dynamic error});
+  $R call(
+      {bool? locked, bool? loading, LocalSettings? settings, dynamic error});
   LocalSettingsStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -100,14 +106,20 @@ class _LocalSettingsStateCopyWithImpl<$R, $Out>
   LocalSettingsCopyWith<$R, LocalSettings, LocalSettings>? get settings =>
       $value.settings?.copyWith.$chain((v) => call(settings: v));
   @override
-  $R call({bool? loading, Object? settings = $none, Object? error = $none}) =>
+  $R call(
+          {bool? locked,
+          bool? loading,
+          Object? settings = $none,
+          Object? error = $none}) =>
       $apply(FieldCopyWithData({
+        if (locked != null) #locked: locked,
         if (loading != null) #loading: loading,
         if (settings != $none) #settings: settings,
         if (error != $none) #error: error
       }));
   @override
   LocalSettingsState $make(CopyWithData data) => LocalSettingsState(
+      locked: data.get(#locked, or: $value.locked),
       loading: data.get(#loading, or: $value.loading),
       settings: data.get(#settings, or: $value.settings),
       error: data.get(#error, or: $value.error));

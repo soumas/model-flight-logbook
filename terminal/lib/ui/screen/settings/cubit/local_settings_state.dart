@@ -8,10 +8,12 @@ part 'local_settings_state.mapper.dart';
 
 @mappableStateClass
 class LocalSettingsState with LocalSettingsStateMappable {
+  final bool locked;
   final bool loading;
   final LocalSettings? settings;
   final dynamic error;
   LocalSettingsState({
+    this.locked = true,
     this.loading = false,
     this.settings,
     this.error,
