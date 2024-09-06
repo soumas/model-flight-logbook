@@ -1,4 +1,4 @@
-import 'package:model_flight_logbook_terminal/domain/entities/flight_session_status.dart';
+import 'package:model_flight_logbook/domain/entities/flight_session_status.dart';
 
 abstract class LogbookApiRepo {
   Future<FlightSessionStatus> getFlightSessionStatus({required String pilotid});

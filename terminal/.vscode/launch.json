@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "model_flight_logbook_terminal",
+            "name": "model_flight_logbook",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "model_flight_logbook_terminal (profile mode)",
+            "name": "model_flight_logbook (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "model_flight_logbook_terminal (release mode)",
+            "name": "model_flight_logbook (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

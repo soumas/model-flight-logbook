@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:model_flight_logbook_terminal/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook_terminal/ui/screen/settings/settings_screen.dart';
+import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
+import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({

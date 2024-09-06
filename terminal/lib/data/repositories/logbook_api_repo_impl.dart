@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:model_flight_logbook_terminal/data/repositories/local_settings_repo_impl.dart';
-import 'package:model_flight_logbook_terminal/domain/entities/flight_session_status.dart';
-import 'package:model_flight_logbook_terminal/domain/repositories/logbook_api_repo.dart';
+import 'package:model_flight_logbook/data/repositories/local_settings_repo_impl.dart';
+import 'package:model_flight_logbook/domain/entities/flight_session_status.dart';
+import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
 
 class LogbookApiRepoImpl implements LogbookApiRepo {
   final _dio = Dio();

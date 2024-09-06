@@ -1,5 +1,5 @@
-import 'package:model_flight_logbook_terminal/domain/repositories/logbook_api_repo.dart';
-import 'package:model_flight_logbook_terminal/ui/screen/flight_session_status/cubit/flight_session_status_state.dart';
+import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
+import 'package:model_flight_logbook/ui/screen/flight_session_status/cubit/flight_session_status_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FlightSessionStatusCubit extends Cubit<FlightSessionStatusState> {
@@ -10,6 +10,7 @@ class FlightSessionStatusCubit extends Cubit<FlightSessionStatusState> {
   load(String pilotid) async {
     try {
       emit(state.copyWith(loading: true, pilotid: pilotid));
+      await Future.delayed(Duration(seconds: 1));
       final fss = await logbookApiRepo.getFlightSessionStatus(pilotid: pilotid);
       emit(state.copyWith(loading: false, flightSessionStatus: fss));
     } catch (e) {

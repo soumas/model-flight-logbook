@@ -1,8 +1,8 @@
-import 'package:model_flight_logbook_terminal/ui/screen/flight_session_status/flight_session_status_screen.dart';
+import 'package:model_flight_logbook/ui/screen/flight_session_status/flight_session_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:model_flight_logbook_terminal/constants.dart';
-import 'package:model_flight_logbook_terminal/ui/screen/rfid_scan/fragments/main_menu.dart';
+import 'package:model_flight_logbook/constants.dart';
+import 'package:model_flight_logbook/ui/screen/rfid_scan/fragments/main_menu.dart';
 
 class RfidScanScreen extends StatefulWidget {
   const RfidScanScreen({

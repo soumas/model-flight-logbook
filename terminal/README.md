@@ -1,3 +1,3 @@
-# model_flight_logbook_terminal
+# model_flight_logbook
 
 A new Flutter project.

@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dart_mappable/dart_mappable.dart';
 
-import 'package:model_flight_logbook_terminal/domain/entities/local_settings.dart';
-import 'package:model_flight_logbook_terminal/mappable.dart';
+import 'package:model_flight_logbook/domain/entities/local_settings.dart';
+import 'package:model_flight_logbook/mappable.dart';
 
 part 'local_settings_state.mapper.dart';
 

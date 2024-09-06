@@ -1,11 +1,11 @@
-import 'package:model_flight_logbook_terminal/data/repositories/local_settings_repo_impl.dart';
-import 'package:model_flight_logbook_terminal/ui/screen/flight_session_status/flight_session_status_screen.dart';
+import 'package:model_flight_logbook/data/repositories/local_settings_repo_impl.dart';
+import 'package:model_flight_logbook/ui/screen/flight_session_status/flight_session_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:model_flight_logbook_terminal/injector.dart';
-import 'package:model_flight_logbook_terminal/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook_terminal/ui/screen/settings/settings_screen.dart';
-import 'package:model_flight_logbook_terminal/ui/screen/rfid_scan/rfid_scan_screen.dart';
+import 'package:model_flight_logbook/injector.dart';
+import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
+import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
+import 'package:model_flight_logbook/ui/screen/rfid_scan/rfid_scan_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
