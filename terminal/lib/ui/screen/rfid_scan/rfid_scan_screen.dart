@@ -32,7 +32,7 @@ class _RfidScanScreenState extends State<RfidScanScreen> {
 
   bool _onKey(KeyEvent event) {
     if (event is KeyDownEvent && (ModalRoute.of(context)?.isCurrent ?? false)) {
-      if (event.logicalKey == LogicalKeyboardKey.enter) {
+      if (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.numpadEnter) {
         final input = _input;
         _input = '';
         Navigator.of(context).pushNamed(FlightSessionStatusScreen.route, arguments: input).then((value) {
@@ -74,16 +74,16 @@ class _RfidScanScreenState extends State<RfidScanScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Image.asset(
                     kAssetMflLogoSlim,
-                    width: size.width * 0.1,
+                    width: size.width * 0.06,
                   ),
                 ),
                 Text(
                   'Model Flight Logbook',
-                  style: Theme.of(context).textTheme.labelMedium,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 Text(
-                  'Version: 1.0.2',
-                  style: Theme.of(context).textTheme.labelSmall,
+                  'Modellflugplatz MSGU',
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
             ),
