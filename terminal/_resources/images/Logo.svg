@@ -27,9 +27,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="13.012039"
-     inkscape:cx="65.516251"
-     inkscape:cy="162.46493"
+     inkscape:zoom="0.97585727"
+     inkscape:cx="14.85873"
+     inkscape:cy="297.17461"
      inkscape:window-width="2560"
      inkscape:window-height="1368"
      inkscape:window-x="2560"
@@ -140,7 +140,7 @@
     <path
        id="rect3-6"
        style="opacity:0.6;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.851772;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 72.337121,88.126741 c -2.788692,2.96e-4 -3.512322,-1.23288 -3.512322,-2.763286 0,-1.530405 0.723631,-2.761864 3.512322,-2.76164 l 45.763939,0.0037 c 0,0 -1.03495,1.260313 -0.98064,2.690165 0.0543,1.429852 1.03908,2.826214 1.03908,2.826214 z"
+       d="m 72.337121,92.889244 c -2.788692,2.96e-4 -3.512322,-1.23288 -3.512322,-2.763286 0,-1.530405 0.723631,-2.761864 3.512322,-2.76164 l 45.763939,0.0037 c 0,0 -1.03495,1.260313 -0.98064,2.690165 0.0543,1.429852 1.03908,2.826214 1.03908,2.826214 z"
        sodipodi:nodetypes="sssczcs"
        inkscape:export-filename="../../assets/images/mfl_logo_slim.png"
        inkscape:export-xdpi="102.09732"
@@ -148,11 +148,11 @@
     <path
        id="rect3"
        style="fill:none;stroke:#ffffff;stroke-width:1.2;stroke-linecap:round;stroke-dasharray:none"
-       d="m 119.63591,89.993392 -37.263917,6.13e-4 m -8.332241,7.2e-5 -2.35952,3.8e-5 c -2.958445,4.8e-5 -5.039215,-2.098873 -5.039215,-4.705102 0,-2.606228 2.08077,-4.703615 5.039215,-4.703659 l 47.955678,-7.23e-4"
+       d="m 119.63591,94.755895 -37.263917,6.13e-4 m -8.332241,7.2e-5 -2.35952,3.8e-5 c -2.958445,4.8e-5 -5.039215,-2.098873 -5.039215,-4.705102 0,-2.606228 2.08077,-4.703615 5.039215,-4.703659 l 47.955678,-7.23e-4"
        sodipodi:nodetypes="cccsssc" />
     <g
        id="g7"
-       transform="matrix(1.1162412,-0.27224733,0.27224733,1.1162412,-33.469052,4.8435055)">
+       transform="matrix(1.1162412,-0.27224733,0.27224733,1.1162412,-33.469052,9.6060053)">
       <circle
          style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1.20397;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          id="path4"
@@ -176,7 +176,7 @@
     </g>
     <g
        id="g8"
-       transform="rotate(-3.57341,157.95245,84.013163)">
+       transform="rotate(-3.57341,234.28928,86.39441)">
       <ellipse
          style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.411715;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          id="path14"
@@ -196,7 +196,7 @@
     </g>
     <path
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.142202;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 81.757201,83.899864 c 0,0 -0.739915,0.106732 -0.739915,0.881794 v -2.6e-5 c 0,1.31183 0.110239,8.418541 0.110239,8.418541 l -2.976548,-2.446103 -2.862005,2.447443 c 0,0 0.0058,-8.122561 0.0058,-8.539863 0,-0.65533 0.553426,-0.762792 0.553426,-0.762792"
+       d="m 81.757201,88.662367 c 0,0 -0.739915,0.106732 -0.739915,0.881794 v -2.6e-5 c 0,1.31183 0.110239,8.418541 0.110239,8.418541 l -2.976548,-2.446103 -2.862005,2.447443 c 0,0 0.0058,-8.122561 0.0058,-8.539863 0,-0.65533 0.553426,-0.762792 0.553426,-0.762792"
        id="path10"
        sodipodi:nodetypes="csscccsc" />
   </g>
