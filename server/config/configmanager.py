@@ -49,44 +49,65 @@ class UtmConfig:
         self.enabled = _ini.getboolean('utm','enabled')
         self.username = _ini.get('utm','username')
         self.password = _ini.get('utm','password')
-        self.kml_path = _ini.get('utm','kml_path')
-        self.airport = _ini.get('utm','airport')
         self.max_altitude_m = _ini.get('utm','max_altitude_m')
         self.mtom_g = _ini.get('utm','mtom_g')
         self.notify_pilot = _ini.getboolean('utm','notify_pilot')
         self.simulate = _ini.getboolean('utm','simulate')
 
+class TerminalConfig:
+    def __init__(self, type, airportname, airport_kml, terminalname, adminpin):
+        self.type = type
+        self.terminalname = terminalname
+        self.airportname = airportname
+        self.airport_kml = airport_kml
+        self.adminpin = adminpin
+
 class Config:
     def __init__(self):
         self.logbook = LogbookConfig()
+        self.terminals = _buildTerminalDict()
         self.smtp = SmtpConfig()
         self.utm = UtmConfig()
+
+def _buildTerminalDict():
+    retdict:dict = dict()
+    for sectionname in _ini.sections():
+        if sectionname.startswith('terminalconfig_'):            
+            retdict[sectionname[15:]] = TerminalConfig(
+                type = _ini.get(sectionname,'type'),
+                airportname = _ini.get(sectionname, 'airportname'),
+                airport_kml = _ini.get(sectionname, 'airport_kml'),
+                terminalname = _ini.get(sectionname, 'terminalname'),
+                adminpin = _ini.get(sectionname, 'adminpin')
+            )
+    return retdict
 
 config = Config()
 
 def __check_configurations():
+
     log.info('********************************************')
     log.info('        Model Flight Logbook Server')
     log.info('             version: ' + config.logbook.version)    
     log.info('********************************************')
 
     if config.logbook.apikey_admin == 'admin':
-        log.warn('logbook.apikey_admin has default value --> specify unique key for security reason!')
+        log.warning('logbook.apikey_admin has default value --> specify unique key for security reason!')
 
     if config.logbook.apikey_terminal == 'terminal':
-        log.warn('logbook.apikey_terminal has default value --> specify unique key for security reason!')
+        log.warning('logbook.apikey_terminal has default value --> specify unique key for security reason!')
 
     if not config.logbook.admin_email:
-        log.warn('logbook.admin_email is not defined --> define an email adress in order to get notifications')
+        log.warning('logbook.admin_email is not defined --> define an email adress in order to get notifications')
 
     if not config.smtp.server:
-        log.warn('smtp.server is not defined --> define smtp configurations in order to enable email notifications')
+        log.warning('smtp.server is not defined --> define smtp configurations in order to enable email notifications')
     elif not config.smtp.from_email:
         log.error('!!!!! smtp.from_email is not defined, but smtp.server is --> sending emails may not work !!!!!')
 
     if not config.utm.enabled:
         log.info('utm feature is disabled --> define utm configurations in order to enable the feature')
-    elif not config.utm.airport or not config.utm.kml_path or not config.utm.max_altitude_m or not config.utm.mtom_g or not config.utm.password or not config.utm.username:
+    elif not config.utm.max_altitude_m or not config.utm.mtom_g or not config.utm.password or not config.utm.username:
         log.error('!!!!! utm feature is enabled but not all required utm configurations are availabe --> check out the docs !!!!!')
 
 __check_configurations()

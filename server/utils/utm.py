@@ -11,7 +11,7 @@ import time
 import traceback
 
 from db.entities import FlightPlanStatus, FlightSessionEntity, PilotEntity
-from config.configmanager import config
+from config.configmanager import TerminalConfig, config
 from db.dbmanager import SessionLocal
 from utils.send_mail import send_admin_notification, send_mail
 from utils.logger import log
@@ -54,8 +54,8 @@ def __wait_and_send_key(driver, xpath, text, timeout=DEFAULT_WAIT_TIME):
 def __build_flight_title_id_part(pilotid):
     return ' ({})'.format(pilotid)
 
-def __build_flight_title(pilot: PilotEntity):
-    return '{}, {} {} {}'.format(config.utm.airport, pilot.firstname, pilot.lastname, __build_flight_title_id_part(pilot.id))
+def __build_flight_title(pilot: PilotEntity, terminal: TerminalConfig):
+    return '{}, {} {} {}'.format(terminal.airportname, pilot.firstname, pilot.lastname, __build_flight_title_id_part(pilot.id))
 
 def __utm_login(driver):    
     log.debug('__utm_login')
@@ -100,7 +100,7 @@ def __set_flightplanstatus(id:int, status:FlightPlanStatus):
     finally:
         db.close()
 
-def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, fsession:FlightSessionEntity, error: str):    
+def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, fsession:FlightSessionEntity, terminal:TerminalConfig, error: str):    
     log.debug('__send_notification ({})'.format(pilot.id))
 
     # notify pilot
@@ -111,7 +111,7 @@ def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, f
                 template_name="pilot_utm_status.html",
                 email_to=pilot.email,
                 subject="UTM Status: " + fsession.flightplanstatus.value,
-                body={'status':fsession.flightplanstatus.value, 'flightname':__build_flight_title(pilot), 'adminmail':config.logbook.admin_email}
+                body={'status':fsession.flightplanstatus.value, 'flightname':__build_flight_title(pilot, terminal), 'adminmail':config.logbook.admin_email}
             )
     except:
         # don't throw exception when notification fails
@@ -123,7 +123,7 @@ def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, f
             send_admin_notification(
                 background_tasks=background_tasks,
                 subject="UTM Interaktion fehlgeschlagen!",
-                body={'message':'Bei einer Interaktion mit dem UTM System bzgl. dem Flug <b>"' + __build_flight_title(pilot) + '"</b> ist folgender Fehler aufgetreten:<br/><br/>' + error }
+                body={'message':'Bei einer Interaktion mit dem UTM System bzgl. dem Flug <b>"' + __build_flight_title(pilot,terminal) + '"</b> ist folgender Fehler aufgetreten:<br/><br/>' + error }
             )
     except:
         # don't throw exception when notification fails
@@ -131,7 +131,7 @@ def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, f
         
 
 
-def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity):
+def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity, terminal: TerminalConfig):
     
     log.debug('utm start flight for pilot: {}'.format(pilot.id))
 
@@ -155,14 +155,14 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             log.debug('create flight plan')
             __wait_until_clickable(driver, "//i[@class='ti ti-link']") # wait until ui recognizes login state
             __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
-            driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(config.utm.kml_path)
+            driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airport_kml)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
             __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
             __wait_and_send_key(driver, "//label[normalize-space()='Last name *']/following-sibling::input", pilot.lastname)
             __wait_and_send_key(driver, "//label[normalize-space()='Phone number *']/following-sibling::input",pilot.phonenumber)
             __wait_and_send_key(driver, "//label[normalize-space()='Maximum takeoff mass (g) *']/following-sibling::input", config.utm.mtom_g)
             __wait_and_send_key(driver, "//label[normalize-space()='Max. altitude above ground (m) *']/following-sibling::input",config.utm.max_altitude_m)
-            __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight *']/following-sibling::input", __build_flight_title(pilot))
+            __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight *']/following-sibling::input", __build_flight_title(pilot, terminal))
             startDateTime = datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=1)
             endDateTime = startDateTime + timedelta(hours=4)
             __wait_and_send_key(driver, "//label[normalize-space()='Start date and time *']/following-sibling::div/input", startDateTime.strftime(DATETIME_FORMAT))
@@ -189,7 +189,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             log.debug('flight plan activated')
 
         else:
-            log.warn('utm simulation mode is active - waiting some seconds and doing nothing')
+            log.warning('utm simulation mode is active - waiting some seconds and doing nothing')
             time.sleep(10)
 
         fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.flying)
@@ -201,10 +201,10 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
     finally:        
         if driver != None:
             __dispose_driver(driver)
-        __send_notification(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession, error=error)
+        __send_notification(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession, terminal=terminal, error=error)
 
 
-def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity):
+def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity, terminal: TerminalConfig):
     
     log.debug('utm end flight for pilot {}'.format(pilot.id))
     if not config.utm.enabled:
@@ -231,13 +231,13 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
                 __wait_and_click(driver, "//div[@class='operation-plans']/div[@class='operation-plan']/div[@class='status ACTIVATED']/following-sibling::p[contains(normalize-space(.), '" + __build_flight_title_id_part(pilot.id) + "')]")
                 __wait_and_click(driver, "//button[normalize-space()='End flight']")
             except selenium.common.exceptions.TimeoutException:
-                log.warn('Flight with id part "{}" not found in active flights list. Maybe the flight ended earlier...?'.format(__build_flight_title_id_part(pilot.id)))
+                log.warning('Flight with id part "{}" not found in active flights list. Maybe the flight ended earlier...?'.format(__build_flight_title_id_part(pilot.id)))
                 pass
 
             log.debug('flight plan ended')
             
         else:
-            log.warn('utm simulation mode is active - waiting some minutes and doing nothing')
+            log.warning('utm simulation mode is active - waiting some minutes and doing nothing')
             time.sleep(10)
 
         fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.closed)
@@ -249,4 +249,4 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
     finally:
         if driver != None:
             __dispose_driver(driver) 
-        __send_notification(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession, error=error)
+        __send_notification(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession, terminal=terminal, error=error)

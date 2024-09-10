@@ -24,3 +24,10 @@ class FlightSessionStatusDTO(BaseModel):
 class EndFlightSessionDTO(BaseModel):
     takeoffcount: Optional[int]=None
     comment: Optional[str]=None
+
+class TerminalConfigDTO(BaseModel):
+    id: str
+    type: str
+    airportname: str
+    terminalname: str
+    adminpin: str
