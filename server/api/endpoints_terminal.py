@@ -35,10 +35,8 @@ def __findPilot(pilotid:str, db:Session, raiseOnInactive:bool = True):
 def get_terminal_config_list():
     return [TerminalConfigDTO(
         id=cfg,
-        type=config.terminals[cfg].type,
         airportname=config.terminals[cfg].airportname,
         terminalname=config.terminals[cfg].terminalname,
-        adminpin=config.terminals[cfg].adminpin
     ) for cfg in config.terminals]
 
 @api.get("/terminal/flightsession/status", dependencies=[Security(__terminalauth)], response_model=FlightSessionStatusDTO)

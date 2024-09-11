@@ -27,7 +27,5 @@ class EndFlightSessionDTO(BaseModel):
 
 class TerminalConfigDTO(BaseModel):
     id: str
-    type: str
     airportname: str
     terminalname: str
-    adminpin: str

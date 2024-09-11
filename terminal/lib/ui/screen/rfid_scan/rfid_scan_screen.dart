@@ -2,7 +2,7 @@ import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/ui/screen/flight_session_status/flight_session_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
+import 'package:model_flight_logbook/ui/screen/local_settings/local_settings_screen.dart';
 
 class RfidScanScreen extends StatefulWidget {
   const RfidScanScreen({
@@ -57,7 +57,7 @@ class _RfidScanScreenState extends State<RfidScanScreen> {
           Align(
             alignment: Alignment.topRight,
             child: IconButton(
-              onPressed: () => Navigator.of(context).pushNamed(SettingsScreen.route),
+              onPressed: () => Navigator.of(context).pushNamed(LocalSettingsScreen.route),
               icon: const Icon(Icons.miscellaneous_services),
             ),
           ),

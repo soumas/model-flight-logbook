@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:model_flight_logbook/data/repositories/local_settings_repo_impl.dart';
 import 'package:model_flight_logbook/domain/entities/flight_session_status.dart';
+import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
 
 class LogbookApiRepoImpl implements LogbookApiRepo {
@@ -26,8 +26,16 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
   }
 
   void _prepareDio(String pilotid) {
-    _dio.options.baseUrl = LocalSettingsRepoImpl.cachedApiEndpoint;
-    _dio.options.headers['x-api-key'] = LocalSettingsRepoImpl.cachedApiKey;
+    // TODO _dio.options.baseUrl = LocalSettingsRepoImpl.cachedApiEndpoint;
+    // TODO _dio.options.headers['x-api-key'] = LocalSettingsRepoImpl.cachedApiKey;
     _dio.options.headers['x-pilotid'] = pilotid;
+  }
+
+  @override
+  Future<List<TerminalConfig>> loadTerminalConfigs({required String apiEndpoint, required String apiKey}) async {
+    _dio.options.baseUrl = apiEndpoint;
+    _dio.options.headers['x-api-key'] = apiKey;
+    final response = await _dio.get('/terminal/config/list');
+    return response.data.map<TerminalConfig>((item) => TerminalConfigMapper.fromMap(item)).toList();
   }
 }

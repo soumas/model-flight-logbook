@@ -98,6 +98,12 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Einstellungen'**
   String get settings;
+
+  /// No description provided for @addServerConnection.
+  ///
+  /// In de, this message translates to:
+  /// **'Serververbindung hinzufügen'**
+  String get addServerConnection;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

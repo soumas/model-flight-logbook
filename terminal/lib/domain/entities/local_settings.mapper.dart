@@ -13,6 +13,7 @@ class LocalSettingsMapper extends ClassMapperBase<LocalSettings> {
   static LocalSettingsMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = LocalSettingsMapper._());
+      TerminalEndpointMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -22,26 +23,23 @@ class LocalSettingsMapper extends ClassMapperBase<LocalSettings> {
 
   static String _$adminPin(LocalSettings v) => v.adminPin;
   static const Field<LocalSettings, String> _f$adminPin =
-      Field('adminPin', _$adminPin, opt: true, def: '0000');
-  static String _$apiEndpoint(LocalSettings v) => v.apiEndpoint;
-  static const Field<LocalSettings, String> _f$apiEndpoint =
-      Field('apiEndpoint', _$apiEndpoint);
-  static String _$apiKey(LocalSettings v) => v.apiKey;
-  static const Field<LocalSettings, String> _f$apiKey =
-      Field('apiKey', _$apiKey);
+      Field('adminPin', _$adminPin, opt: true, def: '');
+  static List<TerminalEndpoint> _$terminalEndpoints(LocalSettings v) =>
+      v.terminalEndpoints;
+  static const Field<LocalSettings, List<TerminalEndpoint>>
+      _f$terminalEndpoints =
+      Field('terminalEndpoints', _$terminalEndpoints, opt: true, def: const []);
 
   @override
   final MappableFields<LocalSettings> fields = const {
     #adminPin: _f$adminPin,
-    #apiEndpoint: _f$apiEndpoint,
-    #apiKey: _f$apiKey,
+    #terminalEndpoints: _f$terminalEndpoints,
   };
 
   static LocalSettings _instantiate(DecodingData data) {
     return LocalSettings(
         adminPin: data.dec(_f$adminPin),
-        apiEndpoint: data.dec(_f$apiEndpoint),
-        apiKey: data.dec(_f$apiKey));
+        terminalEndpoints: data.dec(_f$terminalEndpoints));
   }
 
   @override
@@ -97,7 +95,10 @@ extension LocalSettingsValueCopy<$R, $Out>
 
 abstract class LocalSettingsCopyWith<$R, $In extends LocalSettings, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? adminPin, String? apiEndpoint, String? apiKey});
+  ListCopyWith<$R, TerminalEndpoint,
+          TerminalEndpointCopyWith<$R, TerminalEndpoint, TerminalEndpoint>>
+      get terminalEndpoints;
+  $R call({String? adminPin, List<TerminalEndpoint>? terminalEndpoints});
   LocalSettingsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -110,17 +111,21 @@ class _LocalSettingsCopyWithImpl<$R, $Out>
   late final ClassMapperBase<LocalSettings> $mapper =
       LocalSettingsMapper.ensureInitialized();
   @override
-  $R call({String? adminPin, String? apiEndpoint, String? apiKey}) =>
+  ListCopyWith<$R, TerminalEndpoint,
+          TerminalEndpointCopyWith<$R, TerminalEndpoint, TerminalEndpoint>>
+      get terminalEndpoints => ListCopyWith($value.terminalEndpoints,
+          (v, t) => v.copyWith.$chain(t), (v) => call(terminalEndpoints: v));
+  @override
+  $R call({String? adminPin, List<TerminalEndpoint>? terminalEndpoints}) =>
       $apply(FieldCopyWithData({
         if (adminPin != null) #adminPin: adminPin,
-        if (apiEndpoint != null) #apiEndpoint: apiEndpoint,
-        if (apiKey != null) #apiKey: apiKey
+        if (terminalEndpoints != null) #terminalEndpoints: terminalEndpoints
       }));
   @override
   LocalSettings $make(CopyWithData data) => LocalSettings(
       adminPin: data.get(#adminPin, or: $value.adminPin),
-      apiEndpoint: data.get(#apiEndpoint, or: $value.apiEndpoint),
-      apiKey: data.get(#apiKey, or: $value.apiKey));
+      terminalEndpoints:
+          data.get(#terminalEndpoints, or: $value.terminalEndpoints));
 
   @override
   LocalSettingsCopyWith<$R2, LocalSettings, $Out2> $chain<$R2, $Out2>(

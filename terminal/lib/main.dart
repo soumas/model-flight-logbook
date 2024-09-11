@@ -1,17 +1,15 @@
-import 'package:model_flight_logbook/data/repositories/local_settings_repo_impl.dart';
 import 'package:model_flight_logbook/ui/screen/flight_session_status/flight_session_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
+import 'package:model_flight_logbook/ui/screen/local_settings/local_settings_screen.dart';
 import 'package:model_flight_logbook/ui/screen/rfid_scan/rfid_scan_screen.dart';
+import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await initInjector();
-  await LocalSettingsRepoImpl.initCache();
   runApp(const MainApp());
 }
 
@@ -25,8 +23,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         RfidScanScreen.route: (context) => const RfidScanScreen(),
-        SettingsScreen.route: (context) => const SettingsScreen(),
+        LocalSettingsScreen.route: (context) => const LocalSettingsScreen(),
         FlightSessionStatusScreen.route: (context) => const FlightSessionStatusScreen(),
+        ServerConnectionScreen.route: (context) => const ServerConnectionScreen(),
       },
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [

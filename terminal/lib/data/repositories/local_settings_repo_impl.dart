@@ -4,22 +4,13 @@ import 'package:model_flight_logbook/domain/entities/local_settings.dart';
 import 'package:model_flight_logbook/domain/repositories/local_settings_repo.dart';
 
 class LocalSettingsRepoImpl extends LocalSettingsRepo {
-  static String cachedApiEndpoint = '';
-  static String cachedApiKey = '';
-
-  static Future<void> initCache() async {
-    LocalSettings settings = await loadStatic();
-    cachedApiEndpoint = settings.apiEndpoint;
-    cachedApiKey = settings.apiKey;
-  }
-
   static Future<LocalSettings> loadStatic() async {
     final json = (await SharedPreferences.getInstance()).getString(kLocalStorageKeySettings);
     try {
       return LocalSettingsMapper.fromJson(json!);
     } catch (e) {
       // todo... it nicer
-      return LocalSettings(apiEndpoint: '', apiKey: '');
+      return LocalSettings();
     }
   }
 
@@ -31,6 +22,5 @@ class LocalSettingsRepoImpl extends LocalSettingsRepo {
   @override
   Future save(LocalSettings settings) async {
     await (await SharedPreferences.getInstance()).setString(kLocalStorageKeySettings, settings.toJson());
-    await initCache();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/repositories/local_settings_repo.dart';
-import 'package:model_flight_logbook/ui/screen/settings/cubit/local_settings_state.dart';
+import 'package:model_flight_logbook/ui/screen/local_settings/cubit/local_settings_state.dart';
 
 class LocalSettingsCubit extends Cubit<LocalSettingsState> {
   LocalSettingsCubit({required this.localSettingsRepo}) : super(LocalSettingsState());
@@ -11,10 +11,12 @@ class LocalSettingsCubit extends Cubit<LocalSettingsState> {
     try {
       emit(state.copyWith(loading: true));
       final settings = await localSettingsRepo.load();
-      emit(state.copyWith(loading: false, settings: settings));
+      emit(state.copyWith(settings: settings, locked: settings.adminPin.isNotEmpty));
     } catch (e) {
-      emit(state.copyWith(loading: false, error: e));
+      emit(state.copyWith(error: e));
       rethrow;
+    } finally {
+      emit(state.copyWith(loading: false));
     }
   }
 
@@ -22,23 +24,17 @@ class LocalSettingsCubit extends Cubit<LocalSettingsState> {
     try {
       emit(state.copyWith(loading: true));
       await localSettingsRepo.save(state.settings!);
-      load();
     } catch (e) {
-      emit(state.copyWith(loading: false, error: e));
+      emit(state.copyWith(error: e));
       rethrow;
+    } finally {
+      emit(state.copyWith(loading: false));
     }
   }
 
-  void setApiEndpoint(String value) {
-    emit(state.copyWith(settings: state.settings!.copyWith(apiEndpoint: value)));
-  }
-
-  void setApiKey(String value) {
-    emit(state.copyWith(settings: state.settings!.copyWith(apiKey: value)));
-  }
-
-  void setAdminPin(String value) {
+  void setAdminPinAndSave(String value) {
     emit(state.copyWith(settings: state.settings!.copyWith(adminPin: value)));
+    save();
   }
 
   void unlock() {
