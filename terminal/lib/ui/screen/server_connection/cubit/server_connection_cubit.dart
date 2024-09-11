@@ -26,7 +26,9 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
       final terminalConfigList = await logbookApiRepo.loadTerminalConfigs(apiEndpoint: state.apiEndpoint, apiKey: state.apiKey);
       if (terminalConfigList.length == 1) {
         submit(terminalConfigList[0]);
-      } else {}
+      } else {
+        emit(state.copyWith(configOptions: terminalConfigList));
+      }
     } catch (e) {
       emit(state.copyWith(error: e));
       rethrow;

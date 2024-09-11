@@ -65,10 +65,9 @@ class LocalSettingsScreen extends StatelessWidget {
                                 },
                               ),
                               TextButton.icon(
-                                onPressed: () {
-                                  Navigator.of(context).pushNamed(ServerConnectionScreen.route).then((terminalendpoint) {
-                                    // TODO: save new or modified endpoint
-                                  });
+                                onPressed: () async {
+                                  final xxx = await Navigator.of(context).pushNamed(ServerConnectionScreen.route);
+                                  int i = 0;
                                 },
                                 label: const Text('Serververbindung hinzufügen'),
                                 icon: const Icon(Icons.add),

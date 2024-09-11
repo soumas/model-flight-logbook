@@ -18,7 +18,12 @@ class ServerConnectionScreen extends StatelessWidget {
       ),
       body: BlocProvider<ServerConnectionCubit>(
         create: (context) => injector.get<ServerConnectionCubit>()..init(),
-        child: BlocBuilder<ServerConnectionCubit, ServerConnectionState>(
+        child: BlocConsumer<ServerConnectionCubit, ServerConnectionState>(
+          listener: (context, state) {
+            if (state.result != null) {
+              Navigator.of(context).pop(state.result!);
+            }
+          },
           builder: (context, state) {
             if (state.loading) {
               return const CircularProgressIndicator();
