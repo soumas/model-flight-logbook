@@ -155,7 +155,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             log.debug('create flight plan')
             __wait_until_clickable(driver, "//i[@class='ti ti-link']") # wait until ui recognizes login state
             __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
-            driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airport_kml)
+            driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
             __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
             __wait_and_send_key(driver, "//label[normalize-space()='Last name *']/following-sibling::input", pilot.lastname)

@@ -23,7 +23,6 @@ class LogbookConfig:
         self.version = _read_version()
         self.dburl = _ini.get('logbook','dburl')
         self.apikey_admin = _ini.get('logbook','apikey_admin')
-        self.apikey_terminal = _ini.get('logbook','apikey_terminal')
         self.admin_email = _ini.get('logbook','admin_email')
         self.forward_comment = _ini.getboolean('logbook','forward_comment')
         self.debug = _ini.getboolean('logbook','debug')
@@ -55,10 +54,12 @@ class UtmConfig:
         self.simulate = _ini.getboolean('utm','simulate')
 
 class TerminalConfig:
-    def __init__(self, airportname, airport_kml, terminalname):
+    def __init__(self, airportname, terminaltype, apikey, airportkml, terminalname):
+        self.terminaltype = terminaltype
         self.terminalname = terminalname
+        self.apikey = apikey
         self.airportname = airportname
-        self.airport_kml = airport_kml
+        self.airportkml = airportkml
 
 class Config:
     def __init__(self):
@@ -72,9 +73,11 @@ def _buildTerminalDict():
     for sectionname in _ini.sections():
         if sectionname.startswith('terminalconfig_'):            
             retdict[sectionname[15:]] = TerminalConfig(
-                airportname = _ini.get(sectionname, 'airportname'),
-                airport_kml = _ini.get(sectionname, 'airport_kml'),
+                terminaltype = _ini.get(sectionname, 'terminaltype'),
                 terminalname = _ini.get(sectionname, 'terminalname'),
+                apikey = _ini.get(sectionname, 'apikey'),
+                airportname = _ini.get(sectionname, 'airportname'),
+                airportkml = _ini.get(sectionname, 'airportkml'),
             )
     return retdict
 
@@ -89,9 +92,6 @@ def __check_configurations():
 
     if config.logbook.apikey_admin == 'admin':
         log.warning('logbook.apikey_admin has default value --> specify unique key for security reason!')
-
-    if config.logbook.apikey_terminal == 'terminal':
-        log.warning('logbook.apikey_terminal has default value --> specify unique key for security reason!')
 
     if not config.logbook.admin_email:
         log.warning('logbook.admin_email is not defined --> define an email adress in order to get notifications')

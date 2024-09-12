@@ -12,12 +12,19 @@ from api.exceptions import invalid_api_key, active_flightsession_found, unknown_
 from db.entities import FlightPlanStatus, FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
 from utils import logger, utm
-from utils.send_mail import send_admin_notification, send_mail
+from utils.send_mail import send_admin_notification
 
-def __terminalauth(api_key_header:str = Security(api_key_header)):
-    if api_key_header == config.logbook.apikey_terminal:
-        return api_key_header
-    raise invalid_api_key
+def __specific_terminalauth(x_terminal:Annotated[str, Header()], api_key_header:str = Security(api_key_header)):
+    if not x_terminal in config.terminals:
+        raise unknown_terminal       
+    if api_key_header != config.terminals[x_terminal].apikey:        
+        raise invalid_api_key
+    return api_key_header
+
+def __common_terminalauth(api_key_header:str = Security(api_key_header)):
+    # verry simple "secuity" for get_terminal_config_list (used by terminal client to get config options before a specific terminal is selected)
+    if api_key_header != 'a&feoy!j0diusyJog2':        
+        raise invalid_api_key
 
 def __findCurrentFlightSession(pilotid:str, db:Session):
     return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilotid, or_(FlightSessionEntity.end == None, FlightSessionEntity.flightplanstatus == FlightPlanStatus.flying, FlightSessionEntity.flightplanstatus == FlightPlanStatus.start_pending, FlightSessionEntity.flightplanstatus == FlightPlanStatus.end_pending ))).first()
@@ -31,15 +38,23 @@ def __findPilot(pilotid:str, db:Session, raiseOnInactive:bool = True):
         raise inactive_pilot
     return pilot
 
-@api.get("/terminal/config/list", dependencies=[Security(__terminalauth)], response_model=list[TerminalConfigDTO])
+@api.get("/terminal/config/list", dependencies=[Security(__common_terminalauth)], response_model=list[TerminalConfigDTO])
 def get_terminal_config_list():
     return [TerminalConfigDTO(
-        id=cfg,
+        terminalid=cfg,
+        terminaltype=config.terminals[cfg].terminaltype,
         airportname=config.terminals[cfg].airportname,
         terminalname=config.terminals[cfg].terminalname,
     ) for cfg in config.terminals]
 
-@api.get("/terminal/flightsession/status", dependencies=[Security(__terminalauth)], response_model=FlightSessionStatusDTO)
+@api.get("/terminal/connectioncheck", dependencies=[Security(__specific_terminalauth)])
+def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, db:Session = Depends(get_db)):
+    # check terminal-id and api-id combination (__terminalauth)
+    if(x_pilotid):
+        # if pilotid is given (singlemode) this method checks existence of pilot
+        __findPilot(pilotid=x_pilotid, db=db, raiseOnInactive=False)
+
+@api.get("/terminal/flightsession/status", dependencies=[Security(__specific_terminalauth)], response_model=FlightSessionStatusDTO)
 def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = Depends(get_db)):
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
@@ -51,10 +66,8 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
         flightPlanStatus=None if fsession == None else fsession.flightplanstatus
     )
 
-@api.post("/terminal/flightsession/start", dependencies=[Security(__terminalauth)], response_model=None)
-async def start_flight_session(x_terminal:Annotated[str, Header()], x_pilotid:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
-    if not x_terminal in config.terminals:
-        raise unknown_terminal    
+@api.post("/terminal/flightsession/start", dependencies=[Security(__specific_terminalauth)], response_model=None)
+async def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     if __findCurrentFlightSession(x_pilotid, db) is not None:
         raise active_flightsession_found
@@ -71,10 +84,8 @@ async def start_flight_session(x_terminal:Annotated[str, Header()], x_pilotid:An
     background_tasks.add_task(utm.start_flight, background_tasks, pilot, fsession, config.terminals[x_terminal])
 
 
-@api.post("/terminal/flightsession/end", dependencies=[Security(__terminalauth)], response_model=None)
-async def end_flight_session(x_terminal:Annotated[str, Header()], x_pilotid:Annotated[str, Header()], data:EndFlightSessionDTO, background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
-    if not x_terminal in config.terminals:
-        raise unknown_terminal      
+@api.post("/terminal/flightsession/end", dependencies=[Security(__specific_terminalauth)], response_model=None)
+async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], data:EndFlightSessionDTO, background_tasks:BackgroundTasks, db:Session = Depends(get_db)):  
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db, raiseOnInactive=False) 
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
     if(fsession is None):

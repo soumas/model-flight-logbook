@@ -26,6 +26,7 @@ class EndFlightSessionDTO(BaseModel):
     comment: Optional[str]=None
 
 class TerminalConfigDTO(BaseModel):
-    id: str
+    terminalid: str
+    terminaltype : str
     airportname: str
     terminalname: str
