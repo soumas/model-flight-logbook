@@ -20,8 +20,12 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
   @override
   final String id = 'TerminalConfig';
 
-  static String _$id(TerminalConfig v) => v.id;
-  static const Field<TerminalConfig, String> _f$id = Field('id', _$id);
+  static String _$terminalid(TerminalConfig v) => v.terminalid;
+  static const Field<TerminalConfig, String> _f$terminalid =
+      Field('terminalid', _$terminalid);
+  static String _$terminaltype(TerminalConfig v) => v.terminaltype;
+  static const Field<TerminalConfig, String> _f$terminaltype =
+      Field('terminaltype', _$terminaltype);
   static String _$airportname(TerminalConfig v) => v.airportname;
   static const Field<TerminalConfig, String> _f$airportname =
       Field('airportname', _$airportname);
@@ -31,14 +35,16 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
 
   @override
   final MappableFields<TerminalConfig> fields = const {
-    #id: _f$id,
+    #terminalid: _f$terminalid,
+    #terminaltype: _f$terminaltype,
     #airportname: _f$airportname,
     #terminalname: _f$terminalname,
   };
 
   static TerminalConfig _instantiate(DecodingData data) {
     return TerminalConfig(
-        id: data.dec(_f$id),
+        terminalid: data.dec(_f$terminalid),
+        terminaltype: data.dec(_f$terminaltype),
         airportname: data.dec(_f$airportname),
         terminalname: data.dec(_f$terminalname));
   }
@@ -96,7 +102,11 @@ extension TerminalConfigValueCopy<$R, $Out>
 
 abstract class TerminalConfigCopyWith<$R, $In extends TerminalConfig, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? id, String? airportname, String? terminalname});
+  $R call(
+      {String? terminalid,
+      String? terminaltype,
+      String? airportname,
+      String? terminalname});
   TerminalConfigCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -110,15 +120,21 @@ class _TerminalConfigCopyWithImpl<$R, $Out>
   late final ClassMapperBase<TerminalConfig> $mapper =
       TerminalConfigMapper.ensureInitialized();
   @override
-  $R call({String? id, String? airportname, String? terminalname}) =>
+  $R call(
+          {String? terminalid,
+          String? terminaltype,
+          String? airportname,
+          String? terminalname}) =>
       $apply(FieldCopyWithData({
-        if (id != null) #id: id,
+        if (terminalid != null) #terminalid: terminalid,
+        if (terminaltype != null) #terminaltype: terminaltype,
         if (airportname != null) #airportname: airportname,
         if (terminalname != null) #terminalname: terminalname
       }));
   @override
   TerminalConfig $make(CopyWithData data) => TerminalConfig(
-      id: data.get(#id, or: $value.id),
+      terminalid: data.get(#terminalid, or: $value.terminalid),
+      terminaltype: data.get(#terminaltype, or: $value.terminaltype),
       airportname: data.get(#airportname, or: $value.airportname),
       terminalname: data.get(#terminalname, or: $value.terminalname));
 

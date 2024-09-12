@@ -30,19 +30,24 @@ class TerminalEndpointMapper extends ClassMapperBase<TerminalEndpoint> {
   static TerminalConfig _$config(TerminalEndpoint v) => v.config;
   static const Field<TerminalEndpoint, TerminalConfig> _f$config =
       Field('config', _$config);
+  static String? _$pilotid(TerminalEndpoint v) => v.pilotid;
+  static const Field<TerminalEndpoint, String> _f$pilotid =
+      Field('pilotid', _$pilotid, opt: true);
 
   @override
   final MappableFields<TerminalEndpoint> fields = const {
     #apiEndpoint: _f$apiEndpoint,
     #apiKey: _f$apiKey,
     #config: _f$config,
+    #pilotid: _f$pilotid,
   };
 
   static TerminalEndpoint _instantiate(DecodingData data) {
     return TerminalEndpoint(
         apiEndpoint: data.dec(_f$apiEndpoint),
         apiKey: data.dec(_f$apiKey),
-        config: data.dec(_f$config));
+        config: data.dec(_f$config),
+        pilotid: data.dec(_f$pilotid));
   }
 
   @override
@@ -100,7 +105,11 @@ extension TerminalEndpointValueCopy<$R, $Out>
 abstract class TerminalEndpointCopyWith<$R, $In extends TerminalEndpoint, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   TerminalConfigCopyWith<$R, TerminalConfig, TerminalConfig> get config;
-  $R call({String? apiEndpoint, String? apiKey, TerminalConfig? config});
+  $R call(
+      {String? apiEndpoint,
+      String? apiKey,
+      TerminalConfig? config,
+      String? pilotid});
   TerminalEndpointCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -117,17 +126,23 @@ class _TerminalEndpointCopyWithImpl<$R, $Out>
   TerminalConfigCopyWith<$R, TerminalConfig, TerminalConfig> get config =>
       $value.config.copyWith.$chain((v) => call(config: v));
   @override
-  $R call({String? apiEndpoint, String? apiKey, TerminalConfig? config}) =>
+  $R call(
+          {String? apiEndpoint,
+          String? apiKey,
+          TerminalConfig? config,
+          Object? pilotid = $none}) =>
       $apply(FieldCopyWithData({
         if (apiEndpoint != null) #apiEndpoint: apiEndpoint,
         if (apiKey != null) #apiKey: apiKey,
-        if (config != null) #config: config
+        if (config != null) #config: config,
+        if (pilotid != $none) #pilotid: pilotid
       }));
   @override
   TerminalEndpoint $make(CopyWithData data) => TerminalEndpoint(
       apiEndpoint: data.get(#apiEndpoint, or: $value.apiEndpoint),
       apiKey: data.get(#apiKey, or: $value.apiKey),
-      config: data.get(#config, or: $value.config));
+      config: data.get(#config, or: $value.config),
+      pilotid: data.get(#pilotid, or: $value.pilotid));
 
   @override
   TerminalEndpointCopyWith<$R2, TerminalEndpoint, $Out2> $chain<$R2, $Out2>(

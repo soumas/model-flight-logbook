@@ -7,16 +7,20 @@ part 'server_connection_state.mapper.dart';
 
 @mappableStateClass
 class ServerConnectionState with ServerConnectionStateMappable {
-  final bool loading;
-  final String apiEndpoint;
-  final String apiKey;
+  final String selectedApiEndpoint;
+  final String selectedApiKey;
+  final String selectedPilotId;
+  final TerminalConfig? selectedConfig;
   final List<TerminalConfig> configOptions;
   final TerminalEndpoint? result;
+  final bool loading;
   final dynamic error;
   ServerConnectionState({
+    this.selectedApiEndpoint = '',
+    this.selectedApiKey = '',
+    this.selectedPilotId = '',
+    this.selectedConfig,
     this.loading = false,
-    this.apiEndpoint = '',
-    this.apiKey = '',
     this.configOptions = const [],
     this.result,
     this.error,

@@ -23,15 +23,23 @@ class ServerConnectionStateMapper
   @override
   final String id = 'ServerConnectionState';
 
+  static String _$selectedApiEndpoint(ServerConnectionState v) =>
+      v.selectedApiEndpoint;
+  static const Field<ServerConnectionState, String> _f$selectedApiEndpoint =
+      Field('selectedApiEndpoint', _$selectedApiEndpoint, opt: true, def: '');
+  static String _$selectedApiKey(ServerConnectionState v) => v.selectedApiKey;
+  static const Field<ServerConnectionState, String> _f$selectedApiKey =
+      Field('selectedApiKey', _$selectedApiKey, opt: true, def: '');
+  static String _$selectedPilotId(ServerConnectionState v) => v.selectedPilotId;
+  static const Field<ServerConnectionState, String> _f$selectedPilotId =
+      Field('selectedPilotId', _$selectedPilotId, opt: true, def: '');
+  static TerminalConfig? _$selectedConfig(ServerConnectionState v) =>
+      v.selectedConfig;
+  static const Field<ServerConnectionState, TerminalConfig> _f$selectedConfig =
+      Field('selectedConfig', _$selectedConfig, opt: true);
   static bool _$loading(ServerConnectionState v) => v.loading;
   static const Field<ServerConnectionState, bool> _f$loading =
       Field('loading', _$loading, opt: true, def: false);
-  static String _$apiEndpoint(ServerConnectionState v) => v.apiEndpoint;
-  static const Field<ServerConnectionState, String> _f$apiEndpoint =
-      Field('apiEndpoint', _$apiEndpoint, opt: true, def: '');
-  static String _$apiKey(ServerConnectionState v) => v.apiKey;
-  static const Field<ServerConnectionState, String> _f$apiKey =
-      Field('apiKey', _$apiKey, opt: true, def: '');
   static List<TerminalConfig> _$configOptions(ServerConnectionState v) =>
       v.configOptions;
   static const Field<ServerConnectionState, List<TerminalConfig>>
@@ -46,9 +54,11 @@ class ServerConnectionStateMapper
 
   @override
   final MappableFields<ServerConnectionState> fields = const {
+    #selectedApiEndpoint: _f$selectedApiEndpoint,
+    #selectedApiKey: _f$selectedApiKey,
+    #selectedPilotId: _f$selectedPilotId,
+    #selectedConfig: _f$selectedConfig,
     #loading: _f$loading,
-    #apiEndpoint: _f$apiEndpoint,
-    #apiKey: _f$apiKey,
     #configOptions: _f$configOptions,
     #result: _f$result,
     #error: _f$error,
@@ -56,9 +66,11 @@ class ServerConnectionStateMapper
 
   static ServerConnectionState _instantiate(DecodingData data) {
     return ServerConnectionState(
+        selectedApiEndpoint: data.dec(_f$selectedApiEndpoint),
+        selectedApiKey: data.dec(_f$selectedApiKey),
+        selectedPilotId: data.dec(_f$selectedPilotId),
+        selectedConfig: data.dec(_f$selectedConfig),
         loading: data.dec(_f$loading),
-        apiEndpoint: data.dec(_f$apiEndpoint),
-        apiKey: data.dec(_f$apiKey),
         configOptions: data.dec(_f$configOptions),
         result: data.dec(_f$result),
         error: data.dec(_f$error));
@@ -103,14 +115,18 @@ abstract class ServerConnectionStateCopyWith<
     $R,
     $In extends ServerConnectionState,
     $Out> implements ClassCopyWith<$R, $In, $Out> {
+  TerminalConfigCopyWith<$R, TerminalConfig, TerminalConfig>?
+      get selectedConfig;
   ListCopyWith<$R, TerminalConfig,
           TerminalConfigCopyWith<$R, TerminalConfig, TerminalConfig>>
       get configOptions;
   TerminalEndpointCopyWith<$R, TerminalEndpoint, TerminalEndpoint>? get result;
   $R call(
-      {bool? loading,
-      String? apiEndpoint,
-      String? apiKey,
+      {String? selectedApiEndpoint,
+      String? selectedApiKey,
+      String? selectedPilotId,
+      TerminalConfig? selectedConfig,
+      bool? loading,
       List<TerminalConfig>? configOptions,
       TerminalEndpoint? result,
       dynamic error});
@@ -127,6 +143,10 @@ class _ServerConnectionStateCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ServerConnectionState> $mapper =
       ServerConnectionStateMapper.ensureInitialized();
   @override
+  TerminalConfigCopyWith<$R, TerminalConfig, TerminalConfig>?
+      get selectedConfig => $value.selectedConfig?.copyWith
+          .$chain((v) => call(selectedConfig: v));
+  @override
   ListCopyWith<$R, TerminalConfig,
           TerminalConfigCopyWith<$R, TerminalConfig, TerminalConfig>>
       get configOptions => ListCopyWith($value.configOptions,
@@ -136,25 +156,33 @@ class _ServerConnectionStateCopyWithImpl<$R, $Out>
       get result => $value.result?.copyWith.$chain((v) => call(result: v));
   @override
   $R call(
-          {bool? loading,
-          String? apiEndpoint,
-          String? apiKey,
+          {String? selectedApiEndpoint,
+          String? selectedApiKey,
+          String? selectedPilotId,
+          Object? selectedConfig = $none,
+          bool? loading,
           List<TerminalConfig>? configOptions,
           Object? result = $none,
           Object? error = $none}) =>
       $apply(FieldCopyWithData({
+        if (selectedApiEndpoint != null)
+          #selectedApiEndpoint: selectedApiEndpoint,
+        if (selectedApiKey != null) #selectedApiKey: selectedApiKey,
+        if (selectedPilotId != null) #selectedPilotId: selectedPilotId,
+        if (selectedConfig != $none) #selectedConfig: selectedConfig,
         if (loading != null) #loading: loading,
-        if (apiEndpoint != null) #apiEndpoint: apiEndpoint,
-        if (apiKey != null) #apiKey: apiKey,
         if (configOptions != null) #configOptions: configOptions,
         if (result != $none) #result: result,
         if (error != $none) #error: error
       }));
   @override
   ServerConnectionState $make(CopyWithData data) => ServerConnectionState(
+      selectedApiEndpoint:
+          data.get(#selectedApiEndpoint, or: $value.selectedApiEndpoint),
+      selectedApiKey: data.get(#selectedApiKey, or: $value.selectedApiKey),
+      selectedPilotId: data.get(#selectedPilotId, or: $value.selectedPilotId),
+      selectedConfig: data.get(#selectedConfig, or: $value.selectedConfig),
       loading: data.get(#loading, or: $value.loading),
-      apiEndpoint: data.get(#apiEndpoint, or: $value.apiEndpoint),
-      apiKey: data.get(#apiKey, or: $value.apiKey),
       configOptions: data.get(#configOptions, or: $value.configOptions),
       result: data.get(#result, or: $value.result),
       error: data.get(#error, or: $value.error));

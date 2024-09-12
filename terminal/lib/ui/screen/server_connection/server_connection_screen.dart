@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_cubit.dart';
@@ -27,8 +28,6 @@ class ServerConnectionScreen extends StatelessWidget {
           builder: (context, state) {
             if (state.loading) {
               return const CircularProgressIndicator();
-            } else if (state.error != null) {
-              return Text('Error: ${state.error.toString()}');
             } else {
               return SizedBox(
                 width: 460,
@@ -37,26 +36,61 @@ class ServerConnectionScreen extends StatelessWidget {
                   child: Builder(builder: (context) {
                     return Column(
                       children: [
-                        TextFormField(
-                          initialValue: state.apiEndpoint,
-                          decoration: const InputDecoration(label: Text('Api Endpoint')),
-                          onChanged: (value) {
-                            context.read<ServerConnectionCubit>().setApiEndpoint(value);
-                          },
-                        ),
-                        TextFormField(
-                          initialValue: state.apiKey,
-                          decoration: const InputDecoration(label: Text('Api Key')),
-                          onChanged: (value) {
-                            context.read<ServerConnectionCubit>().setApiKey(value);
-                          },
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            context.read<ServerConnectionCubit>().connect();
-                          },
-                          child: Text('Verbinden'),
-                        ),
+                        if (state.error != null) Text('Error: ${state.error.toString()}'),
+                        if (state.configOptions.isEmpty)
+                          TextFormField(
+                            initialValue: state.selectedApiEndpoint,
+                            decoration: const InputDecoration(label: Text('Api Endpoint')),
+                            onChanged: (value) {
+                              context.read<ServerConnectionCubit>().selectApiEndpoint(value);
+                            },
+                            readOnly: state.configOptions.isNotEmpty,
+                          ),
+                        if (state.configOptions.isEmpty)
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<ServerConnectionCubit>().loadConfigurations();
+                            },
+                            child: Text('Weiter'),
+                          ),
+                        if (state.configOptions.isNotEmpty)
+                          DropdownButtonFormField(
+                            value: state.selectedConfig,
+                            items: state.configOptions
+                                .map(
+                                  (opt) => DropdownMenuItem<TerminalConfig>(
+                                    value: opt,
+                                    child: Text('${opt.airportname} (${opt.terminalname})'),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: <TerminalConfig>(value) {
+                              context.read<ServerConnectionCubit>().selectTerminalconfig(value);
+                            },
+                          ),
+                        if (state.selectedConfig != null)
+                          TextFormField(
+                            initialValue: state.selectedApiKey,
+                            decoration: const InputDecoration(label: Text('Api Key')),
+                            onChanged: (value) {
+                              context.read<ServerConnectionCubit>().selectApiKey(value);
+                            },
+                          ),
+                        if (state.selectedConfig != null && state.selectedConfig!.terminaltype == 'singleuser')
+                          TextFormField(
+                            initialValue: state.selectedApiKey,
+                            decoration: const InputDecoration(label: Text('Pilot-ID')),
+                            onChanged: (value) {
+                              context.read<ServerConnectionCubit>().selectPilotid(value);
+                            },
+                          ),
+                        if (state.selectedConfig != null)
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<ServerConnectionCubit>().submit();
+                            },
+                            child: Text('Prüfen und speichern'),
+                          ),
                       ],
                     );
                   }),

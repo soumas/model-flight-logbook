@@ -32,10 +32,21 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
   }
 
   @override
-  Future<List<TerminalConfig>> loadTerminalConfigs({required String apiEndpoint, required String apiKey}) async {
+  Future<List<TerminalConfig>> loadTerminalConfigs({required String apiEndpoint}) async {
     _dio.options.baseUrl = apiEndpoint;
-    _dio.options.headers['x-api-key'] = apiKey;
+    _dio.options.headers['x-api-key'] = 'a&feoy!j0diusyJog2';
     final response = await _dio.get('/terminal/config/list');
     return response.data.map<TerminalConfig>((item) => TerminalConfigMapper.fromMap(item)).toList();
+  }
+
+  @override
+  Future<void> checkTerminalConnection({required String apiEndpoint, required String terminalid, required String apiKey, String? pilotid}) async {
+    _dio.options.baseUrl = apiEndpoint;
+    _dio.options.headers['x-terminal'] = terminalid;
+    _dio.options.headers['x-api-key'] = apiKey;
+    if (pilotid != null) {
+      _dio.options.headers['x-pilotid'] = pilotid;
+    }
+    await _dio.get('/terminal/connectioncheck');
   }
 }

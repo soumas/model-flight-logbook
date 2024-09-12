@@ -20,14 +20,13 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
     }
   }
 
-  connect() async {
+  loadConfigurations() async {
     try {
       emit(state.copyWith(loading: true));
-      final terminalConfigList = await logbookApiRepo.loadTerminalConfigs(apiEndpoint: state.apiEndpoint, apiKey: state.apiKey);
-      if (terminalConfigList.length == 1) {
-        submit(terminalConfigList[0]);
-      } else {
-        emit(state.copyWith(configOptions: terminalConfigList));
+      final terminalConfigList = await logbookApiRepo.loadTerminalConfigs(apiEndpoint: state.selectedApiEndpoint);
+      emit(state.copyWith(configOptions: terminalConfigList));
+      if (terminalConfigList.isNotEmpty) {
+        selectTerminalconfig(terminalConfigList.first);
       }
     } catch (e) {
       emit(state.copyWith(error: e));
@@ -37,23 +36,39 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
     }
   }
 
-  submit(TerminalConfig terminalConfig) {
-    emit(
-      state.copyWith(
-        result: TerminalEndpoint(
-          apiEndpoint: state.apiEndpoint,
-          apiKey: state.apiKey,
-          config: terminalConfig,
+  submit() async {
+    try {
+      await logbookApiRepo.checkTerminalConnection(apiEndpoint: state.selectedApiEndpoint, apiKey: state.selectedApiKey, terminalid: state.selectedConfig!.terminalid, pilotid: state.selectedPilotId);
+      emit(
+        state.copyWith(
+          result: TerminalEndpoint(
+            apiEndpoint: state.selectedApiEndpoint,
+            apiKey: state.selectedApiKey,
+            config: state.selectedConfig!,
+          ),
         ),
-      ),
-    );
+      );
+    } catch (e) {
+      emit(state.copyWith(error: e));
+      rethrow;
+    } finally {
+      emit(state.copyWith(loading: false));
+    }
   }
 
-  setApiEndpoint(String value) {
-    emit(state.copyWith(apiEndpoint: value));
+  selectApiEndpoint(String value) {
+    emit(state.copyWith(selectedApiEndpoint: value));
   }
 
-  setApiKey(String value) {
-    emit(state.copyWith(apiKey: value));
+  selectApiKey(String value) {
+    emit(state.copyWith(selectedApiKey: value));
+  }
+
+  selectPilotid(String? value) {
+    emit(state.copyWith(selectedPilotId: value));
+  }
+
+  selectTerminalconfig(TerminalConfig? value) {
+    emit(state.copyWith(selectedConfig: value));
   }
 }

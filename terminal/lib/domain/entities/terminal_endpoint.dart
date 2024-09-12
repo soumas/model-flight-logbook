@@ -8,10 +8,12 @@ part 'terminal_endpoint.mapper.dart';
 class TerminalEndpoint with TerminalEndpointMappable {
   final String apiEndpoint;
   final String apiKey;
+  final String? pilotid;
   final TerminalConfig config;
   TerminalEndpoint({
     required this.apiEndpoint,
     required this.apiKey,
     required this.config,
+    this.pilotid,
   });
 }
