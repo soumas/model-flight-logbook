@@ -7,7 +7,11 @@
         {
             "name": "model_flight_logbook",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
         },
         {
             "name": "model_flight_logbook (profile mode)",

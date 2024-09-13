@@ -50,42 +50,79 @@ class _RfidScanScreenState extends State<RfidScanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Modellflugplatz MSGU',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'RFID Terminal',
+                          style: Theme.of(context).textTheme.labelSmall,
+                          textAlign: TextAlign.center,
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  kAssetRfidIconSlim,
+                                  height: MediaQuery.of(context).size.height * 0.25,
+                                ),
+                                // if (false)
+                                //   IconButton(
+                                //     onPressed: () {},
+                                //     icon: Icon(
+                                //       Icons.keyboard,
+                                //       size: MediaQuery.of(context).size.height * 0.1,
+                                //     ),
+                                //   ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          kAssetMflLogoSlim,
+                          height: 40,
+                        ),
+                      ),
+                      Text(
+                        '"Model Flight Logbook" by MSGU',
+                        style: Theme.of(context).textTheme.labelMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
           Align(
             alignment: Alignment.topRight,
             child: IconButton(
               onPressed: () => Navigator.of(context).pushNamed(LocalSettingsScreen.route),
               icon: const Icon(Icons.miscellaneous_services),
-            ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  kAssetRfidIconSlim,
-                  width: size.width * 0.4,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Image.asset(
-                    kAssetMflLogoSlim,
-                    width: size.width * 0.06,
-                  ),
-                ),
-                Text(
-                  'Model Flight Logbook',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                Text(
-                  'Modellflugplatz MSGU',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ],
             ),
           ),
         ],

@@ -37,21 +37,20 @@ class ServerConnectionScreen extends StatelessWidget {
                     return Column(
                       children: [
                         if (state.error != null) Text('Error: ${state.error.toString()}'),
-                        if (state.configOptions.isEmpty)
-                          TextFormField(
-                            initialValue: state.selectedApiEndpoint,
-                            decoration: const InputDecoration(label: Text('Api Endpoint')),
-                            onChanged: (value) {
-                              context.read<ServerConnectionCubit>().selectApiEndpoint(value);
-                            },
-                            readOnly: state.configOptions.isNotEmpty,
-                          ),
+                        TextFormField(
+                          initialValue: state.selectedApiEndpoint,
+                          decoration: const InputDecoration(label: Text('Api Endpoint')),
+                          onChanged: (value) {
+                            context.read<ServerConnectionCubit>().selectApiEndpoint(value);
+                          },
+                          readOnly: state.configOptions.isNotEmpty,
+                        ),
                         if (state.configOptions.isEmpty)
                           ElevatedButton(
                             onPressed: () {
                               context.read<ServerConnectionCubit>().loadConfigurations();
                             },
-                            child: Text('Weiter'),
+                            child: Text('Konfigurationen laden'),
                           ),
                         if (state.configOptions.isNotEmpty)
                           DropdownButtonFormField(
@@ -67,6 +66,8 @@ class ServerConnectionScreen extends StatelessWidget {
                             onChanged: <TerminalConfig>(value) {
                               context.read<ServerConnectionCubit>().selectTerminalconfig(value);
                             },
+                            decoration: const InputDecoration(label: Text('Konfiguration')),
+                            dropdownColor: Colors.blueGrey,
                           ),
                         if (state.selectedConfig != null)
                           TextFormField(
@@ -75,10 +76,11 @@ class ServerConnectionScreen extends StatelessWidget {
                             onChanged: (value) {
                               context.read<ServerConnectionCubit>().selectApiKey(value);
                             },
+                            obscureText: true,
                           ),
                         if (state.selectedConfig != null && state.selectedConfig!.terminaltype == 'singleuser')
                           TextFormField(
-                            initialValue: state.selectedApiKey,
+                            initialValue: state.selectedPilotId,
                             decoration: const InputDecoration(label: Text('Pilot-ID')),
                             onChanged: (value) {
                               context.read<ServerConnectionCubit>().selectPilotid(value);

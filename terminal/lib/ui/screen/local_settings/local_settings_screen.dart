@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/local_settings/cubit/local_settings_cubit.dart';
@@ -54,20 +55,28 @@ class LocalSettingsScreen extends StatelessWidget {
                               const Divider(),
                               FormField(
                                 builder: (field) {
-                                  return const Column(
-                                    children: [
-                                      ListTile(
-                                        title: Text('MSGU Modellflugplatz (RFID Terminal)'),
-                                        subtitle: Text('https://msgu.at/termianl/23lso/'),
-                                      ),
-                                    ],
+                                  return Column(
+                                    children: state.settings!.terminalEndpoints.map((te) {
+                                      return ListTile(
+                                        title: Text('${te.config.airportname} (${te.config.terminalname})'),
+                                        subtitle: Text(te.apiEndpoint),
+                                        trailing: IconButton(
+                                          onPressed: () {
+                                            context.read<LocalSettingsCubit>().deleteEndpointAndSave(te);
+                                          },
+                                          icon: const Icon(Icons.delete),
+                                        ),
+                                      );
+                                    }).toList(),
                                   );
                                 },
                               ),
                               TextButton.icon(
                                 onPressed: () async {
-                                  final xxx = await Navigator.of(context).pushNamed(ServerConnectionScreen.route);
-                                  int i = 0;
+                                  final endpoint = await Navigator.of(context).pushNamed(ServerConnectionScreen.route);
+                                  if (endpoint != null && context.mounted) {
+                                    context.read<LocalSettingsCubit>().addOrUpdateEndpointAndSave(endpoint as TerminalEndpoint);
+                                  }
                                 },
                                 label: const Text('Serververbindung hinzufügen'),
                                 icon: const Icon(Icons.add),
