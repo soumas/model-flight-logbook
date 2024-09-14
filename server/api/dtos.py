@@ -1,8 +1,7 @@
 import datetime
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import BaseModel
-from sqlalchemy import DateTime
 
 from db.entities import FlightPlanStatus
 
@@ -13,6 +12,8 @@ class PilotDTO(BaseModel):
     phonenumber: str
     email: str
     active: bool
+    acRegistrationValidTo: Optional[datetime.date]=None
+    acPilotlicenseValidTo: Optional[datetime.date]=None
 
 class FlightSessionStatusDTO(BaseModel):
     pilotName: str
@@ -20,6 +21,9 @@ class FlightSessionStatusDTO(BaseModel):
     sessionStarttime: Optional[datetime.datetime]=None
     sessionEndtime: Optional[datetime.datetime]=None
     flightPlanStatus: Optional[FlightPlanStatus]=None
+    infoMessages: Optional[List[str]]=None
+    warnMessages: Optional[List[str]]=None
+    errorMessages: Optional[List[str]]=None
 
 class EndFlightSessionDTO(BaseModel):
     takeoffcount: Optional[int]=None

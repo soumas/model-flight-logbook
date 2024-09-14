@@ -1,7 +1,7 @@
 import enum
 import sqlalchemy
 
-from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Date, DateTime, Enum, ForeignKey, Integer, String
 from db.dbmanager import engine
 
 Base = sqlalchemy.orm.declarative_base()
@@ -23,6 +23,8 @@ class PilotEntity(Base):
     phonenumber = Column(String, nullable=False)
     email = Column(String, nullable=False)    
     active = Column(Boolean, nullable=False)
+    acRegistrationValidTo = Column(Date, nullable=True)    
+    acPilotlicenseValidTo = Column(Date, nullable=True)    
 
 class FlightSessionEntity(Base):
     __tablename__ = "flightsessions"
