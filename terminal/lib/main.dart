@@ -1,10 +1,10 @@
-import 'package:model_flight_logbook/ui/screen/flight_session_status/flight_session_status_screen.dart';
+import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/screen/local_settings/local_settings_screen.dart';
-import 'package:model_flight_logbook/ui/screen/rfid_scan/rfid_scan_screen.dart';
+import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
+import 'package:model_flight_logbook/ui/screen/pilot_id_input/pilot_id_input_screen.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
 
 Future<void> main() async {
@@ -22,9 +22,9 @@ class MainApp extends StatelessWidget {
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       routes: {
-        RfidScanScreen.route: (context) => const RfidScanScreen(),
-        LocalSettingsScreen.route: (context) => const LocalSettingsScreen(),
-        FlightSessionStatusScreen.route: (context) => const FlightSessionStatusScreen(),
+        PilotIdInputScreen.route: (context) => const PilotIdInputScreen(),
+        SettingsScreen.route: (context) => const SettingsScreen(),
+        PilotStatusScreen.route: (context) => const PilotStatusScreen(),
         ServerConnectionScreen.route: (context) => const ServerConnectionScreen(),
       },
       supportedLocales: AppLocalizations.supportedLocales,

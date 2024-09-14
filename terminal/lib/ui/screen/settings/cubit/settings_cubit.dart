@@ -1,17 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/domain/repositories/local_settings_repo.dart';
-import 'package:model_flight_logbook/ui/screen/local_settings/cubit/local_settings_state.dart';
+import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
+import 'package:model_flight_logbook/ui/screen/settings/cubit/settings_state.dart';
 
-class LocalSettingsCubit extends Cubit<LocalSettingsState> {
-  LocalSettingsCubit({required this.localSettingsRepo}) : super(LocalSettingsState());
+class SettingsCubit extends Cubit<SettingsState> {
+  SettingsCubit({required this.localStorageRepo}) : super(SettingsState());
 
-  final LocalSettingsRepo localSettingsRepo;
+  final LocalStorageRepo localStorageRepo;
 
   load() async {
     try {
       emit(state.copyWith(loading: true));
-      final settings = await localSettingsRepo.load();
+      final settings = await localStorageRepo.loadSettings();
       emit(state.copyWith(settings: settings, locked: settings.adminPin.isNotEmpty));
     } catch (e) {
       emit(state.copyWith(error: e));
@@ -24,7 +24,7 @@ class LocalSettingsCubit extends Cubit<LocalSettingsState> {
   save() async {
     try {
       emit(state.copyWith(loading: true));
-      await localSettingsRepo.save(state.settings!);
+      await localStorageRepo.saveSettings(state.settings!);
     } catch (e) {
       emit(state.copyWith(error: e));
       rethrow;

@@ -1,16 +1,16 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:model_flight_logbook/mappable.dart';
 
-part 'flight_session_status.mapper.dart';
+part 'pilot_status.mapper.dart';
 
 @mappableModelClass
-class FlightSessionStatus with FlightSessionStatusMappable {
+class PilotStatus with PilotStatusMappable {
   final String pilotName;
   final int? sessionId;
   final String? sessionStarttime;
   final String? sessionEndtime;
   final String? flightPlanStatus;
-  FlightSessionStatus({
+  PilotStatus({
     required this.pilotName,
     this.sessionId,
     this.sessionStarttime,

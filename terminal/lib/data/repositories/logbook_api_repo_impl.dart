@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:model_flight_logbook/domain/entities/flight_session_status.dart';
+import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
 
@@ -7,10 +7,10 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
   final _dio = Dio();
 
   @override
-  Future<FlightSessionStatus> getFlightSessionStatus({required String pilotid}) async {
+  Future<PilotStatus> loadPilotStatus({required String pilotid}) async {
     _prepareDio(pilotid);
     final response = await _dio.get('/terminal/flightsession/status');
-    return FlightSessionStatusMapper.fromMap(response.data);
+    return PilotStatusMapper.fromMap(response.data);
   }
 
   @override
@@ -26,8 +26,8 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
   }
 
   void _prepareDio(String pilotid) {
-    // TODO _dio.options.baseUrl = LocalSettingsRepoImpl.cachedApiEndpoint;
-    // TODO _dio.options.headers['x-api-key'] = LocalSettingsRepoImpl.cachedApiKey;
+    // TODO _dio.options.baseUrl = SettingsRepoImpl.cachedApiEndpoint;
+    // TODO _dio.options.headers['x-api-key'] = SettingsRepoImpl.cachedApiKey;
     _dio.options.headers['x-pilotid'] = pilotid;
   }
 

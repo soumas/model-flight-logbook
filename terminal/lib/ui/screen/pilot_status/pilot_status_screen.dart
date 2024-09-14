@@ -1,11 +1,11 @@
 import 'package:model_flight_logbook/injector.dart';
-import 'package:model_flight_logbook/ui/screen/flight_session_status/cubit/flight_session_status_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/flight_session_status/cubit/flight_session_status_state.dart';
+import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
+import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FlightSessionStatusScreen extends StatelessWidget {
-  const FlightSessionStatusScreen({super.key});
+class PilotStatusScreen extends StatelessWidget {
+  const PilotStatusScreen({super.key});
 
   static const route = '/pilotstate';
 
@@ -16,9 +16,9 @@ class FlightSessionStatusScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Sitzungsstatus'),
       ),
-      body: BlocProvider<FlightSessionStatusCubit>(
-        create: (context) => injector.get<FlightSessionStatusCubit>()..load(pilotid),
-        child: BlocConsumer<FlightSessionStatusCubit, FlightSessionStatusState>(
+      body: BlocProvider<PilotStatusCubit>(
+        create: (context) => injector.get<PilotStatusCubit>()..load(pilotid),
+        child: BlocConsumer<PilotStatusCubit, PilotStatusState>(
           listener: (context, state) {
             if (state.completedAction != null) {
               Navigator.of(context).pop(state.completedAction);
@@ -71,9 +71,9 @@ class FlightSessionStatusScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    ElevatedButton(onPressed: () => context.read<FlightSessionStatusCubit>().load(state.pilotid), child: const Text('Akualisieren')),
-                    if (state.flightSessionStatus?.sessionId == null) ElevatedButton(onPressed: () => context.read<FlightSessionStatusCubit>().startSession(), child: const Text('Session starten')),
-                    if (state.flightSessionStatus?.sessionId != null) ElevatedButton(onPressed: () => context.read<FlightSessionStatusCubit>().endSession(), child: const Text('Session beenden')),
+                    ElevatedButton(onPressed: () => context.read<PilotStatusCubit>().load(state.pilotid), child: const Text('Akualisieren')),
+                    if (state.flightSessionStatus?.sessionId == null) ElevatedButton(onPressed: () => context.read<PilotStatusCubit>().startSession(), child: const Text('Session starten')),
+                    if (state.flightSessionStatus?.sessionId != null) ElevatedButton(onPressed: () => context.read<PilotStatusCubit>().endSession(), child: const Text('Session beenden')),
                   ],
                 ),
               ],

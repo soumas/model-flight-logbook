@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/screen/local_settings/cubit/local_settings_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/local_settings/cubit/local_settings_state.dart';
+import 'package:model_flight_logbook/ui/screen/settings/cubit/settings_cubit.dart';
+import 'package:model_flight_logbook/ui/screen/settings/cubit/settings_state.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
 
-class LocalSettingsScreen extends StatelessWidget {
-  const LocalSettingsScreen({super.key});
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
   static const route = '/settings';
 
@@ -18,9 +18,9 @@ class LocalSettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.settings),
       ),
-      body: BlocProvider<LocalSettingsCubit>(
-        create: (context) => injector.get<LocalSettingsCubit>()..load(),
-        child: BlocBuilder<LocalSettingsCubit, LocalSettingsState>(
+      body: BlocProvider<SettingsCubit>(
+        create: (context) => injector.get<SettingsCubit>()..load(),
+        child: BlocBuilder<SettingsCubit, SettingsState>(
           builder: (context, state) {
             if (state.loading) {
               return const CircularProgressIndicator();
@@ -38,7 +38,7 @@ class LocalSettingsScreen extends StatelessWidget {
                           decoration: const InputDecoration(label: Text('Enter Admin PIN')),
                           onChanged: (value) {
                             if (state.settings!.adminPin.compareTo(value) == 0) {
-                              context.read<LocalSettingsCubit>().unlock();
+                              context.read<SettingsCubit>().unlock();
                             }
                           },
                         );
@@ -62,7 +62,7 @@ class LocalSettingsScreen extends StatelessWidget {
                                         subtitle: Text(te.apiEndpoint),
                                         trailing: IconButton(
                                           onPressed: () {
-                                            context.read<LocalSettingsCubit>().deleteEndpointAndSave(te);
+                                            context.read<SettingsCubit>().deleteEndpointAndSave(te);
                                           },
                                           icon: const Icon(Icons.delete),
                                         ),
@@ -75,7 +75,7 @@ class LocalSettingsScreen extends StatelessWidget {
                                 onPressed: () async {
                                   final endpoint = await Navigator.of(context).pushNamed(ServerConnectionScreen.route);
                                   if (endpoint != null && context.mounted) {
-                                    context.read<LocalSettingsCubit>().addOrUpdateEndpointAndSave(endpoint as TerminalEndpoint);
+                                    context.read<SettingsCubit>().addOrUpdateEndpointAndSave(endpoint as TerminalEndpoint);
                                   }
                                 },
                                 label: const Text('Serververbindung hinzufügen'),
@@ -93,7 +93,7 @@ class LocalSettingsScreen extends StatelessWidget {
                                 initialValue: state.settings!.adminPin,
                                 decoration: const InputDecoration(label: Text('Admin PIN')),
                                 onChanged: (value) {
-                                  context.read<LocalSettingsCubit>().setAdminPinAndSave(value);
+                                  context.read<SettingsCubit>().setAdminPinAndSave(value);
                                 },
                               ),
                             ],
