@@ -35,6 +35,15 @@ class PilotStatusMapper extends ClassMapperBase<PilotStatus> {
   static String? _$flightPlanStatus(PilotStatus v) => v.flightPlanStatus;
   static const Field<PilotStatus, String> _f$flightPlanStatus =
       Field('flightPlanStatus', _$flightPlanStatus, opt: true);
+  static List<String>? _$infoMessages(PilotStatus v) => v.infoMessages;
+  static const Field<PilotStatus, List<String>> _f$infoMessages =
+      Field('infoMessages', _$infoMessages, opt: true);
+  static List<String>? _$warnMessages(PilotStatus v) => v.warnMessages;
+  static const Field<PilotStatus, List<String>> _f$warnMessages =
+      Field('warnMessages', _$warnMessages, opt: true);
+  static List<String>? _$errorMessages(PilotStatus v) => v.errorMessages;
+  static const Field<PilotStatus, List<String>> _f$errorMessages =
+      Field('errorMessages', _$errorMessages, opt: true);
 
   @override
   final MappableFields<PilotStatus> fields = const {
@@ -43,6 +52,9 @@ class PilotStatusMapper extends ClassMapperBase<PilotStatus> {
     #sessionStarttime: _f$sessionStarttime,
     #sessionEndtime: _f$sessionEndtime,
     #flightPlanStatus: _f$flightPlanStatus,
+    #infoMessages: _f$infoMessages,
+    #warnMessages: _f$warnMessages,
+    #errorMessages: _f$errorMessages,
   };
 
   static PilotStatus _instantiate(DecodingData data) {
@@ -51,7 +63,10 @@ class PilotStatusMapper extends ClassMapperBase<PilotStatus> {
         sessionId: data.dec(_f$sessionId),
         sessionStarttime: data.dec(_f$sessionStarttime),
         sessionEndtime: data.dec(_f$sessionEndtime),
-        flightPlanStatus: data.dec(_f$flightPlanStatus));
+        flightPlanStatus: data.dec(_f$flightPlanStatus),
+        infoMessages: data.dec(_f$infoMessages),
+        warnMessages: data.dec(_f$warnMessages),
+        errorMessages: data.dec(_f$errorMessages));
   }
 
   @override
@@ -105,12 +120,21 @@ extension PilotStatusValueCopy<$R, $Out>
 
 abstract class PilotStatusCopyWith<$R, $In extends PilotStatus, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get infoMessages;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get warnMessages;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get errorMessages;
   $R call(
       {String? pilotName,
       int? sessionId,
       String? sessionStarttime,
       String? sessionEndtime,
-      String? flightPlanStatus});
+      String? flightPlanStatus,
+      List<String>? infoMessages,
+      List<String>? warnMessages,
+      List<String>? errorMessages});
   PilotStatusCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -123,18 +147,48 @@ class _PilotStatusCopyWithImpl<$R, $Out>
   late final ClassMapperBase<PilotStatus> $mapper =
       PilotStatusMapper.ensureInitialized();
   @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get infoMessages => $value.infoMessages != null
+          ? ListCopyWith(
+              $value.infoMessages!,
+              (v, t) => ObjectCopyWith(v, $identity, t),
+              (v) => call(infoMessages: v))
+          : null;
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get warnMessages => $value.warnMessages != null
+          ? ListCopyWith(
+              $value.warnMessages!,
+              (v, t) => ObjectCopyWith(v, $identity, t),
+              (v) => call(warnMessages: v))
+          : null;
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get errorMessages => $value.errorMessages != null
+          ? ListCopyWith(
+              $value.errorMessages!,
+              (v, t) => ObjectCopyWith(v, $identity, t),
+              (v) => call(errorMessages: v))
+          : null;
+  @override
   $R call(
           {String? pilotName,
           Object? sessionId = $none,
           Object? sessionStarttime = $none,
           Object? sessionEndtime = $none,
-          Object? flightPlanStatus = $none}) =>
+          Object? flightPlanStatus = $none,
+          Object? infoMessages = $none,
+          Object? warnMessages = $none,
+          Object? errorMessages = $none}) =>
       $apply(FieldCopyWithData({
         if (pilotName != null) #pilotName: pilotName,
         if (sessionId != $none) #sessionId: sessionId,
         if (sessionStarttime != $none) #sessionStarttime: sessionStarttime,
         if (sessionEndtime != $none) #sessionEndtime: sessionEndtime,
-        if (flightPlanStatus != $none) #flightPlanStatus: flightPlanStatus
+        if (flightPlanStatus != $none) #flightPlanStatus: flightPlanStatus,
+        if (infoMessages != $none) #infoMessages: infoMessages,
+        if (warnMessages != $none) #warnMessages: warnMessages,
+        if (errorMessages != $none) #errorMessages: errorMessages
       }));
   @override
   PilotStatus $make(CopyWithData data) => PilotStatus(
@@ -144,7 +198,10 @@ class _PilotStatusCopyWithImpl<$R, $Out>
           data.get(#sessionStarttime, or: $value.sessionStarttime),
       sessionEndtime: data.get(#sessionEndtime, or: $value.sessionEndtime),
       flightPlanStatus:
-          data.get(#flightPlanStatus, or: $value.flightPlanStatus));
+          data.get(#flightPlanStatus, or: $value.flightPlanStatus),
+      infoMessages: data.get(#infoMessages, or: $value.infoMessages),
+      warnMessages: data.get(#warnMessages, or: $value.warnMessages),
+      errorMessages: data.get(#errorMessages, or: $value.errorMessages));
 
   @override
   PilotStatusCopyWith<$R2, PilotStatus, $Out2> $chain<$R2, $Out2>(

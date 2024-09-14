@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_id_input/pilot_id_input_screen.dart';
+import 'package:model_flight_logbook/ui/screen/pilotid_input/pilotid_input_screen.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
 
 Future<void> main() async {
@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       routes: {
-        PilotIdInputScreen.route: (context) => const PilotIdInputScreen(),
+        PilotidInputScreen.route: (context) => const PilotidInputScreen(),
         SettingsScreen.route: (context) => const SettingsScreen(),
         PilotStatusScreen.route: (context) => const PilotStatusScreen(),
         ServerConnectionScreen.route: (context) => const ServerConnectionScreen(),
