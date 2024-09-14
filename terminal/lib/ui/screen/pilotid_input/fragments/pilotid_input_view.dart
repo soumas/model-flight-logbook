@@ -20,7 +20,7 @@ class PilotidInputView extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         Text(
-          'Fügen Sie über die Einstellungen eine Serververbindung hinzu.',
+          'Fügen Sie über die Einstellungen einen Server hinzu.',
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
