@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
+import 'package:model_flight_logbook/ui/widgets/mfl_message_block.dart';
 
 class PilotidInputView extends StatelessWidget {
   const PilotidInputView({
@@ -13,21 +14,28 @@ class PilotidInputView extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<PilotidInputCubit>().state;
     if (state.selectedEndpoint == null) {
-      return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text(
-          'Model Flight Logbook Terminal',
-          style: Theme.of(context).textTheme.headlineMedium,
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          'Fügen Sie über die Einstellungen einen Server hinzu.',
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        ),
-      ]);
+      return Column(
+        children: [
+          Image.asset(
+            kAssetMflLogoSlim,
+            height: 80,
+          ),
+          Text(
+            'Model Flight Logbook',
+            style: Theme.of(context).textTheme.headlineMedium,
+            textAlign: TextAlign.center,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 30.0),
+            child: MflMessageBlock(
+              severity: MflCardSeverity.info,
+              text: 'Bitte öffnen Sie die Einstellungen und fügen Sie einen Server hinzu um das Terminal zu verwenden.',
+            ),
+          ),
+        ],
+      );
     } else {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             state.selectedEndpoint?.config.airportname ?? 'Unbekannter Flugplatz',

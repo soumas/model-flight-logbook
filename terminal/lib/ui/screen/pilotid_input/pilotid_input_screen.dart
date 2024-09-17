@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/fragments/main_drawer.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/fragments/pilotid_input_view.dart';
+import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
 
 class PilotidInputScreen extends StatefulWidget {
   const PilotidInputScreen({
@@ -53,39 +53,10 @@ class _PilotidInputScreenState extends State<PilotidInputScreen> {
     return BlocProvider<PilotidInputCubit>(
       create: (context) => injector.get<PilotidInputCubit>()..init(),
       child: Builder(builder: (context) {
-        return Scaffold(
-          appBar: AppBar(),
-          body: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0, top: 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Expanded(
-                    child: PilotidInputView(),
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                          kAssetMflLogoSlim,
-                          height: 40,
-                        ),
-                      ),
-                      Text(
-                        '"Model Flight Logbook" by MSGU',
-                        style: Theme.of(context).textTheme.labelMedium,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-          endDrawer: const MainDrawer(),
+        return const MflScaffold(
+          alignment: Alignment.center,
+          endDrawer: MainDrawer(),
+          child: PilotidInputView(),
         );
       }),
     );
