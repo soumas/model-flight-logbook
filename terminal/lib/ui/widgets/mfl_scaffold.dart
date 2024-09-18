@@ -22,7 +22,7 @@ class MflScaffold extends StatelessWidget {
       ),
       body: Center(
         child: SizedBox(
-          width: 480,
+          width: 460,
           height: MediaQuery.of(context).size.height - kToolbarHeight,
           child: Align(
             alignment: alignment,

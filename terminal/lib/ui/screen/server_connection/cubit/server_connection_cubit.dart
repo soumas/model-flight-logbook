@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
@@ -9,28 +10,48 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
 
   final LogbookApiRepo logbookApiRepo;
 
-  init() async {
+  loadConfigurations() async {
     try {
-      emit(state.copyWith(loading: true));
+      emit(state.copyWith(loading: true, error: null));
+      final terminalConfigList = await logbookApiRepo.loadTerminalConfigs(apiEndpoint: state.selectedApiEndpoint);
+      emit(state.copyWith(configOptions: terminalConfigList, selectedConfig: terminalConfigList.firstOrNull));
     } catch (e) {
-      emit(state.copyWith(error: e));
+      if (!_handleDioException(e)) {
+        emit(state.copyWith(error: e));
+      }
       rethrow;
     } finally {
       emit(state.copyWith(loading: false));
     }
   }
 
-  loadConfigurations() async {
-    try {
-      emit(state.copyWith(loading: true));
-      final terminalConfigList = await logbookApiRepo.loadTerminalConfigs(apiEndpoint: state.selectedApiEndpoint);
-      emit(state.copyWith(configOptions: terminalConfigList));
-    } catch (e) {
-      emit(state.copyWith(error: e));
-      rethrow;
-    } finally {
-      emit(state.copyWith(loading: false));
+  bool _handleDioException(dynamic e) {
+    if (e is DioException) {
+      var msg = '';
+      switch (e.type) {
+        case DioExceptionType.sendTimeout:
+        case DioExceptionType.receiveTimeout:
+        case DioExceptionType.connectionTimeout:
+          msg = 'Zeitüberschreibung';
+          break;
+        case DioExceptionType.badResponse:
+          msg = 'Ungültige Antwort';
+        case DioExceptionType.cancel:
+        case DioExceptionType.connectionError:
+          msg = 'Fehler beim Verbindungsaufbau';
+        case DioExceptionType.unknown:
+        default:
+          msg = e.message ?? 'Unbekannter Fehler';
+      }
+      try {
+        if (e.response?.data['detail'] != null) {
+          msg += ' (${e.response?.data['detail']})';
+        }
+      } catch (_) {}
+      emit(state.copyWith(error: msg));
+      return true;
     }
+    return false;
   }
 
   submit() async {
@@ -38,6 +59,7 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
       await logbookApiRepo.checkTerminalConnection(apiEndpoint: state.selectedApiEndpoint, apiKey: state.selectedApiKey, terminalid: state.selectedConfig!.terminalid, pilotid: state.selectedPilotId);
       emit(
         state.copyWith(
+          error: null,
           result: TerminalEndpoint(
             apiEndpoint: state.selectedApiEndpoint,
             apiKey: state.selectedApiKey,
@@ -47,7 +69,9 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith(error: e));
+      if (!_handleDioException(e)) {
+        emit(state.copyWith(error: e));
+      }
       rethrow;
     } finally {
       emit(state.copyWith(loading: false));

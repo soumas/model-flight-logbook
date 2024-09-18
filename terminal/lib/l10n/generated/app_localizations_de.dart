@@ -10,5 +10,5 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settings => 'Einstellungen';
 
   @override
-  String get addServerConnection => 'Serververbindung hinzufügen';
+  String get addServerConnection => 'Server hinzufügen';
 }

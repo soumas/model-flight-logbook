@@ -102,7 +102,7 @@ abstract class AppLocalizations {
   /// No description provided for @addServerConnection.
   ///
   /// In de, this message translates to:
-  /// **'Serververbindung hinzufügen'**
+  /// **'Server hinzufügen'**
   String get addServerConnection;
 }
 

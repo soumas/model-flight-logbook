@@ -26,10 +26,10 @@ class PilotidInputView extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 30.0),
+            padding: EdgeInsets.only(top: 20.0),
             child: MflMessageBlock(
               severity: MflCardSeverity.info,
-              text: 'Bitte öffnen Sie die Einstellungen und fügen Sie einen Server hinzu um das Terminal zu verwenden.',
+              text: 'Setup erforderlich - fügen Sie einen Server hinzu',
             ),
           ),
         ],
@@ -44,30 +44,33 @@ class PilotidInputView extends StatelessWidget {
           ),
           Text(
             state.selectedEndpoint?.config.terminalname ?? 'Unbekanntes Terminal',
-            style: Theme.of(context).textTheme.labelSmall,
+            style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
-          Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (state.selectedEndpoint!.config.terminaltype == 'multiuser')
-                    Image.asset(
-                      kAssetRfidIconSlim,
-                      height: MediaQuery.of(context).size.height * 0.25,
-                    ),
-                  if (state.selectedEndpoint!.config.terminaltype == 'singleuser')
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(PilotStatusScreen.route, arguments: state.selectedEndpoint!.pilotid ?? 'unbekannt');
-                      },
-                      child: Text('Status prüfen\nPilot: ${state.selectedEndpoint!.pilotid ?? 'unbekannt'}'),
-                    )
-                ],
+          const SizedBox(height: 20),
+          if (state.selectedEndpoint!.config.terminaltype == 'multiuser')
+            MflMessageBlock(
+              text: state.selectedEndpoint!.config.pilotidinstruction,
+              severity: MflCardSeverity.info,
+            ),
+          if (state.selectedEndpoint!.config.terminaltype == 'singleuser')
+            ElevatedButton.icon(
+              icon: Icon(Icons.touch_app),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                elevation: 3,
+                shadowColor: Colors.white,
+                iconColor: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(PilotStatusScreen.route, arguments: state.selectedEndpoint!.pilotid ?? 'unbekannt');
+              },
+              label: Text(
+                'Pilotenstatus anzeigen',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.black),
               ),
             ),
-          ),
         ],
       );
     }

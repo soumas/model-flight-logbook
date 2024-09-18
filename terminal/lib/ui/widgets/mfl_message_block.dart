@@ -27,7 +27,7 @@ class MflMessageBlock extends StatelessWidget {
               ),
               child: Icon(
                 _evalIcon(),
-                size: (Theme.of(context).textTheme.bodyLarge?.fontSize! ?? 5) * 3,
+                size: (Theme.of(context).textTheme.bodyLarge?.fontSize! ?? 5) * 1.5,
                 color: _evalFontColor(),
               ),
             ),
@@ -60,7 +60,7 @@ class MflMessageBlock extends StatelessWidget {
   _evalBackgroundColor() {
     switch (severity) {
       case MflCardSeverity.info:
-        return Colors.lightBlue;
+        return Colors.blue;
       case MflCardSeverity.warn:
         return Colors.orange;
       case MflCardSeverity.error:
@@ -75,7 +75,7 @@ class MflMessageBlock extends StatelessWidget {
       case MflCardSeverity.warn:
         return Colors.black87;
       case MflCardSeverity.error:
-        return Colors.redAccent;
+        return Colors.white;
     }
   }
 }

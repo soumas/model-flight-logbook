@@ -19,10 +19,7 @@ class PilotidInputCubit extends Cubit<PilotidInputState> {
       }
       emit(state.copyWith(endpointOptions: settings.terminalEndpoints, selectedEndpoint: selectedEndpoint));
     } catch (e) {
-      //emit(state.copyWith(error: e));
       rethrow;
-    } finally {
-      //emit(state.copyWith(loading: false));
     }
   }
 
