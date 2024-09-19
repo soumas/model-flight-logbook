@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
+import 'package:model_flight_logbook/domain/enums/terminal_type.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_cubit.dart';
@@ -22,10 +23,11 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return MflScaffold(
       title: AppLocalizations.of(context)!.addServerConnection,
       child: BlocProvider<ServerConnectionCubit>(
-        create: (context) => injector.get<ServerConnectionCubit>(),
+        create: (context) => injector.get<ServerConnectionCubit>()..init(localizations),
         child: BlocConsumer<ServerConnectionCubit, ServerConnectionState>(
           listener: (context, state) {
             if (state.result != null) {
@@ -102,7 +104,7 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                               },
                               obscureText: true,
                             ),
-                          if (state.selectedConfig != null && state.selectedConfig!.terminaltype == 'singleuser')
+                          if (state.selectedConfig != null && TerminalType.singleuser == state.selectedConfig!.terminaltype)
                             TextFormField(
                                 initialValue: state.selectedPilotId,
                                 decoration: const InputDecoration(label: Text('Pilot-ID')),
@@ -118,13 +120,17 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                     ),
                   ),
                   if (state.selectedConfig != null)
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          context.read<ServerConnectionCubit>().submit();
-                        }
-                      },
-                      child: Text('Prüfen und speichern'),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            context.read<ServerConnectionCubit>().submit();
+                          }
+                        },
+                        label: Text('Prüfen und speichern'),
+                        icon: const Icon(Icons.save),
+                      ),
                     ),
                 ],
               ),
@@ -133,95 +139,5 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
         ),
       ),
     );
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text(AppLocalizations.of(context)!.addServerConnection),
-    //   ),
-    //   body: BlocProvider<ServerConnectionCubit>(
-    //     create: (context) => injector.get<ServerConnectionCubit>()..init(),
-    //     child: BlocConsumer<ServerConnectionCubit, ServerConnectionState>(
-    //       listener: (context, state) {
-    //         if (state.result != null) {
-    //           Navigator.of(context).pop(state.result!);
-    //         }
-    //       },
-    //       builder: (context, state) {
-    //         if (state.loading) {
-    //           return const CircularProgressIndicator();
-    //         } else {
-    //           return SizedBox(
-    //             width: 460,
-    //             child: Padding(
-    //               padding: const EdgeInsets.all(8.0),
-    //               child: Builder(builder: (context) {
-    //                 return Column(
-    //                   children: [
-    //                     if (state.error != null) Text('Error: ${state.error.toString()}'),
-    //                     TextFormField(
-    //                       initialValue: state.selectedApiEndpoint,
-    //                       decoration: const InputDecoration(label: Text('Api Endpoint')),
-    //                       onChanged: (value) {
-    //                         context.read<ServerConnectionCubit>().selectApiEndpoint(value);
-    //                       },
-    //                       readOnly: state.configOptions.isNotEmpty,
-    //                     ),
-    //                     if (state.configOptions.isEmpty)
-    //                       ElevatedButton(
-    //                         onPressed: () {
-    //                           context.read<ServerConnectionCubit>().loadConfigurations();
-    //                         },
-    //                         child: Text('Konfigurationen laden'),
-    //                       ),
-    //                     if (state.configOptions.isNotEmpty)
-    //                       DropdownButtonFormField(
-    //                         value: state.selectedConfig,
-    //                         items: state.configOptions
-    //                             .map(
-    //                               (opt) => DropdownMenuItem<TerminalConfig>(
-    //                                 value: opt,
-    //                                 child: Text('${opt.airportname} (${opt.terminalname})'),
-    //                               ),
-    //                             )
-    //                             .toList(),
-    //                         onChanged: <TerminalConfig>(value) {
-    //                           context.read<ServerConnectionCubit>().selectTerminalconfig(value);
-    //                         },
-    //                         decoration: const InputDecoration(label: Text('Konfiguration')),
-    //                         dropdownColor: Colors.blueGrey,
-    //                       ),
-    //                     if (state.selectedConfig != null)
-    //                       TextFormField(
-    //                         initialValue: state.selectedApiKey,
-    //                         decoration: const InputDecoration(label: Text('Api Key')),
-    //                         onChanged: (value) {
-    //                           context.read<ServerConnectionCubit>().selectApiKey(value);
-    //                         },
-    //                         obscureText: true,
-    //                       ),
-    //                     if (state.selectedConfig != null && state.selectedConfig!.terminaltype == 'singleuser')
-    //                       TextFormField(
-    //                         initialValue: state.selectedPilotId,
-    //                         decoration: const InputDecoration(label: Text('Pilot-ID')),
-    //                         onChanged: (value) {
-    //                           context.read<ServerConnectionCubit>().selectPilotid(value);
-    //                         },
-    //                       ),
-    //                     if (state.selectedConfig != null)
-    //                       ElevatedButton(
-    //                         onPressed: () {
-    //                           context.read<ServerConnectionCubit>().submit();
-    //                         },
-    //                         child: Text('Prüfen und speichern'),
-    //                       ),
-    //                   ],
-    //                 );
-    //               }),
-    //             ),
-    //           );
-    //         }
-    //       },
-    //     ),
-    //   ),
-    // );
   }
 }

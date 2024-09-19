@@ -9,13 +9,17 @@ final class PilotStatusState with PilotStatusStateMappable {
   final bool loading;
   final String pilotid;
   final PilotStatus? flightSessionStatus;
-  final dynamic error;
   final String? completedAction;
+  final List<String>? infoMessages;
+  final List<String>? warnMessages;
+  final List<String>? errorMessages;
   PilotStatusState({
     this.loading = false,
     this.pilotid = '',
     this.flightSessionStatus,
-    this.error,
     this.completedAction,
+    this.infoMessages,
+    this.warnMessages,
+    this.errorMessages,
   });
 }

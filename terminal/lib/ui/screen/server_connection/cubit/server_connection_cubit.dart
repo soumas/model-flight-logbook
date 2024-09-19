@@ -2,13 +2,20 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
+import 'package:model_flight_logbook/domain/enums/api_response_reason.dart';
 import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
+import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_state.dart';
 
 class ServerConnectionCubit extends Cubit<ServerConnectionState> {
   ServerConnectionCubit({required this.logbookApiRepo}) : super(ServerConnectionState());
 
   final LogbookApiRepo logbookApiRepo;
+  late AppLocalizations localizations;
+
+  init(AppLocalizations localizations) {
+    this.localizations = localizations;
+  }
 
   loadConfigurations() async {
     try {
@@ -28,6 +35,18 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
   bool _handleDioException(dynamic e) {
     if (e is DioException) {
       var msg = '';
+
+      try {
+        if (e.response?.data['detail'] != null) {
+          final reason = ApiResponseReasonExt.fromString(e.response?.data['detail']);
+          if (reason != null) {
+            msg = ApiResponseReasonExt.getDescription(reason, localizations);
+            emit(state.copyWith(error: msg));
+            return true;
+          }
+        }
+      } catch (_) {}
+
       switch (e.type) {
         case DioExceptionType.sendTimeout:
         case DioExceptionType.receiveTimeout:
@@ -43,11 +62,6 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
         default:
           msg = e.message ?? 'Unbekannter Fehler';
       }
-      try {
-        if (e.response?.data['detail'] != null) {
-          msg += ' (${e.response?.data['detail']})';
-        }
-      } catch (_) {}
       emit(state.copyWith(error: msg));
       return true;
     }

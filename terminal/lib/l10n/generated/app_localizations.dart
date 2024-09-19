@@ -104,6 +104,48 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Server hinzufügen'**
   String get addServerConnection;
+
+  /// No description provided for @apiResponseReasonInvalidApiKey.
+  ///
+  /// In de, this message translates to:
+  /// **'Ungültiger Api Key'**
+  String get apiResponseReasonInvalidApiKey;
+
+  /// No description provided for @apiResponseReasonFlightsessionNotFound.
+  ///
+  /// In de, this message translates to:
+  /// **'Der angeforderte Flugtag wurde nicht gefunden'**
+  String get apiResponseReasonFlightsessionNotFound;
+
+  /// No description provided for @apiResponseReasonUnknownPilot.
+  ///
+  /// In de, this message translates to:
+  /// **'Unbekannter Pilot'**
+  String get apiResponseReasonUnknownPilot;
+
+  /// No description provided for @apiResponseReasonUnknownTerminal.
+  ///
+  /// In de, this message translates to:
+  /// **'Unbekanntes Terminal'**
+  String get apiResponseReasonUnknownTerminal;
+
+  /// No description provided for @apiResponseReasonInactivePilot.
+  ///
+  /// In de, this message translates to:
+  /// **'Inaktiver Pilot'**
+  String get apiResponseReasonInactivePilot;
+
+  /// No description provided for @apiResponseReasonActiveFlightsessionFound.
+  ///
+  /// In de, this message translates to:
+  /// **'Es wurde ein aktiver Flugtag gefunden. Beenden Sie diesen, bevor Sie die Aktion erneut ausführen.'**
+  String get apiResponseReasonActiveFlightsessionFound;
+
+  /// No description provided for @apiResponseReasonUtmActionRunning.
+  ///
+  /// In de, this message translates to:
+  /// **'Es findet eine Interaktion mit dem UTM System der Austro Control statt. Bitte führen Sie die Aktion in wenigen Minuten erneut aus.'**
+  String get apiResponseReasonUtmActionRunning;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

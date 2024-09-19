@@ -1,33 +1,35 @@
 import 'package:dio/dio.dart';
 import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
+import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
 import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
 
 class LogbookApiRepoImpl implements LogbookApiRepo {
   final _dio = Dio();
 
   @override
-  Future<PilotStatus> loadPilotStatus({required String pilotid}) async {
-    _prepareDio(pilotid);
+  Future<PilotStatus> loadPilotStatus({required TerminalEndpoint endpoint, required String pilotid}) async {
+    _prepareDio(endpoint, pilotid);
     final response = await _dio.get('/terminal/flightsession/status');
     return PilotStatusMapper.fromMap(response.data);
   }
 
   @override
-  Future endFlightSession({required String pilotid}) async {
-    _prepareDio(pilotid);
+  Future endFlightSession({required TerminalEndpoint endpoint, required String pilotid}) async {
+    _prepareDio(endpoint, pilotid);
     return _dio.post('/terminal/flightsession/end', data: {"takeoffcount": 5, "comment": "bla bla bla 123435"});
   }
 
   @override
-  Future startFlightSession({required String pilotid}) async {
-    _prepareDio(pilotid);
+  Future startFlightSession({required TerminalEndpoint endpoint, required String pilotid}) async {
+    _prepareDio(endpoint, pilotid);
     return _dio.post('/terminal/flightsession/start');
   }
 
-  void _prepareDio(String pilotid) {
-    // TODO _dio.options.baseUrl = SettingsRepoImpl.cachedApiEndpoint;
-    // TODO _dio.options.headers['x-api-key'] = SettingsRepoImpl.cachedApiKey;
+  void _prepareDio(TerminalEndpoint endpoint, String pilotid) {
+    _dio.options.baseUrl = endpoint.apiEndpoint;
+    _dio.options.headers['x-api-key'] = endpoint.apiKey;
+    _dio.options.headers['x-terminal'] = endpoint.config.terminalid;
     _dio.options.headers['x-pilotid'] = pilotid;
   }
 

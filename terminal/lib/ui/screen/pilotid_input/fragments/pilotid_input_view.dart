@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/constants.dart';
+import 'package:model_flight_logbook/domain/enums/terminal_type.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_message_block.dart';
@@ -29,7 +30,7 @@ class PilotidInputView extends StatelessWidget {
             padding: EdgeInsets.only(top: 20.0),
             child: MflMessageBlock(
               severity: MflCardSeverity.info,
-              text: 'Setup erforderlich - fügen Sie einen Server hinzu',
+              text: 'Hallo! Bitte fügen Sie einen Server hinzu.',
             ),
           ),
         ],
@@ -48,28 +49,18 @@ class PilotidInputView extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
-          if (state.selectedEndpoint!.config.terminaltype == 'multiuser')
+          if (TerminalType.multiuser == state.selectedEndpoint!.config.terminaltype)
             MflMessageBlock(
               text: state.selectedEndpoint!.config.pilotidinstruction,
               severity: MflCardSeverity.info,
             ),
-          if (state.selectedEndpoint!.config.terminaltype == 'singleuser')
+          if (TerminalType.singleuser == state.selectedEndpoint!.config.terminaltype)
             ElevatedButton.icon(
-              icon: Icon(Icons.touch_app),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                elevation: 3,
-                shadowColor: Colors.white,
-                iconColor: Colors.black,
-              ),
+              icon: const Icon(Icons.touch_app),
               onPressed: () {
                 Navigator.of(context).pushNamed(PilotStatusScreen.route, arguments: state.selectedEndpoint!.pilotid ?? 'unbekannt');
               },
-              label: Text(
-                'Pilotenstatus anzeigen',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.black),
-              ),
+              label: const Text('Pilotenstatus anzeigen'),
             ),
         ],
       );

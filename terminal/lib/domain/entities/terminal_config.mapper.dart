@@ -13,6 +13,7 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
   static TerminalConfigMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = TerminalConfigMapper._());
+      TerminalTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -23,8 +24,8 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
   static String _$terminalid(TerminalConfig v) => v.terminalid;
   static const Field<TerminalConfig, String> _f$terminalid =
       Field('terminalid', _$terminalid);
-  static String _$terminaltype(TerminalConfig v) => v.terminaltype;
-  static const Field<TerminalConfig, String> _f$terminaltype =
+  static TerminalType _$terminaltype(TerminalConfig v) => v.terminaltype;
+  static const Field<TerminalConfig, TerminalType> _f$terminaltype =
       Field('terminaltype', _$terminaltype);
   static String _$airportname(TerminalConfig v) => v.airportname;
   static const Field<TerminalConfig, String> _f$airportname =
@@ -109,7 +110,7 @@ abstract class TerminalConfigCopyWith<$R, $In extends TerminalConfig, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call(
       {String? terminalid,
-      String? terminaltype,
+      TerminalType? terminaltype,
       String? airportname,
       String? terminalname,
       String? pilotidinstruction});
@@ -128,7 +129,7 @@ class _TerminalConfigCopyWithImpl<$R, $Out>
   @override
   $R call(
           {String? terminalid,
-          String? terminaltype,
+          TerminalType? terminaltype,
           String? airportname,
           String? terminalname,
           String? pilotidinstruction}) =>

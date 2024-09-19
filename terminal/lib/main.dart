@@ -19,7 +19,19 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark().copyWith(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            side: const BorderSide(
+              color: Colors.white54,
+              width: 2,
+            ),
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.black,
+            textStyle: const TextStyle(fontSize: 16),
+          ),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       routes: {
         PilotidInputScreen.route: (context) => const PilotidInputScreen(),

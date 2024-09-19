@@ -3,6 +3,7 @@ import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_c
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
 
 class PilotStatusScreen extends StatelessWidget {
   const PilotStatusScreen({super.key});
@@ -11,13 +12,12 @@ class PilotStatusScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pilotid = ModalRoute.of(context)!.settings.arguments!.toString();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sitzungsstatus'),
-      ),
-      body: BlocProvider<PilotStatusCubit>(
-        create: (context) => injector.get<PilotStatusCubit>()..load(pilotid),
+    final pilotid = (ModalRoute.of(context)!.settings.arguments ?? 'NO_PILOT_ID_PROVIDED').toString();
+    return BlocProvider(
+      create: (context) => injector.get<PilotStatusCubit>()..load(pilotid),
+      child: MflScaffold(
+        title: 'Pilotenstatus',
+        alignment: Alignment.center,
         child: BlocConsumer<PilotStatusCubit, PilotStatusState>(
           listener: (context, state) {
             if (state.completedAction != null) {
@@ -29,14 +29,22 @@ class PilotStatusScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text('Pilot-ID: '),
-                    Text(state.pilotid),
+                    Text(
+                      state.flightSessionStatus?.pilotName ?? '',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text('Name: '),
-                    Text(state.flightSessionStatus?.pilotName ?? ''),
+                    Text(
+                      'ID: ',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    Text(
+                      state.pilotid,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                   ],
                 ),
                 Row(
@@ -60,7 +68,7 @@ class PilotStatusScreen extends StatelessWidget {
                 Row(
                   children: [
                     const Text('Error: '),
-                    Text(state.error.toString()),
+                    Text(state.errorMessages?.toString() ?? 'kein fehler'),
                   ],
                 ),
                 Row(
@@ -70,10 +78,10 @@ class PilotStatusScreen extends StatelessWidget {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(onPressed: () => context.read<PilotStatusCubit>().load(state.pilotid), child: const Text('Akualisieren')),
-                    if (state.flightSessionStatus?.sessionId == null) ElevatedButton(onPressed: () => context.read<PilotStatusCubit>().startSession(), child: const Text('Session starten')),
-                    if (state.flightSessionStatus?.sessionId != null) ElevatedButton(onPressed: () => context.read<PilotStatusCubit>().endSession(), child: const Text('Session beenden')),
+                    if (state.flightSessionStatus?.sessionId == null) ElevatedButton(onPressed: () => context.read<PilotStatusCubit>().startSession(), child: const Text('Flugtag starten')),
+                    if (state.flightSessionStatus?.sessionId != null) ElevatedButton(onPressed: () => context.read<PilotStatusCubit>().endSession(), child: const Text('Flugtag beenden')),
                   ],
                 ),
               ],
