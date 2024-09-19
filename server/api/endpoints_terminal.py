@@ -45,6 +45,7 @@ def get_terminal_config_list():
         terminaltype=config.terminals[cfg].terminaltype,
         airportname=config.terminals[cfg].airportname,
         terminalname=config.terminals[cfg].terminalname,
+        pilotidinstruction=config.terminals[cfg].pilotidinstruction,
     ) for cfg in config.terminals]
 
 @api.get("/terminal/connectioncheck", dependencies=[Security(__specific_terminalauth)])

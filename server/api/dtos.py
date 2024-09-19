@@ -34,3 +34,4 @@ class TerminalConfigDTO(BaseModel):
     terminaltype : str
     airportname: str
     terminalname: str
+    pilotidinstruction: str
