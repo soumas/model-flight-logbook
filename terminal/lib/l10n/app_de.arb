@@ -6,7 +6,15 @@
   "apiResponseReasonFlightsessionNotFound": "Der angeforderte Flugtag wurde nicht gefunden",
   "apiResponseReasonUnknownPilot": "Unbekannter Pilot",
   "apiResponseReasonUnknownTerminal": "Unbekanntes Terminal",
-  "apiResponseReasonInactivePilot": "Inaktiver Pilot",
-  "apiResponseReasonActiveFlightsessionFound": "Es wurde ein aktiver Flugtag gefunden. Beenden Sie diesen, bevor Sie die Aktion erneut ausführen.",
-  "apiResponseReasonUtmActionRunning": "Es findet eine Interaktion mit dem UTM System der Austro Control statt. Bitte führen Sie die Aktion in wenigen Minuten erneut aus."
+  "apiResponseReasonInactivePilot": "Die Interaktion mit dem Server wurde verweigert, da das Pilotenkonto inaktiv ist.",
+  "apiResponseReasonActiveFlightsessionFound": "Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.",
+  "apiResponseReasonUtmActionRunning": "Es findet eine Interaktion mit dem UTM System der Austro Control statt. Bitte führe die gewünschte Aktion in wenigen Minuten erneut aus.",
+
+  "flightPlanStatusLabelCreated": "Neu erstellt",
+  "flightPlanStatusLabelFeatureDisabled": "UTM Feature inaktiv",
+  "flightPlanStatusLabelStartPending": "Warte auf Freigabe",
+  "flightPlanStatusLabelFlying": "Freigabe erteilt (flying)",
+  "flightPlanStatusLabelEndPending": "Warte auf Beendigung",
+  "flightPlanStatusLabelClosed": "Abgeschlossen (closed)",
+  "flightPlanStatusLabelError": "Fehler"
 }

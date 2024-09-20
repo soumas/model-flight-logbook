@@ -132,20 +132,62 @@ abstract class AppLocalizations {
   /// No description provided for @apiResponseReasonInactivePilot.
   ///
   /// In de, this message translates to:
-  /// **'Inaktiver Pilot'**
+  /// **'Die Interaktion mit dem Server wurde verweigert, da das Pilotenkonto inaktiv ist.'**
   String get apiResponseReasonInactivePilot;
 
   /// No description provided for @apiResponseReasonActiveFlightsessionFound.
   ///
   /// In de, this message translates to:
-  /// **'Es wurde ein aktiver Flugtag gefunden. Beenden Sie diesen, bevor Sie die Aktion erneut ausführen.'**
+  /// **'Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.'**
   String get apiResponseReasonActiveFlightsessionFound;
 
   /// No description provided for @apiResponseReasonUtmActionRunning.
   ///
   /// In de, this message translates to:
-  /// **'Es findet eine Interaktion mit dem UTM System der Austro Control statt. Bitte führen Sie die Aktion in wenigen Minuten erneut aus.'**
+  /// **'Es findet eine Interaktion mit dem UTM System der Austro Control statt. Bitte führe die gewünschte Aktion in wenigen Minuten erneut aus.'**
   String get apiResponseReasonUtmActionRunning;
+
+  /// No description provided for @flightPlanStatusLabelCreated.
+  ///
+  /// In de, this message translates to:
+  /// **'Neu erstellt'**
+  String get flightPlanStatusLabelCreated;
+
+  /// No description provided for @flightPlanStatusLabelFeatureDisabled.
+  ///
+  /// In de, this message translates to:
+  /// **'UTM Feature inaktiv'**
+  String get flightPlanStatusLabelFeatureDisabled;
+
+  /// No description provided for @flightPlanStatusLabelStartPending.
+  ///
+  /// In de, this message translates to:
+  /// **'Warte auf Freigabe'**
+  String get flightPlanStatusLabelStartPending;
+
+  /// No description provided for @flightPlanStatusLabelFlying.
+  ///
+  /// In de, this message translates to:
+  /// **'Freigabe erteilt (flying)'**
+  String get flightPlanStatusLabelFlying;
+
+  /// No description provided for @flightPlanStatusLabelEndPending.
+  ///
+  /// In de, this message translates to:
+  /// **'Warte auf Beendigung'**
+  String get flightPlanStatusLabelEndPending;
+
+  /// No description provided for @flightPlanStatusLabelClosed.
+  ///
+  /// In de, this message translates to:
+  /// **'Abgeschlossen (closed)'**
+  String get flightPlanStatusLabelClosed;
+
+  /// No description provided for @flightPlanStatusLabelError.
+  ///
+  /// In de, this message translates to:
+  /// **'Fehler'**
+  String get flightPlanStatusLabelError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

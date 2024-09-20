@@ -13,6 +13,7 @@ class PilotStatusMapper extends ClassMapperBase<PilotStatus> {
   static PilotStatusMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PilotStatusMapper._());
+      FlightPlanStatusMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -26,14 +27,15 @@ class PilotStatusMapper extends ClassMapperBase<PilotStatus> {
   static int? _$sessionId(PilotStatus v) => v.sessionId;
   static const Field<PilotStatus, int> _f$sessionId =
       Field('sessionId', _$sessionId, opt: true);
-  static String? _$sessionStarttime(PilotStatus v) => v.sessionStarttime;
-  static const Field<PilotStatus, String> _f$sessionStarttime =
+  static DateTime? _$sessionStarttime(PilotStatus v) => v.sessionStarttime;
+  static const Field<PilotStatus, DateTime> _f$sessionStarttime =
       Field('sessionStarttime', _$sessionStarttime, opt: true);
-  static String? _$sessionEndtime(PilotStatus v) => v.sessionEndtime;
-  static const Field<PilotStatus, String> _f$sessionEndtime =
+  static DateTime? _$sessionEndtime(PilotStatus v) => v.sessionEndtime;
+  static const Field<PilotStatus, DateTime> _f$sessionEndtime =
       Field('sessionEndtime', _$sessionEndtime, opt: true);
-  static String? _$flightPlanStatus(PilotStatus v) => v.flightPlanStatus;
-  static const Field<PilotStatus, String> _f$flightPlanStatus =
+  static FlightPlanStatus? _$flightPlanStatus(PilotStatus v) =>
+      v.flightPlanStatus;
+  static const Field<PilotStatus, FlightPlanStatus> _f$flightPlanStatus =
       Field('flightPlanStatus', _$flightPlanStatus, opt: true);
   static List<String>? _$infoMessages(PilotStatus v) => v.infoMessages;
   static const Field<PilotStatus, List<String>> _f$infoMessages =
@@ -129,9 +131,9 @@ abstract class PilotStatusCopyWith<$R, $In extends PilotStatus, $Out>
   $R call(
       {String? pilotName,
       int? sessionId,
-      String? sessionStarttime,
-      String? sessionEndtime,
-      String? flightPlanStatus,
+      DateTime? sessionStarttime,
+      DateTime? sessionEndtime,
+      FlightPlanStatus? flightPlanStatus,
       List<String>? infoMessages,
       List<String>? warnMessages,
       List<String>? errorMessages});

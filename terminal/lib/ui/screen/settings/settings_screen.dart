@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
 import 'package:model_flight_logbook/injector.dart';
+import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/settings/cubit/settings_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/settings/cubit/settings_state.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
@@ -71,7 +72,7 @@ class SettingsScreen extends StatelessWidget {
                               context.read<SettingsCubit>().addOrUpdateEndpointAndSave(endpoint as TerminalEndpoint);
                             }
                           },
-                          label: const Text('Server hinzufügen'),
+                          label: Text(AppLocalizations.of(context)!.addServerConnection),
                           icon: const Icon(Icons.add),
                         )
                       ],

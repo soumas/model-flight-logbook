@@ -6,7 +6,7 @@ import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_state.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_message_block.dart';
+import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
 
 class ServerConnectionScreen extends StatefulWidget {
@@ -40,9 +40,9 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
               child: Column(
                 children: [
                   if (state.error != null)
-                    MflMessageBlock(
+                    MflMessage(
                       text: state.error.toString(),
-                      severity: MflCardSeverity.error,
+                      severity: MflMessageSeverity.error,
                     ),
                   Card(
                     child: Padding(
@@ -61,7 +61,7 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                                           context.read<ServerConnectionCubit>().loadConfigurations();
                                         }
                                       },
-                                      label: Text('Weiter'),
+                                      label: const Text('Weiter'),
                                       icon: const Icon(Icons.arrow_forward),
                                       iconAlignment: IconAlignment.end,
                                     )
@@ -128,7 +128,7 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                             context.read<ServerConnectionCubit>().submit();
                           }
                         },
-                        label: Text('Prüfen und speichern'),
+                        label: const Text('Prüfen und speichern'),
                         icon: const Icon(Icons.save),
                       ),
                     ),

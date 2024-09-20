@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
 import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
@@ -15,9 +16,9 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
   }
 
   @override
-  Future endFlightSession({required TerminalEndpoint endpoint, required String pilotid}) async {
+  Future endFlightSession({required TerminalEndpoint endpoint, required String pilotid, required EndFlightSessionData data}) async {
     _prepareDio(endpoint, pilotid);
-    return _dio.post('/terminal/flightsession/end', data: {"takeoffcount": 5, "comment": "bla bla bla 123435"});
+    return _dio.post('/terminal/flightsession/end', data: data.toJson());
   }
 
   @override

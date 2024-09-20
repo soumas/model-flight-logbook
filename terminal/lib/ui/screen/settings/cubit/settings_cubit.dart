@@ -45,12 +45,13 @@ class SettingsCubit extends Cubit<SettingsState> {
     save();
   }
 
-  void addOrUpdateEndpointAndSave(TerminalEndpoint endpoint) {
+  void addOrUpdateEndpointAndSave(TerminalEndpoint endpoint) async {
     final lst = [...state.settings!.terminalEndpoints];
     lst.removeWhere((existingep) => endpoint.apiEndpoint.compareTo(existingep.apiEndpoint) == 0 && endpoint.config.terminalid.compareTo(existingep.config.terminalid) == 0);
     lst.add(endpoint);
     emit(state.copyWith(settings: state.settings!.copyWith(terminalEndpoints: lst)));
-    save();
+    await save();
+    await localStorageRepo.saveSelectedTerminalEndpoint(endpoint);
   }
 
   void unlock() {

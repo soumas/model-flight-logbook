@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,6 +10,7 @@ import 'package:model_flight_logbook/ui/screen/server_connection/server_connecti
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Intl.defaultLocale = 'DE-de';
   await initInjector();
   runApp(const MainApp());
 }
