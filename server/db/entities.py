@@ -7,11 +7,11 @@ from db.dbmanager import engine
 Base = sqlalchemy.orm.declarative_base()
 
 class FlightPlanStatus(enum.Enum):
-    new = 'new'
-    feature_disabled = 'feature_disabled'
-    start_pending = 'start_pending'
+    created = 'created'
+    featureDisabled = 'featureDisabled'
+    startPending = 'startPending'
     flying = 'flying'
-    end_pending = 'end_pending'
+    endPending = 'endPending'
     closed = 'closed'
     error = 'error'
 

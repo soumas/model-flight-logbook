@@ -27,7 +27,7 @@ def __common_terminalauth(api_key_header:str = Security(api_key_header)):
         raise invalid_api_key
 
 def __findCurrentFlightSession(pilotid:str, db:Session):
-    return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilotid, or_(FlightSessionEntity.end == None, FlightSessionEntity.flightplanstatus == FlightPlanStatus.flying, FlightSessionEntity.flightplanstatus == FlightPlanStatus.start_pending, FlightSessionEntity.flightplanstatus == FlightPlanStatus.end_pending ))).first()
+    return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilotid, or_(FlightSessionEntity.end == None, FlightSessionEntity.flightplanstatus == FlightPlanStatus.flying, FlightSessionEntity.flightplanstatus == FlightPlanStatus.startPending, FlightSessionEntity.flightplanstatus == FlightPlanStatus.endPending ))).first()
 
 def __findPilot(pilotid:str, db:Session, raiseOnInactive:bool = True):
     logger.log.info('Pilot: ' + pilotid) # log pilot to know the user related to an uvicorn.access log entry
@@ -64,7 +64,10 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
         sessionId=None if fsession == None else fsession.id,
         sessionStarttime=None if fsession == None else fsession.start,
         sessionEndtime=None if fsession == None else fsession.end,
-        flightPlanStatus=None if fsession == None else fsession.flightplanstatus
+        flightPlanStatus=None if fsession == None else fsession.flightplanstatus,
+        #infoMessages=['Hüttenfest am 12.12.2024 nicht verläumen'],
+        #warnMessages=['Deine Registrierung läuft am 12.02.2024 aus'],
+        #errorMessages=['Deine Registrierung ist abgelaufen'],
     )
 
 @api.post("/terminal/flightsession/start", dependencies=[Security(__specific_terminalauth)], response_model=None)
@@ -75,7 +78,7 @@ async def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Ann
     fsession = FlightSessionEntity()
     fsession.pilotid = x_pilotid
     fsession.start = datetime.now()
-    fsession.flightplanstatus = FlightPlanStatus.new
+    fsession.flightplanstatus = FlightPlanStatus.created
     db.add(fsession)
     db.commit()
 
@@ -91,7 +94,7 @@ async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annot
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
     if(fsession is None):
         raise flightsession_not_found
-    if(fsession.flightplanstatus == FlightPlanStatus.start_pending or fsession.flightplanstatus == FlightPlanStatus.end_pending):
+    if(fsession.flightplanstatus == FlightPlanStatus.startPending or fsession.flightplanstatus == FlightPlanStatus.endPending):
         raise utm_action_running
     fsession.end = datetime.now()
     fsession.takeoffcount = data.takeoffcount

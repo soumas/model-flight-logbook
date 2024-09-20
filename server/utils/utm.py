@@ -137,14 +137,14 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
 
     if not config.utm.enabled:
         log.debug('utm feature is not configured')
-        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.feature_disabled)
+        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.featureDisabled)
         return
     
     driver = None
     error = None
 
     try:
-        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.start_pending)
+        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.startPending)
 
         if config.utm.simulate != True:
 
@@ -209,7 +209,7 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
     log.debug('utm end flight for pilot {}'.format(pilot.id))
     if not config.utm.enabled:
         log.debug('utm feature is not configured')
-        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.feature_disabled)
+        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.featureDisabled)
         return
 
     driver = None
@@ -217,7 +217,7 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
 
     try:
 
-        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.end_pending)
+        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.endPending)
 
         if config.utm.simulate != True:
 
