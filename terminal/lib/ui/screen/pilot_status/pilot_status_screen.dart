@@ -184,60 +184,74 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
   _endSessionForm(BuildContext context, PilotStatusState state, errorMessages) {
     if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) {
       return [
-        if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-          TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(label: Text('Anzahl Flüge')),
-            onChanged: (value) => context.read<PilotStatusCubit>().setNumFlights(int.parse(value)),
-            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-            validator: (value) {
-              if (state.numFlights == null) {
-                return 'Dieses Feld darf nicht leer bleiben';
-              }
-              return null;
-            },
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
+                  Text(
+                    'Formular - Flugtag beenden',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(label: Text('Anzahl Flüge*')),
+                    onChanged: (value) => context.read<PilotStatusCubit>().setNumFlights(int.parse(value)),
+                    inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                    validator: (value) {
+                      if (state.numFlights == null) {
+                        return 'Dieses Feld darf nicht leer bleiben';
+                      }
+                      return null;
+                    },
+                  ),
+                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
+                  TextFormField(
+                    maxLines: 2,
+                    decoration: const InputDecoration(labelText: 'Besondere Ereignisse'),
+                    //onChanged: (value) => context.read<PilotStatusCubit>().setComment(value),
+                    controller: _commentTextEditingController,
+                    onTap: () {
+                      showModalBottomSheet(
+                        constraints: BoxConstraints.expand(height: 200, width: 460),
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            height: 200,
+                            color: Colors.deepPurple,
+                            child: VirtualKeyboard(
+                              height: 180,
+                              width: 460,
+                              textColor: Colors.white,
+                              textController: _commentTextEditingController,
+                              type: VirtualKeyboardType.Alphanumeric,
+                              customLayoutKeys: MflKeyboardLayouts(),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
+                  const SizedBox(
+                    height: 20,
+                  ),
+                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<PilotStatusCubit>().endSession();
+                      }
+                    },
+                    label: const Text('Flugtag beenden'),
+                    icon: const Icon(Icons.flight_land),
+                  ),
+              ],
+            ),
           ),
-        if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-          TextFormField(
-            maxLines: 2,
-            decoration: const InputDecoration(labelText: 'Besondere Ereignisse'),
-            //onChanged: (value) => context.read<PilotStatusCubit>().setComment(value),
-            controller: _commentTextEditingController,
-            onTap: () {
-              showModalBottomSheet(
-                constraints: BoxConstraints.expand(height: 200, width: 460),
-                context: context,
-                builder: (context) {
-                  return Container(
-                    height: 200,
-                    color: Colors.deepPurple,
-                    child: VirtualKeyboard(
-                      height: 180,
-                      width: 460,
-                      textColor: Colors.white,
-                      textController: _commentTextEditingController,
-                      type: VirtualKeyboardType.Alphanumeric,
-                      customLayoutKeys: MflKeyboardLayouts(),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-        if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-          const SizedBox(
-            height: 20,
-          ),
-        if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-          ElevatedButton.icon(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                context.read<PilotStatusCubit>().endSession();
-              }
-            },
-            label: const Text('Flugtag beenden'),
-            icon: const Icon(Icons.flight_land),
-          ),
+        ),
       ];
     }
     return [];
