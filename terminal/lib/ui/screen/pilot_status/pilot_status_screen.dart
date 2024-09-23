@@ -7,8 +7,10 @@ import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_c
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:model_flight_logbook/ui/utils/mfl_keyboard_layouts.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
+import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 
 class PilotStatusScreen extends StatefulWidget {
   const PilotStatusScreen({super.key});
@@ -21,6 +23,7 @@ class PilotStatusScreen extends StatefulWidget {
 
 class _PilotStatusScreenState extends State<PilotStatusScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _commentTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -198,7 +201,28 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
           TextFormField(
             maxLines: 2,
             decoration: const InputDecoration(labelText: 'Besondere Ereignisse'),
-            onChanged: (value) => context.read<PilotStatusCubit>().setComment(value),
+            //onChanged: (value) => context.read<PilotStatusCubit>().setComment(value),
+            controller: _commentTextEditingController,
+            onTap: () {
+              showModalBottomSheet(
+                constraints: BoxConstraints.expand(height: 200, width: 460),
+                context: context,
+                builder: (context) {
+                  return Container(
+                    height: 200,
+                    color: Colors.deepPurple,
+                    child: VirtualKeyboard(
+                      height: 180,
+                      width: 460,
+                      textColor: Colors.white,
+                      textController: _commentTextEditingController,
+                      type: VirtualKeyboardType.Alphanumeric,
+                      customLayoutKeys: MflKeyboardLayouts(),
+                    ),
+                  );
+                },
+              );
+            },
           ),
         if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
           const SizedBox(
