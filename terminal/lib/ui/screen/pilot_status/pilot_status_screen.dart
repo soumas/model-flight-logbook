@@ -1,13 +1,12 @@
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/domain/enums/flight_plan_status.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
+import 'package:model_flight_logbook/ui/mfl_text_form_field.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_keyboard_layouts.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
@@ -24,6 +23,7 @@ class PilotStatusScreen extends StatefulWidget {
 class _PilotStatusScreenState extends State<PilotStatusScreen> {
   final _formKey = GlobalKey<FormState>();
   final _commentTextEditingController = TextEditingController();
+  final _numFlightsEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -195,44 +195,23 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-                  TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(label: Text('Anzahl Flüge*')),
-                    onChanged: (value) => context.read<PilotStatusCubit>().setNumFlights(int.parse(value)),
-                    inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                  MflTextFormField(
+                    controller: _numFlightsEditingController,
+                    label: 'Anzahl Flüge*',
+                    inputType: VirtualKeyboardType.Numeric,
                     validator: (value) {
-                      if (state.numFlights == null) {
+                      if ((value ?? '').isEmpty) {
                         return 'Dieses Feld darf nicht leer bleiben';
+                      } else if (int.tryParse(value!) == null) {
+                        return 'Bitte geben Sie eine Ganzzahl ein.';
                       }
                       return null;
                     },
                   ),
                 if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-                  TextFormField(
-                    maxLines: 2,
-                    decoration: const InputDecoration(labelText: 'Besondere Ereignisse'),
-                    //onChanged: (value) => context.read<PilotStatusCubit>().setComment(value),
+                  MflTextFormField(
                     controller: _commentTextEditingController,
-                    onTap: () {
-                      showModalBottomSheet(
-                        constraints: BoxConstraints.expand(height: 200, width: 460),
-                        context: context,
-                        builder: (context) {
-                          return Container(
-                            height: 200,
-                            color: Colors.deepPurple,
-                            child: VirtualKeyboard(
-                              height: 180,
-                              width: 460,
-                              textColor: Colors.white,
-                              textController: _commentTextEditingController,
-                              type: VirtualKeyboardType.Alphanumeric,
-                              customLayoutKeys: MflKeyboardLayouts(),
-                            ),
-                          );
-                        },
-                      );
-                    },
+                    label: 'Besondere Ereignisses',
                   ),
                 if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
                   const SizedBox(

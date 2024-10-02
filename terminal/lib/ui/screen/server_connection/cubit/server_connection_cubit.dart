@@ -16,9 +16,9 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
     this.localizations = localizations;
   }
 
-  loadConfigurations() async {
+  loadConfigurations(String endpoint) async {
     try {
-      emit(state.copyWith(loading: true, error: null));
+      emit(state.copyWith(loading: true, error: null, selectedApiEndpoint: endpoint));
       final terminalConfigList = await logbookApiRepo.loadTerminalConfigs(apiEndpoint: state.selectedApiEndpoint);
       emit(state.copyWith(configOptions: terminalConfigList, selectedConfig: terminalConfigList.firstOrNull));
     } catch (e) {
@@ -62,10 +62,6 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
     } finally {
       emit(state.copyWith(loading: false));
     }
-  }
-
-  selectApiEndpoint(String value) {
-    emit(state.copyWith(selectedApiEndpoint: value));
   }
 
   selectApiKey(String value) {

@@ -26,7 +26,7 @@ class PilotidInputView extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          Text('by MSGU', style: Theme.of(context).textTheme.labelSmall),
+          Text('by SoumaSoft', style: Theme.of(context).textTheme.labelSmall),
           const Padding(
             padding: EdgeInsets.only(top: 20.0),
             child: MflMessage(
@@ -68,7 +68,7 @@ class PilotidInputView extends StatelessWidget {
             kAssetMflLogoSlim,
             height: 50,
           ),
-          Text('"Model Flight Logbook" by MSGU', style: Theme.of(context).textTheme.labelSmall),
+          Text('Model Flight Logbook', style: Theme.of(context).textTheme.labelSmall),
         ],
       );
     }
