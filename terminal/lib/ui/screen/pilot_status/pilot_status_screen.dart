@@ -1,29 +1,20 @@
 import 'package:intl/intl.dart';
+import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/domain/enums/flight_plan_status.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/mfl_text_form_field.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:model_flight_logbook/ui/screen/pilot_status/fragments/end_flight_session_button.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
-import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 
-class PilotStatusScreen extends StatefulWidget {
+class PilotStatusScreen extends StatelessWidget {
   const PilotStatusScreen({super.key});
 
   static const route = '/pilotstate';
-
-  @override
-  State<PilotStatusScreen> createState() => _PilotStatusScreenState();
-}
-
-class _PilotStatusScreenState extends State<PilotStatusScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _commentTextEditingController = TextEditingController();
-  final _numFlightsEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,34 +25,12 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
       child: MflScaffold(
         alignment: Alignment.center,
         child: BlocConsumer<PilotStatusCubit, PilotStatusState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (context.mounted && state.completedAction != null) {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Aktion abgeschlossen'),
-                    content: const Text(
-                      'A dialog is a type of modal window that\n'
-                      'appears in front of app content to\n'
-                      'provide critical information, or prompt\n'
-                      'for a decision to be made.',
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          textStyle: Theme.of(context).textTheme.labelLarge,
-                        ),
-                        child: const Text('Schließen'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+              await _showActionCompletedInfo(context, state);
+              if (context.mounted) {
+                Navigator.popUntil(context, (route) => route.isFirst);
+              }
             }
           },
           builder: (context, state) {
@@ -71,79 +40,43 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
             if (state.loading) {
               return const Center(child: CircularProgressIndicator());
             } else {
-              return Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    if (state.flightSessionStatus?.pilotName != null)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
-                        child: Flexible(
-                          child: Text(
-                            'Pilot: ${state.flightSessionStatus?.pilotName ?? ''}',
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
+              return Column(
+                children: [
+                  if (state.flightSessionStatus?.pilotName != null)
+                    Padding(
+                      padding: kFormFieldPadding,
+                      child: Flexible(
+                        child: Text(
+                          'Pilot: ${state.flightSessionStatus?.pilotName ?? ''}',
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ),
-                    if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null)
-                      Text(
-                        'Flugtag begonnen: ${DateFormat.yMd().format(state.flightSessionStatus!.sessionStarttime!)}, ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionEndtime != null)
-                      Text(
-                        'Flugtag beendet: ${DateFormat.yMd().format(state.flightSessionStatus!.sessionEndtime!)}, ${DateFormat.Hm().format(state.flightSessionStatus!.sessionEndtime!)} Uhr',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null)
-                      Text(
-                        'UTM Status: ${state.flightSessionStatus!.flightPlanStatus!.toLabel(AppLocalizations.of(context)!)}',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null)
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ...errorMessages.map(
-                      (e) => MflMessage(
-                        text: e,
-                        severity: MflMessageSeverity.error,
-                      ),
                     ),
-                    ...warnMessages.map(
-                      (e) => MflMessage(
-                        text: e,
-                        severity: MflMessageSeverity.warn,
-                      ),
+                  if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) ..._activeSessionInfo(context, state),
+                  ...errorMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.error)),
+                  ...warnMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.warn)),
+                  ...infoMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.info)),
+                  if (errorMessages.isEmpty && state.flightSessionStatus?.sessionId == null) ..._startSessionForm(context, state, errorMessages),
+                  if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus) EndFlightSessionButton(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton.icon(
+                          onPressed: () => context.read<PilotStatusCubit>().init(localizations, pilotid),
+                          label: const Text('Aktualisieren'),
+                          icon: const Icon(Icons.refresh),
+                        ),
+                        TextButton.icon(
+                          onPressed: () => Navigator.of(context).pop(),
+                          label: const Text('Abbrechen'),
+                          icon: const Icon(Icons.close),
+                        ),
+                      ],
                     ),
-                    ...infoMessages.map(
-                      (e) => MflMessage(
-                        text: e,
-                        severity: MflMessageSeverity.info,
-                      ),
-                    ),
-                    ..._startSessionForm(context, state, errorMessages),
-                    ..._endSessionForm(context, state, errorMessages),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton.icon(
-                            onPressed: () => context.read<PilotStatusCubit>().init(localizations, pilotid),
-                            label: const Text('Aktualisieren'),
-                            icon: const Icon(Icons.refresh),
-                          ),
-                          TextButton.icon(
-                            onPressed: () => Navigator.of(context).pop(),
-                            label: const Text('Abbrechen'),
-                            icon: const Icon(Icons.close),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               );
             }
           },
@@ -152,87 +85,73 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
     );
   }
 
-  List<Widget> _startSessionForm(BuildContext context, PilotStatusState state, errorMessages) {
-    if (errorMessages.isEmpty && state.flightSessionStatus?.sessionId == null) {
-      return [
-        const MflMessage(
-          text:
-              'Wenn du fortfährst akzeptierst du die Bedingungen des UTM Systems (https://utm.dronespace.at/avm/?#p=7.24/47.501/13.733) und bist damit einverstanden, dass zum Zwecke der gesetzlich erforderlichen Meldung deine Daten (Name, E-Mail, Telefonnummer) an die Luftfahrtbehörde übermittelt werden.',
-          icon: SizedBox(),
-        ),
-        CheckboxListTile(
-          value: state.termsAccepted,
-          controlAffinity: ListTileControlAffinity.leading,
-          onChanged: (value) {
-            context.read<PilotStatusCubit>().toggleTermsAccepted();
-          },
-          title: Text(
-            'Ich akzeptiere die genannten Bedingungen',
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        ),
-        ElevatedButton.icon(
-          onPressed: state.termsAccepted ? () => context.read<PilotStatusCubit>().startSession() : null,
-          label: const Text('Flugtag beginnen'),
-          icon: const Icon(Icons.flight_takeoff),
-        ),
-      ];
-    }
-    return [];
+  Future<dynamic> _showActionCompletedInfo(BuildContext context, PilotStatusState state) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.blueGrey,
+          content: Text('"${state.completedAction}" wurde ausgeführt'),
+          contentTextStyle: Theme.of(context).textTheme.titleLarge,
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('Schließen'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
-  _endSessionForm(BuildContext context, PilotStatusState state, errorMessages) {
-    if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) {
-      return [
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-                  Text(
-                    'Formular - Flugtag beenden',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-                  MflTextFormField(
-                    controller: _numFlightsEditingController,
-                    label: 'Anzahl Flüge*',
-                    inputType: VirtualKeyboardType.Numeric,
-                    validator: (value) {
-                      if ((value ?? '').isEmpty) {
-                        return 'Dieses Feld darf nicht leer bleiben';
-                      } else if (int.tryParse(value!) == null) {
-                        return 'Bitte geben Sie eine Ganzzahl ein.';
-                      }
-                      return null;
-                    },
-                  ),
-                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-                  MflTextFormField(
-                    controller: _commentTextEditingController,
-                    label: 'Besondere Ereignisses',
-                  ),
-                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-                  const SizedBox(
-                    height: 20,
-                  ),
-                if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus!)
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.read<PilotStatusCubit>().endSession();
-                      }
-                    },
-                    label: const Text('Flugtag beenden'),
-                    icon: const Icon(Icons.flight_land),
-                  ),
-              ],
-            ),
-          ),
+  List<Widget> _activeSessionInfo(BuildContext context, PilotStatusState state) {
+    return [
+      Text(
+        'Flugtag begonnen: ${DateFormat.yMd().format(state.flightSessionStatus!.sessionStarttime!)}, ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr',
+        style: Theme.of(context).textTheme.bodyLarge,
+      ),
+      if (state.flightSessionStatus!.sessionEndtime != null)
+        Text(
+          'Flugtag beendet: ${DateFormat.yMd().format(state.flightSessionStatus!.sessionEndtime!)}, ${DateFormat.Hm().format(state.flightSessionStatus!.sessionEndtime!)} Uhr',
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
-      ];
-    }
-    return [];
+      if (state.flightSessionStatus!.flightPlanStatus != null)
+        Text(
+          'UTM Status: ${state.flightSessionStatus!.flightPlanStatus!.toLabel(AppLocalizations.of(context)!)}',
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      const SizedBox(
+        height: 20,
+      ),
+    ];
+  }
+
+  List<Widget> _startSessionForm(BuildContext context, PilotStatusState state, errorMessages) {
+    return [
+      const MflMessage(
+        severity: MflMessageSeverity.info,
+        text: 'Wenn du fortfährst akzeptierst du die Bedingungen des UTM Systems (https://utm.dronespace.at/avm/) und bist damit einverstanden, dass deine Daten (Name, E-Mail, Telefonnummer) zum Zweck der gesetzlich erforderlichen Meldung  an die Luftfahrtbehörde übermittelt werden.',
+        icon: SizedBox(),
+      ),
+      CheckboxListTile(
+        value: state.termsAccepted,
+        controlAffinity: ListTileControlAffinity.leading,
+        onChanged: (value) {
+          context.read<PilotStatusCubit>().toggleTermsAccepted();
+        },
+        title: Text(
+          'Ich akzeptiere die genannten Bedingungen',
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      ),
+      ElevatedButton.icon(
+        onPressed: state.termsAccepted ? () => context.read<PilotStatusCubit>().startSession() : null,
+        label: const Text('Flugtag beginnen'),
+        icon: const Icon(Icons.flight_takeoff),
+      ),
+    ];
   }
 }

@@ -33,6 +33,11 @@ class MainApp extends StatelessWidget {
             textStyle: const TextStyle(fontSize: 16),
           ),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          fillColor: Colors.grey.withAlpha(30),
+          filled: true,
+          border: const OutlineInputBorder(),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       routes: {

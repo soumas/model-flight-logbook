@@ -46,12 +46,6 @@ class PilotStatusStateMapper extends ClassMapperBase<PilotStatusState> {
   static bool _$termsAccepted(PilotStatusState v) => v.termsAccepted;
   static const Field<PilotStatusState, bool> _f$termsAccepted =
       Field('termsAccepted', _$termsAccepted, opt: true, def: false);
-  static int? _$numFlights(PilotStatusState v) => v.numFlights;
-  static const Field<PilotStatusState, int> _f$numFlights =
-      Field('numFlights', _$numFlights, opt: true);
-  static String? _$comment(PilotStatusState v) => v.comment;
-  static const Field<PilotStatusState, String> _f$comment =
-      Field('comment', _$comment, opt: true);
 
   @override
   final MappableFields<PilotStatusState> fields = const {
@@ -63,8 +57,6 @@ class PilotStatusStateMapper extends ClassMapperBase<PilotStatusState> {
     #warnMessages: _f$warnMessages,
     #errorMessages: _f$errorMessages,
     #termsAccepted: _f$termsAccepted,
-    #numFlights: _f$numFlights,
-    #comment: _f$comment,
   };
 
   static PilotStatusState _instantiate(DecodingData data) {
@@ -76,9 +68,7 @@ class PilotStatusStateMapper extends ClassMapperBase<PilotStatusState> {
         infoMessages: data.dec(_f$infoMessages),
         warnMessages: data.dec(_f$warnMessages),
         errorMessages: data.dec(_f$errorMessages),
-        termsAccepted: data.dec(_f$termsAccepted),
-        numFlights: data.dec(_f$numFlights),
-        comment: data.dec(_f$comment));
+        termsAccepted: data.dec(_f$termsAccepted));
   }
 
   @override
@@ -132,9 +122,7 @@ abstract class PilotStatusStateCopyWith<$R, $In extends PilotStatusState, $Out>
       List<String>? infoMessages,
       List<String>? warnMessages,
       List<String>? errorMessages,
-      bool? termsAccepted,
-      int? numFlights,
-      String? comment});
+      bool? termsAccepted});
   PilotStatusStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -184,9 +172,7 @@ class _PilotStatusStateCopyWithImpl<$R, $Out>
           Object? infoMessages = $none,
           Object? warnMessages = $none,
           Object? errorMessages = $none,
-          bool? termsAccepted,
-          Object? numFlights = $none,
-          Object? comment = $none}) =>
+          bool? termsAccepted}) =>
       $apply(FieldCopyWithData({
         if (loading != null) #loading: loading,
         if (pilotid != null) #pilotid: pilotid,
@@ -196,9 +182,7 @@ class _PilotStatusStateCopyWithImpl<$R, $Out>
         if (infoMessages != $none) #infoMessages: infoMessages,
         if (warnMessages != $none) #warnMessages: warnMessages,
         if (errorMessages != $none) #errorMessages: errorMessages,
-        if (termsAccepted != null) #termsAccepted: termsAccepted,
-        if (numFlights != $none) #numFlights: numFlights,
-        if (comment != $none) #comment: comment
+        if (termsAccepted != null) #termsAccepted: termsAccepted
       }));
   @override
   PilotStatusState $make(CopyWithData data) => PilotStatusState(
@@ -210,9 +194,7 @@ class _PilotStatusStateCopyWithImpl<$R, $Out>
       infoMessages: data.get(#infoMessages, or: $value.infoMessages),
       warnMessages: data.get(#warnMessages, or: $value.warnMessages),
       errorMessages: data.get(#errorMessages, or: $value.errorMessages),
-      termsAccepted: data.get(#termsAccepted, or: $value.termsAccepted),
-      numFlights: data.get(#numFlights, or: $value.numFlights),
-      comment: data.get(#comment, or: $value.comment));
+      termsAccepted: data.get(#termsAccepted, or: $value.termsAccepted));
 
   @override
   PilotStatusStateCopyWith<$R2, PilotStatusState, $Out2> $chain<$R2, $Out2>(

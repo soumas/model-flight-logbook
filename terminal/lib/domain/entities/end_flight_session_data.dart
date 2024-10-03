@@ -5,10 +5,10 @@ part 'end_flight_session_data.mapper.dart';
 
 @mappableModelClass
 class EndFlightSessionData with EndFlightSessionDataMappable {
-  final int? takeoffcount;
+  final int takeoffcount;
   final String? comment;
   EndFlightSessionData({
-    this.takeoffcount,
+    required this.takeoffcount,
     this.comment,
   });
 }

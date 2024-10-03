@@ -20,10 +20,12 @@ class EndFlightSessionDataMapper extends ClassMapperBase<EndFlightSessionData> {
   @override
   final String id = 'EndFlightSessionData';
 
-  static int? _$takeoffcount(EndFlightSessionData v) => v.takeoffcount;
-  static const Field<EndFlightSessionData, int> _f$takeoffcount = Field('takeoffcount', _$takeoffcount, opt: true);
+  static int _$takeoffcount(EndFlightSessionData v) => v.takeoffcount;
+  static const Field<EndFlightSessionData, int> _f$takeoffcount =
+      Field('takeoffcount', _$takeoffcount);
   static String? _$comment(EndFlightSessionData v) => v.comment;
-  static const Field<EndFlightSessionData, String> _f$comment = Field('comment', _$comment, opt: true);
+  static const Field<EndFlightSessionData, String> _f$comment =
+      Field('comment', _$comment, opt: true);
 
   @override
   final MappableFields<EndFlightSessionData> fields = const {
@@ -32,7 +34,8 @@ class EndFlightSessionDataMapper extends ClassMapperBase<EndFlightSessionData> {
   };
 
   static EndFlightSessionData _instantiate(DecodingData data) {
-    return EndFlightSessionData(takeoffcount: data.dec(_f$takeoffcount), comment: data.dec(_f$comment));
+    return EndFlightSessionData(
+        takeoffcount: data.dec(_f$takeoffcount), comment: data.dec(_f$comment));
   }
 
   @override
@@ -49,49 +52,75 @@ class EndFlightSessionDataMapper extends ClassMapperBase<EndFlightSessionData> {
 
 mixin EndFlightSessionDataMappable {
   String toJson() {
-    return EndFlightSessionDataMapper.ensureInitialized().encodeJson<EndFlightSessionData>(this as EndFlightSessionData);
+    return EndFlightSessionDataMapper.ensureInitialized()
+        .encodeJson<EndFlightSessionData>(this as EndFlightSessionData);
   }
 
   Map<String, dynamic> toMap() {
-    return EndFlightSessionDataMapper.ensureInitialized().encodeMap<EndFlightSessionData>(this as EndFlightSessionData);
+    return EndFlightSessionDataMapper.ensureInitialized()
+        .encodeMap<EndFlightSessionData>(this as EndFlightSessionData);
   }
 
-  EndFlightSessionDataCopyWith<EndFlightSessionData, EndFlightSessionData, EndFlightSessionData> get copyWith => _EndFlightSessionDataCopyWithImpl(this as EndFlightSessionData, $identity, $identity);
+  EndFlightSessionDataCopyWith<EndFlightSessionData, EndFlightSessionData,
+          EndFlightSessionData>
+      get copyWith => _EndFlightSessionDataCopyWithImpl(
+          this as EndFlightSessionData, $identity, $identity);
   @override
   String toString() {
-    return EndFlightSessionDataMapper.ensureInitialized().stringifyValue(this as EndFlightSessionData);
+    return EndFlightSessionDataMapper.ensureInitialized()
+        .stringifyValue(this as EndFlightSessionData);
   }
 
   @override
   bool operator ==(Object other) {
-    return EndFlightSessionDataMapper.ensureInitialized().equalsValue(this as EndFlightSessionData, other);
+    return EndFlightSessionDataMapper.ensureInitialized()
+        .equalsValue(this as EndFlightSessionData, other);
   }
 
   @override
   int get hashCode {
-    return EndFlightSessionDataMapper.ensureInitialized().hashValue(this as EndFlightSessionData);
+    return EndFlightSessionDataMapper.ensureInitialized()
+        .hashValue(this as EndFlightSessionData);
   }
 }
 
-extension EndFlightSessionDataValueCopy<$R, $Out> on ObjectCopyWith<$R, EndFlightSessionData, $Out> {
-  EndFlightSessionDataCopyWith<$R, EndFlightSessionData, $Out> get $asEndFlightSessionData => $base.as((v, t, t2) => _EndFlightSessionDataCopyWithImpl(v, t, t2));
+extension EndFlightSessionDataValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, EndFlightSessionData, $Out> {
+  EndFlightSessionDataCopyWith<$R, EndFlightSessionData, $Out>
+      get $asEndFlightSessionData =>
+          $base.as((v, t, t2) => _EndFlightSessionDataCopyWithImpl(v, t, t2));
 }
 
-abstract class EndFlightSessionDataCopyWith<$R, $In extends EndFlightSessionData, $Out> implements ClassCopyWith<$R, $In, $Out> {
+abstract class EndFlightSessionDataCopyWith<
+    $R,
+    $In extends EndFlightSessionData,
+    $Out> implements ClassCopyWith<$R, $In, $Out> {
   $R call({int? takeoffcount, String? comment});
-  EndFlightSessionDataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+  EndFlightSessionDataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+      Then<$Out2, $R2> t);
 }
 
-class _EndFlightSessionDataCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, EndFlightSessionData, $Out> implements EndFlightSessionDataCopyWith<$R, EndFlightSessionData, $Out> {
+class _EndFlightSessionDataCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, EndFlightSessionData, $Out>
+    implements EndFlightSessionDataCopyWith<$R, EndFlightSessionData, $Out> {
   _EndFlightSessionDataCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<EndFlightSessionData> $mapper = EndFlightSessionDataMapper.ensureInitialized();
+  late final ClassMapperBase<EndFlightSessionData> $mapper =
+      EndFlightSessionDataMapper.ensureInitialized();
   @override
-  $R call({Object? takeoffcount = $none, Object? comment = $none}) => $apply(FieldCopyWithData({if (takeoffcount != $none) #takeoffcount: takeoffcount, if (comment != $none) #comment: comment}));
+  $R call({int? takeoffcount, Object? comment = $none}) =>
+      $apply(FieldCopyWithData({
+        if (takeoffcount != null) #takeoffcount: takeoffcount,
+        if (comment != $none) #comment: comment
+      }));
   @override
-  EndFlightSessionData $make(CopyWithData data) => EndFlightSessionData(takeoffcount: data.get(#takeoffcount, or: $value.takeoffcount), comment: data.get(#comment, or: $value.comment));
+  EndFlightSessionData $make(CopyWithData data) => EndFlightSessionData(
+      takeoffcount: data.get(#takeoffcount, or: $value.takeoffcount),
+      comment: data.get(#comment, or: $value.comment));
 
   @override
-  EndFlightSessionDataCopyWith<$R2, EndFlightSessionData, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) => _EndFlightSessionDataCopyWithImpl($value, $cast, t);
+  EndFlightSessionDataCopyWith<$R2, EndFlightSessionData, $Out2>
+      $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+          _EndFlightSessionDataCopyWithImpl($value, $cast, t);
 }

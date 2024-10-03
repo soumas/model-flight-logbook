@@ -26,7 +26,6 @@ class PilotidInputView extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          Text('by SoumaSoft', style: Theme.of(context).textTheme.labelSmall),
           const Padding(
             padding: EdgeInsets.only(top: 20.0),
             child: MflMessage(
