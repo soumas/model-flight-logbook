@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from logging import log
 from typing import Annotated
 from fastapi import Depends, Security, BackgroundTasks
@@ -59,6 +59,22 @@ def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, 
 def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = Depends(get_db)):
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
+    
+    warnMessages = [];
+    erroMessages = [];
+    if(pilot.acPilotlicenseValidTo == None):
+        erroMessages.append('Bei uns ist kein Drohnenführerschein von dir hinterlegt. Bitte sende den Nachweis an info@msgu.at');
+    elif(pilot.acPilotlicenseValidTo < datetime.now().date()):
+        erroMessages.append('Dein Drohnenführerschein ist abgelaufen. Bitte erneuere ihn und sende den Nachweis an info@msgu.at');
+    elif(pilot.acPilotlicenseValidTo < datetime.now().date() + timedelta(days=30)):
+        warnMessages.append('Dein Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab! Bitte denke daran ihn zu erneuern und den Nachweis an info@msgu.at zu senden.');
+    if(pilot.acRegistrationValidTo == None):
+        erroMessages.append('Bei uns ist keine Registrierung von dir hinterlegt. Bitte sende den Nachweis an info@msgu.at');
+    elif(pilot.acRegistrationValidTo < datetime.now().date()):
+        erroMessages.append('Deine Registrierung ist abgelaufen. Bitte erneuere sie und sende den Nachweis an info@msgu.at');
+    elif(pilot.acRegistrationValidTo < datetime.now().date() + timedelta(days=30)):
+        warnMessages.append('Deine Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab! Bitte denke daran sie zu erneuern und den Nachweis an info@msgu.at zu senden.');
+
     return FlightSessionStatusDTO(
         pilotName=pilot.firstname + ' ' + pilot.lastname,
         sessionId=None if fsession == None else fsession.id,
@@ -66,8 +82,8 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
         sessionEndtime=None if fsession == None else fsession.end,
         flightPlanStatus=None if fsession == None else fsession.flightplanstatus,
         #infoMessages=['Hüttenfest am 12.12.2024 nicht verläumen'],
-        #warnMessages=['Deine Registrierung läuft am 12.02.2024 aus'],
-        #errorMessages=['Deine Registrierung ist abgelaufen'],
+        warnMessages=warnMessages,
+        errorMessages=erroMessages,
     )
 
 @api.post("/terminal/flightsession/start", dependencies=[Security(__specific_terminalauth)], response_model=None)
