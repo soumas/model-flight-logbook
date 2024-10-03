@@ -133,7 +133,7 @@ class PilotStatusScreen extends StatelessWidget {
     return [
       const MflMessage(
         severity: MflMessageSeverity.info,
-        text: 'Wenn du fortfährst akzeptierst du die Bedingungen des UTM Systems (https://utm.dronespace.at/avm/) und bist damit einverstanden, dass deine Daten (Name, E-Mail, Telefonnummer) zum Zweck der gesetzlich erforderlichen Meldung  an die Luftfahrtbehörde übermittelt werden.',
+        text: 'Deine Daten (Name, E-Mail, Telefonnummer) werden zwecks der gesetzlich erforderlichen Meldung an die Luftfahrtbehörde übermittelt. Außerdem akzeptierst du die Bedingungen des UTM Systems unter https://utm.dronespace.at/avm/.',
         icon: SizedBox(),
       ),
       CheckboxListTile(
@@ -143,8 +143,9 @@ class PilotStatusScreen extends StatelessWidget {
           context.read<PilotStatusCubit>().toggleTermsAccepted();
         },
         title: Text(
-          'Ich akzeptiere die genannten Bedingungen',
+          'Ja, ich bin damit einverstanden',
           style: Theme.of(context).textTheme.bodyLarge,
+          textAlign: TextAlign.left,
         ),
       ),
       ElevatedButton.icon(

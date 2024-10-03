@@ -61,7 +61,7 @@ class MflMessage extends StatelessWidget {
   _evalBackgroundColor() {
     switch (severity) {
       case MflMessageSeverity.info:
-        return Colors.lightBlueAccent;
+        return Colors.grey.withAlpha(40);
       case MflMessageSeverity.warn:
         return Colors.orange;
       case MflMessageSeverity.error:
@@ -72,7 +72,7 @@ class MflMessage extends StatelessWidget {
   _evalFontColor() {
     switch (severity) {
       case MflMessageSeverity.info:
-        return Colors.black;
+        return Colors.white;
       case MflMessageSeverity.warn:
         return Colors.black;
       case MflMessageSeverity.error:
