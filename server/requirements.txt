@@ -1,0 +1,8 @@
+fastapi[standard]==0.115.0
+fastapi-mail==1.4.1
+pydantic==2.9.2
+uvicorn==0.31.0
+sqlalchemy==2.0.35
+alembic==1.13.3
+selenium==4.25.0
+requests==2.32.3

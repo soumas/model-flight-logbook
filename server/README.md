@@ -15,6 +15,7 @@ pip install pydantic
 pip install uvicorn
 pip install sqlalchemy
 pip install alembic
+pip install requests
 
 ```
 
