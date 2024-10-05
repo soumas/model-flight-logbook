@@ -1,8 +1,8 @@
-
 FROM python:3.10
-WORKDIR /code/model-flight-logbook-server
-COPY ./requirements.txt /code/requirements.txt
-COPY ./log-config.ini /code/log-config.ini
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
-COPY ./model-flight-logbook-server /code/model-flight-logbook-server
-CMD ["uvicorn", "main:app", "--port", "80", "--host", "0.0.0.0", "--log-config", "/code/log-config.ini"]
+WORKDIR /mfl-server/app
+COPY ./requirements.txt /mfl-server/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /mfl-server/requirements.txt
+COPY ./app /mfl-server/app
+COPY ./config /mfl-server/config
+VOLUME ["/mfl-server/config"]
+CMD ["uvicorn", "main:app", "--port", "80", "--host", "0.0.0.0", "--log-config", "/mfl-server/config/log-config.ini"]
