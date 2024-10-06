@@ -21,7 +21,7 @@ def upgrade() -> None:
     op.create_table(
         'flightsessions',
         sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('pilotid', sa.Integer, sa.ForeignKey('pilots.id'), nullable=False),
+        sa.Column('pilotid', sa.String, sa.ForeignKey('pilots.id'), nullable=False),
         sa.Column('start', sa.DateTime, nullable=False),
         sa.Column('flightplanstatus', sa.String, nullable=False),
         sa.Column('end', sa.DateTime, nullable=True),

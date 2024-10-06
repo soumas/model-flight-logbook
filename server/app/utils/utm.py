@@ -17,7 +17,7 @@ from utils.send_mail import send_admin_notification, send_mail
 from utils.logger import log
 
  
-DEFAULT_WAIT_TIME = 5
+DEFAULT_WAIT_TIME = 20
 DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 
@@ -153,7 +153,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             __utm_login(driver)
 
             log.debug('create flight plan')
-            __wait_until_clickable(driver, "//i[@class='ti ti-link']") # wait until ui recognizes login state
+            __wait_until_clickable(driver, "//i[@class='ti ti-question-mark']") # wait until ui recognizes login state
             __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
             driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")

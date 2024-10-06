@@ -1,0 +1,31 @@
+name: mfl-server
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=mfl
+      - POSTGRES_PASSWORD=mfl!lfm
+    ports:
+      - 5432:5432
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks:
+      - mflnet
+  mfl-server:
+    image: mfl-server:latest
+    volumes:
+      - config:/mfl-server/config
+    ports:
+      - 80:80
+    networks:
+      - mflnet
+networks:
+  mflnet:
+    driver: bridge
+volumes:
+  config:
+    driver: local
+  db:
+    driver: local

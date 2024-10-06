@@ -29,7 +29,7 @@ class PilotEntity(Base):
 class FlightSessionEntity(Base):
     __tablename__ = "flightsessions"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    pilotid = Column(Integer, ForeignKey(PilotEntity.id), nullable=False)
+    pilotid = Column(String, ForeignKey(PilotEntity.id), nullable=False)
     start = Column(DateTime, nullable=False)
     flightplanstatus = Column(Enum(FlightPlanStatus), nullable=False)
     end = Column(DateTime, nullable=True)
