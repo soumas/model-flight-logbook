@@ -20,5 +20,4 @@ jobs:
     - name: create release
       uses: ncipollo/release-action@v1.12.0
       with:
-        name: 'testrelase-1'
         artifacts: "./server/server.zip"
