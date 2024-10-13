@@ -1,0 +1,19 @@
+# Workflow creates a zip file used for setup & update of productive installations
+
+name: Build Server Workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  zip-server:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
+    steps:
+    - name: pull repo
+      uses: actions/checkout@v2
+    - name: create zip archive
+      run: |
+          rm -rf <repository_name>.zip
+          zip -r <repository_name>.zip <repository_name> -x ".git/*" ".github/*"
