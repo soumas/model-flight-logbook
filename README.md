@@ -20,3 +20,4 @@ Das "Model Flight Logbook Terminal" wurde in Flutter programmiert und kann daher
 
 # Haftungsausschluss
 Der Haftungsausschluss ist grundsätzlich bereits über die verwendete Lizenz geregelt. Trotzdem weisen wir an dieser Stelle noch einmal explizit darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt auf vollständiges Risiko des Betreibers.
+
