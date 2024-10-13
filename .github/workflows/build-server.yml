@@ -15,5 +15,5 @@ jobs:
       uses: actions/checkout@v2
     - name: create zip archive
       run: |
-          rm -rf <repository_name>.zip
-          zip -r <repository_name>.zip <repository_name> -x ".git/*" ".github/*"
+          rm -rf current-release.zip
+          zip -r current-release.zip ./ -x ".git/*" ".github/*"
