@@ -1,10 +1,26 @@
 # Model Flight Logbook Server
 
-Server Component for the Model Flight Logbook
+Server Komponente für Model Flight Logbook
+
+## Installation, Raspberry
+* DB TBD
+* Python TBD
 
 ## Configuration
+Bevor der Server betrieben werden kann, sind einige Konfigurationen nötig. Alle Einstellungen sind in der Datei '**/config/server-config.ini**' zu definieren. **ACHTUNG**! Ändern Sie die Datei 'server-config *-defaults*.ini' nicht, da diese bei jedem Update überschrieben wird. Erstellen Sie stattdessen die genannte Datei (ohne '-defaults') um die Standardwerte mit Ihren Parametern zu überschreiben.
 
-TODO
+### Sektion 'logbook'
+| Schlüssel | Pflicht | Standardwert | Beschreibung |
+| --- | --- | --- | --- |
+| dburl | * | | Connectionstring für den Verbindungsaufbau zur Datenbank.<br/>https://docs.sqlalchemy.org/en/20/core/engines.html#backend-specific-urls |
+| apikey_admin | * | | Api-Key (Passwort) für administrative Endpunkte |
+| admin_email | * | | Empfänger E-Mail Adresse des Systemadministrators |
+| forward_comment | | True | Bleibt das Bemerkungsfeld beim Beenden eines Flugtages nicht leer, so wird eine Nachricht an den Systemadministrator versendet ('False' um Feature zu deaktivieren)
+| debug | | False | Erweitertes Logging für Analyse und Fehlersuche |
+
+
+### Sektion 'smtp'
+TBD
 
 ## Install dependencies
 
