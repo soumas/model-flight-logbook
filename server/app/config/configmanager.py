@@ -8,17 +8,20 @@ from utils.logger import log
 _ini = configparser.ConfigParser()
 
 # config setup
+
+def _loadConfigIni(path, required=False):
+    log.info('loading config file: ' + path)
+    if(os.path.isfile(path)):
+        _ini.read(path)
+    elif(required == True): 
+        raise Exception('required config ' + path + ' not found!')
+    else:
+        log.debug('config file not found!')
+
 def __init():
-    # load defaults
-    log.debug('loading config/config-defaults.ini')
-    _ini.read('config/config-defaults.ini')
-    # if config file is defined by cli arg - use it
-    if(os.path.isfile('../dev-server-config.ini')):
-        log.debug('loading ../dev-server-config.ini')
-        _ini.read('../dev-server-config.ini')
-    elif(os.path.isfile('../config/server-config.ini')):
-        log.debug('loading ../config/server-config.ini')
-        _ini.read('../config/server-config.ini')
+    _loadConfigIni(path='../config/server-config-defaults.ini', required=True)
+    _loadConfigIni(path='../config/server-config.ini')
+    _loadConfigIni(path='../config/server-config-dev.ini')
 __init()
 
 def _read_version():

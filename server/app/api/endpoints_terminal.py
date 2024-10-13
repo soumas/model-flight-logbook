@@ -30,7 +30,7 @@ def __findCurrentFlightSession(pilotid:str, db:Session):
     return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilotid, or_(FlightSessionEntity.end == None, FlightSessionEntity.flightplanstatus == FlightPlanStatus.flying, FlightSessionEntity.flightplanstatus == FlightPlanStatus.startPending, FlightSessionEntity.flightplanstatus == FlightPlanStatus.endPending ))).first()
 
 def __findPilot(pilotid:str, db:Session, raiseOnInactive:bool = True):
-    logger.log.info('Pilot: ' + pilotid) # log pilot to know the user related to an uvicorn.access log entry
+    logger.log.debug('Pilot: ' + pilotid) # log pilot to know the user related to an uvicorn.access log entry
     pilot:PilotEntity = db.query(PilotEntity).filter(PilotEntity.id == pilotid).first()
     if(pilot is None):
         raise unknown_pilot
