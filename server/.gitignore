@@ -1,4 +1,5 @@
 __pycache__
 *.db
-dev-server-config.ini
-logfile*.log
+**server-config-dev.ini
+**server-config.ini
+**logs/logfile*

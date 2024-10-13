@@ -1,6 +1,10 @@
-# Simple Time Punch Server
+# Model Flight Logbook Server
 
-Simple Time Punch Server (Python FastAPI & SQLite Database)
+Server Component for the Model Flight Logbook
+
+## Configuration
+
+TODO
 
 ## Install dependencies
 

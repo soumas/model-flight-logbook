@@ -2,11 +2,10 @@ name: mfl-server
 
 services:
   db:
-    image: postgres:latest
+    image: mariadb:lts
     restart: always
     environment:
-      - POSTGRES_USER=mfl
-      - POSTGRES_PASSWORD=mfl!lfm
+      - MARIADB_ROOT_PASSWORD=mfl!lfm
     ports:
       - 5432:5432
     volumes: 
@@ -15,6 +14,7 @@ services:
       - mflnet
   mfl-server:
     image: mfl-server:latest
+    restart: always
     volumes:
       - config:/mfl-server/config
     ports:
