@@ -19,9 +19,9 @@ def _loadConfigIni(path, required=False):
         log.debug('config file not found!')
 
 def __init():
-    _loadConfigIni(path='../config/server-config-defaults.ini', required=True)
-    _loadConfigIni(path='../config/server-config.ini')
-    _loadConfigIni(path='../config/server-config-dev.ini')
+    _loadConfigIni(path='./server-config-default.ini', required=True)
+    _loadConfigIni(path='./server-config.ini')
+    _loadConfigIni(path='./server-config-dev.ini')
 __init()
 
 def _read_version():

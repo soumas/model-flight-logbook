@@ -1,1 +1,0 @@
-If log-config.ini is used, log files will be created in this directory.
