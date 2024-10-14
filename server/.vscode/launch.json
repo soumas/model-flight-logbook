@@ -15,7 +15,7 @@
                 "--port",
                 "8065",
                 "--log-config",
-                "../config/log-config.ini"
+                "../config/log-config-dev.ini"
             ],
             "jinja": true,
             "cwd": "${workspaceFolder}/app"
