@@ -1,16 +1,20 @@
-name: Zip Server
+name: Server zip and attach to release
 on: 
   push:
     tags:
-    - '*'
+    - 'mfl-server-*'
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write    
     steps:
-    - uses: actions/checkout@master
-    - name: Zip Release
+    - name: Checkout Repo
+      uses: actions/checkout@master
+    - name: Get version from tagname
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+    - name: Write version to versionfile
+      run: echo "${{ steps.get_version.outputs.VERSION }}" >> "./server/app/version"
+    - name: Create Zip
       uses: thedoctor0/zip-release@0.7.5
       with:  
         directory: ./server
@@ -20,5 +24,5 @@ jobs:
     - name: create release
       uses: ncipollo/release-action@v1.12.0
       with:
-        tag: testtag-3
+        name: ${{ steps.get_version.outputs.VERSION }}
         artifacts: "./server/server.zip"
