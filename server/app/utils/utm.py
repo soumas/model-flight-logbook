@@ -3,6 +3,7 @@ import selenium
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -17,15 +18,16 @@ from utils.send_mail import send_admin_notification, send_mail
 from utils.logger import log
 
  
-DEFAULT_WAIT_TIME = 20
+DEFAULT_WAIT_TIME = 10
 DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 
 def __create_driver():
     log.debug('__create_driver')
+    service = Service(r"../app/resources/geckodriver")
     options = FirefoxOptions()
     options.add_argument("--headless")
-    return webdriver.Firefox(options=options)
+    return webdriver.Firefox(service=service, options=options)
 
 def __dispose_driver(driver):
     log.debug('__dispose_driver')
@@ -75,7 +77,7 @@ def __utm_login(driver):
 def __utm_open_menu(driver):
     log.debug('__utm_open_menu')
     # workaround for the buggy menu button
-    for i in range(5):
+    for i in range(2):
         try:
             __wait_and_click(driver, "//div[@id='menu-button']")
             time.sleep(1)
