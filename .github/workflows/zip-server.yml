@@ -11,7 +11,7 @@ jobs:
       uses: actions/checkout@master
     - name: Get version from tagname
       id: get_version
-      run: echo ::set-output name=VERSION::${${GITHUB_REF/refs\/tags\//}:11}
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//:11}
     - name: Write version to versionfile
       run: echo "${{ steps.get_version.outputs.VERSION }}" >> "./server/app/version"
     - name: Create Zip
