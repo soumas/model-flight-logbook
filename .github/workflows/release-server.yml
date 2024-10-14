@@ -18,8 +18,7 @@ jobs:
       run: echo "${{steps.get_version.outputs.VERSION }}" > "./server/app/version"
     - name: create zip
       run: |
-        cd ./server
-        zip -r "./mfl-${{steps.get_version.outputs.VERSION }}-server.zip" ./app/* ./config/* ./logs/*
+        zip -r "./mfl-${{steps.get_version.outputs.VERSION }}-server.zip" ./api/* ./config/* ./db/* ./mailtemplates/* ./resources/* ./utils/* ./main.py ./log-config.ini ./requirements.txt ./server-config-default.ini ./version
     - name: Upload zip to release
       uses: softprops/action-gh-release@v2
       with: 
