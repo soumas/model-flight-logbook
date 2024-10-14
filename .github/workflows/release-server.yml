@@ -1,4 +1,4 @@
-name: Server zip and attach to release
+name: release server
 on: 
   push:
     tags:
@@ -15,10 +15,10 @@ jobs:
         GITREV="${GITHUB_REF/refs\/tags\//}"
         echo "VERSION=${GITREV:11}" >> "$GITHUB_OUTPUT"
     - name: write version to versionfile
-      run: echo "${{ steps.get_version.outputs.VERSION }}" > "./server/app/version"
+      run: echo "${{steps.get_version.outputs.VERSION }}" > "./server/app/version"
     - name: create zip
-      run: zip ./server/mfl-server-${{ steps.get_version.outputs.VERSION }}.zip ./server/app/* ./server/config/* ./server/logs/*
+      run: zip "./server/mfl-server-${{steps.get_version.outputs.VERSION }}.zip" ./server/app/* ./server/config/* ./server/logs/*
     - name: Upload zip to release
       uses: softprops/action-gh-release@v2
       with: 
-        files: ./server/mfl-server-${{ steps.get_version.outputs.VERSION }}.zip
+        files: "./server/mfl-server-${{steps.get_version.outputs.VERSION }}.zip"
