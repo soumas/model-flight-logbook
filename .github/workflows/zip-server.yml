@@ -11,7 +11,7 @@ jobs:
       uses: actions/checkout@master
     - name: Get version from tagname
       id: get_version
-      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      run: echo ::set-output name=VERSION::${${GITHUB_REF/refs\/tags\//}:11}
     - name: Write version to versionfile
       run: echo "${{ steps.get_version.outputs.VERSION }}" >> "./server/app/version"
     - name: Create Zip
@@ -24,5 +24,5 @@ jobs:
     - name: create release
       uses: ncipollo/release-action@v1.12.0
       with:
-        name: ${{ steps.get_version.outputs.VERSION }}
+        name: ${GITHUB_REF/refs\/tags\//}
         artifacts: "./server/server.zip"
