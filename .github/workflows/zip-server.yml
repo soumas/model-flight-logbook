@@ -2,34 +2,23 @@ name: Server zip and attach to release
 on: 
   push:
     tags:
-    - 'mfl-server-*'
+    - 'mfl-*'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repo
+    - name: checkout repo
       uses: actions/checkout@master
-    - name: Get version from tagname
+    - name: get version from tagname
       id: get_version
       run: |
         GITREV="${GITHUB_REF/refs\/tags\//}"
         echo "VERSION=${GITREV:11}" >> "$GITHUB_OUTPUT"
-    - name: Write version to versionfile
-      run: echo "${{ steps.get_version.outputs.VERSION }}" >> "./server/app/version"
-    - name: Create Zip
-      run: zip ./server/server.zip ./server/app/* ./server/config/* ./server/logs/*
+    - name: write version to versionfile
+      run: echo "${{ steps.get_version.outputs.VERSION }}" > "./server/app/version"
+    - name: create zip
+      run: zip ./server/mfl-server-${{ steps.get_version.outputs.VERSION }}.zip ./server/app/* ./server/config/* ./server/logs/*
     - name: Upload zip to release
       uses: softprops/action-gh-release@v2
       with: 
-        files: ./server/server.zip
-#      uses: thedoctor0/zip-release@0.7.5
-#      with:  
-#        directory: ./server
-#        type: 'zip'
-#        filename: 'server.zip'
-#        exclusions: '*.git* /*node_modules/* .editorconfig'
-#    - name: create release
-#      uses: ncipollo/release-action@v1.12.0
-#      with:
-#        name: "${GITHUB_REF}"
-#        artifacts: "./server/server.zip"
+        files: ./server/mfl-server-${{ steps.get_version.outputs.VERSION }}.zip
