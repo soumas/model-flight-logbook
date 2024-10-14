@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server    
     steps:
     - name: checkout repo
       uses: actions/checkout@master
@@ -15,7 +18,7 @@ jobs:
         GITREV="${GITHUB_REF/refs\/tags\//}"
         echo "VERSION=${GITREV:4}" >> "$GITHUB_OUTPUT"
     - name: write version to versionfile
-      run: echo "${{steps.get_version.outputs.VERSION }}" > "./server/app/version"
+      run: echo "${{steps.get_version.outputs.VERSION }}" > "./version"
     - name: create zip
       run: |
         zip -r "./mfl-${{steps.get_version.outputs.VERSION }}-server.zip" ./api/* ./config/* ./db/* ./mailtemplates/* ./resources/* ./utils/* ./main.py ./log-config.ini ./requirements.txt ./server-config-default.ini ./version
