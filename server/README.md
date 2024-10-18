@@ -40,6 +40,9 @@ uvicorn main:app --port 8081 --log-config log-config.ini
 
 # Nach Serverstart Testcall machen --> sendet Test-Email an die Admin-Adresse
 curl --header "x-api-key: your_secure_api_key" localhost:8082/admin/test/admin_notification
+
+# Über einen Browser kann die API Dokumentation aufgerufen werden
+http://localhost:8081/docs
 ```
 
 ### Server als systemd-Service registrieren
