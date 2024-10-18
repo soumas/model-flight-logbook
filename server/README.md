@@ -22,7 +22,8 @@ mkdir ~/mfl-server && cd ~/mfl-server
 python3 -m venv venv && source venv/bin/activate
 
 # mfl-server.zip herunterladen & entpacken
-wget https://github.com/soumas/model-flight-logbook/releases/download/mfl-1.0.0/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip
+# ACHTUNG: "X.X.X" mit der aktuellsten Versionsnummer ersetzen
+wget https://github.com/soumas/model-flight-logbook/releases/download/mfl-X.X.X/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip
 
 # python pakete installieren (kann lange dauern)
 python -m pip install -r requirements.txt
@@ -71,9 +72,11 @@ sudo systemctl status mfl-server.service
 ### Server update
 ```shell
 cd ~/mfl-server/
+# server stoppen
 sudo systemctl stop mfl-server.service
-# "X.X.X" mit der gewünschten Versionsnummer ersetzen
+# ACHTUNG: "X.X.X" mit der aktuellsten Versionsnummer ersetzen
 wget https://github.com/soumas/model-flight-logbook/releases/download/mfl-X.X.X/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip
+# server starten
 sudo systemctl start mfl-server.service
 
 ```
