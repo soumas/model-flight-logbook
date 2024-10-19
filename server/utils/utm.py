@@ -24,10 +24,9 @@ DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 
 def __create_driver():
     log.debug('__create_driver')
-    service = Service(r"./resources/geckodriver")
     options = FirefoxOptions()
     options.add_argument("--headless")
-    return webdriver.Firefox(service=service, options=options)
+    return webdriver.Firefox(options=options)
 
 def __dispose_driver(driver):
     log.debug('__dispose_driver')
