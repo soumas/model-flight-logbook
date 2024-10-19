@@ -62,6 +62,7 @@ class UtmConfig:
         self.mtom_g = _ini.get('utm','mtom_g')
         self.notify_pilot = _ini.getboolean('utm','notify_pilot')
         self.simulate = _ini.getboolean('utm','simulate')
+        self.geckodriver_path = _ini.get('utm', 'geckodriver_path')
 
 class TerminalConfig:
     def __init__(self, airportname, terminaltype, apikey, airportkml, terminalname, pilotidinstruction):
