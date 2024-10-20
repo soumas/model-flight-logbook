@@ -77,7 +77,7 @@ def __utm_login(driver):
 def __utm_open_menu(driver):
     log.debug('__utm_open_menu')
     # workaround for the buggy menu button
-    for i in range(2):
+    for i in range(3):
         try:
             __wait_and_click(driver, "//div[@id='menu-button']")
             time.sleep(1)
@@ -86,6 +86,18 @@ def __utm_open_menu(driver):
             log.debug('buggy menu fallback')
             pass
 
+def __utm_open_drone_form_and_set_kml(driver, terminal: TerminalConfig):
+    log.debug('__utm_open_drone_form_and_set_kml')
+    __wait_until_clickable(driver, "//i[@class='ti ti-question-mark']") # wait until ui recognizes login state        
+    # workaround for the buggy drone menu button
+    for i in range(3):
+        try:
+            __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
+            time.sleep(1)
+            driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
+        except:
+            log.debug('buggy done menu fallback')
+            pass
 
 def __set_flightplanstatus(id:int, status:FlightPlanStatus):
     log.debug('__set_flightplanstatus ({})'.format(status.value))
@@ -155,9 +167,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             __utm_login(driver)
 
             log.debug('create flight plan')
-            __wait_until_clickable(driver, "//i[@class='ti ti-question-mark']") # wait until ui recognizes login state
-            __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
-            driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
+            __utm_open_drone_form_and_set_kml(driver, terminal)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
             __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
             __wait_and_send_key(driver, "//label[normalize-space()='Last name *']/following-sibling::input", pilot.lastname)

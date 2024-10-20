@@ -15,6 +15,9 @@ sudo apt install python3.11-dev
 # Das Modul "venv" ist normal vorinstalliert, aber nicht immer. Zur Sicherheit:
 sudo apt install python3-venv
 
+# firefox-esr fuer utm feature installieren
+sudo apt install firefox-esr
+
 # Installationsordner erstellen (beliebiges Verzeichnis, z.B. ~/mfl-server/)
 mkdir ~/mfl-server && cd ~/mfl-server
 
