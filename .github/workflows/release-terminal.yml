@@ -36,10 +36,10 @@ jobs:
     - name: rename
       run: |
         ls ./
-        ls ./terminal/
-        ls ./terminal/build/
-        ls ./terminal/build/linux/
-        mv ./terminal/build/linux/x64/release/bundle/model_flight_logbook ./terminal/mfl-terminal-linux
+        ls ./
+        ls ./build/
+        ls ./build/linux/
+        mv ./build/linux/x64/release/bundle/model_flight_logbook ./mfl-terminal-linux
     - name: Upload zip to release
       uses: softprops/action-gh-release@v2
       with: 
