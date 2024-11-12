@@ -83,12 +83,8 @@ sudo systemctl status mfl-server.service
 ### Server update
 ```shell
 cd ~/mfl-server/
-# server stoppen
-sudo systemctl stop mfl-server.service
 # ACHTUNG: "X.X.X" mit der aktuellsten Versionsnummer ersetzen
-wget https://github.com/soumas/model-flight-logbook/releases/download/mfl-X.X.X/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip
-# server starten
-sudo systemctl start mfl-server.service
+wget https://github.com/soumas/model-flight-logbook/releases/download/mfl-X.X.X/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip && sudo systemctl restart mfl-server.service
 
 ```
 

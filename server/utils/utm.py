@@ -1,9 +1,11 @@
+from pathlib import Path
+from sys import platform
 from fastapi import BackgroundTasks
 import selenium
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -24,14 +26,39 @@ DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 
 def __create_driver():
     log.debug('__create_driver')
-    service = Service(config.utm.geckodriver_path)
-    options = FirefoxOptions()
-    options.add_argument("--headless")
-    return webdriver.Firefox(service=service, options=options)
+    options = Options()
+    # a few usefull options
+    options.add_argument("--window-size=800,600")
+    options.add_argument("--use-gl=angle")
+    #options.add_argument("--use-angle=swiftshader")
+    options.add_argument("--headless") # if you want it headless
+
+    #if platform.system() == "Linux" and platform.machine() == "armv7l":  
+        # if raspi
+    options.BinaryLocation = "/usr/bin/chromium-browser"
+    #service = Service(executable_path="/usr/bin/chromedriver", service_args=['--log', 'debug'], log_output='./chrome_log.txt')
+    service = Service(executable_path="/usr/bin/chromedriver")
+    #else: # if not raspi and considering you're using Chrome
+    #    raise 'only Linux on armv7l (Rasperry Pi) supported'
+
+    #service = Service(executable_path=config.utm.geckodriver_path, service_args=['--log', 'debug'], log_output='./firefox_log.txt')
+    #options = FirefoxOptions()
+    #options.add_argument("--headless")
+    return webdriver.Chrome(service=service, options=options)
 
 def __dispose_driver(driver):
     log.debug('__dispose_driver')
     driver.close()
+
+def __utm_save_error_screenshot(driver, methodname:str, pilot: PilotEntity):
+    if driver != None:
+        try:
+            utmerrorpath = './utm_error_screenshots/'
+            Path(utmerrorpath).mkdir(parents=True, exist_ok=True)
+            driver.save_screenshot(utmerrorpath + methodname+'_pilotid'+ pilot.id + '_' +  datetime.now().strftime('%Y%m%d%H%M%S')+'.png')
+        except:
+            log.error('Error on saving screenshot for error in method ' + methodname)
+            log.error(traceback.format_exc())
 
 def __wait_until_url_loaded(driver, url, timeout=DEFAULT_WAIT_TIME):
     log.debug('__wait_until_url_loaded, url {}, timeout {}'.format(url, timeout))
@@ -77,7 +104,7 @@ def __utm_login(driver):
 def __utm_open_menu(driver):
     log.debug('__utm_open_menu')
     # workaround for the buggy menu button
-    for i in range(3):
+    for i in range(2):
         try:
             __wait_and_click(driver, "//div[@id='menu-button']")
             time.sleep(1)
@@ -86,18 +113,6 @@ def __utm_open_menu(driver):
             log.debug('buggy menu fallback')
             pass
 
-def __utm_open_drone_form_and_set_kml(driver, terminal: TerminalConfig):
-    log.debug('__utm_open_drone_form_and_set_kml')
-    __wait_until_clickable(driver, "//i[@class='ti ti-question-mark']") # wait until ui recognizes login state        
-    # workaround for the buggy drone menu button
-    for i in range(3):
-        try:
-            __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
-            time.sleep(1)
-            driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
-        except:
-            log.debug('buggy done menu fallback')
-            pass
 
 def __set_flightplanstatus(id:int, status:FlightPlanStatus):
     log.debug('__set_flightplanstatus ({})'.format(status.value))
@@ -167,7 +182,10 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             __utm_login(driver)
 
             log.debug('create flight plan')
-            __utm_open_drone_form_and_set_kml(driver, terminal)
+            __wait_until_clickable(driver, "//i[@class='ti ti-question-mark']") # wait until ui recognizes login state
+            time.sleep(10) # todo: replace with real solution
+            __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
+            driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
             __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
             __wait_and_send_key(driver, "//label[normalize-space()='Last name *']/following-sibling::input", pilot.lastname)
@@ -209,12 +227,12 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
     except:
         error = traceback.format_exc()
         log.error(error)
+        __utm_save_error_screenshot(driver=driver, pilot=pilot, methodname='start_flight')
         fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.error)
     finally:        
         if driver != None:
             __dispose_driver(driver)
         __send_notification(background_tasks=background_tasks, pilot=pilot, fsession=fligthsession, terminal=terminal, error=error)
-
 
 def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsession: FlightSessionEntity, terminal: TerminalConfig):
     
@@ -229,34 +247,37 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
 
     try:
 
-        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.endPending)
+        if(fligthsession.flightplanstatus == FlightPlanStatus.flying):
 
-        if config.utm.simulate != True:
+            __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.endPending)
 
-            driver = __create_driver()
+            if config.utm.simulate != True:
 
-            __utm_login(driver)
-            log.debug('navigate to flightplan with id part {}'.format(__build_flight_title_id_part(pilot.id)))
-            __utm_open_menu(driver)
-            __wait_and_click(driver, "//span[normalize-space()='Flight plans and log']")
-            try:
-                __wait_and_click(driver, "//div[@class='operation-plans']/div[@class='operation-plan']/div[@class='status ACTIVATED']/following-sibling::p[contains(normalize-space(.), '" + __build_flight_title_id_part(pilot.id) + "')]")
-                __wait_and_click(driver, "//button[normalize-space()='End flight']")
-            except selenium.common.exceptions.TimeoutException:
-                log.warning('Flight with id part "{}" not found in active flights list. Maybe the flight ended earlier...?'.format(__build_flight_title_id_part(pilot.id)))
-                pass
+                driver = __create_driver()
 
-            log.debug('flight plan ended')
-            
-        else:
-            log.warning('utm simulation mode is active - waiting some minutes and doing nothing')
-            time.sleep(10)
+                __utm_login(driver)
+                log.debug('navigate to flightplan with id part {}'.format(__build_flight_title_id_part(pilot.id)))
+                __utm_open_menu(driver)
+                __wait_and_click(driver, "//span[normalize-space()='Flight plans and log']")
+                try:
+                    __wait_and_click(driver, "//div[@class='operation-plans']/div[@class='operation-plan']/div[@class='status ACTIVATED']/following-sibling::p[contains(normalize-space(.), '" + __build_flight_title_id_part(pilot.id) + "')]")
+                    __wait_and_click(driver, "//button[normalize-space()='End flight']")
+                except selenium.common.exceptions.TimeoutException:
+                    log.warning('Flight with id part "{}" not found in active flights list. Maybe the flight ended earlier...?'.format(__build_flight_title_id_part(pilot.id)))
+                    pass
+
+                log.debug('flight plan ended')
+                
+            else:
+                log.warning('utm simulation mode is active - waiting some minutes and doing nothing')
+                time.sleep(10)
 
         fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.closed)
 
     except:
         error = traceback.format_exc()
         log.error(error)
+        __utm_save_error_screenshot(driver=driver, pilot=pilot, methodname='start_flight')
         fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.error)
     finally:
         if driver != None:
