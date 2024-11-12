@@ -1,4 +1,4 @@
-name: release server
+name: release terminal
 on: 
   push:
     tags:
@@ -27,7 +27,9 @@ jobs:
       with:
         flutter-version: '3.24.1'
         channel: 'stable'
-    - name: Install Dependencies
+    - name: Install sys dependencies
+      run: apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev        
+    - name: Install flutter dependencies
       run: flutter pub get
     - name: Build linux
       run: flutter build linux --release
