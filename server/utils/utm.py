@@ -182,7 +182,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             __utm_login(driver)
 
             log.debug('create flight plan')
-            __wait_until_clickable(driver, "//i[@class='ti ti-question-mark']") # wait until ui recognizes login state
+            __wait_until_clickable(driver, "//a[normalize-space()='Sign out']") # wait until ui recognizes login state
             time.sleep(10) # todo: replace with real solution
             __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
             driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
