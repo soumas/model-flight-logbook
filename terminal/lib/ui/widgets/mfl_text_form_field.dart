@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_keyboard_layouts.dart';
@@ -109,5 +108,5 @@ class MflTextFormField extends StatelessWidget {
     );
   }
 
-  bool get _useVirtualKeyboard => kIsWeb || (defaultTargetPlatform != TargetPlatform.iOS && defaultTargetPlatform != TargetPlatform.android);
+  bool get _useVirtualKeyboard => false; //kIsWeb || (defaultTargetPlatform != TargetPlatform.iOS && defaultTargetPlatform != TargetPlatform.android);
 }

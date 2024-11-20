@@ -5,7 +5,7 @@ import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/domain/enums/terminal_type.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/mfl_text_form_field.dart';
+import 'package:model_flight_logbook/ui/widgets/mfl_text_form_field.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_state.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';

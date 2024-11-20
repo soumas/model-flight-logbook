@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/constants.dart';
-import 'package:model_flight_logbook/ui/mfl_text_form_field.dart';
+import 'package:model_flight_logbook/ui/widgets/mfl_text_form_field.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 
