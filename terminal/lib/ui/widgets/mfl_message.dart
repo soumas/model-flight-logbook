@@ -36,7 +36,7 @@ class MflMessage extends StatelessWidget {
                         color: _evalFontColor(),
                       ),
                 ),
-                Container(
+                Flexible(
                   child: Text(
                     text ?? '',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: _evalFontColor()),
