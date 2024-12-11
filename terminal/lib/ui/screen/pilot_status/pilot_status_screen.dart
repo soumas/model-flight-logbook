@@ -55,7 +55,7 @@ class PilotStatusScreen extends StatelessWidget {
                   ...warnMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.warn)),
                   ...infoMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.info)),
                   if (errorMessages.isEmpty && state.flightSessionStatus?.sessionId == null) ..._startSessionForm(context, state, errorMessages),
-                  if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus || FlightPlanStatus.error == state.flightSessionStatus?.flightPlanStatus) EndFlightSessionButton(),
+                  if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus || FlightPlanStatus.error == state.flightSessionStatus?.flightPlanStatus || FlightPlanStatus.featureDisabled == state.flightSessionStatus?.flightPlanStatus) EndFlightSessionButton(),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Row(
