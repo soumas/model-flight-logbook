@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:model_flight_logbook/constants.dart';
 
 class MflScaffold extends StatelessWidget {
   const MflScaffold({
@@ -29,7 +28,7 @@ class MflScaffold extends StatelessWidget {
               ),
             Center(
               child: SizedBox(
-                width: kContentWidth,
+                //width: kContentWidth,
                 height: MediaQuery.of(context).size.height - kToolbarHeight,
                 child: Align(
                   alignment: alignment,

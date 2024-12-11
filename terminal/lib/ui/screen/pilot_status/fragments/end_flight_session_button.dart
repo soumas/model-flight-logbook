@@ -18,7 +18,7 @@ class EndFlightSessionButton extends StatelessWidget {
       onPressed: () async {
         bool confirmed = await showModalBottomSheet(
           context: context,
-          constraints: const BoxConstraints.expand(width: kContentWidth),
+          //constraints: const BoxConstraints.expand(width: kContentWidth),
           isScrollControlled: true,
           backgroundColor: Colors.black,
           builder: (context) {

@@ -48,7 +48,7 @@ class MflTextFormField extends StatelessWidget {
         onTap: _useVirtualKeyboard && !readOnly
             ? () {
                 showModalBottomSheet(
-                  constraints: const BoxConstraints.expand(width: kContentWidth),
+                  constraints: BoxConstraints.expand(width: MediaQuery.of(context).size.width),
                   isScrollControlled: true,
                   context: context,
                   backgroundColor: Colors.black.withAlpha(120),
@@ -81,15 +81,16 @@ class MflTextFormField extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          height: 200,
+                          height: MediaQuery.of(context).size.height * 0.8,
                           color: Colors.deepPurple,
                           child: VirtualKeyboard(
-                            height: 180,
-                            width: kContentWidth,
+                            height: MediaQuery.of(context).size.height * 0.75,
+                            width: MediaQuery.of(context).size.width,
                             textColor: Colors.white,
                             textController: controller,
                             type: inputType,
                             customLayoutKeys: MflKeyboardLayouts(),
+                            fontSize: MediaQuery.of(context).size.height * 0.05,
                           ),
                         ),
                         const SizedBox(height: 20),

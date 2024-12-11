@@ -22,7 +22,8 @@ class MflMessage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: child ??
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: EdgeInsets.only(
@@ -35,7 +36,7 @@ class MflMessage extends StatelessWidget {
                         color: _evalFontColor(),
                       ),
                 ),
-                Flexible(
+                Container(
                   child: Text(
                     text ?? '',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: _evalFontColor()),
