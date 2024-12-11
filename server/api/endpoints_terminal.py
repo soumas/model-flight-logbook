@@ -63,17 +63,17 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     warnMessages = [];
     erroMessages = [];
     if(pilot.acPilotlicenseValidTo == None):
-        erroMessages.append('Bei uns ist kein Drohnenführerschein von dir hinterlegt. Bitte sende den Nachweis an ' + config.logbook.admin_email );
+        erroMessages.append('Drohnenführerschein fehlt');
     elif(pilot.acPilotlicenseValidTo < datetime.now().date()):
-        erroMessages.append('Dein Drohnenführerschein ist abgelaufen. Bitte erneuere ihn und sende den Nachweis an ' + config.logbook.admin_email);
+        erroMessages.append('Drohnenführerschein abgelaufen');
     elif(pilot.acPilotlicenseValidTo < datetime.now().date() + timedelta(days=30)):
-        warnMessages.append('Dein Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab! Bitte denke daran ihn zu erneuern und den Nachweis an ' + config.logbook.admin_email + ' zu senden.');
+        warnMessages.append('Dein Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab');
     if(pilot.acRegistrationValidTo == None):
-        erroMessages.append('Bei uns ist keine Registrierung von dir hinterlegt. Bitte sende den Nachweis an ' + config.logbook.admin_email);
+        erroMessages.append('Registrierung fehlt');
     elif(pilot.acRegistrationValidTo < datetime.now().date()):
-        erroMessages.append('Deine Registrierung ist abgelaufen. Bitte erneuere sie und sende den Nachweis an ' + config.logbook.admin_email);
+        erroMessages.append('Registrierung abgelaufen');
     elif(pilot.acRegistrationValidTo < datetime.now().date() + timedelta(days=30)):
-        warnMessages.append('Deine Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab! Bitte denke daran sie zu erneuern und den Nachweis an ' + config.logbook.admin_email + ' zu senden.');
+        warnMessages.append('Deine Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab');
 
     return FlightSessionStatusDTO(
         pilotName=pilot.firstname + ' ' + pilot.lastname,

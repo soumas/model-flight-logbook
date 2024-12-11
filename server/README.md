@@ -43,8 +43,8 @@ wget https://github.com/mozilla/geckodriver/releases/download/v0.35.0/geckodrive
 
 ### Erster Testlauf
 ```shell
-# Server auf port 8081 starten und logs beobachren
-uvicorn main:app --port 8081 --log-config log-config.ini
+# Server auf port 8082 starten und logs beobachren
+uvicorn main:app --port 8082 --host "0.0.0.0" --log-config log-config.ini
 
 # Nach Serverstart Testcall machen --> sendet Test-Email an die Admin-Adresse
 curl --header "x-api-key: your_secure_api_key" localhost:8082/admin/test/admin_notification
