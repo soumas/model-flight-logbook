@@ -50,7 +50,7 @@ uvicorn main:app --port 8082 --host "0.0.0.0" --log-config log-config.ini
 curl --header "x-api-key: your_secure_api_key" localhost:8082/admin/test/admin_notification
 
 # Über einen Browser kann die API Dokumentation aufgerufen werden
-http://localhost:8081/docs
+http://localhost:8082/docs
 ```
 
 ### Server als systemd-Service registrieren
@@ -65,7 +65,7 @@ Description=Model Flight Logbook Server
 [Service]
 Type=simple
 WorkingDirectory=/home/pi/mfl-server/
-ExecStart=/home/pi/mfl-server/venv/bin/uvicorn main:app --port 8081 --log-config log-config.ini
+ExecStart=/home/pi/mfl-server/venv/bin/uvicorn main:app --port 8082 --log-config log-config.ini
 Restart=always
 User=pi
 Group=pi
