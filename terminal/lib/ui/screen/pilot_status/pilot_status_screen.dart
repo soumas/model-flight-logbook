@@ -45,7 +45,7 @@ class PilotStatusScreen extends StatelessWidget {
                   if (state.flightSessionStatus?.pilotName != null)
                     Padding(
                       padding: kFormFieldPadding,
-                      child: Container(
+                      child: Flexible(
                         child: Text(
                           'Pilot: ${state.flightSessionStatus?.pilotName ?? ''}',
                           style: Theme.of(context).textTheme.headlineSmall,
@@ -136,16 +136,25 @@ class PilotStatusScreen extends StatelessWidget {
         text: 'Deine Daten (Name, E-Mail, Telefonnummer) werden zwecks der gesetzlich erforderlichen Meldung an die Luftfahrtbehörde übermittelt. Außerdem akzeptierst du die Bedingungen des UTM Systems unter https://utm.dronespace.at/avm/.',
         icon: SizedBox(),
       ),
-      CheckboxListTile(
-        value: state.termsAccepted,
-        controlAffinity: ListTileControlAffinity.leading,
-        onChanged: (value) {
-          context.read<PilotStatusCubit>().toggleTermsAccepted();
-        },
-        title: Text(
-          'Ja, ich bin damit einverstanden',
-          style: Theme.of(context).textTheme.bodyLarge,
-          textAlign: TextAlign.left,
+      Padding(
+        padding: kFormFieldPadding,
+        child: TextButton(
+          onPressed: () => context.read<PilotStatusCubit>().toggleTermsAccepted(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Checkbox(
+                value: state.termsAccepted,
+                onChanged: (value) {},
+              ),
+              Text(
+                'Ja, ich bin damit einverstanden',
+                style: Theme.of(context).textTheme.bodyLarge,
+                textAlign: TextAlign.left,
+              )
+            ],
+          ),
         ),
       ),
       ElevatedButton.icon(
