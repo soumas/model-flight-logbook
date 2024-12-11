@@ -45,11 +45,9 @@ class PilotStatusScreen extends StatelessWidget {
                   if (state.flightSessionStatus?.pilotName != null)
                     Padding(
                       padding: kFormFieldPadding,
-                      child: Flexible(
-                        child: Text(
-                          'Pilot: ${state.flightSessionStatus?.pilotName ?? ''}',
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
+                      child: Text(
+                        'Pilot: ${state.flightSessionStatus?.pilotName ?? ''}',
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),
                   if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) ..._activeSessionInfo(context, state),
