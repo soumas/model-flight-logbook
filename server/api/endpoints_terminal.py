@@ -22,7 +22,7 @@ def __specific_terminalauth(x_terminal:Annotated[str, Header()], api_key_header:
     return api_key_header
 
 def __common_terminalauth(api_key_header:str = Security(api_key_header)):
-    # verry simple "secuity" for get_terminal_config_list (used by terminal client to get config options before a specific terminal is selected)
+    # very simple "secuity" for get_terminal_config_list (used by terminal client to get config options before a specific terminal is selected)
     if api_key_header != 'a&feoy!j0diusyJog2':        
         raise invalid_api_key
 
