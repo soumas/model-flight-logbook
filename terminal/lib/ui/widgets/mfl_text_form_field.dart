@@ -51,46 +51,61 @@ class MflTextFormField extends StatelessWidget {
                   constraints: BoxConstraints.expand(width: MediaQuery.of(context).size.width),
                   isScrollControlled: true,
                   context: context,
-                  backgroundColor: Colors.black.withAlpha(120),
+                  backgroundColor: Colors.black,
                   builder: (context) {
                     return Column(
                       children: [
                         Expanded(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: kFormFieldPadding,
-                              child: TextFormField(
-                                controller: controller,
-                                decoration: InputDecoration(
-                                  fillColor: Colors.black,
-                                  filled: true,
-                                  labelText: label,
-                                  suffix: TextButton.icon(
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: IconButton(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    label: const SizedBox(),
-                                    icon: const Icon(Icons.keyboard_return),
-                                    iconAlignment: IconAlignment.end,
+                                    icon: const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Icon(Icons.close),
+                                    )),
+                              ),
+                              Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding: kFormFieldPadding,
+                                  child: TextFormField(
+                                    controller: controller,
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.black,
+                                      filled: true,
+                                      labelText: label,
+                                      suffix: TextButton.icon(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        label: const SizedBox(),
+                                        icon: const Icon(Icons.keyboard_return),
+                                        iconAlignment: IconAlignment.end,
+                                      ),
+                                    ),
+                                    autofocus: true,
                                   ),
                                 ),
-                                autofocus: true,
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height * 0.8,
                           color: Colors.deepPurple,
                           child: VirtualKeyboard(
-                            height: MediaQuery.of(context).size.height * 0.75,
+                            height: MediaQuery.of(context).size.height * 0.8,
                             width: MediaQuery.of(context).size.width,
                             textColor: Colors.white,
                             textController: controller,
                             type: inputType,
                             customLayoutKeys: MflKeyboardLayouts(),
-                            fontSize: MediaQuery.of(context).size.height * 0.05,
+                            fontSize: MediaQuery.of(context).size.height * 0.04,
                           ),
                         ),
                         const SizedBox(height: 20),
