@@ -17,7 +17,13 @@ class MflScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (title != null) ? AppBar(title: Text(title!)) : null,
+      appBar: (title != null)
+          ? AppBar(
+              title: Text(title!),
+              automaticallyImplyLeading: false,
+              actions: [IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.close))],
+            )
+          : null,
       body: Builder(builder: (context) {
         return Stack(
           children: [
@@ -25,6 +31,11 @@ class MflScaffold extends StatelessWidget {
               Align(
                 alignment: Alignment.topRight,
                 child: IconButton(onPressed: () => Scaffold.of(context).openEndDrawer(), icon: const Icon(Icons.menu)),
+              ),
+            if (endDrawer == null && title == null)
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.close)),
               ),
             Center(
               child: SizedBox(

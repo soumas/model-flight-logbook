@@ -45,10 +45,7 @@ class PilotStatusScreen extends StatelessWidget {
                   if (state.flightSessionStatus?.pilotName != null)
                     Padding(
                       padding: kFormFieldPadding,
-                      child: Text(
-                        'Pilot: ${state.flightSessionStatus?.pilotName ?? ''}',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
+                      child: Text(state.flightSessionStatus?.pilotName ?? '', style: Theme.of(context).textTheme.headlineLarge),
                     ),
                   if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) ..._activeSessionInfo(context, state),
                   ...errorMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.error)),
@@ -56,24 +53,6 @@ class PilotStatusScreen extends StatelessWidget {
                   ...infoMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.info)),
                   if (errorMessages.isEmpty && state.flightSessionStatus?.sessionId == null) ..._startSessionForm(context, state, errorMessages),
                   if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus || FlightPlanStatus.error == state.flightSessionStatus?.flightPlanStatus || FlightPlanStatus.featureDisabled == state.flightSessionStatus?.flightPlanStatus) EndFlightSessionButton(),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton.icon(
-                          onPressed: () => context.read<PilotStatusCubit>().init(localizations, pilotid),
-                          label: const Text('Aktualisieren'),
-                          icon: const Icon(Icons.refresh),
-                        ),
-                        TextButton.icon(
-                          onPressed: () => Navigator.of(context).pop(),
-                          label: const Text('Abbrechen'),
-                          icon: const Icon(Icons.close),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               );
             }
@@ -108,7 +87,7 @@ class PilotStatusScreen extends StatelessWidget {
   List<Widget> _activeSessionInfo(BuildContext context, PilotStatusState state) {
     return [
       Text(
-        'Flugtag begonnen: ${DateFormat.yMd().format(state.flightSessionStatus!.sessionStarttime!)}, ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr',
+        'Aktiv seit ${DateFormat.yMd().format(state.flightSessionStatus!.sessionStarttime!)}, ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr',
         style: Theme.of(context).textTheme.bodyLarge,
       ),
       if (state.flightSessionStatus!.sessionEndtime != null)
@@ -116,7 +95,7 @@ class PilotStatusScreen extends StatelessWidget {
           'Flugtag beendet: ${DateFormat.yMd().format(state.flightSessionStatus!.sessionEndtime!)}, ${DateFormat.Hm().format(state.flightSessionStatus!.sessionEndtime!)} Uhr',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-      if (state.flightSessionStatus!.flightPlanStatus != null)
+      if (state.flightSessionStatus!.flightPlanStatus != null && state.flightSessionStatus!.flightPlanStatus != FlightPlanStatus.featureDisabled)
         Text(
           'UTM Status: ${state.flightSessionStatus!.flightPlanStatus!.toLabel(AppLocalizations.of(context)!)}',
           style: Theme.of(context).textTheme.bodyLarge,
@@ -129,36 +108,32 @@ class PilotStatusScreen extends StatelessWidget {
 
   List<Widget> _startSessionForm(BuildContext context, PilotStatusState state, errorMessages) {
     return [
-      const MflMessage(
-        severity: MflMessageSeverity.info,
-        text: 'Deine Daten (Name, E-Mail, Telefonnummer) werden zwecks der gesetzlich erforderlichen Meldung an die Luftfahrtbehörde übermittelt. Außerdem akzeptierst du die Bedingungen des UTM Systems unter https://utm.dronespace.at/avm/.',
-        icon: SizedBox(),
-      ),
-      Padding(
-        padding: kFormFieldPadding,
-        child: TextButton(
-          onPressed: () => context.read<PilotStatusCubit>().toggleTermsAccepted(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Checkbox(
-                value: state.termsAccepted,
-                onChanged: (value) {},
+      // const MflMessage(
+      //   severity: MflMessageSeverity.info,
+      //   text: 'Deine Daten (Name, E-Mail, Telefonnummer) werden zwecks der gesetzlich erforderlichen Meldung an die Luftfahrtbehörde übermittelt. Außerdem akzeptierst du die Bedingungen des UTM Systems unter https://utm.dronespace.at/avm/.',
+      // ),
+      TextButton(
+        onPressed: () => context.read<PilotStatusCubit>().toggleTermsAccepted(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Checkbox(
+              value: state.termsAccepted,
+              onChanged: (value) {},
+            ),
+            Flexible(
+              child: Text(
+                'Name, E-Mail und Telefonnummer werden zwecks der gesetzlich erforderlichen Meldung an die Luftfahrtbehörde übermittelt.',
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-              Text(
-                'Ja, ich bin damit einverstanden',
-                style: Theme.of(context).textTheme.bodyLarge,
-                textAlign: TextAlign.left,
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
-      ElevatedButton.icon(
+      ElevatedButton(
         onPressed: state.termsAccepted ? () => context.read<PilotStatusCubit>().startSession() : null,
-        label: const Text('Flugtag beginnen'),
-        icon: const Icon(Icons.flight_takeoff),
+        child: const Text('Flugtag beginnen'),
       ),
     ];
   }

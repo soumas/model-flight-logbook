@@ -40,12 +40,12 @@ class PilotidInputView extends StatelessWidget {
         children: [
           Text(
             state.selectedEndpoint?.config.airportname ?? 'Unbekannter Flugplatz',
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineLarge,
             textAlign: TextAlign.center,
           ),
           Text(
             state.selectedEndpoint?.config.terminalname ?? 'Unbekanntes Terminal',
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
@@ -55,12 +55,17 @@ class PilotidInputView extends StatelessWidget {
               severity: MflMessageSeverity.info,
             ),
           if (TerminalType.singleuser == state.selectedEndpoint!.config.terminaltype)
-            ElevatedButton.icon(
-              icon: const Icon(Icons.touch_app),
-              onPressed: () {
-                Navigator.of(context).pushNamed(PilotStatusScreen.route, arguments: state.selectedEndpoint!.pilotid);
-              },
-              label: const Text('Status anzeigen'),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    PilotStatusScreen.route,
+                    arguments: state.selectedEndpoint!.pilotid,
+                  );
+                },
+                child: const Text('Status anzeigen'),
+              ),
             ),
           const SizedBox(height: 50),
           Image.asset(

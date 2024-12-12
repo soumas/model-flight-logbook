@@ -5,68 +5,38 @@ class MflMessage extends StatelessWidget {
     super.key,
     this.severity = MflMessageSeverity.info,
     this.text,
-    this.icon,
     this.child,
   });
 
   final MflMessageSeverity severity;
   final String? text;
-  final Widget? icon;
   final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.20),
-      child: Card(
-        color: _evalBackgroundColor(),
-        child: Padding(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.015),
-          child: child ??
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Padding(
-                  //   padding: EdgeInsets.only(
-                  //     right: icon != null ? 0.0 : 8.0,
-                  //   ),
-                  //   child: icon ??
-                  //       Icon(
-                  //         _evalIcon(),
-                  //         size: (Theme.of(context).textTheme.bodyLarge?.fontSize! ?? 5) * 1.5,
-                  //         color: _evalFontColor(),
-                  //       ),
-                  // ),
-                  Flexible(
-                    child: Text(
-                      text ?? '',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: _evalFontColor()),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
+    return Card(
+      color: _evalBackgroundColor(),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.85,
+        child: child ??
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.015),
+                child: Text(
+                  text ?? '',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: _evalFontColor()),
+                  textAlign: TextAlign.center,
+                ),
               ),
-        ),
+            ),
       ),
     );
   }
 
-  // IconData? _evalIcon() {
-  //   switch (severity) {
-  //     case MflMessageSeverity.info:
-  //       return Icons.info_outline_rounded;
-  //     case MflMessageSeverity.warn:
-  //       return Icons.warning_amber_outlined;
-  //     case MflMessageSeverity.error:
-  //       return Icons.remove_circle_outline_outlined;
-  //   }
-  // }
-
   _evalBackgroundColor() {
     switch (severity) {
       case MflMessageSeverity.info:
-        return Colors.grey.withAlpha(40);
+        return Colors.lightBlueAccent;
       case MflMessageSeverity.warn:
         return Colors.orange;
       case MflMessageSeverity.error:
@@ -77,7 +47,7 @@ class MflMessage extends StatelessWidget {
   _evalFontColor() {
     switch (severity) {
       case MflMessageSeverity.info:
-        return Colors.white;
+        return Colors.black;
       case MflMessageSeverity.warn:
         return Colors.black;
       case MflMessageSeverity.error:

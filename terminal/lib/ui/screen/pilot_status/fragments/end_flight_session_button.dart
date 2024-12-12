@@ -14,80 +14,81 @@ class EndFlightSessionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: () async {
-        bool confirmed = await showModalBottomSheet(
-          context: context,
-          //constraints: const BoxConstraints.expand(width: kContentWidth),
-          isScrollControlled: true,
-          backgroundColor: Colors.black,
-          builder: (context) {
-            return Form(
-              key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: kFormFieldPadding,
-                    child: Text(
-                      'Protokoll',
-                      style: Theme.of(context).textTheme.headlineMedium,
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: ElevatedButton.icon(
+        onPressed: () async {
+          bool confirmed = await showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.black,
+            builder: (context) {
+              return Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: kFormFieldPadding,
+                      child: Text(
+                        'Protokoll',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
                     ),
-                  ),
-                  MflTextFormField(
-                    controller: _numFlightsEditingController,
-                    label: 'Anzahl Flüge*',
-                    inputType: VirtualKeyboardType.Numeric,
-                    validator: (value) {
-                      if ((value ?? '').isEmpty) {
-                        return 'Dieses Feld darf nicht leer bleiben';
-                      } else if (int.tryParse(value!) == null) {
-                        return 'Bitte geben Sie eine Ganzzahl ein.';
-                      }
-                      return null;
-                    },
-                  ),
-                  MflTextFormField(
-                    controller: _commentTextEditingController,
-                    label: 'Besondere Ereignisse',
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.of(context).pop(true);
-                          }
-                        },
-                        label: const Text('Flugtag beenden'),
-                        icon: const Icon(Icons.flight_land),
-                      ),
-                      TextButton.icon(
-                        onPressed: () => Navigator.of(context).pop(),
-                        label: const Text('Abbrechen'),
-                        icon: const Icon(Icons.close),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            );
-          },
-        );
-
-        if (confirmed && context.mounted) {
-          context.read<PilotStatusCubit>().endSession(
-                numFlights: int.parse(_numFlightsEditingController.text),
-                comment: _commentTextEditingController.text.isNotEmpty ? _commentTextEditingController.text : null,
+                    MflTextFormField(
+                      controller: _numFlightsEditingController,
+                      label: 'Anzahl Flüge*',
+                      inputType: VirtualKeyboardType.Numeric,
+                      validator: (value) {
+                        if ((value ?? '').isEmpty) {
+                          return 'Dieses Feld darf nicht leer bleiben';
+                        } else if (int.tryParse(value!) == null) {
+                          return 'Bitte geben Sie eine Ganzzahl ein.';
+                        }
+                        return null;
+                      },
+                    ),
+                    MflTextFormField(
+                      controller: _commentTextEditingController,
+                      label: 'Besondere Ereignisse',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).pop(true);
+                            }
+                          },
+                          child: const Text('Flugtag beenden'),
+                        ),
+                        TextButton.icon(
+                          onPressed: () => Navigator.of(context).pop(),
+                          label: const Text('Abbrechen'),
+                          icon: const Icon(Icons.close),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               );
-        }
-      },
-      label: const Text('Flugtag beenden'),
-      icon: const Icon(Icons.flight_land),
+            },
+          );
+
+          if (confirmed && context.mounted) {
+            context.read<PilotStatusCubit>().endSession(
+                  numFlights: int.parse(_numFlightsEditingController.text),
+                  comment: _commentTextEditingController.text.isNotEmpty ? _commentTextEditingController.text : null,
+                );
+          }
+        },
+        label: const Text('Flugtag beenden'),
+        icon: const Icon(Icons.flight_land),
+      ),
     );
   }
 }

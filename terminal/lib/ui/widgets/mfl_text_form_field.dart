@@ -97,7 +97,7 @@ class MflTextFormField extends StatelessWidget {
                           textController: controller,
                           type: inputType,
                           customLayoutKeys: MflKeyboardLayouts(),
-                          fontSize: MediaQuery.of(context).size.height * 0.05,
+                          fontSize: MediaQuery.of(context).size.height * 0.08,
                         ),
                       ],
                     );
