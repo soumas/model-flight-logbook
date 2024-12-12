@@ -60,33 +60,28 @@ class MflTextFormField extends StatelessWidget {
                             children: [
                               Align(
                                 alignment: Alignment.topRight,
-                                child: IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    icon: const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Icon(Icons.close),
-                                    )),
+                                child: TextButton.icon(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  icon: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(Icons.close),
+                                  ),
+                                  label: const Text('Schließen'),
+                                  iconAlignment: IconAlignment.end,
+                                ),
                               ),
                               Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Padding(
-                                  padding: kFormFieldPadding,
+                                alignment: Alignment.bottomCenter,
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.8,
                                   child: TextFormField(
                                     controller: controller,
                                     decoration: InputDecoration(
                                       fillColor: Colors.black,
                                       filled: true,
                                       labelText: label,
-                                      suffix: TextButton.icon(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        label: const SizedBox(),
-                                        icon: const Icon(Icons.keyboard_return),
-                                        iconAlignment: IconAlignment.end,
-                                      ),
                                     ),
                                     autofocus: true,
                                   ),
@@ -95,20 +90,15 @@ class MflTextFormField extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.8,
-                          color: Colors.deepPurple,
-                          child: VirtualKeyboard(
-                            height: MediaQuery.of(context).size.height * 0.8,
-                            width: MediaQuery.of(context).size.width,
-                            textColor: Colors.white,
-                            textController: controller,
-                            type: inputType,
-                            customLayoutKeys: MflKeyboardLayouts(),
-                            fontSize: MediaQuery.of(context).size.height * 0.04,
-                          ),
+                        VirtualKeyboard(
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          textColor: Colors.white,
+                          textController: controller,
+                          type: inputType,
+                          customLayoutKeys: MflKeyboardLayouts(),
+                          fontSize: MediaQuery.of(context).size.height * 0.05,
                         ),
-                        const SizedBox(height: 20),
                       ],
                     );
                   },
