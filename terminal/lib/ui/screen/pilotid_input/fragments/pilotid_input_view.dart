@@ -27,7 +27,7 @@ class PilotidInputView extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 20.0),
+            padding: EdgeInsets.only(top: 40.0),
             child: MflMessage(
               severity: MflMessageSeverity.info,
               text: 'Füge über die Einstellungen einen Server hinzu.',
@@ -48,7 +48,7 @@ class PilotidInputView extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 50),
           if (TerminalType.multiuser == state.selectedEndpoint!.config.terminaltype)
             MflMessage(
               text: state.selectedEndpoint!.config.pilotidinstruction,
@@ -56,7 +56,7 @@ class PilotidInputView extends StatelessWidget {
             ),
           if (TerminalType.singleuser == state.selectedEndpoint!.config.terminaltype)
             Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 50.0),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed(
