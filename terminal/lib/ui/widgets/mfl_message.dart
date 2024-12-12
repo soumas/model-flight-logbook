@@ -19,9 +19,9 @@ class MflMessage extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.85,
         child: child ??
-            Flexible(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.015),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.015),
+              child: Flexible(
                 child: Text(
                   text ?? '',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: _evalFontColor()),

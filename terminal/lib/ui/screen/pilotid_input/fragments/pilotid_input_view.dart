@@ -28,7 +28,10 @@ class PilotidInputView extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.only(top: 20.0),
-            child: Text('bla'),
+            child: MflMessage(
+              severity: MflMessageSeverity.info,
+              text: 'Füge über die Einstellungen einen Server hinzu.',
+            ),
           ),
         ],
       );
