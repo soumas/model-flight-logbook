@@ -81,7 +81,7 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
         sessionStarttime=None if fsession == None else fsession.start,
         sessionEndtime=None if fsession == None else fsession.end,
         flightPlanStatus=None if fsession == None else fsession.flightplanstatus,
-        infoMessages=['Hüttenfest am 12.12.2024 nicht versäumen'],
+        infoMessages=['Hüttenfest am 12.12.2024 nicht versäumen und sonst auch noch eine ganz lange botschaft. Ich wünsch dir viele Spaß mit dieser langen Meldung\n\n\nUnd auch noch drei Zeilenumbürche.'],
         warnMessages=warnMessages,
         errorMessages=erroMessages,
     )
