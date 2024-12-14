@@ -46,23 +46,23 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                 children: [
                   MflTextFormField(
                     controller: _serverUrlController,
-                    label: 'Server URL',
-                    suffixIcon: (state.configOptions.isEmpty)
-                        ? TextButton.icon(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<ServerConnectionCubit>().loadConfigurations(_serverUrlController.text);
-                              }
-                            },
-                            label: const Text('Weiter'),
-                            icon: const Icon(Icons.arrow_forward),
-                            iconAlignment: IconAlignment.end,
-                          )
-                        : null,
+                    label: 'Serveradresse',
+                    // suffixIcon: (state.configOptions.isEmpty)
+                    //     ? TextButton.icon(
+                    //         onPressed: () {
+                    //           if (_formKey.currentState!.validate()) {
+                    //             context.read<ServerConnectionCubit>().loadConfigurations(_serverUrlController.text);
+                    //           }
+                    //         },
+                    //         label: const Text('Weiter'),
+                    //         icon: const Icon(Icons.arrow_forward),
+                    //         iconAlignment: IconAlignment.end,
+                    //       )
+                    //     : null,
                     readOnly: state.configOptions.isNotEmpty,
                     validator: (value) {
-                      if (!Uri.parse(value ?? '').isAbsolute) {
-                        return 'URL ungültig';
+                      if (Uri.tryParse(value ?? '') == null || !Uri.parse(value ?? '').isAbsolute) {
+                        return 'Serveradresse ungültig (Beispiel: http://my-mfl-server.com:8189)';
                       }
                       return null;
                     },
@@ -74,13 +74,17 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                   ),
                   if (state.configOptions.isNotEmpty)
                     DropdownButtonFormField(
+                      isDense: false,
                       padding: kFormFieldPadding,
                       value: state.selectedConfig,
                       items: state.configOptions
                           .map(
                             (opt) => DropdownMenuItem<TerminalConfig>(
                               value: opt,
-                              child: Text('${opt.airportname} (${opt.terminalname})'),
+                              child: Text(
+                                '${opt.airportname} (${opt.terminalname})',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
                             ),
                           )
                           .toList(),
@@ -124,15 +128,14 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                     ),
                   if (state.selectedConfig != null)
                     Padding(
-                      padding: kFormFieldPadding,
-                      child: ElevatedButton.icon(
+                      padding: kFormFieldPadding * 2,
+                      child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             context.read<ServerConnectionCubit>().submit();
                           }
                         },
-                        label: const Text('Prüfen und speichern'),
-                        icon: const Icon(Icons.save),
+                        child: const Text('Prüfen und speichern'),
                       ),
                     ),
                 ],

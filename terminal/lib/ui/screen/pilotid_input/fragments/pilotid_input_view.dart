@@ -45,7 +45,7 @@ class PilotidInputView extends StatelessWidget {
           ),
           Text(
             state.selectedEndpoint?.config.terminalname ?? 'Unbekanntes Terminal',
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 50),

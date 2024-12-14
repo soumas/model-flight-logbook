@@ -23,12 +23,12 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         textTheme: ThemeData.dark().textTheme.copyWith(
-              bodySmall: ThemeData.dark().textTheme.bodySmall!.copyWith(fontSize: 16),
-              bodyMedium: ThemeData.dark().textTheme.bodyMedium!.copyWith(fontSize: 22),
-              bodyLarge: ThemeData.dark().textTheme.bodyLarge!.copyWith(fontSize: 28),
-              headlineSmall: ThemeData.dark().textTheme.headlineSmall!.copyWith(fontSize: 16),
-              headlineMedium: ThemeData.dark().textTheme.headlineMedium!.copyWith(fontSize: 28),
-              headlineLarge: ThemeData.dark().textTheme.headlineLarge!.copyWith(fontSize: 42),
+              bodySmall: ThemeData.dark().textTheme.bodySmall!.copyWith(fontSize: 18),
+              bodyMedium: ThemeData.dark().textTheme.bodyMedium!.copyWith(fontSize: 28),
+              bodyLarge: ThemeData.dark().textTheme.bodyLarge!.copyWith(fontSize: 38, fontWeight: FontWeight.bold),
+              headlineSmall: ThemeData.dark().textTheme.headlineSmall!.copyWith(fontSize: 32),
+              headlineMedium: ThemeData.dark().textTheme.headlineMedium!.copyWith(fontSize: 42),
+              headlineLarge: ThemeData.dark().textTheme.headlineLarge!.copyWith(fontSize: 52),
               labelSmall: ThemeData.dark().textTheme.labelSmall!.copyWith(fontSize: 16),
               labelMedium: ThemeData.dark().textTheme.labelMedium!.copyWith(fontSize: 24),
               labelLarge: ThemeData.dark().textTheme.labelLarge!.copyWith(fontSize: 32, fontWeight: FontWeight.w500),
@@ -50,6 +50,12 @@ class MainApp extends StatelessWidget {
           filled: true,
           border: const OutlineInputBorder(),
         ),
+        listTileTheme: ListTileThemeData(
+          titleTextStyle: ThemeData.dark().textTheme.headlineLarge!.copyWith(fontSize: 28),
+          subtitleTextStyle: ThemeData.dark().textTheme.headlineLarge!.copyWith(fontSize: 18),
+        ),
+        iconTheme: ThemeData.dark().iconTheme.copyWith(size: 38),
+        dialogBackgroundColor: Colors.blueGrey,
       ),
       debugShowCheckedModeBanner: false,
       routes: {

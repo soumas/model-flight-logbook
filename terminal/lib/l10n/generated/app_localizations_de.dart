@@ -16,7 +16,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get apiResponseReasonInvalidApiKey => 'Ungültiger Api Key';
 
   @override
-  String get apiResponseReasonFlightsessionNotFound => 'Der angeforderte Flugtag wurde nicht gefunden';
+  String get apiResponseReasonFlightsessionNotFound => 'Die angeforderte Sitzung wurde nicht gefunden';
 
   @override
   String get apiResponseReasonUnknownPilot => 'Unbekannter Pilot';
@@ -28,10 +28,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get apiResponseReasonInactivePilot => 'Die Interaktion mit dem Server wurde verweigert, da das Pilotenkonto inaktiv ist.';
 
   @override
-  String get apiResponseReasonActiveFlightsessionFound => 'Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.';
+  String get apiResponseReasonActiveFlightsessionFound => 'Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.';
 
   @override
-  String get apiResponseReasonUtmActionRunning => 'Es findet eine Interaktion mit dem UTM System der Austro Control statt. Bitte führe die gewünschte Aktion in wenigen Minuten erneut aus.';
+  String get apiResponseReasonUtmActionRunning => 'UTM Interaktion in Ausführung.';
 
   @override
   String get flightPlanStatusLabelCreated => 'Neu erstellt';
@@ -43,13 +43,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get flightPlanStatusLabelStartPending => 'Warte auf Freigabe';
 
   @override
-  String get flightPlanStatusLabelFlying => 'Freigabe erteilt (flying)';
+  String get flightPlanStatusLabelFlying => 'Freigabe erteilt';
 
   @override
   String get flightPlanStatusLabelEndPending => 'Warte auf Beendigung';
 
   @override
-  String get flightPlanStatusLabelClosed => 'Abgeschlossen (closed)';
+  String get flightPlanStatusLabelClosed => 'Abgeschlossen';
 
   @override
   String get flightPlanStatusLabelError => 'Fehler';

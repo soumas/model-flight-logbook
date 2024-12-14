@@ -3,18 +3,18 @@
   "addServerConnection": "Server hinzufügen",
 
   "apiResponseReasonInvalidApiKey": "Ungültiger Api Key",
-  "apiResponseReasonFlightsessionNotFound": "Der angeforderte Flugtag wurde nicht gefunden",
+  "apiResponseReasonFlightsessionNotFound": "Die angeforderte Sitzung wurde nicht gefunden",
   "apiResponseReasonUnknownPilot": "Unbekannter Pilot",
   "apiResponseReasonUnknownTerminal": "Unbekanntes Terminal",
   "apiResponseReasonInactivePilot": "Die Interaktion mit dem Server wurde verweigert, da das Pilotenkonto inaktiv ist.",
-  "apiResponseReasonActiveFlightsessionFound": "Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.",
-  "apiResponseReasonUtmActionRunning": "Es findet eine Interaktion mit dem UTM System der Austro Control statt. Bitte führe die gewünschte Aktion in wenigen Minuten erneut aus.",
+  "apiResponseReasonActiveFlightsessionFound": "Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.",
+  "apiResponseReasonUtmActionRunning": "UTM Interaktion in Ausführung.",
 
   "flightPlanStatusLabelCreated": "Neu erstellt",
   "flightPlanStatusLabelFeatureDisabled": "UTM Feature inaktiv",
   "flightPlanStatusLabelStartPending": "Warte auf Freigabe",
-  "flightPlanStatusLabelFlying": "Freigabe erteilt (flying)",
+  "flightPlanStatusLabelFlying": "Freigabe erteilt",
   "flightPlanStatusLabelEndPending": "Warte auf Beendigung",
-  "flightPlanStatusLabelClosed": "Abgeschlossen (closed)",
+  "flightPlanStatusLabelClosed": "Abgeschlossen",
   "flightPlanStatusLabelError": "Fehler"
 }

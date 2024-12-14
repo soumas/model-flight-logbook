@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MflMessage extends StatelessWidget {
   const MflMessage({
     super.key,
-    this.severity = MflMessageSeverity.info,
+    this.severity = MflMessageSeverity.none,
     this.text,
     this.child,
   });
@@ -18,21 +18,23 @@ class MflMessage extends StatelessWidget {
       color: _evalBackgroundColor(),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.85,
-        child: child ??
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.015),
-              child: Text(
-                text ?? '',
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.015),
+          child: child ??
+              Text(
+                text?.replaceAll('\\n', '\n') ?? '',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: _evalFontColor()),
                 textAlign: TextAlign.center,
               ),
-            ),
+        ),
       ),
     );
   }
 
   _evalBackgroundColor() {
     switch (severity) {
+      case MflMessageSeverity.none:
+        return null;
       case MflMessageSeverity.info:
         return Colors.lightBlueAccent;
       case MflMessageSeverity.warn:
@@ -44,8 +46,10 @@ class MflMessage extends StatelessWidget {
 
   _evalFontColor() {
     switch (severity) {
+      case MflMessageSeverity.none:
+        return null;
       case MflMessageSeverity.info:
-        return Colors.black;
+        return Colors.deepPurple;
       case MflMessageSeverity.warn:
         return Colors.black;
       case MflMessageSeverity.error:
@@ -55,6 +59,7 @@ class MflMessage extends StatelessWidget {
 }
 
 enum MflMessageSeverity {
+  none,
   info,
   warn,
   error,

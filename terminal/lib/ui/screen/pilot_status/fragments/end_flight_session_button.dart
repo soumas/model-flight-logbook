@@ -15,7 +15,7 @@ class EndFlightSessionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.only(top: 60.0),
       child: ElevatedButton.icon(
         onPressed: () async {
           bool confirmed = await showModalBottomSheet(
@@ -31,7 +31,7 @@ class EndFlightSessionButton extends StatelessWidget {
                     Padding(
                       padding: kFormFieldPadding,
                       child: Text(
-                        'Protokoll',
+                        'Flugbuch',
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ),
@@ -55,24 +55,14 @@ class EndFlightSessionButton extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.of(context).pop(true);
-                            }
-                          },
-                          child: const Text('Flugtag beenden'),
-                        ),
-                        TextButton.icon(
-                          onPressed: () => Navigator.of(context).pop(),
-                          label: const Text('Abbrechen'),
-                          icon: const Icon(Icons.close),
-                        ),
-                      ],
-                    )
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.of(context).pop(true);
+                        }
+                      },
+                      child: const Text('Absenden'),
+                    ),
                   ],
                 ),
               );
@@ -86,7 +76,7 @@ class EndFlightSessionButton extends StatelessWidget {
                 );
           }
         },
-        label: const Text('Flugtag beenden'),
+        label: const Text('Sitzung beenden'),
         icon: const Icon(Icons.flight_land),
       ),
     );

@@ -114,7 +114,7 @@ abstract class AppLocalizations {
   /// No description provided for @apiResponseReasonFlightsessionNotFound.
   ///
   /// In de, this message translates to:
-  /// **'Der angeforderte Flugtag wurde nicht gefunden'**
+  /// **'Die angeforderte Sitzung wurde nicht gefunden'**
   String get apiResponseReasonFlightsessionNotFound;
 
   /// No description provided for @apiResponseReasonUnknownPilot.
@@ -138,13 +138,13 @@ abstract class AppLocalizations {
   /// No description provided for @apiResponseReasonActiveFlightsessionFound.
   ///
   /// In de, this message translates to:
-  /// **'Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.'**
+  /// **'Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.'**
   String get apiResponseReasonActiveFlightsessionFound;
 
   /// No description provided for @apiResponseReasonUtmActionRunning.
   ///
   /// In de, this message translates to:
-  /// **'Es findet eine Interaktion mit dem UTM System der Austro Control statt. Bitte führe die gewünschte Aktion in wenigen Minuten erneut aus.'**
+  /// **'UTM Interaktion in Ausführung.'**
   String get apiResponseReasonUtmActionRunning;
 
   /// No description provided for @flightPlanStatusLabelCreated.
@@ -168,7 +168,7 @@ abstract class AppLocalizations {
   /// No description provided for @flightPlanStatusLabelFlying.
   ///
   /// In de, this message translates to:
-  /// **'Freigabe erteilt (flying)'**
+  /// **'Freigabe erteilt'**
   String get flightPlanStatusLabelFlying;
 
   /// No description provided for @flightPlanStatusLabelEndPending.
@@ -180,7 +180,7 @@ abstract class AppLocalizations {
   /// No description provided for @flightPlanStatusLabelClosed.
   ///
   /// In de, this message translates to:
-  /// **'Abgeschlossen (closed)'**
+  /// **'Abgeschlossen'**
   String get flightPlanStatusLabelClosed;
 
   /// No description provided for @flightPlanStatusLabelError.

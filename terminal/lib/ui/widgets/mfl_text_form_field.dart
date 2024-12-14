@@ -60,7 +60,7 @@ class MflTextFormField extends StatelessWidget {
                             children: [
                               Align(
                                 alignment: Alignment.topRight,
-                                child: TextButton.icon(
+                                child: IconButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
@@ -68,8 +68,6 @@ class MflTextFormField extends StatelessWidget {
                                     padding: EdgeInsets.all(8.0),
                                     child: Icon(Icons.close),
                                   ),
-                                  label: const Text('Schließen'),
-                                  iconAlignment: IconAlignment.end,
                                 ),
                               ),
                               Align(
