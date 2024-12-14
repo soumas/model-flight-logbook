@@ -67,13 +67,13 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     elif(pilot.acPilotlicenseValidTo < datetime.now().date()):
         erroMessages.append('Drohnenführerschein abgelaufen');
     elif(pilot.acPilotlicenseValidTo < datetime.now().date() + timedelta(days=30)):
-        warnMessages.append('Achtung! Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab');
+        warnMessages.append('Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab');
     if(pilot.acRegistrationValidTo == None):
         erroMessages.append('Registrierung fehlt');
     elif(pilot.acRegistrationValidTo < datetime.now().date()):
         erroMessages.append('Registrierung abgelaufen');
     elif(pilot.acRegistrationValidTo < datetime.now().date() + timedelta(days=30)):
-        warnMessages.append('Achtung! Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab');
+        warnMessages.append('Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab');
 
     return FlightSessionStatusDTO(
         pilotName=pilot.firstname + ' ' + pilot.lastname,
@@ -81,7 +81,7 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
         sessionStarttime=None if fsession == None else fsession.start,
         sessionEndtime=None if fsession == None else fsession.end,
         flightPlanStatus=None if fsession == None else fsession.flightplanstatus,
-        #infoMessages=['Hüttenfest am 12.12.2024 nicht verläumen'],
+        infoMessages=['Hüttenfest am 12.12.2024 nicht versäumen'],
         warnMessages=warnMessages,
         errorMessages=erroMessages,
     )
