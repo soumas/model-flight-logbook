@@ -35,8 +35,8 @@ python -m pip install -r requirements.txt
 mv server-config-template.ini server-config.ini
 nano server-config.ini 
 
-# geckodriver installieren (für UTM feature)
-wget https://github.com/mozilla/geckodriver/releases/download/v0.35.0/geckodriver-v0.35.0-linux32.tar.gz -O geckodriver.tar.gz && tar -xzvf geckodriver.tar.gz && sudo mv geckodriver /usr/local/bin && rm geckodriver.tar.gz
+# chromedriver (am raspberry pi, ggf. auch auf anderen plattformen)
+sudo apt-get install chromium-chromedriver
 
 
 ```

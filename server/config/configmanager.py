@@ -35,6 +35,7 @@ class LogbookConfig:
         self.apikey_admin = _ini.get('logbook','apikey_admin')
         self.admin_email = _ini.get('logbook','admin_email')
         self.forward_comment = _ini.getboolean('logbook','forward_comment')
+        self.chromedriver_path = _ini.get('utm', 'chromedriver_path')
         self.debug = _ini.getboolean('logbook','debug')
 
 class SmtpConfig:
@@ -62,7 +63,6 @@ class UtmConfig:
         self.mtom_g = _ini.get('utm','mtom_g')
         self.notify_pilot = _ini.getboolean('utm','notify_pilot')
         self.simulate = _ini.getboolean('utm','simulate')
-        self.geckodriver_path = _ini.get('utm', 'geckodriver_path')
 
 class TerminalConfig:
     def __init__(self, airportname, terminaltype, apikey, airportkml, terminalname, pilotidinstruction):
