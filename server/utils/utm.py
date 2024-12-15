@@ -90,7 +90,7 @@ def __utm_login(driver):
     __wait_and_send_key(driver, "//input[@id='username']", config.utm.username)
     __wait_and_send_key(driver, "//input[@id='password']", config.utm.password)
     __wait_and_click(driver, "//button[@type='submit']")
-    __wait_until_url_loaded(driver, STARTURL)
+    __wait_until_url_loaded(driver, STARTURL, timeout=30)
 
 def __utm_open_menu(driver):
     log.debug('__utm_open_menu')
