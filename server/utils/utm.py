@@ -22,7 +22,6 @@ from utils.logger import log
 DEFAULT_WAIT_TIME = 10
 DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
-STARTURL = 'https://utm.dronespace.at/avm/#p=5/47.74/13.23'
 
 def __create_driver():
     log.debug('__create_driver')
@@ -79,7 +78,7 @@ def __build_flight_title(pilot: PilotEntity, terminal: TerminalConfig):
 def __utm_login(driver):    
     log.debug('__utm_login')
 
-    driver.get(STARTURL)
+    driver.get('https://utm.dronespace.at/avm/#p=5/47.74/13.23')
 
     log.debug('accept terms and conditions')
     __wait_and_click(driver, "//*[@class='button ok']") # agb akzeptieren
@@ -90,7 +89,7 @@ def __utm_login(driver):
     __wait_and_send_key(driver, "//input[@id='username']", config.utm.username)
     __wait_and_send_key(driver, "//input[@id='password']", config.utm.password)
     __wait_and_click(driver, "//button[@type='submit']")
-    __wait_until_url_loaded(driver, STARTURL, timeout=30)
+    __wait_until_url_loaded(driver, 'https://utm.dronespace.at/avm/', timeout=30)
 
 def __utm_open_menu(driver):
     log.debug('__utm_open_menu')
