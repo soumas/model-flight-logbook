@@ -4,6 +4,7 @@ import selenium
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -25,10 +26,12 @@ DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 def __create_driver():
     log.debug('__create_driver')
 
+    service = Service(config.utm.geckodriver_path)
+
     options = Options()
     options.add_argument("--headless")
 
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox(service=service, options=options)
     driver.set_window_size(1920,1080)
     return driver
 
