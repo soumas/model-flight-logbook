@@ -172,7 +172,8 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
 
             log.debug('create flight plan')
             __wait_until_clickable(driver, "//a[normalize-space()='Sign out']") # wait until ui recognizes login state
-            __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
+            __wait_and_click(driver, "//i[@class='ti ti-drone']")
+            time.sleep(2) # wait some time for the animated menu
             driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
             __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
@@ -195,7 +196,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             secondsBeforeStartTime = (startDateTime - datetime.now()).total_seconds() + 10 # 10 seconds buffer to be sure that start time is arrived
             if(secondsBeforeStartTime>0):
                 log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
-                time.sleep(secondsBeforeStartTime)             
+                time.sleep(secondsBeforeStartTime)
             __wait_and_click(driver, "//button[normalize-space()='Activate flight plan']")
             __wait_until_clickable(driver, "//button[normalize-space()='End flight']", 300)
         else:
