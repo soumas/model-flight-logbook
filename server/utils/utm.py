@@ -199,7 +199,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             __wait_until_clickable(driver, "//button[normalize-space()='End flight']", 300)
         else:
             log.warning('utm simulation mode is active - waiting some seconds and doing nothing')
-            time.sleep(10)
+            time.sleep(90)
 
         fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.flying)
 
@@ -249,7 +249,7 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
                 
             else:
                 log.warning('utm simulation mode is active - waiting some minutes and doing nothing')
-                time.sleep(10)
+                time.sleep(60)
 
         fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.closed)
 
