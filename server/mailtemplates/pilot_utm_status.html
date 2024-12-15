@@ -121,15 +121,32 @@
                                 valign="top">
                                 <p
                                     style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
+                                    Der Status deines Fluges im Austro Control Dronespace hat sich geändert. Bei Fragen
+                                    wende dich bitte an den Administrator unter <a
+                                        href="mailto:{{adminmail}}">{{adminmail}}</a>
+                                </p>
+                                <p
+                                    style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
                                     <b>Flugbezeichnung:</b><br />{{ flightname }}
+                                </p>
+                                <p
+                                    style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
+                                    <b>Startzeit:</b><br />{{ starttime }}
+                                </p>
+                                <p
+                                    style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
+                                    <b>Endzeit:</b><br />{{ endtime }}
+                                </p>
+                                <p
+                                    style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
+                                    <b>Terminal:</b><br />{{ airportname }} {{ terminalname }}
                                 </p>
                                 <p
                                     style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
                                     <b>Status:</b><br />{{ status }}
                                     {% if status == 'error' %}
                                     ⚠ (Hinweis: Der Systemadministrator wird automatisch &uuml;ber diesen Fehler
-                                    informiert. Bitte
-                                    wende dich an <a href="mailto:{{adminmail}}">{{adminmail}}</a>)
+                                    informiert)
                                     {% endif %}
                                 </p>
                             </td>

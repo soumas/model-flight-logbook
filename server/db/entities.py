@@ -35,4 +35,6 @@ class FlightSessionEntity(Base):
     end = Column(DateTime, nullable=True)
     takeoffcount = Column(String, nullable=True)
     comment = Column(String, nullable=True)
+    utmlaststart = Column(DateTime, nullable=True)
+    utmlastend = Column(DateTime, nullable=True)
 

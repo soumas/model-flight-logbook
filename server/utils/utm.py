@@ -100,16 +100,21 @@ def __utm_open_menu(driver):
             time.sleep(1)
             __wait_until_clickable(driver, "//span[normalize-space()='Flight plans and log']")
         except:
-            log.debug('buggy menu fallback')
+            log.debug('bugy menu fallback')
             pass
 
 
-def __set_flightplanstatus(id:int, status:FlightPlanStatus):
+def __write_fsession_values(id:int, status:FlightPlanStatus = None, utmstart:datetime = None, utmend:datetime = None):
     log.debug('__set_flightplanstatus ({})'.format(status.value))
     db = SessionLocal()
     try :
         fsession:FlightSessionEntity = db.query(FlightSessionEntity).filter(FlightSessionEntity.id == id).first()
-        fsession.flightplanstatus = status
+        if status != None:
+            fsession.flightplanstatus = status
+        if utmstart != None:
+            fsession.utmlaststart = utmstart
+        if utmend != None:
+            fsession.utmlastend = utmend
         db.commit()
         db.refresh(fsession)
         return fsession
@@ -130,7 +135,7 @@ def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, f
                 template_name="pilot_utm_status.html",
                 email_to=pilot.email,
                 subject="UTM Status: " + fsession.flightplanstatus.value,
-                body={'status':fsession.flightplanstatus.value, 'flightname':__build_flight_title(pilot, terminal), 'adminmail':config.logbook.admin_email}
+                body={'status':fsession.flightplanstatus.value, 'flightname':__build_flight_title(pilot, terminal), 'adminmail':config.logbook.admin_email, 'airportname':terminal.airportname, 'terminalname':terminal.terminalname, 'starttime':fsession.utmlaststart, 'endtime':fsession.utmlastend}
             )
     except:
         # don't throw exception when notification fails
@@ -156,14 +161,14 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
 
     if not config.utm.enabled:
         log.debug('utm feature is not configured')
-        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.featureDisabled)
+        __write_fsession_values(id=fligthsession.id, status=FlightPlanStatus.featureDisabled)
         return
     
     driver = None
     error = None
 
     try:
-        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.startPending)
+        __write_fsession_values(id=fligthsession.id, status=FlightPlanStatus.startPending)
 
         if config.utm.simulate != True:
 
@@ -180,18 +185,18 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             __wait_and_send_key(driver, "//label[normalize-space()='Maximum takeoff mass (g) *']/following-sibling::input", config.utm.mtom_g)
             __wait_and_send_key(driver, "//label[normalize-space()='Max. altitude above ground (m) *']/following-sibling::input",config.utm.max_altitude_m)
             __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight']/following-sibling::input", __build_flight_title(pilot, terminal))
-            startDateTime = datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=2)
-            endDateTime = startDateTime + timedelta(hours=4, minutes=0)
-            __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", (startDateTime + timedelta(minutes=30)).strftime(DATETIME_FORMAT)) # first set end date to half an hour after startdate to avoid alert 'flight time too short'
+            utmStartTime = datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=2)
+            utmEndTime = utmStartTime + timedelta(hours=4, minutes=0)
+            __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", (utmStartTime + timedelta(minutes=30)).strftime(DATETIME_FORMAT)) # first set end date to half an hour after startdate to avoid alert 'flight time too short'
             __wait_and_click(driver, "//label[normalize-space()='Phone number *']/following-sibling::input") # close calendar control by clicking into another field
-            __wait_and_send_key(driver, "//label[normalize-space()='Start date and time *']/following-sibling::div/input", startDateTime.strftime(DATETIME_FORMAT)) # now we can set the starttime without alert
+            __wait_and_send_key(driver, "//label[normalize-space()='Start date and time *']/following-sibling::div/input", utmStartTime.strftime(DATETIME_FORMAT)) # now we can set the starttime without alert
             __wait_and_click(driver, "//label[normalize-space()='Phone number *']/following-sibling::input") # close calendar control by clicking into another field
-            __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", endDateTime.strftime(DATETIME_FORMAT))
+            __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", utmEndTime.strftime(DATETIME_FORMAT))
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
             __wait_and_click(driver, "//i[@class='ti ti-send']")
             __wait_and_click(driver, "//div[@class='waiting-plans']/div[@class='operation-plan']/div[@class='status APPROVED']/following-sibling::p[contains(normalize-space(.), '" + __build_flight_title_id_part(pilot.id) + "')]", 300)
 
-            secondsBeforeStartTime = (startDateTime - datetime.now()).total_seconds() + 10 # 10 seconds buffer to be sure that start time is arrived
+            secondsBeforeStartTime = (utmStartTime - datetime.now()).total_seconds() + 10 # 10 seconds buffer to be sure that start time is arrived
             if(secondsBeforeStartTime>0):
                 log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
                 time.sleep(secondsBeforeStartTime)
@@ -199,15 +204,15 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             __wait_until_clickable(driver, "//button[normalize-space()='End flight']", 300)
         else:
             log.warning('utm simulation mode is active - waiting some seconds and doing nothing')
-            time.sleep(90)
+            time.sleep(30)
 
-        fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.flying)
+        fligthsession = __write_fsession_values(id=fligthsession.id, status=FlightPlanStatus.flying, utmstart=utmStartTime, utmend=utmEndTime)
 
     except:
         error = traceback.format_exc()
         log.error(error)
         __utm_save_error_screenshot(driver=driver, pilot=pilot, methodname='start_flight')
-        fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.error)
+        fligthsession = __write_fsession_values(id=fligthsession.id, status=FlightPlanStatus.error)
     finally:        
         if driver != None:
             __dispose_driver(driver)
@@ -218,7 +223,7 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
     log.debug('utm end flight for pilot {}'.format(pilot.id))
     if not config.utm.enabled:
         log.debug('utm feature is not configured')
-        __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.featureDisabled)
+        __write_fsession_values(id=fligthsession.id, status=FlightPlanStatus.featureDisabled)
         return
 
     driver = None
@@ -228,7 +233,7 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
 
         if(fligthsession.flightplanstatus == FlightPlanStatus.flying):
 
-            __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.endPending)
+            __write_fsession_values(id=fligthsession.id, status=FlightPlanStatus.endPending)
 
             if config.utm.simulate != True:
 
@@ -249,15 +254,15 @@ def end_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthsess
                 
             else:
                 log.warning('utm simulation mode is active - waiting some minutes and doing nothing')
-                time.sleep(60)
+                time.sleep(30)
 
-        fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.closed)
+        fligthsession = __write_fsession_values(id=fligthsession.id, status=FlightPlanStatus.closed)
 
     except:
         error = traceback.format_exc()
         log.error(error)
         __utm_save_error_screenshot(driver=driver, pilot=pilot, methodname='start_flight')
-        fligthsession = __set_flightplanstatus(id=fligthsession.id, status=FlightPlanStatus.error)
+        fligthsession = __write_fsession_values(id=fligthsession.id, status=FlightPlanStatus.error)
     finally:
         if driver != None:
             __dispose_driver(driver) 
