@@ -3,3 +3,4 @@ __pycache__
 **server-config-dev.ini
 **server-config.ini
 **logs/logfile*
+**utm_error_screenshots/*

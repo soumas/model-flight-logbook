@@ -1,11 +1,9 @@
 from pathlib import Path
-from sys import platform
 from fastapi import BackgroundTasks
 import selenium
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -26,25 +24,13 @@ DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 
 def __create_driver():
     log.debug('__create_driver')
+
     options = Options()
-    # a few usefull options
-    options.add_argument("--window-size=800,600")
-    options.add_argument("--use-gl=angle")
-    #options.add_argument("--use-angle=swiftshader")
-    options.add_argument("--headless") # if you want it headless
+    options.add_argument("--headless")
 
-    #if platform.system() == "Linux" and platform.machine() == "armv7l":  
-        # if raspi
-    options.BinaryLocation = "/usr/bin/chromium-browser"
-    #service = Service(executable_path="/usr/bin/chromedriver", service_args=['--log', 'debug'], log_output='./chrome_log.txt')
-    service = Service(executable_path="/usr/bin/chromedriver")
-    #else: # if not raspi and considering you're using Chrome
-    #    raise 'only Linux on armv7l (Rasperry Pi) supported'
-
-    #service = Service(executable_path=config.utm.geckodriver_path, service_args=['--log', 'debug'], log_output='./firefox_log.txt')
-    #options = FirefoxOptions()
-    #options.add_argument("--headless")
-    return webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Firefox(options=options)
+    driver.set_window_size(1920,1080)
+    return driver
 
 def __dispose_driver(driver):
     log.debug('__dispose_driver')
@@ -183,7 +169,6 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
 
             log.debug('create flight plan')
             __wait_until_clickable(driver, "//a[normalize-space()='Sign out']") # wait until ui recognizes login state
-            time.sleep(10) # todo: replace with real solution
             __wait_and_click(driver, "//i[@class='ti ti-drone']") # open form
             driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
@@ -192,32 +177,24 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
             __wait_and_send_key(driver, "//label[normalize-space()='Phone number *']/following-sibling::input",pilot.phonenumber)
             __wait_and_send_key(driver, "//label[normalize-space()='Maximum takeoff mass (g) *']/following-sibling::input", config.utm.mtom_g)
             __wait_and_send_key(driver, "//label[normalize-space()='Max. altitude above ground (m) *']/following-sibling::input",config.utm.max_altitude_m)
-            __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight *']/following-sibling::input", __build_flight_title(pilot, terminal))
-            startDateTime = datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=1)
-            endDateTime = startDateTime + timedelta(hours=4)
-            __wait_and_send_key(driver, "//label[normalize-space()='Start date and time *']/following-sibling::div/input", startDateTime.strftime(DATETIME_FORMAT))
+            __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight']/following-sibling::input", __build_flight_title(pilot, terminal))
+            startDateTime = datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=2)
+            endDateTime = startDateTime + timedelta(hours=4, minutes=0)
+            __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", (startDateTime + timedelta(minutes=30)).strftime(DATETIME_FORMAT)) # first set end date to half an hour after startdate to avoid alert 'flight time too short'
+            __wait_and_click(driver, "//label[normalize-space()='Phone number *']/following-sibling::input") # close calendar control by clicking into another field
+            __wait_and_send_key(driver, "//label[normalize-space()='Start date and time *']/following-sibling::div/input", startDateTime.strftime(DATETIME_FORMAT)) # now we can set the starttime without alert
+            __wait_and_click(driver, "//label[normalize-space()='Phone number *']/following-sibling::input") # close calendar control by clicking into another field
             __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", endDateTime.strftime(DATETIME_FORMAT))
-            __wait_and_click(driver, "//input[@class='input']") # close calendar controls by clicking any other input field
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
             __wait_and_click(driver, "//i[@class='ti ti-send']")
+            __wait_and_click(driver, "//div[@class='waiting-plans']/div[@class='operation-plan']/div[@class='status APPROVED']/following-sibling::p[contains(normalize-space(.), '" + __build_flight_title_id_part(pilot.id) + "')]", 300)
 
-            secondsBeforeStartTime = (startDateTime - datetime.now()).total_seconds() + 90 # 90 seconds buffer to be sure that start time is in the past
+            secondsBeforeStartTime = (startDateTime - datetime.now()).total_seconds() + 10 # 10 seconds buffer to be sure that start time is arrived
             if(secondsBeforeStartTime>0):
                 log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
-                time.sleep(secondsBeforeStartTime) 
-            log.debug('reload page {}'.format(driver.current_url))
-            driver.refresh()
-            log.debug('activate flight plan')
-            __utm_open_menu(driver)
-            __wait_and_click(driver, "//span[normalize-space()='Flight plans and log']")
-            __wait_and_click(driver, "//div[@class='waiting-plans']/div[@class='operation-plan']/div[@class='status APPROVED']/following-sibling::p[contains(normalize-space(.), '" + __build_flight_title_id_part(pilot.id) + "')]", 60)
+                time.sleep(secondsBeforeStartTime)             
             __wait_and_click(driver, "//button[normalize-space()='Activate flight plan']")
-
-            log.debug('wait for success message')
-            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", 60)
-
-            log.debug('flight plan activated')
-
+            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", 300)
         else:
             log.warning('utm simulation mode is active - waiting some seconds and doing nothing')
             time.sleep(10)
