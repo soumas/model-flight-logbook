@@ -29,7 +29,7 @@ def __create_driver():
     service = Service(config.logbook.chromedriver_path)
 
     options = Options()
-    #options.add_argument("--headless")
+    options.add_argument("--headless")
 
     driver = webdriver.Chrome(service=service, options=options)
     driver.set_window_size(1920,1080)
@@ -170,10 +170,9 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
 
             __utm_login(driver)
 
-            log.debug('create flight plan')
+            time.sleep(20) # wait some time for the animated menu
             __wait_until_clickable(driver, "//a[normalize-space()='Sign out']") # wait until ui recognizes login state
             __wait_and_click(driver, "//i[@class='ti ti-drone']")
-            time.sleep(2) # wait some time for the animated menu
             driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
             __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
