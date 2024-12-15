@@ -22,6 +22,7 @@ from utils.logger import log
 DEFAULT_WAIT_TIME = 10
 DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
+STARTURL = 'https://utm.dronespace.at/avm/#p=5/47.74/13.23'
 
 def __create_driver():
     log.debug('__create_driver')
@@ -78,7 +79,7 @@ def __build_flight_title(pilot: PilotEntity, terminal: TerminalConfig):
 def __utm_login(driver):    
     log.debug('__utm_login')
 
-    driver.get('https://utm.dronespace.at/avm/?#p=5/47.74/13.23')
+    driver.get(STARTURL)
 
     log.debug('accept terms and conditions')
     __wait_and_click(driver, "//*[@class='button ok']") # agb akzeptieren
@@ -89,6 +90,7 @@ def __utm_login(driver):
     __wait_and_send_key(driver, "//input[@id='username']", config.utm.username)
     __wait_and_send_key(driver, "//input[@id='password']", config.utm.password)
     __wait_and_click(driver, "//button[@type='submit']")
+    __wait_until_url_loaded(driver, STARTURL)
 
 def __utm_open_menu(driver):
     log.debug('__utm_open_menu')
@@ -170,8 +172,6 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
 
             __utm_login(driver)
 
-            time.sleep(20) # wait some time for the animated menu
-            __wait_until_clickable(driver, "//a[normalize-space()='Sign out']") # wait until ui recognizes login state
             __wait_and_click(driver, "//i[@class='ti ti-drone']")
             driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
