@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
@@ -73,7 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     if (context.mounted) {
                                       Navigator.of(context).pop();
                                       if (updated) {
-                                        Toast.success(context: context, message: 'Erfolgreich');
+                                        Toast.success(context: context, message: 'Die Konfiguration wurde erfolgreich aktualisiert');
                                       } else {
                                         Toast.error(context: context, message: 'Fehlgeschlagen');
                                       }
@@ -128,16 +130,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 const SizedBox(
                   height: 50,
                 ),
-                Text('Sonstige Einstellungen', style: Theme.of(context).textTheme.headlineSmall),
+                Text('Zugriffsschutz für diese Maske', style: Theme.of(context).textTheme.headlineSmall),
                 const Divider(),
                 MflTextFormField(
                   controller: _aminPinController,
-                  label: 'Admin PIN (Zugriffsschutz f. Einstellungen)',
+                  label: 'PIN',
                   onClose: () {
                     context.read<SettingsCubit>().setAdminPinAndSave(_aminPinController.text);
                   },
                   obscureText: true,
                 ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Text('Weitere Aktionen', style: Theme.of(context).textTheme.headlineSmall),
+                const Divider(),
+                TextButton.icon(
+                  onPressed: () {
+                    try {
+                      exit(0);
+                    } on UnsupportedError {
+                      Toast.error(context: context, message: 'Funktion wird nicht unterstüzt.');
+                    }
+                  },
+                  icon: const Icon(Icons.close),
+                  label: const Text('Terminal beenden'),
+                )
               ],
             );
           }

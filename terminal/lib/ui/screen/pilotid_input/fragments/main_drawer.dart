@@ -41,10 +41,7 @@ class MainDrawer extends StatelessWidget {
             onTap: () async {
               await Navigator.of(context).pushNamed(SettingsScreen.route);
               if (context.mounted) {
-                final cubit = context.read<PilotidInputCubit>();
-                if (cubit.state.selectedEndpoint != null) {
-                  cubit.selectEndpoint(cubit.state.selectedEndpoint!);
-                }
+                context.read<PilotidInputCubit>().init();
               }
             },
           ),

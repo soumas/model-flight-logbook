@@ -8,7 +8,7 @@ class PilotidInputCubit extends Cubit<PilotidInputState> {
 
   final LocalStorageRepo localStorageRepo;
 
-  init() async {
+  Future init() async {
     try {
       emit(state.copyWith(endpointOptions: null, selectedEndpoint: null));
       final settings = await localStorageRepo.loadSettings();
@@ -27,8 +27,8 @@ class PilotidInputCubit extends Cubit<PilotidInputState> {
     }
   }
 
-  selectEndpoint(TerminalEndpoint opt) async {
+  Future selectEndpoint(TerminalEndpoint opt) async {
     await localStorageRepo.saveSelectedTerminalEndpoint(opt);
-    init();
+    await init();
   }
 }

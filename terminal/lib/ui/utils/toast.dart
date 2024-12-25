@@ -6,9 +6,8 @@ class Toast {
     Toast.show(
       context: context,
       message: message,
-      backgroundColor: Colors.green,
-      foregroundColor: Colors.black,
       icondata: Icons.check,
+      type: ToastificationType.success,
     );
   }
 
@@ -16,33 +15,24 @@ class Toast {
     Toast.show(
       context: context,
       message: message,
-      backgroundColor: Colors.red,
-      foregroundColor: Colors.white,
       icondata: Icons.error,
+      type: ToastificationType.error,
     );
   }
 
-  static show({required BuildContext context, required String message, Color? backgroundColor, Color? foregroundColor, IconData? icondata}) {
+  static show({required BuildContext context, required String message, ToastificationType? type, IconData? icondata}) {
     toastification.show(
       context: context,
-      title: Text(
-        message,
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(color: foregroundColor),
-      ),
-      autoCloseDuration: const Duration(seconds: 4),
-      icon: icondata != null
-          ? Icon(
-              icondata,
-              color: foregroundColor,
-              size: 28,
-            )
-          : const SizedBox(),
+      description: Text(message, style: Theme.of(context).textTheme.titleLarge),
+      autoCloseDuration: const Duration(seconds: 3),
+      icon: icondata != null ? Icon(icondata, size: 40) : const SizedBox(),
       closeButtonShowType: CloseButtonShowType.none,
       alignment: const Alignment(0, 1),
       showProgressBar: false,
-      backgroundColor: backgroundColor,
-      foregroundColor: foregroundColor,
       closeOnClick: true,
+      dragToClose: true,
+      pauseOnHover: false,
+      type: type,
     );
   }
 }
