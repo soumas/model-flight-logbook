@@ -120,7 +120,7 @@ abstract class AppLocalizations {
   /// No description provided for @apiResponseReasonUnknownPilot.
   ///
   /// In de, this message translates to:
-  /// **'Unbekannter Pilot'**
+  /// **'Pilot:in unbekannt'**
   String get apiResponseReasonUnknownPilot;
 
   /// No description provided for @apiResponseReasonUnknownTerminal.

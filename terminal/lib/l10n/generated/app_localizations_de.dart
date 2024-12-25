@@ -19,7 +19,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get apiResponseReasonFlightsessionNotFound => 'Die angeforderte Sitzung wurde nicht gefunden';
 
   @override
-  String get apiResponseReasonUnknownPilot => 'Unbekannter Pilot';
+  String get apiResponseReasonUnknownPilot => 'Pilot:in unbekannt';
 
   @override
   String get apiResponseReasonUnknownTerminal => 'Unbekanntes Terminal';
