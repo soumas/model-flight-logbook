@@ -19,7 +19,7 @@ from utils.send_mail import send_admin_notification, send_mail
 from utils.logger import log
 
  
-DEFAULT_WAIT_TIME = 10
+DEFAULT_WAIT_TIME = 20
 DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 
