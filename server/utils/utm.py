@@ -30,7 +30,7 @@ def __create_driver():
     service = Service(config.logbook.chromedriver_path)
 
     options = Options()
-    options.add_argument("--headless")
+    #options.add_argument("--headless")
 
     driver = webdriver.Chrome(service=service, options=options)
     driver.set_window_size(1920,1080)
@@ -52,20 +52,28 @@ def __utm_save_error_screenshot(driver, methodname:str, pilot: PilotEntity):
 
 def __wait_until_url_loaded(driver, url, timeout=DEFAULT_WAIT_TIME):
     log.debug('__wait_until_url_loaded, url {}, timeout {}'.format(url, timeout))
-    WebDriverWait(driver, timeout, ignored_exceptions=[StaleElementReferenceException]).until(EC.url_matches(url))
+    WebDriverWait(driver, timeout).until(EC.url_matches(url))
 
 def __wait_until_clickable(driver, xpath, timeout=DEFAULT_WAIT_TIME):
     log.debug('__wait_until_clickable, xpath {}, timeout {}'.format(xpath, timeout))
-    WebDriverWait(driver, timeout, ignored_exceptions=[StaleElementReferenceException]).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    errcnt = 0;
+    while True:
+        try:
+            WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+            return
+        except StaleElementReferenceException:
+            if errcnt >= 5:
+                raise
+            errcnt = errcnt+1
 
 def __wait_and_click(driver, xpath, timeout=DEFAULT_WAIT_TIME):
     log.debug('__wait_and_click, xpath {}, timeout {}'.format(xpath, timeout))
-    WebDriverWait(driver, timeout, ignored_exceptions=[StaleElementReferenceException]).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    __wait_until_clickable(driver, xpath, timeout)
     driver.find_element(By.XPATH, xpath).click()
 
 def __wait_and_send_key(driver, xpath, text, timeout=DEFAULT_WAIT_TIME):
     log.debug('__wait_and_send_key, xpath {}, text ***, timeout {}'.format(xpath, timeout))
-    WebDriverWait(driver, timeout, ignored_exceptions=[StaleElementReferenceException]).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    __wait_until_clickable(driver, xpath, timeout)
     driver.find_element(By.XPATH, xpath).send_keys(Keys.CONTROL + "a")
     driver.find_element(By.XPATH, xpath).send_keys(Keys.DELETE)
     driver.find_element(By.XPATH, xpath).send_keys(text)
