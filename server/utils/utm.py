@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import StaleElementReferenceException
 from datetime import datetime, timedelta
 import time
 import traceback
@@ -51,20 +52,20 @@ def __utm_save_error_screenshot(driver, methodname:str, pilot: PilotEntity):
 
 def __wait_until_url_loaded(driver, url, timeout=DEFAULT_WAIT_TIME):
     log.debug('__wait_until_url_loaded, url {}, timeout {}'.format(url, timeout))
-    WebDriverWait(driver, timeout).until(EC.url_matches(url))
+    WebDriverWait(driver, timeout, ignored_exceptions=[StaleElementReferenceException]).until(EC.url_matches(url))
 
 def __wait_until_clickable(driver, xpath, timeout=DEFAULT_WAIT_TIME):
     log.debug('__wait_until_clickable, xpath {}, timeout {}'.format(xpath, timeout))
-    WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    WebDriverWait(driver, timeout, ignored_exceptions=[StaleElementReferenceException]).until(EC.element_to_be_clickable((By.XPATH, xpath)))
 
 def __wait_and_click(driver, xpath, timeout=DEFAULT_WAIT_TIME):
     log.debug('__wait_and_click, xpath {}, timeout {}'.format(xpath, timeout))
-    WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    WebDriverWait(driver, timeout, ignored_exceptions=[StaleElementReferenceException]).until(EC.element_to_be_clickable((By.XPATH, xpath)))
     driver.find_element(By.XPATH, xpath).click()
 
 def __wait_and_send_key(driver, xpath, text, timeout=DEFAULT_WAIT_TIME):
     log.debug('__wait_and_send_key, xpath {}, text ***, timeout {}'.format(xpath, timeout))
-    WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    WebDriverWait(driver, timeout, ignored_exceptions=[StaleElementReferenceException]).until(EC.element_to_be_clickable((By.XPATH, xpath)))
     driver.find_element(By.XPATH, xpath).send_keys(Keys.CONTROL + "a")
     driver.find_element(By.XPATH, xpath).send_keys(Keys.DELETE)
     driver.find_element(By.XPATH, xpath).send_keys(text)
@@ -203,7 +204,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
                 log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
                 time.sleep(secondsBeforeStartTime)
             __wait_and_click(driver, "//button[normalize-space()='Activate flight plan']")
-            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=600)
+            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=300)
         else:
             log.warning('utm simulation mode is active - waiting some seconds and doing nothing')
             time.sleep(30)
