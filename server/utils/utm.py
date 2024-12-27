@@ -19,7 +19,7 @@ from utils.send_mail import send_admin_notification, send_mail
 from utils.logger import log
 
  
-DEFAULT_WAIT_TIME = 20
+DEFAULT_WAIT_TIME = 30
 DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 
@@ -203,7 +203,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
                 log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
                 time.sleep(secondsBeforeStartTime)
             __wait_and_click(driver, "//button[normalize-space()='Activate flight plan']")
-            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=300)
+            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=600)
         else:
             log.warning('utm simulation mode is active - waiting some seconds and doing nothing')
             time.sleep(30)
