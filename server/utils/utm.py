@@ -30,10 +30,10 @@ def __create_driver():
     service = Service(config.logbook.chromedriver_path)
 
     options = Options()
-    #options.add_argument("--headless")
+    options.add_argument("--headless")
 
     driver = webdriver.Chrome(service=service, options=options)
-    driver.set_window_size(800,480)
+    driver.set_window_size(1920,1080)
     return driver
 
 def __dispose_driver(driver):
