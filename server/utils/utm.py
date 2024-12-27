@@ -45,7 +45,7 @@ def __utm_save_error_screenshot(driver, methodname:str, pilot: PilotEntity):
         try:
             utmerrorpath = './utm_error_screenshots/'
             Path(utmerrorpath).mkdir(parents=True, exist_ok=True)
-            driver.save_screenshot(utmerrorpath + methodname+'_pilotid'+ pilot.id + '_' +  datetime.now().strftime('%Y%m%d%H%M%S')+'.png')
+            driver.save_screenshot(utmerrorpath + datetime.now().strftime('%Y%m%d%H%M%S') + '_' + methodname+'_pilotid'+ pilot.id  +  '.png')
         except:
             log.error('Error on saving screenshot for error in method ' + methodname)
             log.error(traceback.format_exc())
