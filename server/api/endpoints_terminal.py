@@ -128,3 +128,11 @@ async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annot
             subject='Anmerkung von Pilot', 
             body={'message':'Der Pilot ' + pilot.firstname + ' ' + pilot.lastname + ' hat folgende Anmerkung im Model Flight Logbook hinterlassen: ' + fsession.comment }
         )
+
+# @api.post("/terminal/flightsession/utmtest", dependencies=[Security(__specific_terminalauth)], response_model=None)
+# async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], data:EndFlightSessionDTO, background_tasks:BackgroundTasks, db:Session = Depends(get_db)):  
+#     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db, raiseOnInactive=False) 
+#     fsession:FlightSessionEntity = db.query(FlightSessionEntity).filter(FlightSessionEntity.pilotid == x_pilotid).first()
+#     if(fsession is None):
+#         raise flightsession_not_found
+#     background_tasks.add_task(utm.start_flight, background_tasks, pilot, fsession, config.terminals[x_terminal])   

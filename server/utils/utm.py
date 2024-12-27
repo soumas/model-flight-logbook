@@ -89,7 +89,9 @@ def __utm_login(driver):
     __wait_and_send_key(driver, "//input[@id='username']", config.utm.username)
     __wait_and_send_key(driver, "//input[@id='password']", config.utm.password)
     __wait_and_click(driver, "//button[@type='submit']")
-    __wait_until_url_loaded(driver, 'https://utm.dronespace.at/avm/', timeout=30)
+    __wait_until_url_loaded(driver, 'https://utm.dronespace.at/avm/')
+    __wait_until_clickable(driver, "//a[normalize-space()='Sign out']")
+
 
 def __utm_open_menu(driver):
     log.debug('__utm_open_menu')
@@ -201,7 +203,7 @@ def start_flight(background_tasks: BackgroundTasks, pilot: PilotEntity, fligthse
                 log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
                 time.sleep(secondsBeforeStartTime)
             __wait_and_click(driver, "//button[normalize-space()='Activate flight plan']")
-            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", 300)
+            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=300)
         else:
             log.warning('utm simulation mode is active - waiting some seconds and doing nothing')
             time.sleep(30)
