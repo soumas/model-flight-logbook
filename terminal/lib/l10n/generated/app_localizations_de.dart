@@ -22,10 +22,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get apiResponseReasonUnknownPilot => 'Pilot:in unbekannt';
 
   @override
-  String get apiResponseReasonUnknownTerminal => 'Unbekanntes Terminal';
+  String get apiResponseReasonUnknownTerminal => 'Terminal unbekannt';
 
   @override
-  String get apiResponseReasonInactivePilot => 'Die Interaktion mit dem Server wurde verweigert, da das Pilotenkonto inaktiv ist.';
+  String get apiResponseReasonInactivePilot => 'Pilot:in inaktiv';
 
   @override
   String get apiResponseReasonActiveFlightsessionFound => 'Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.';

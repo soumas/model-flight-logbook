@@ -126,13 +126,13 @@ abstract class AppLocalizations {
   /// No description provided for @apiResponseReasonUnknownTerminal.
   ///
   /// In de, this message translates to:
-  /// **'Unbekanntes Terminal'**
+  /// **'Terminal unbekannt'**
   String get apiResponseReasonUnknownTerminal;
 
   /// No description provided for @apiResponseReasonInactivePilot.
   ///
   /// In de, this message translates to:
-  /// **'Die Interaktion mit dem Server wurde verweigert, da das Pilotenkonto inaktiv ist.'**
+  /// **'Pilot:in inaktiv'**
   String get apiResponseReasonInactivePilot;
 
   /// No description provided for @apiResponseReasonActiveFlightsessionFound.

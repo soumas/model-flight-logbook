@@ -5,8 +5,8 @@
   "apiResponseReasonInvalidApiKey": "Ungültiger Api Key",
   "apiResponseReasonFlightsessionNotFound": "Die angeforderte Sitzung wurde nicht gefunden",
   "apiResponseReasonUnknownPilot": "Pilot:in unbekannt",
-  "apiResponseReasonUnknownTerminal": "Unbekanntes Terminal",
-  "apiResponseReasonInactivePilot": "Die Interaktion mit dem Server wurde verweigert, da das Pilotenkonto inaktiv ist.",
+  "apiResponseReasonUnknownTerminal": "Terminal unbekannt",
+  "apiResponseReasonInactivePilot": "Pilot:in inaktiv",
   "apiResponseReasonActiveFlightsessionFound": "Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.",
   "apiResponseReasonUtmActionRunning": "UTM Interaktion in Ausführung.",
 

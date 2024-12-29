@@ -23,13 +23,11 @@ def __specific_terminalauth(x_terminal:Annotated[str, Header()], api_key_header:
 def __findCurrentFlightSession(pilotid:str, db:Session):
     return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilotid, or_(FlightSessionEntity.end == None, FlightSessionEntity.flightplanstatus == FlightPlanStatus.flying, FlightSessionEntity.flightplanstatus == FlightPlanStatus.startPending, FlightSessionEntity.flightplanstatus == FlightPlanStatus.endPending ))).first()
 
-def __findPilot(pilotid:str, db:Session, raiseOnInactive:bool = True):
+def __findPilot(pilotid:str, db:Session):
     logger.log.debug('Pilot: ' + pilotid) # log pilot to know the user related to an uvicorn.access log entry
     pilot:PilotEntity = db.query(PilotEntity).filter(PilotEntity.id == pilotid).first()
     if(pilot is None):
         raise unknown_pilot
-    if(pilot.active != True and raiseOnInactive == True):
-        raise inactive_pilot
     return pilot
 
 @api.get("/terminal/connectioncheck", dependencies=[Security(__specific_terminalauth)])
@@ -37,7 +35,7 @@ def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, 
     # check terminal-id and api-id combination (__terminalauth)
     if(x_pilotid):
         # if pilotid is given (singlemode) this method checks existence of pilot
-        __findPilot(pilotid=x_pilotid, db=db, raiseOnInactive=False)
+        __findPilot(pilotid=x_pilotid, db=db)
 
 @api.get("/terminal/flightsession/status", dependencies=[Security(__specific_terminalauth)], response_model=FlightSessionStatusDTO)
 def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = Depends(get_db)):
@@ -46,12 +44,16 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     
     warnMessages = [];
     erroMessages = [];
+    if(pilot.active != True):
+        erroMessages.append('Pilot:in inaktiv');
+
     if(pilot.acPilotlicenseValidTo == None):
         erroMessages.append('Drohnenführerschein fehlt');
     elif(pilot.acPilotlicenseValidTo < datetime.now().date()):
         erroMessages.append('Drohnenführerschein abgelaufen');
     elif(pilot.acPilotlicenseValidTo < datetime.now().date() + timedelta(days=30)):
         warnMessages.append('Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab');
+    
     if(pilot.acRegistrationValidTo == None):
         erroMessages.append('Registrierung fehlt');
     elif(pilot.acRegistrationValidTo < datetime.now().date()):
@@ -73,6 +75,8 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
 @api.post("/terminal/flightsession/start", dependencies=[Security(__specific_terminalauth)], response_model=None)
 async def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
+    if(pilot.active != True):
+        raise inactive_pilot    
     if __findCurrentFlightSession(x_pilotid, db) is not None:
         raise active_flightsession_found
     fsession = FlightSessionEntity()
@@ -90,7 +94,7 @@ async def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Ann
 
 @api.post("/terminal/flightsession/end", dependencies=[Security(__specific_terminalauth)], response_model=None)
 async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], data:EndFlightSessionDTO, background_tasks:BackgroundTasks, db:Session = Depends(get_db)):  
-    pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db, raiseOnInactive=False) 
+    pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
     if(fsession is None):
         raise flightsession_not_found

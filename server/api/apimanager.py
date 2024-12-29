@@ -17,5 +17,5 @@ async def lifespan(app: FastAPI):
     # after last request (shutdown event)
     log.debug('shutdown event occured')
 
-api = FastAPI(debug=True, lifespan=lifespan)
+api = FastAPI(debug=config.logbook.debug, lifespan=lifespan)
 api_key_header = APIKeyHeader(name="x-api-key")
