@@ -1,6 +1,5 @@
 from fastapi import BackgroundTasks, Depends, Response, Security, status
 from requests import Session
-from sqlalchemy.exc import IntegrityError
 from config.configmanager import config
 from api.dtos import PilotDTO
 from api.apimanager import api, api_key_header

@@ -1,11 +1,10 @@
 from datetime import datetime, timedelta
-from logging import log
 from typing import Annotated
 from fastapi import Depends, Security, BackgroundTasks
 from fastapi.params import Header
 from requests import Session
 from sqlalchemy import and_, or_
-from api.dtos import EndFlightSessionDTO, FlightSessionStatusDTO, TerminalConfigDTO
+from api.dtos import EndFlightSessionDTO, FlightSessionStatusDTO
 from config.configmanager import config
 from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, utm_action_running, unknown_terminal
@@ -21,11 +20,6 @@ def __specific_terminalauth(x_terminal:Annotated[str, Header()], api_key_header:
         raise invalid_api_key
     return api_key_header
 
-def __common_terminalauth(api_key_header:str = Security(api_key_header)):
-    # very simple "secuity" for get_terminal_config_list (used by terminal client to get config options before a specific terminal is selected)
-    if api_key_header != 'a&feoy!j0diusyJog2':        
-        raise invalid_api_key
-
 def __findCurrentFlightSession(pilotid:str, db:Session):
     return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilotid, or_(FlightSessionEntity.end == None, FlightSessionEntity.flightplanstatus == FlightPlanStatus.flying, FlightSessionEntity.flightplanstatus == FlightPlanStatus.startPending, FlightSessionEntity.flightplanstatus == FlightPlanStatus.endPending ))).first()
 
@@ -37,16 +31,6 @@ def __findPilot(pilotid:str, db:Session, raiseOnInactive:bool = True):
     if(pilot.active != True and raiseOnInactive == True):
         raise inactive_pilot
     return pilot
-
-@api.get("/terminal/config/list", dependencies=[Security(__common_terminalauth)], response_model=list[TerminalConfigDTO])
-def get_terminal_config_list():
-    return [TerminalConfigDTO(
-        terminalid=cfg,
-        terminaltype=config.terminals[cfg].terminaltype,
-        airportname=config.terminals[cfg].airportname,
-        terminalname=config.terminals[cfg].terminalname,
-        pilotidinstruction=config.terminals[cfg].pilotidinstruction,
-    ) for cfg in config.terminals]
 
 @api.get("/terminal/connectioncheck", dependencies=[Security(__specific_terminalauth)])
 def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, db:Session = Depends(get_db)):
@@ -128,11 +112,3 @@ async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annot
             subject='Anmerkung von Pilot', 
             body={'message':'Der Pilot ' + pilot.firstname + ' ' + pilot.lastname + ' hat folgende Anmerkung im Model Flight Logbook hinterlassen: ' + fsession.comment }
         )
-
-# @api.post("/terminal/flightsession/utmtest", dependencies=[Security(__specific_terminalauth)], response_model=None)
-# async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], data:EndFlightSessionDTO, background_tasks:BackgroundTasks, db:Session = Depends(get_db)):  
-#     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db, raiseOnInactive=False) 
-#     fsession:FlightSessionEntity = db.query(FlightSessionEntity).filter(FlightSessionEntity.pilotid == x_pilotid).first()
-#     if(fsession is None):
-#         raise flightsession_not_found
-#     background_tasks.add_task(utm.start_flight, background_tasks, pilot, fsession, config.terminals[x_terminal])   
