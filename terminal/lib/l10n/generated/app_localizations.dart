@@ -140,54 +140,6 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.'**
   String get apiResponseReasonActiveFlightsessionFound;
-
-  /// No description provided for @apiResponseReasonUtmActionRunning.
-  ///
-  /// In de, this message translates to:
-  /// **'UTM Interaktion in Ausführung.'**
-  String get apiResponseReasonUtmActionRunning;
-
-  /// No description provided for @flightPlanStatusLabelCreated.
-  ///
-  /// In de, this message translates to:
-  /// **'Neu erstellt'**
-  String get flightPlanStatusLabelCreated;
-
-  /// No description provided for @flightPlanStatusLabelFeatureDisabled.
-  ///
-  /// In de, this message translates to:
-  /// **'UTM Feature inaktiv'**
-  String get flightPlanStatusLabelFeatureDisabled;
-
-  /// No description provided for @flightPlanStatusLabelStartPending.
-  ///
-  /// In de, this message translates to:
-  /// **'Warte auf Freigabe'**
-  String get flightPlanStatusLabelStartPending;
-
-  /// No description provided for @flightPlanStatusLabelFlying.
-  ///
-  /// In de, this message translates to:
-  /// **'Freigabe erteilt'**
-  String get flightPlanStatusLabelFlying;
-
-  /// No description provided for @flightPlanStatusLabelEndPending.
-  ///
-  /// In de, this message translates to:
-  /// **'Warte auf Beendigung'**
-  String get flightPlanStatusLabelEndPending;
-
-  /// No description provided for @flightPlanStatusLabelClosed.
-  ///
-  /// In de, this message translates to:
-  /// **'Abgeschlossen'**
-  String get flightPlanStatusLabelClosed;
-
-  /// No description provided for @flightPlanStatusLabelError.
-  ///
-  /// In de, this message translates to:
-  /// **'Fehler'**
-  String get flightPlanStatusLabelError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

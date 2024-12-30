@@ -13,7 +13,6 @@ class PilotStatusMapper extends ClassMapperBase<PilotStatus> {
   static PilotStatusMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PilotStatusMapper._());
-      FlightPlanStatusMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -30,13 +29,6 @@ class PilotStatusMapper extends ClassMapperBase<PilotStatus> {
   static DateTime? _$sessionStarttime(PilotStatus v) => v.sessionStarttime;
   static const Field<PilotStatus, DateTime> _f$sessionStarttime =
       Field('sessionStarttime', _$sessionStarttime, opt: true);
-  static DateTime? _$sessionEndtime(PilotStatus v) => v.sessionEndtime;
-  static const Field<PilotStatus, DateTime> _f$sessionEndtime =
-      Field('sessionEndtime', _$sessionEndtime, opt: true);
-  static FlightPlanStatus? _$flightPlanStatus(PilotStatus v) =>
-      v.flightPlanStatus;
-  static const Field<PilotStatus, FlightPlanStatus> _f$flightPlanStatus =
-      Field('flightPlanStatus', _$flightPlanStatus, opt: true);
   static List<String>? _$infoMessages(PilotStatus v) => v.infoMessages;
   static const Field<PilotStatus, List<String>> _f$infoMessages =
       Field('infoMessages', _$infoMessages, opt: true);
@@ -52,8 +44,6 @@ class PilotStatusMapper extends ClassMapperBase<PilotStatus> {
     #pilotName: _f$pilotName,
     #sessionId: _f$sessionId,
     #sessionStarttime: _f$sessionStarttime,
-    #sessionEndtime: _f$sessionEndtime,
-    #flightPlanStatus: _f$flightPlanStatus,
     #infoMessages: _f$infoMessages,
     #warnMessages: _f$warnMessages,
     #errorMessages: _f$errorMessages,
@@ -64,8 +54,6 @@ class PilotStatusMapper extends ClassMapperBase<PilotStatus> {
         pilotName: data.dec(_f$pilotName),
         sessionId: data.dec(_f$sessionId),
         sessionStarttime: data.dec(_f$sessionStarttime),
-        sessionEndtime: data.dec(_f$sessionEndtime),
-        flightPlanStatus: data.dec(_f$flightPlanStatus),
         infoMessages: data.dec(_f$infoMessages),
         warnMessages: data.dec(_f$warnMessages),
         errorMessages: data.dec(_f$errorMessages));
@@ -132,8 +120,6 @@ abstract class PilotStatusCopyWith<$R, $In extends PilotStatus, $Out>
       {String? pilotName,
       int? sessionId,
       DateTime? sessionStarttime,
-      DateTime? sessionEndtime,
-      FlightPlanStatus? flightPlanStatus,
       List<String>? infoMessages,
       List<String>? warnMessages,
       List<String>? errorMessages});
@@ -177,8 +163,6 @@ class _PilotStatusCopyWithImpl<$R, $Out>
           {String? pilotName,
           Object? sessionId = $none,
           Object? sessionStarttime = $none,
-          Object? sessionEndtime = $none,
-          Object? flightPlanStatus = $none,
           Object? infoMessages = $none,
           Object? warnMessages = $none,
           Object? errorMessages = $none}) =>
@@ -186,8 +170,6 @@ class _PilotStatusCopyWithImpl<$R, $Out>
         if (pilotName != null) #pilotName: pilotName,
         if (sessionId != $none) #sessionId: sessionId,
         if (sessionStarttime != $none) #sessionStarttime: sessionStarttime,
-        if (sessionEndtime != $none) #sessionEndtime: sessionEndtime,
-        if (flightPlanStatus != $none) #flightPlanStatus: flightPlanStatus,
         if (infoMessages != $none) #infoMessages: infoMessages,
         if (warnMessages != $none) #warnMessages: warnMessages,
         if (errorMessages != $none) #errorMessages: errorMessages
@@ -198,9 +180,6 @@ class _PilotStatusCopyWithImpl<$R, $Out>
       sessionId: data.get(#sessionId, or: $value.sessionId),
       sessionStarttime:
           data.get(#sessionStarttime, or: $value.sessionStarttime),
-      sessionEndtime: data.get(#sessionEndtime, or: $value.sessionEndtime),
-      flightPlanStatus:
-          data.get(#flightPlanStatus, or: $value.flightPlanStatus),
       infoMessages: data.get(#infoMessages, or: $value.infoMessages),
       warnMessages: data.get(#warnMessages, or: $value.warnMessages),
       errorMessages: data.get(#errorMessages, or: $value.errorMessages));

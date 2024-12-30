@@ -1,19 +1,10 @@
 import enum
 import sqlalchemy
 
-from sqlalchemy import Boolean, Column, Date, DateTime, Enum, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer, String
 from db.dbmanager import *
 
 Base = sqlalchemy.orm.declarative_base()
-
-class FlightPlanStatus(enum.Enum):
-    created = 'created'
-    featureDisabled = 'featureDisabled'
-    startPending = 'startPending'
-    flying = 'flying'
-    endPending = 'endPending'
-    closed = 'closed'
-    error = 'error'
 
 class PilotEntity(Base):
     __tablename__ = "pilots"
@@ -30,11 +21,11 @@ class FlightSessionEntity(Base):
     __tablename__ = "flightsessions"
     id = Column(Integer, primary_key=True, autoincrement=True)
     pilotid = Column(String, ForeignKey(PilotEntity.id), nullable=False)
+    terminalid = Column(String, nullable=False)
     start = Column(DateTime, nullable=False)
-    flightplanstatus = Column(Enum(FlightPlanStatus), nullable=False)
     end = Column(DateTime, nullable=True)
-    takeoffcount = Column(String, nullable=True)
+    takeoffcount = Column(Integer, nullable=True)
+    maxAltitude = Column(Integer, nullable=True)
+    airspaceObserver = Column(Boolean, nullable=True)
     comment = Column(String, nullable=True)
-    utmlaststart = Column(DateTime, nullable=True)
-    utmlastend = Column(DateTime, nullable=True)
 

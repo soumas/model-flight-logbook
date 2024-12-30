@@ -45,6 +45,7 @@ class MflTextFormField extends StatelessWidget {
         validator: validator,
         initialValue: initialValue,
         obscureText: obscureText,
+        onEditingComplete: !_useVirtualKeyboard ? onClose : null,
         onTap: _useVirtualKeyboard && !readOnly
             ? () {
                 showModalBottomSheet(

@@ -9,6 +9,7 @@ class EndFlightSessionButton extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _commentTextEditingController = TextEditingController();
   final _numFlightsEditingController = TextEditingController();
+  final _maxAltitudeEditingController = TextEditingController();
 
   EndFlightSessionButton({super.key});
 
@@ -49,6 +50,19 @@ class EndFlightSessionButton extends StatelessWidget {
                       },
                     ),
                     MflTextFormField(
+                      controller: _maxAltitudeEditingController,
+                      label: 'Maximale Flughöhe*',
+                      inputType: VirtualKeyboardType.Numeric,
+                      validator: (value) {
+                        if ((value ?? '').isEmpty) {
+                          return 'Dieses Feld darf nicht leer bleiben';
+                        } else if (int.tryParse(value!) == null) {
+                          return 'Bitte geben Sie eine Ganzzahl ein.';
+                        }
+                        return null;
+                      },
+                    ),
+                    MflTextFormField(
                       controller: _commentTextEditingController,
                       label: 'Besondere Ereignisse',
                     ),
@@ -72,6 +86,8 @@ class EndFlightSessionButton extends StatelessWidget {
           if (confirmed && context.mounted) {
             context.read<PilotStatusCubit>().endSession(
                   numFlights: int.parse(_numFlightsEditingController.text),
+                  maxAltitude: int.parse(_maxAltitudeEditingController.text),
+                  airspaceObserver: false /*todo*/,
                   comment: _commentTextEditingController.text.isNotEmpty ? _commentTextEditingController.text : null,
                 );
           }

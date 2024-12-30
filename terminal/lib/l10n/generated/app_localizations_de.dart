@@ -29,28 +29,4 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get apiResponseReasonActiveFlightsessionFound => 'Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.';
-
-  @override
-  String get apiResponseReasonUtmActionRunning => 'UTM Interaktion in Ausführung.';
-
-  @override
-  String get flightPlanStatusLabelCreated => 'Neu erstellt';
-
-  @override
-  String get flightPlanStatusLabelFeatureDisabled => 'UTM Feature inaktiv';
-
-  @override
-  String get flightPlanStatusLabelStartPending => 'Warte auf Freigabe';
-
-  @override
-  String get flightPlanStatusLabelFlying => 'Freigabe erteilt';
-
-  @override
-  String get flightPlanStatusLabelEndPending => 'Warte auf Beendigung';
-
-  @override
-  String get flightPlanStatusLabelClosed => 'Abgeschlossen';
-
-  @override
-  String get flightPlanStatusLabelError => 'Fehler';
 }

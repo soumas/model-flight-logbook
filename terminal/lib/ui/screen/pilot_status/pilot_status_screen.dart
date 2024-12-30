@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/constants.dart';
-import 'package:model_flight_logbook/domain/enums/flight_plan_status.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
@@ -53,7 +52,7 @@ class PilotStatusScreen extends StatelessWidget {
                   ...infoMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.info)),
                   if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) ..._activeSessionInfo(context, state),
                   if (errorMessages.isEmpty && state.flightSessionStatus?.sessionId == null) ..._startSessionForm(context, state, errorMessages),
-                  if (FlightPlanStatus.flying == state.flightSessionStatus?.flightPlanStatus || FlightPlanStatus.error == state.flightSessionStatus?.flightPlanStatus || FlightPlanStatus.featureDisabled == state.flightSessionStatus?.flightPlanStatus) EndFlightSessionButton(),
+                  EndFlightSessionButton(),
                 ],
               );
             }
@@ -73,16 +72,6 @@ class PilotStatusScreen extends StatelessWidget {
         'Aktiv seit ${DateFormat.yMd().format(state.flightSessionStatus!.sessionStarttime!)}, ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr',
         style: Theme.of(context).textTheme.bodyMedium,
       ),
-      if (state.flightSessionStatus!.sessionEndtime != null)
-        Text(
-          'Sitzung beendet: ${DateFormat.yMd().format(state.flightSessionStatus!.sessionEndtime!)}, ${DateFormat.Hm().format(state.flightSessionStatus!.sessionEndtime!)} Uhr',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-      if (state.flightSessionStatus!.flightPlanStatus != null && state.flightSessionStatus!.flightPlanStatus != FlightPlanStatus.featureDisabled)
-        Text(
-          'UTM Status: ${state.flightSessionStatus!.flightPlanStatus!.toLabel(AppLocalizations.of(context)!)}',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
       const SizedBox(
         height: 20,
       ),

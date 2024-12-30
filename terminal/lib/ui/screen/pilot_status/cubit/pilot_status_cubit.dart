@@ -1,7 +1,5 @@
 import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/domain/enums/api_response_reason.dart';
-import 'package:model_flight_logbook/domain/enums/flight_plan_status.dart';
 import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
 import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
@@ -26,12 +24,7 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
       emit(state.copyWith(loading: true, pilotid: pilotid));
       final fss = await logbookApiRepo.loadPilotStatus(endpoint: await _loadSelectedEndpoint(), pilotid: pilotid);
 
-      final warn = <String>[];
-      final fps = fss.flightPlanStatus;
-      if (fps != null && (fps == FlightPlanStatus.startPending || fps == FlightPlanStatus.endPending)) {
-        warn.add(ApiResponseReasonExt.getDescription(ApiResponseReason.utmActionRunning, localizations));
-      }
-      emit(state.copyWith(flightSessionStatus: fss, warnMessages: warn));
+      emit(state.copyWith(flightSessionStatus: fss));
     } catch (e) {
       emit(state.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()]));
     } finally {
@@ -52,11 +45,20 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
     }
   }
 
-  endSession({required int numFlights, String? comment}) async {
+  endSession({required int numFlights, required int maxAltitude, required bool airspaceObserver, String? comment}) async {
     try {
       _resetMessages();
       emit(state.copyWith(loading: true));
-      await logbookApiRepo.endFlightSession(endpoint: await _loadSelectedEndpoint(), pilotid: state.pilotid, data: EndFlightSessionData(takeoffcount: numFlights, comment: comment));
+      await logbookApiRepo.endFlightSession(
+        endpoint: await _loadSelectedEndpoint(),
+        pilotid: state.pilotid,
+        data: EndFlightSessionData(
+          takeoffcount: numFlights,
+          maxAltitude: maxAltitude,
+          airspaceObserver: airspaceObserver,
+          comment: comment,
+        ),
+      );
       emit(state.copyWith(completedAction: 'Sitzung beendet'));
     } catch (e) {
       emit(state.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()]));

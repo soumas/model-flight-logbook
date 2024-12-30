@@ -22,10 +22,12 @@ def upgrade() -> None:
         'flightsessions',
         sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
         sa.Column('pilotid', sa.String, sa.ForeignKey('pilots.id'), nullable=False),
+        sa.Column('terminalid', sa.String, nullable=False),
         sa.Column('start', sa.DateTime, nullable=False),
-        sa.Column('flightplanstatus', sa.String, nullable=False),
         sa.Column('end', sa.DateTime, nullable=True),
-        sa.Column('takeoffcount', sa.String, nullable=True),
+        sa.Column('takeoffcount', sa.Integer, nullable=True),
+        sa.Column('maxAltitude', sa.Integer, nullable=True),
+        sa.Column('airspaceObserver', sa.Boolean, nullable=True),
         sa.Column('comment', sa.String, nullable=True),
     )
 

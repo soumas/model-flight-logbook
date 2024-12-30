@@ -1,21 +1,23 @@
+
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.security import APIKeyHeader
-
-from utils.logger import *
+from utils.scheduler import scheduler
 from config.configmanager import config
 from db.dbmanager import execute_db_migration
 
-from utils.logger import log
+from tasks.utm_sync_task import *
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # before first reqeust (startup event)
-    log.debug('startup event occured')
     execute_db_migration()
+    scheduler.start()
+    # run server
     yield
     # after last request (shutdown event)
-    log.debug('shutdown event occured')
+    scheduler.shutdown()
+
 
 api = FastAPI(debug=config.logbook.debug, lifespan=lifespan)
 api_key_header = APIKeyHeader(name="x-api-key")

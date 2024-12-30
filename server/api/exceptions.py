@@ -9,4 +9,3 @@ unknown_terminal = HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="
 inactive_pilot = HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="INACTIVE_PILOT")
 #409
 active_flightsession_found = HTTPException(status_code=status.HTTP_409_CONFLICT, detail="ACTIVE_FLIGHTSESSION_FOUND")
-utm_action_running = HTTPException(status_code=status.HTTP_409_CONFLICT, detail="UTM_ACTION_RUNNING")

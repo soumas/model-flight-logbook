@@ -7,14 +7,6 @@
   "apiResponseReasonUnknownPilot": "Pilot:in unbekannt",
   "apiResponseReasonUnknownTerminal": "Terminal unbekannt",
   "apiResponseReasonInactivePilot": "Pilot:in inaktiv",
-  "apiResponseReasonActiveFlightsessionFound": "Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.",
-  "apiResponseReasonUtmActionRunning": "UTM Interaktion in Ausführung.",
+  "apiResponseReasonActiveFlightsessionFound": "Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst."
 
-  "flightPlanStatusLabelCreated": "Neu erstellt",
-  "flightPlanStatusLabelFeatureDisabled": "UTM Feature inaktiv",
-  "flightPlanStatusLabelStartPending": "Warte auf Freigabe",
-  "flightPlanStatusLabelFlying": "Freigabe erteilt",
-  "flightPlanStatusLabelEndPending": "Warte auf Beendigung",
-  "flightPlanStatusLabelClosed": "Abgeschlossen",
-  "flightPlanStatusLabelError": "Fehler"
 }

@@ -7,7 +7,6 @@ enum ApiResponseReason {
   unknownTerminal,
   inactivePilot,
   activeFlightsessionFound,
-  utmActionRunning,
 }
 
 extension ApiResponseReasonExt on ApiResponseReason {
@@ -25,8 +24,6 @@ extension ApiResponseReasonExt on ApiResponseReason {
         return ApiResponseReason.inactivePilot;
       case 'ACTIVE_FLIGHTSESSION_FOUND':
         return ApiResponseReason.activeFlightsessionFound;
-      case 'UTM_ACTION_RUNNING':
-        return ApiResponseReason.utmActionRunning;
     }
     return null;
   }
@@ -45,8 +42,6 @@ extension ApiResponseReasonExt on ApiResponseReason {
         return localizations.apiResponseReasonInactivePilot;
       case ApiResponseReason.activeFlightsessionFound:
         return localizations.apiResponseReasonActiveFlightsessionFound;
-      case ApiResponseReason.utmActionRunning:
-        return localizations.apiResponseReasonUtmActionRunning;
     }
   }
 }
