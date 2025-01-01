@@ -29,6 +29,9 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
 
   void _prepareDio(TerminalEndpoint endpoint, String pilotid) {
     _dio.options.baseUrl = endpoint.apiEndpoint;
+    _dio.options.sendTimeout = const Duration(seconds: 5);
+    _dio.options.connectTimeout = const Duration(seconds: 5);
+    _dio.options.receiveTimeout = const Duration(seconds: 5);
     _dio.options.headers['x-api-key'] = endpoint.apiKey;
     _dio.options.headers['x-terminal'] = endpoint.config.terminalid;
     _dio.options.headers['x-pilotid'] = pilotid;

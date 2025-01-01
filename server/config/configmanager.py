@@ -65,13 +65,12 @@ class UtmConfig:
         self.simulate = _ini.getboolean('utm','simulate')
 
 class TerminalConfig:
-    def __init__(self, airportname, terminaltype, apikey, airportkml, terminalname, pilotidinstruction):
+    def __init__(self, airportname, terminaltype, apikey, airportkml, terminalname):
         self.terminaltype = terminaltype
         self.terminalname = terminalname
         self.apikey = apikey
         self.airportname = airportname
         self.airportkml = airportkml
-        self.pilotidinstruction = pilotidinstruction
 
 class Config:
     def __init__(self):
@@ -90,7 +89,6 @@ def _buildTerminalDict():
                 apikey = _ini.get(sectionname, 'apikey'),
                 airportname = _ini.get(sectionname, 'airportname'),
                 airportkml = _ini.get(sectionname, 'airportkml'),
-                pilotidinstruction = _ini.get(sectionname, 'pilotidinstruction'),
             )
     return retdict
 

@@ -14,14 +14,14 @@ class MflKeyboardLayouts extends VirtualKeyboardLayoutKeys {
 
 const List<List> _german = [
   ['q', 'w', 'e', 'r', 't', 'z', 'u', 'i', 'o', 'p', 'ü', VirtualKeyboardKeyAction.Backspace],
-  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ö', 'ä', VirtualKeyboardKeyAction.Return],
-  ['y', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', ':', '/', VirtualKeyboardKeyAction.Shift],
-  [VirtualKeyboardKeyAction.Space, VirtualKeyboardKeyAction.SwithLanguage]
+  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ö', 'ä', VirtualKeyboardKeyAction.Shift],
+  ['y', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', ':', '/', VirtualKeyboardKeyAction.SwithLanguage],
+  [VirtualKeyboardKeyAction.Space]
 ];
 
 const List<List> _specialchars = [
-  ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', VirtualKeyboardKeyAction.Return, VirtualKeyboardKeyAction.Backspace],
-  ['+', '-', '*', '/', '@', ';', ',', ':', '=', '!', '"', '\$', '%', '&'],
-  ['(', ')', '~', '#', '.', '<', '>', '|', 'ß', '§', '^', '\'', '?', '_'],
-  [VirtualKeyboardKeyAction.Space, VirtualKeyboardKeyAction.SwithLanguage]
+  ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', VirtualKeyboardKeyAction.Backspace],
+  ['*', '/', '@', ';', ',', ':', '=', '!', '"', '\$', '%', '&', ''],
+  ['(', ')', '~', '#', '.', '<', '>', '|', 'ß', '§', '^', '\'', '?', '_', VirtualKeyboardKeyAction.SwithLanguage],
+  [VirtualKeyboardKeyAction.Space]
 ];

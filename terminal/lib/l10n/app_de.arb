@@ -3,10 +3,10 @@
   "addServerConnection": "Server hinzufügen",
 
   "apiResponseReasonInvalidApiKey": "Ungültiger Api Key",
-  "apiResponseReasonFlightsessionNotFound": "Die angeforderte Sitzung wurde nicht gefunden",
+  "apiResponseReasonFlightsessionNotFound": "Der angeforderte Flugtag wurde nicht gefunden",
   "apiResponseReasonUnknownPilot": "Pilot:in unbekannt",
   "apiResponseReasonUnknownTerminal": "Terminal unbekannt",
   "apiResponseReasonInactivePilot": "Pilot:in inaktiv",
-  "apiResponseReasonActiveFlightsessionFound": "Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst."
+  "apiResponseReasonActiveFlightsessionFound": "Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst."
 
 }

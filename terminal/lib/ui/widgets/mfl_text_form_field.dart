@@ -57,41 +57,29 @@ class MflTextFormField extends StatelessWidget {
                     return Column(
                       children: [
                         Expanded(
-                          child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  icon: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(Icons.close),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.95,
+                              child: TextFormField(
+                                controller: controller,
+                                decoration: InputDecoration(
+                                  fillColor: Colors.black,
+                                  filled: true,
+                                  labelText: label,
+                                  suffixIcon: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(onPressed: () => Navigator.of(context).pop(), child: const Text('⏎')),
                                   ),
                                 ),
+                                autofocus: true,
                               ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.8,
-                                  child: TextFormField(
-                                    controller: controller,
-                                    decoration: InputDecoration(
-                                      fillColor: Colors.black,
-                                      filled: true,
-                                      labelText: label,
-                                    ),
-                                    autofocus: true,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                         VirtualKeyboard(
-                          height: MediaQuery.of(context).size.height * 0.7,
-                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: MediaQuery.of(context).size.height * 0.75,
+                          width: MediaQuery.of(context).size.width * 0.95,
                           textColor: Colors.white,
                           textController: controller,
                           type: inputType,

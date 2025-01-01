@@ -10,12 +10,10 @@ class TerminalConfig with TerminalConfigMappable {
   final TerminalType terminaltype;
   final String airportname;
   final String terminalname;
-  final String pilotidinstruction;
   TerminalConfig({
     required this.terminalid,
     required this.terminaltype,
     required this.airportname,
     required this.terminalname,
-    required this.pilotidinstruction,
   });
 }

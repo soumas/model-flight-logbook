@@ -35,14 +35,10 @@ class MainApp extends StatelessWidget {
             ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            shadowColor: Colors.white,
-            elevation: 8,
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            elevation: 4,
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.yellow,
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
@@ -56,6 +52,7 @@ class MainApp extends StatelessWidget {
         ),
         iconTheme: ThemeData.dark().iconTheme.copyWith(size: 38),
         dialogBackgroundColor: Colors.blueGrey,
+        appBarTheme: ThemeData.dark().appBarTheme.copyWith(foregroundColor: Colors.grey, iconTheme: const IconThemeData(size: 38, color: Colors.grey)),
       ),
       debugShowCheckedModeBanner: false,
       routes: {

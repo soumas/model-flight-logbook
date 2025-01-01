@@ -92,8 +92,7 @@ class EndFlightSessionButton extends StatelessWidget {
                 );
           }
         },
-        label: const Text('Sitzung beenden'),
-        icon: const Icon(Icons.flight_land),
+        label: const Text('Flugtag beenden'),
       ),
     );
   }

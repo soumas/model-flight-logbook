@@ -4,7 +4,7 @@ import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/pilotid_input/fragments/main_drawer.dart';
+import 'package:model_flight_logbook/ui/screen/pilotid_input/fragments/main_menu.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/fragments/pilotid_input_view.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
 
@@ -54,8 +54,8 @@ class _PilotidInputScreenState extends State<PilotidInputScreen> {
       create: (context) => injector.get<PilotidInputCubit>()..init(),
       child: Builder(builder: (context) {
         return const MflScaffold(
-          alignment: Alignment.center,
-          endDrawer: MainDrawer(),
+          title: 'Flugbuch',
+          endDrawer: MainMenu(),
           child: PilotidInputView(),
         );
       }),

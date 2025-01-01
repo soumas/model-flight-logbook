@@ -37,7 +37,7 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
       _resetMessages();
       emit(state.copyWith(loading: true));
       await logbookApiRepo.startFlightSession(endpoint: await _loadSelectedEndpoint(), pilotid: state.pilotid);
-      emit(state.copyWith(completedAction: 'Sitzung gestartet'));
+      emit(state.copyWith(completedAction: 'Flugtag begonnen'));
     } catch (e) {
       emit(state.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()]));
     } finally {
@@ -59,7 +59,7 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
           comment: comment,
         ),
       );
-      emit(state.copyWith(completedAction: 'Sitzung beendet'));
+      emit(state.copyWith(completedAction: 'Flugtag beendet'));
     } catch (e) {
       emit(state.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()]));
     } finally {
@@ -77,9 +77,5 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
 
   void _resetMessages() {
     emit(state.copyWith(infoMessages: null, errorMessages: null, warnMessages: null));
-  }
-
-  void toggleTermsAccepted() {
-    emit(state.copyWith(termsAccepted: !state.termsAccepted));
   }
 }

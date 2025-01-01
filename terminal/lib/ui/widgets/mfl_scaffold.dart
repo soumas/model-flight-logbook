@@ -17,42 +17,15 @@ class MflScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (title != null)
-          ? AppBar(
-              title: Text(title!),
-              automaticallyImplyLeading: false,
-              actions: [IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.close))],
-            )
-          : null,
+      appBar: AppBar(
+        title: title != null ? Text(title!) : null,
+      ),
       body: Builder(builder: (context) {
-        return Stack(
-          children: [
-            if (endDrawer != null)
-              Align(
-                alignment: Alignment.topRight,
-                child: IconButton(onPressed: () => Scaffold.of(context).openEndDrawer(), icon: const Icon(Icons.menu)),
-              ),
-            if (endDrawer == null && title == null)
-              Align(
-                alignment: Alignment.topRight,
-                child: IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.close)),
-              ),
-            Center(
-              child: SizedBox(
-                //width: kContentWidth,
-                height: MediaQuery.of(context).size.height - kToolbarHeight,
-                child: Align(
-                  alignment: alignment,
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: child,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: child,
+          ),
         );
       }),
       endDrawer: endDrawer,

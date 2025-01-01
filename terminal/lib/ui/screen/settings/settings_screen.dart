@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
+import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
 import 'package:model_flight_logbook/ui/utils/toast.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_text_form_field.dart';
 import 'package:model_flight_logbook/ui/screen/settings/cubit/settings_cubit.dart';
@@ -71,9 +72,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   title: const Text('Aktualisieren'),
                                   leading: const Icon(Icons.refresh),
                                   onTap: () async {
+                                    Navigator.of(context).pop();
                                     final updated = await context.read<SettingsCubit>().reloadEndpointAndSave(te);
                                     if (context.mounted) {
-                                      Navigator.of(context).pop();
                                       if (updated) {
                                         Toast.success(context: context, message: 'Die Konfiguration wurde erfolgreich aktualisiert');
                                       } else {
@@ -89,6 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   title: const Text('Löschen'),
                                   leading: const Icon(Icons.delete),
                                   onTap: () async {
+                                    Navigator.of(context).pop();
                                     final doDelete = await showAdaptiveDialog(
                                       context: context,
                                       builder: (context) {
@@ -125,11 +127,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     }
                   },
                   label: Text(AppLocalizations.of(context)!.addServerConnection),
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(Icons.add, size: 38),
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
+                MflPaddings.verticalMedium(context),
                 Text('Zugriffsschutz für diese Maske', style: Theme.of(context).textTheme.headlineSmall),
                 const Divider(),
                 MflTextFormField(
@@ -140,9 +140,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   },
                   obscureText: true,
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
+                MflPaddings.verticalMedium(context),
                 Text('Weitere Aktionen', style: Theme.of(context).textTheme.headlineSmall),
                 const Divider(),
                 TextButton.icon(
@@ -153,9 +151,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Toast.error(context: context, message: 'Funktion wird nicht unterstüzt.');
                     }
                   },
-                  icon: const Icon(Icons.close),
+                  icon: const Icon(Icons.close, size: 38),
                   label: const Text('Terminal beenden'),
-                )
+                ),
+                MflPaddings.verticalMedium(context),
               ],
             );
           }

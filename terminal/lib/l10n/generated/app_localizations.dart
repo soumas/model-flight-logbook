@@ -114,7 +114,7 @@ abstract class AppLocalizations {
   /// No description provided for @apiResponseReasonFlightsessionNotFound.
   ///
   /// In de, this message translates to:
-  /// **'Die angeforderte Sitzung wurde nicht gefunden'**
+  /// **'Der angeforderte Flugtag wurde nicht gefunden'**
   String get apiResponseReasonFlightsessionNotFound;
 
   /// No description provided for @apiResponseReasonUnknownPilot.
@@ -138,7 +138,7 @@ abstract class AppLocalizations {
   /// No description provided for @apiResponseReasonActiveFlightsessionFound.
   ///
   /// In de, this message translates to:
-  /// **'Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.'**
+  /// **'Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.'**
   String get apiResponseReasonActiveFlightsessionFound;
 }
 

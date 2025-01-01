@@ -16,7 +16,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get apiResponseReasonInvalidApiKey => 'Ungültiger Api Key';
 
   @override
-  String get apiResponseReasonFlightsessionNotFound => 'Die angeforderte Sitzung wurde nicht gefunden';
+  String get apiResponseReasonFlightsessionNotFound => 'Der angeforderte Flugtag wurde nicht gefunden';
 
   @override
   String get apiResponseReasonUnknownPilot => 'Pilot:in unbekannt';
@@ -28,5 +28,5 @@ class AppLocalizationsDe extends AppLocalizations {
   String get apiResponseReasonInactivePilot => 'Pilot:in inaktiv';
 
   @override
-  String get apiResponseReasonActiveFlightsessionFound => 'Es wurde eine aktive Sitzung gefunden. Beende diesen, bevor du die Aktion erneut ausführst.';
+  String get apiResponseReasonActiveFlightsessionFound => 'Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.';
 }

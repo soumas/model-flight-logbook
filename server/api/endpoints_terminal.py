@@ -50,7 +50,7 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     elif(pilot.acPilotlicenseValidTo < datetime.now().date()):
         erroMessages.append('Drohnenführerschein abgelaufen');
     elif(pilot.acPilotlicenseValidTo < datetime.now().date() + timedelta(days=30)):
-        warnMessages.append('Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab');
+        warnMessages.append('Achtung - Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab');
     
     if(pilot.acRegistrationValidTo == None):
         erroMessages.append('Registrierung fehlt');

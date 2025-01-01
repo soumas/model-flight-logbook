@@ -33,9 +33,6 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
   static String _$terminalname(TerminalConfig v) => v.terminalname;
   static const Field<TerminalConfig, String> _f$terminalname =
       Field('terminalname', _$terminalname);
-  static String _$pilotidinstruction(TerminalConfig v) => v.pilotidinstruction;
-  static const Field<TerminalConfig, String> _f$pilotidinstruction =
-      Field('pilotidinstruction', _$pilotidinstruction);
 
   @override
   final MappableFields<TerminalConfig> fields = const {
@@ -43,7 +40,6 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
     #terminaltype: _f$terminaltype,
     #airportname: _f$airportname,
     #terminalname: _f$terminalname,
-    #pilotidinstruction: _f$pilotidinstruction,
   };
 
   static TerminalConfig _instantiate(DecodingData data) {
@@ -51,8 +47,7 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
         terminalid: data.dec(_f$terminalid),
         terminaltype: data.dec(_f$terminaltype),
         airportname: data.dec(_f$airportname),
-        terminalname: data.dec(_f$terminalname),
-        pilotidinstruction: data.dec(_f$pilotidinstruction));
+        terminalname: data.dec(_f$terminalname));
   }
 
   @override
@@ -112,8 +107,7 @@ abstract class TerminalConfigCopyWith<$R, $In extends TerminalConfig, $Out>
       {String? terminalid,
       TerminalType? terminaltype,
       String? airportname,
-      String? terminalname,
-      String? pilotidinstruction});
+      String? terminalname});
   TerminalConfigCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -131,23 +125,19 @@ class _TerminalConfigCopyWithImpl<$R, $Out>
           {String? terminalid,
           TerminalType? terminaltype,
           String? airportname,
-          String? terminalname,
-          String? pilotidinstruction}) =>
+          String? terminalname}) =>
       $apply(FieldCopyWithData({
         if (terminalid != null) #terminalid: terminalid,
         if (terminaltype != null) #terminaltype: terminaltype,
         if (airportname != null) #airportname: airportname,
-        if (terminalname != null) #terminalname: terminalname,
-        if (pilotidinstruction != null) #pilotidinstruction: pilotidinstruction
+        if (terminalname != null) #terminalname: terminalname
       }));
   @override
   TerminalConfig $make(CopyWithData data) => TerminalConfig(
       terminalid: data.get(#terminalid, or: $value.terminalid),
       terminaltype: data.get(#terminaltype, or: $value.terminaltype),
       airportname: data.get(#airportname, or: $value.airportname),
-      terminalname: data.get(#terminalname, or: $value.terminalname),
-      pilotidinstruction:
-          data.get(#pilotidinstruction, or: $value.pilotidinstruction));
+      terminalname: data.get(#terminalname, or: $value.terminalname));
 
   @override
   TerminalConfigCopyWith<$R2, TerminalConfig, $Out2> $chain<$R2, $Out2>(
