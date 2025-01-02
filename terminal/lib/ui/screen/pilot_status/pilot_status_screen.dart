@@ -40,10 +40,11 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
   void _initAutoCloseTimer() {
     _disposeAutoCloseTimer();
     _autoCloseTimer = Timer(
-      const Duration(seconds: 10),
+      const Duration(seconds: 99915),
       () {
         if (!context.mounted) return;
         if (ModalRoute.of(context)?.isCurrent ?? false) {
+          Toast.info(context: context, message: 'Checkin / Checkout wurde abgebrochen');
           Navigator.of(context).pop();
         } else {
           _initAutoCloseTimer();
@@ -75,25 +76,37 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
         },
         builder: (context, state) {
           return MflScaffold(
+            title: 'Checkin / Checkout',
             child: Builder(
               builder: (context) {
                 if (state.loading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: Column(
+                      children: [
+                        MflPaddings.verticalLarge(context),
+                        const CircularProgressIndicator(),
+                      ],
+                    ),
+                  );
                 } else {
                   final errorMessages = [...state.errorMessages ?? [], ...state.flightSessionStatus?.errorMessages ?? []];
                   final warnMessages = [...state.warnMessages ?? [], ...state.flightSessionStatus?.warnMessages ?? []];
                   final infoMessages = [...state.infoMessages ?? [], ...state.flightSessionStatus?.infoMessages ?? []];
+                  final anymessage = errorMessages.isNotEmpty || warnMessages.isNotEmpty || infoMessages.isNotEmpty;
                   return Center(
                     child: Column(
                       children: [
+                        anymessage ? MflPaddings.verticalSmall(context) : MflPaddings.verticalLarge(context),
                         Text(state.flightSessionStatus?.pilotName ?? '', style: Theme.of(context).textTheme.headlineLarge),
-                        if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) ..._activeSessionInfo(context, state),
-                        MflPaddings.verticalSmall(context),
+                        _activeSessionInfo(context, state),
+                        anymessage ? MflPaddings.verticalSmall(context) : MflPaddings.verticalLarge(context),
                         ...errorMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.error)),
                         ...warnMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.warn)),
                         ...infoMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.info)),
-                        if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) ...[EndFlightSessionButton()],
-                        if (state.flightSessionStatus?.sessionId == null) ..._startSessionForm(context, state, errorMessages),
+                        anymessage ? MflPaddings.verticalMedium(context) : const SizedBox(),
+                        if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) ...const [EndFlightSessionButton()],
+                        if (state.flightSessionStatus?.sessionId == null) _startSessionForm(context, state, errorMessages),
+                        MflPaddings.verticalLarge(context),
                       ],
                     ),
                   );
@@ -107,24 +120,32 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
   }
 
   void _showActionCompletedInfo(BuildContext context, PilotStatusState state) {
-    Toast.success(context: context, message: '${state.completedAction} OK');
+    Toast.success(context: context, message: state.completedAction!);
   }
 
-  List<Widget> _activeSessionInfo(BuildContext context, PilotStatusState state) {
-    return [
-      Text(
+  Widget _activeSessionInfo(BuildContext context, PilotStatusState state) {
+    if (state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null) {
+      return Text(
         'Flugtag aktiv seit ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr',
         style: Theme.of(context).textTheme.bodyMedium,
-      ),
-    ];
+      );
+    } else if (state.flightSessionStatus != null) {
+      return Text(
+        'Kein aktiver Flugtag',
+        style: Theme.of(context).textTheme.bodyMedium,
+      );
+    }
+    return const SizedBox();
   }
 
-  List<Widget> _startSessionForm(BuildContext context, PilotStatusState state, List errorMessages) {
-    return [
-      ElevatedButton.icon(
+  Widget _startSessionForm(BuildContext context, PilotStatusState state, List errorMessages) {
+    if (state.flightSessionStatus != null) {
+      return ElevatedButton.icon(
         onPressed: errorMessages.isEmpty ? () => context.read<PilotStatusCubit>().startSession() : null,
+        icon: const Icon(Icons.flight_takeoff),
         label: const Text('Flugtag beginnen'),
-      ),
-    ];
+      );
+    }
+    return const SizedBox();
   }
 }

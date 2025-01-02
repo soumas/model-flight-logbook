@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_keyboard_layouts.dart';
+import 'package:model_flight_logbook/ui/widgets/input_description_button.dart';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 
 class MflTextFormField extends StatelessWidget {
@@ -12,11 +13,11 @@ class MflTextFormField extends StatelessWidget {
     this.inputType = VirtualKeyboardType.Alphanumeric,
     this.validator,
     this.initialValue,
-    this.suffixIcon,
     this.readOnly = false,
     this.onClose,
     this.obscureText = false,
     this.padding = kFormFieldPadding,
+    this.description,
   });
 
   final TextEditingController controller;
@@ -24,11 +25,11 @@ class MflTextFormField extends StatelessWidget {
   final VirtualKeyboardType inputType;
   final FormFieldValidator<String>? validator;
   final String? initialValue;
-  final Widget? suffixIcon;
   final bool readOnly;
   final Function()? onClose;
   final bool obscureText;
   final EdgeInsets padding;
+  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +38,8 @@ class MflTextFormField extends StatelessWidget {
       child: TextFormField(
         decoration: InputDecoration(
           labelText: label,
-          suffixIcon: suffixIcon,
           disabledBorder: InputBorder.none,
+          suffixIcon: description != null ? InputDescriptionButton(description: description) : null,
         ),
         controller: controller,
         readOnly: readOnly || _useVirtualKeyboard,

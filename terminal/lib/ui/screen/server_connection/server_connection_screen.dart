@@ -117,7 +117,7 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                     ),
                   if (state.selectedConfig != null)
                     Padding(
-                      padding: kFormFieldPadding * 2,
+                      padding: kFormFieldPadding,
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {

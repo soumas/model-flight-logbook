@@ -45,19 +45,14 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
     }
   }
 
-  endSession({required int numFlights, required int maxAltitude, required bool airspaceObserver, String? comment}) async {
+  endSession({required EndFlightSessionData data}) async {
     try {
       _resetMessages();
       emit(state.copyWith(loading: true));
       await logbookApiRepo.endFlightSession(
         endpoint: await _loadSelectedEndpoint(),
         pilotid: state.pilotid,
-        data: EndFlightSessionData(
-          takeoffcount: numFlights,
-          maxAltitude: maxAltitude,
-          airspaceObserver: airspaceObserver,
-          comment: comment,
-        ),
+        data: data,
       );
       emit(state.copyWith(completedAction: 'Flugtag beendet'));
     } catch (e) {

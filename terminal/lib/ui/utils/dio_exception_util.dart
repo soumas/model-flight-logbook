@@ -18,7 +18,7 @@ class DioExceptionUtil {
         case DioExceptionType.sendTimeout:
         case DioExceptionType.receiveTimeout:
         case DioExceptionType.connectionTimeout:
-          return 'Zeitüberschreibung';
+          return 'Zeitüberschreitung';
         case DioExceptionType.badResponse:
           return 'Ungültige Antwort';
         case DioExceptionType.cancel:

@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:model_flight_logbook/ui/screen/pilot_status/fragments/end_flight_session_form.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -35,9 +36,12 @@ class MainApp extends StatelessWidget {
             ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            elevation: 4,
-            backgroundColor: Colors.blue,
+            shadowColor: Colors.white,
+            elevation: 4.0,
+            backgroundColor: Colors.blueGrey,
             foregroundColor: Colors.yellow,
+            iconColor: Colors.yellow,
+            iconSize: 38,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           ),
         ),
@@ -60,6 +64,7 @@ class MainApp extends StatelessWidget {
         SettingsScreen.route: (context) => const SettingsScreen(),
         PilotStatusScreen.route: (context) => const PilotStatusScreen(),
         ServerConnectionScreen.route: (context) => const ServerConnectionScreen(),
+        EndFlightSessionForm.route: (context) => const EndFlightSessionForm(),
       },
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [

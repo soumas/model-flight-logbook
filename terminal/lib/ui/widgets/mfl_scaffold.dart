@@ -5,13 +5,11 @@ class MflScaffold extends StatelessWidget {
     super.key,
     this.title,
     required this.child,
-    this.alignment = Alignment.topCenter,
     this.endDrawer,
   });
 
   final String? title;
   final Widget child;
-  final Alignment alignment;
   final Widget? endDrawer;
 
   @override

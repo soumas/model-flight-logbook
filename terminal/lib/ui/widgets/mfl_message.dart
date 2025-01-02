@@ -38,9 +38,9 @@ class MflMessage extends StatelessWidget {
       case MflMessageSeverity.info:
         return Colors.lightBlueAccent;
       case MflMessageSeverity.warn:
-        return Colors.orange;
+        return Colors.orangeAccent.shade100;
       case MflMessageSeverity.error:
-        return Colors.redAccent;
+        return Colors.red;
     }
   }
 
@@ -49,11 +49,11 @@ class MflMessage extends StatelessWidget {
       case MflMessageSeverity.none:
         return null;
       case MflMessageSeverity.info:
-        return Colors.deepPurple;
+        return Colors.black54;
       case MflMessageSeverity.warn:
-        return Colors.black;
+        return Colors.red;
       case MflMessageSeverity.error:
-        return Colors.white;
+        return Colors.amberAccent;
     }
   }
 }

@@ -43,21 +43,21 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     warnMessages = [];
     erroMessages = [];
     if(pilot.active != True):
-        erroMessages.append('Pilot:in inaktiv');
+        erroMessages.append('Konto inaktiv');
 
     if(pilot.acPilotlicenseValidTo == None):
         erroMessages.append('Drohnenführerschein fehlt');
     elif(pilot.acPilotlicenseValidTo < datetime.now().date()):
         erroMessages.append('Drohnenführerschein abgelaufen');
     elif(pilot.acPilotlicenseValidTo < datetime.now().date() + timedelta(days=30)):
-        warnMessages.append('Achtung - Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab');
+        warnMessages.append('Dein Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab!');
     
     if(pilot.acRegistrationValidTo == None):
         erroMessages.append('Registrierung fehlt');
     elif(pilot.acRegistrationValidTo < datetime.now().date()):
         erroMessages.append('Registrierung abgelaufen');
     elif(pilot.acRegistrationValidTo < datetime.now().date() + timedelta(days=30)):
-        warnMessages.append('Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab');
+        warnMessages.append('Deine Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab!');
 
     return FlightSessionStatusDTO(
         pilotName=pilot.firstname + ' ' + pilot.lastname,
@@ -100,6 +100,6 @@ async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annot
     if(config.logbook.forward_comment and fsession.comment):
         send_admin_notification(
             background_tasks=background_tasks, 
-            subject='Anmerkung von Pilot', 
-            body={'message':'Der Pilot ' + pilot.firstname + ' ' + pilot.lastname + ' hat folgende Anmerkung im Model Flight Logbook hinterlassen: ' + fsession.comment }
+            subject='Besonderes Ereignis', 
+            body={'message':pilot.firstname + ' ' + pilot.lastname + ' (' + pilot.id + ') hat am Flugplatz "' + config.terminals[x_terminal].airportname + '" (' + config.terminals[x_terminal].terminalname + ') im Protokoll zum Flugtag folgendes besondere Ereignis angegeben:<br/><br/>' + fsession.comment }
         )
