@@ -19,13 +19,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get apiResponseReasonFlightsessionNotFound => 'Der angeforderte Flugtag wurde nicht gefunden';
 
   @override
-  String get apiResponseReasonUnknownPilot => 'Pilot:in unbekannt';
+  String get apiResponseReasonUnknownPilot => 'Pilot unbekannt';
 
   @override
   String get apiResponseReasonUnknownTerminal => 'Terminal unbekannt';
 
   @override
-  String get apiResponseReasonInactivePilot => 'Pilot:in inaktiv';
+  String get apiResponseReasonInactivePilot => 'Pilot inaktiv';
 
   @override
   String get apiResponseReasonActiveFlightsessionFound => 'Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.';

@@ -4,9 +4,9 @@
 
   "apiResponseReasonInvalidApiKey": "Ungültiger Api Key",
   "apiResponseReasonFlightsessionNotFound": "Der angeforderte Flugtag wurde nicht gefunden",
-  "apiResponseReasonUnknownPilot": "Pilot:in unbekannt",
+  "apiResponseReasonUnknownPilot": "Pilot unbekannt",
   "apiResponseReasonUnknownTerminal": "Terminal unbekannt",
-  "apiResponseReasonInactivePilot": "Pilot:in inaktiv",
+  "apiResponseReasonInactivePilot": "Pilot inaktiv",
   "apiResponseReasonActiveFlightsessionFound": "Es wurde ein aktiver Flugtag gefunden. Beende diesen, bevor du die Aktion erneut ausführst."
 
 }

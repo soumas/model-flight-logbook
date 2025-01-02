@@ -120,7 +120,7 @@ abstract class AppLocalizations {
   /// No description provided for @apiResponseReasonUnknownPilot.
   ///
   /// In de, this message translates to:
-  /// **'Pilot:in unbekannt'**
+  /// **'Pilot unbekannt'**
   String get apiResponseReasonUnknownPilot;
 
   /// No description provided for @apiResponseReasonUnknownTerminal.
@@ -132,7 +132,7 @@ abstract class AppLocalizations {
   /// No description provided for @apiResponseReasonInactivePilot.
   ///
   /// In de, this message translates to:
-  /// **'Pilot:in inaktiv'**
+  /// **'Pilot inaktiv'**
   String get apiResponseReasonInactivePilot;
 
   /// No description provided for @apiResponseReasonActiveFlightsessionFound.

@@ -99,7 +99,7 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                   if (state.selectedConfig != null && TerminalType.singleuser == state.selectedConfig!.terminaltype)
                     MflTextFormField(
                         controller: _pilotIdController,
-                        label: 'Pilot-ID',
+                        label: 'Piloten-ID',
                         onClose: () {
                           context.read<ServerConnectionCubit>().selectPilotid(_pilotIdController.text);
                         },
