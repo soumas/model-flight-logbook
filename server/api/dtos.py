@@ -32,3 +32,6 @@ class TerminalConfigDTO(BaseModel):
     terminaltype : str
     airportname: str
     terminalname: str
+
+class TerminalStatusDTO(BaseModel):
+    utmStatus: str

@@ -16,7 +16,7 @@ initInjector() {
   injector.registerSingleton<LogbookApiRepo>(LogbookApiRepoImpl());
 
   // factories
-  injector.registerFactory<PilotidInputCubit>(() => PilotidInputCubit(localStorageRepo: injector.get()));
+  injector.registerFactory<PilotidInputCubit>(() => PilotidInputCubit(localStorageRepo: injector.get(), logbookApiRepo: injector.get()));
   injector.registerFactory<SettingsCubit>(() => SettingsCubit(localStorageRepo: injector.get(), logbookApiRepo: injector.get()));
   injector.registerFactory<PilotStatusCubit>(() => PilotStatusCubit(logbookApiRepo: injector.get(), localStorageRepo: injector.get()));
   injector.registerFactory<ServerConnectionCubit>(() => ServerConnectionCubit(logbookApiRepo: injector.get()));

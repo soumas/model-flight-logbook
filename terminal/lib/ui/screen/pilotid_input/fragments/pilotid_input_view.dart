@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/enums/terminal_type.dart';
@@ -7,10 +9,32 @@ import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input
 import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';
 
-class PilotidInputView extends StatelessWidget {
+class PilotidInputView extends StatefulWidget {
   const PilotidInputView({
     super.key,
   });
+
+  @override
+  State<PilotidInputView> createState() => _PilotidInputViewState();
+}
+
+class _PilotidInputViewState extends State<PilotidInputView> {
+  late final Timer _refreshTerminalStateTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshTerminalStateTimer = Timer.periodic(
+      const Duration(minutes: 1),
+      (timer) => context.read<PilotidInputCubit>().updateTerminalState(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _refreshTerminalStateTimer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +67,21 @@ class SelectedEndpointView extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           MflPaddings.verticalLarge(context),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('UTM-Status:'),
-              Padding(
-                padding: EdgeInsets.only(left: 12.0, right: 4.0),
-                child: Icon(
-                  Icons.check_circle,
-                  color: Colors.green,
+          if (state.terminalStatus != null)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('UTM-Status:'),
+                const Padding(
+                  padding: EdgeInsets.only(left: 12.0, right: 4.0),
+                  child: Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                  ),
                 ),
-              ),
-              Text('Aktiv'),
-            ],
-          ),
+                Text(state.terminalStatus!.utmStatus),
+              ],
+            ),
           MflPaddings.verticalMedium(context),
           if (TerminalType.singleuser == state.selectedEndpoint!.config.terminaltype)
             ElevatedButton(

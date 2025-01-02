@@ -14,6 +14,7 @@ class PilotidInputStateMapper extends ClassMapperBase<PilotidInputState> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PilotidInputStateMapper._());
       TerminalEndpointMapper.ensureInitialized();
+      TerminalStatusMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -30,17 +31,23 @@ class PilotidInputStateMapper extends ClassMapperBase<PilotidInputState> {
       v.selectedEndpoint;
   static const Field<PilotidInputState, TerminalEndpoint> _f$selectedEndpoint =
       Field('selectedEndpoint', _$selectedEndpoint, opt: true);
+  static TerminalStatus? _$terminalStatus(PilotidInputState v) =>
+      v.terminalStatus;
+  static const Field<PilotidInputState, TerminalStatus> _f$terminalStatus =
+      Field('terminalStatus', _$terminalStatus, opt: true);
 
   @override
   final MappableFields<PilotidInputState> fields = const {
     #endpointOptions: _f$endpointOptions,
     #selectedEndpoint: _f$selectedEndpoint,
+    #terminalStatus: _f$terminalStatus,
   };
 
   static PilotidInputState _instantiate(DecodingData data) {
     return PilotidInputState(
         endpointOptions: data.dec(_f$endpointOptions),
-        selectedEndpoint: data.dec(_f$selectedEndpoint));
+        selectedEndpoint: data.dec(_f$selectedEndpoint),
+        terminalStatus: data.dec(_f$terminalStatus));
   }
 
   @override
@@ -85,9 +92,12 @@ abstract class PilotidInputStateCopyWith<$R, $In extends PilotidInputState,
       get endpointOptions;
   TerminalEndpointCopyWith<$R, TerminalEndpoint, TerminalEndpoint>?
       get selectedEndpoint;
+  TerminalStatusCopyWith<$R, TerminalStatus, TerminalStatus>?
+      get terminalStatus;
   $R call(
       {List<TerminalEndpoint>? endpointOptions,
-      TerminalEndpoint? selectedEndpoint});
+      TerminalEndpoint? selectedEndpoint,
+      TerminalStatus? terminalStatus});
   PilotidInputStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -110,18 +120,25 @@ class _PilotidInputStateCopyWithImpl<$R, $Out>
       get selectedEndpoint => $value.selectedEndpoint?.copyWith
           .$chain((v) => call(selectedEndpoint: v));
   @override
+  TerminalStatusCopyWith<$R, TerminalStatus, TerminalStatus>?
+      get terminalStatus => $value.terminalStatus?.copyWith
+          .$chain((v) => call(terminalStatus: v));
+  @override
   $R call(
           {List<TerminalEndpoint>? endpointOptions,
-          Object? selectedEndpoint = $none}) =>
+          Object? selectedEndpoint = $none,
+          Object? terminalStatus = $none}) =>
       $apply(FieldCopyWithData({
         if (endpointOptions != null) #endpointOptions: endpointOptions,
-        if (selectedEndpoint != $none) #selectedEndpoint: selectedEndpoint
+        if (selectedEndpoint != $none) #selectedEndpoint: selectedEndpoint,
+        if (terminalStatus != $none) #terminalStatus: terminalStatus
       }));
   @override
   PilotidInputState $make(CopyWithData data) => PilotidInputState(
       endpointOptions: data.get(#endpointOptions, or: $value.endpointOptions),
       selectedEndpoint:
-          data.get(#selectedEndpoint, or: $value.selectedEndpoint));
+          data.get(#selectedEndpoint, or: $value.selectedEndpoint),
+      terminalStatus: data.get(#terminalStatus, or: $value.terminalStatus));
 
   @override
   PilotidInputStateCopyWith<$R2, PilotidInputState, $Out2> $chain<$R2, $Out2>(

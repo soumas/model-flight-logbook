@@ -1,12 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
 import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
+import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_state.dart';
 
 class PilotidInputCubit extends Cubit<PilotidInputState> {
-  PilotidInputCubit({required this.localStorageRepo}) : super(PilotidInputState());
+  PilotidInputCubit({
+    required this.localStorageRepo,
+    required this.logbookApiRepo,
+  }) : super(PilotidInputState());
 
   final LocalStorageRepo localStorageRepo;
+  final LogbookApiRepo logbookApiRepo;
 
   Future init() async {
     try {
@@ -22,6 +27,7 @@ class PilotidInputCubit extends Cubit<PilotidInputState> {
         selectedEndpoint = settings.terminalEndpoints.where((te) => te.apiEndpoint.compareTo(selectedEndpoint!.apiEndpoint) == 0 && te.config.terminalid.compareTo(selectedEndpoint.config.terminalid) == 0).first;
       }
       emit(state.copyWith(endpointOptions: settings.terminalEndpoints, selectedEndpoint: selectedEndpoint));
+      updateTerminalState();
     } catch (e) {
       rethrow;
     }
@@ -30,5 +36,13 @@ class PilotidInputCubit extends Cubit<PilotidInputState> {
   Future selectEndpoint(TerminalEndpoint opt) async {
     await localStorageRepo.saveSelectedTerminalEndpoint(opt);
     await init();
+  }
+
+  Future updateTerminalState() async {
+    if (state.selectedEndpoint != null) {
+      emit(state.copyWith(terminalStatus: null));
+      final ts = await logbookApiRepo.loadTerminalStatus(endpoint: state.selectedEndpoint!);
+      emit(state.copyWith(terminalStatus: ts));
+    }
   }
 }
