@@ -27,6 +27,7 @@ def upgrade() -> None:
         sa.Column('phonenumber', sa.String, nullable=False),
         sa.Column('email', sa.String, nullable=False),
         sa.Column('active', sa.Boolean, nullable=False),
+        sa.Column('acIsUtmOperator', sa.Boolean, nullable=False),
         sa.Column('acRegistrationValidTo', sa.Date, nullable=True),
         sa.Column('acPilotlicenseValidTo', sa.Date, nullable=True),
     )

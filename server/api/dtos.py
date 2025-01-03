@@ -10,6 +10,7 @@ class PilotDTO(BaseModel):
     phonenumber: str
     email: str
     active: bool
+    acIsUtmOperator: bool
     acRegistrationValidTo: Optional[datetime.date]=None
     acPilotlicenseValidTo: Optional[datetime.date]=None
 
@@ -33,5 +34,6 @@ class TerminalConfigDTO(BaseModel):
     airportname: str
     terminalname: str
 
-class TerminalStatusDTO(BaseModel):
+class UtmStatusDTO(BaseModel):
     utmStatus: str
+    

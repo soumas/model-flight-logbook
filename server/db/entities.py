@@ -1,4 +1,3 @@
-import enum
 import sqlalchemy
 
 from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer, String
@@ -12,8 +11,9 @@ class PilotEntity(Base):
     firstname = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
     phonenumber = Column(String, nullable=False)
-    email = Column(String, nullable=False)    
+    email = Column(String, nullable=False)
     active = Column(Boolean, nullable=False)
+    acIsUtmOperator = Column(Boolean, nullable=False)
     acRegistrationValidTo = Column(Date, nullable=True)    
     acPilotlicenseValidTo = Column(Date, nullable=True)    
 

@@ -3,12 +3,12 @@ import 'dart:core';
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:model_flight_logbook/mappable.dart';
 
-part 'terminal_status.mapper.dart';
+part 'utm_status.mapper.dart';
 
 @mappableModelClass
-class TerminalStatus with TerminalStatusMappable {
+class UtmStatus with UtmStatusMappable {
   final String utmStatus;
-  TerminalStatus({
+  UtmStatus({
     required this.utmStatus,
   });
 }

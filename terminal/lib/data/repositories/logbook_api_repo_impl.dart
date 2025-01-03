@@ -3,7 +3,7 @@ import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dar
 import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_status.dart';
+import 'package:model_flight_logbook/domain/entities/utm_status.dart';
 import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
 
 class LogbookApiRepoImpl implements LogbookApiRepo {
@@ -47,12 +47,12 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
   }
 
   @override
-  Future<TerminalStatus> loadTerminalStatus({required TerminalEndpoint endpoint}) async {
+  Future<UtmStatus> loadTerminalStatus({required TerminalEndpoint endpoint}) async {
     _dio.options.baseUrl = endpoint.apiEndpoint;
     _dio.options.headers['x-terminal'] = endpoint.config.terminalid;
     _dio.options.headers['x-api-key'] = endpoint.apiKey;
-    final response = await _dio.get('/terminal/status');
-    return TerminalStatusMapper.fromMap(response.data);
+    final response = await _dio.get('/terminal/utmstatus');
+    return UtmStatusMapper.fromMap(response.data);
   }
 
   void _prepareDio(TerminalEndpoint endpoint, String pilotid) {

@@ -30,6 +30,7 @@ async def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Sessio
         db_pilot.firstname = pilot.firstname
         db_pilot.lastname = pilot.lastname
         db_pilot.phonenumber = pilot.phonenumber
+        db_pilot.acIsUtmOperator = pilot.acIsUtmOperator
         db_pilot.acRegistrationValidTo = pilot.acRegistrationValidTo
         db_pilot.acPilotlicenseValidTo = pilot.acPilotlicenseValidTo
     db.commit()

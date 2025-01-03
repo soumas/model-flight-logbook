@@ -4,7 +4,7 @@ from fastapi import Depends, Security, BackgroundTasks
 from fastapi.params import Header
 from requests import Session
 from sqlalchemy import and_, or_
-from api.dtos import EndFlightSessionDTO, FlightSessionStatusDTO, TerminalStatusDTO
+from api.dtos import EndFlightSessionDTO, FlightSessionStatusDTO, UtmStatusDTO
 from config.configmanager import config
 from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, unknown_terminal
@@ -34,9 +34,9 @@ def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, 
         # if pilotid is given (singlemode) this method checks existence of pilot
         __findPilot(pilotid=x_pilotid, db=db)
 
-@api.get("/terminal/status", dependencies=[Security(__specific_terminalauth)], response_model=TerminalStatusDTO)
-def get_flightsession_status():
-    return TerminalStatusDTO(utmStatus='TODO ' + datetime.now().strftime('%H:%M'))
+@api.get("/terminal/utmstatus", dependencies=[Security(__specific_terminalauth)], response_model=UtmStatusDTO)
+def get_utm_status():
+    return UtmStatusDTO(utmStatus='TODO ' + datetime.now().strftime('%H:%M'))
 
 
 @api.get("/terminal/flightsession/status", dependencies=[Security(__specific_terminalauth)], response_model=FlightSessionStatusDTO)
@@ -49,6 +49,9 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     erroMessages = [];
     if(pilot.active != True):
         erroMessages.append('Konto inaktiv');
+    
+    if(config.utm.enabled  and pilot.acIsUtmOperator != True):
+        warnMessages.append('Keine UTM Freigabeanforderung über dieses Konto')
 
     if(pilot.acPilotlicenseValidTo == None):
         erroMessages.append('Drohnenführerschein fehlt');
