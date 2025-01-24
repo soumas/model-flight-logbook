@@ -14,7 +14,7 @@ class PilotidInputStateMapper extends ClassMapperBase<PilotidInputState> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = PilotidInputStateMapper._());
       TerminalEndpointMapper.ensureInitialized();
-      UtmStatusMapper.ensureInitialized();
+      TerminalStatusMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -31,8 +31,9 @@ class PilotidInputStateMapper extends ClassMapperBase<PilotidInputState> {
       v.selectedEndpoint;
   static const Field<PilotidInputState, TerminalEndpoint> _f$selectedEndpoint =
       Field('selectedEndpoint', _$selectedEndpoint, opt: true);
-  static UtmStatus? _$terminalStatus(PilotidInputState v) => v.terminalStatus;
-  static const Field<PilotidInputState, UtmStatus> _f$terminalStatus =
+  static TerminalStatus? _$terminalStatus(PilotidInputState v) =>
+      v.terminalStatus;
+  static const Field<PilotidInputState, TerminalStatus> _f$terminalStatus =
       Field('terminalStatus', _$terminalStatus, opt: true);
 
   @override
@@ -91,11 +92,12 @@ abstract class PilotidInputStateCopyWith<$R, $In extends PilotidInputState,
       get endpointOptions;
   TerminalEndpointCopyWith<$R, TerminalEndpoint, TerminalEndpoint>?
       get selectedEndpoint;
-  UtmStatusCopyWith<$R, UtmStatus, UtmStatus>? get terminalStatus;
+  TerminalStatusCopyWith<$R, TerminalStatus, TerminalStatus>?
+      get terminalStatus;
   $R call(
       {List<TerminalEndpoint>? endpointOptions,
       TerminalEndpoint? selectedEndpoint,
-      UtmStatus? terminalStatus});
+      TerminalStatus? terminalStatus});
   PilotidInputStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -118,8 +120,9 @@ class _PilotidInputStateCopyWithImpl<$R, $Out>
       get selectedEndpoint => $value.selectedEndpoint?.copyWith
           .$chain((v) => call(selectedEndpoint: v));
   @override
-  UtmStatusCopyWith<$R, UtmStatus, UtmStatus>? get terminalStatus =>
-      $value.terminalStatus?.copyWith.$chain((v) => call(terminalStatus: v));
+  TerminalStatusCopyWith<$R, TerminalStatus, TerminalStatus>?
+      get terminalStatus => $value.terminalStatus?.copyWith
+          .$chain((v) => call(terminalStatus: v));
   @override
   $R call(
           {List<TerminalEndpoint>? endpointOptions,

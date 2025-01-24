@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/domain/enums/terminal_type.dart';
@@ -25,7 +24,7 @@ class _PilotidInputViewState extends State<PilotidInputView> {
   void initState() {
     super.initState();
     _refreshTerminalStateTimer = Timer.periodic(
-      const Duration(minutes: 1),
+      const Duration(seconds: 15),
       (timer) => context.read<PilotidInputCubit>().updateTerminalState(),
     );
   }
@@ -57,7 +56,7 @@ class SelectedEndpointView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          MflPaddings.verticalLarge(context),
+          MflPaddings.verticalMedium(context),
           Text(
             state.selectedEndpoint?.config.airportname ?? 'Unbekannter Flugplatz',
             style: Theme.of(context).textTheme.headlineLarge,
@@ -66,20 +65,22 @@ class SelectedEndpointView extends StatelessWidget {
             state.selectedEndpoint?.config.terminalname ?? 'Unbekanntes Terminal',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
-          MflPaddings.verticalLarge(context),
+          MflPaddings.verticalMedium(context),
+          const Divider(),
+          MflPaddings.verticalMedium(context),
           if (state.terminalStatus != null)
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('UTM-Status:'),
-                const Padding(
-                  padding: EdgeInsets.only(left: 12.0, right: 4.0),
-                  child: Icon(
-                    Icons.check_circle,
-                    color: Colors.green,
+                if (state.terminalStatus?.utmStatus.animated ?? false) const CircularProgressIndicator(),
+                if (state.terminalStatus?.utmStatus.animated == false)
+                  Icon(
+                    state.terminalStatus?.utmStatus.icon,
+                    color: state.terminalStatus?.utmStatus.color,
+                    size: 64,
                   ),
-                ),
-                Text(state.terminalStatus!.utmStatus),
+                const SizedBox(width: 15),
+                Text('${state.terminalStatus?.utmStatus.label}'),
               ],
             ),
           MflPaddings.verticalMedium(context),

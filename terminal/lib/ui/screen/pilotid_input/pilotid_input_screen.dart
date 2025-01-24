@@ -54,7 +54,6 @@ class _PilotidInputScreenState extends State<PilotidInputScreen> {
       create: (context) => injector.get<PilotidInputCubit>()..init(),
       child: Builder(builder: (context) {
         return const MflScaffold(
-          title: 'Flugbuch',
           endDrawer: MainMenu(),
           child: PilotidInputView(),
         );

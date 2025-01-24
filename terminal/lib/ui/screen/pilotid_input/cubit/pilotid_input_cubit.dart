@@ -40,9 +40,14 @@ class PilotidInputCubit extends Cubit<PilotidInputState> {
 
   Future updateTerminalState() async {
     if (state.selectedEndpoint != null) {
+      try {
+        final ts = await logbookApiRepo.loadTerminalStatus(endpoint: state.selectedEndpoint!);
+        emit(state.copyWith(terminalStatus: ts));
+      } catch (e) {
+        emit(state.copyWith(terminalStatus: null));
+      }
+    } else {
       emit(state.copyWith(terminalStatus: null));
-      final ts = await logbookApiRepo.loadTerminalStatus(endpoint: state.selectedEndpoint!);
-      emit(state.copyWith(terminalStatus: ts));
     }
   }
 }
