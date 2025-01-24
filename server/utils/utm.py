@@ -32,7 +32,7 @@ def __create_driver():
     options.add_argument("--headless")
 
     driver = webdriver.Chrome(service=service, options=options)
-    driver.set_window_size(800,600)
+    driver.set_window_size(1024,768)
     return driver
 
 def __dispose_driver(driver):
