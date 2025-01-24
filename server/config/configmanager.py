@@ -65,7 +65,8 @@ class UtmConfig:
         self.simulate = _ini.getboolean('utm','simulate')
 
 class TerminalConfig:
-    def __init__(self, airportname, terminaltype, apikey, airportkml, terminalname):
+    def __init__(self, terminalid, airportname, terminaltype, apikey, airportkml, terminalname):
+        self.terminalid = terminalid
         self.terminaltype = terminaltype
         self.terminalname = terminalname
         self.apikey = apikey
@@ -84,6 +85,7 @@ def _buildTerminalDict():
     for sectionname in _ini.sections():
         if sectionname.startswith('terminalconfig_'):            
             retdict[sectionname[15:]] = TerminalConfig(
+                terminalid = sectionname[15:],
                 terminaltype = _ini.get(sectionname, 'terminaltype'),
                 terminalname = _ini.get(sectionname, 'terminalname'),
                 apikey = _ini.get(sectionname, 'apikey'),

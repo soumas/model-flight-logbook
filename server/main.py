@@ -6,5 +6,6 @@ from api.endpoints_admin import *
 from api.endpoints_terminal import *
 from api.endpoints_public import *
 from api.apimanager import *
+from tasks.utm_sync_task import *
 
 app = api

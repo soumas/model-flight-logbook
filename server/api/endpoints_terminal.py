@@ -4,13 +4,15 @@ from fastapi import Depends, Security, BackgroundTasks
 from fastapi.params import Header
 from requests import Session
 from sqlalchemy import and_, or_
-from api.dtos import EndFlightSessionDTO, FlightSessionStatusDTO, UtmStatusDTO
+from api.dtos import EndFlightSessionDTO, FlightSessionStatusDTO, TerminalStatusDTO
 from config.configmanager import config
 from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, unknown_terminal
 from db.entities import FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
+from tasks.utm_sync_task import UtmSyncStatus, UtmSyncStatusData, trigger_utm_sync_task
 from utils.send_mail import send_admin_notification
+from tasks.utm_sync_task import utmSyncStatusDataDict
 
 def __specific_terminalauth(x_terminal:Annotated[str, Header()], api_key_header:str = Security(api_key_header)):
     if not x_terminal in config.terminals:
@@ -34,9 +36,13 @@ def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, 
         # if pilotid is given (singlemode) this method checks existence of pilot
         __findPilot(pilotid=x_pilotid, db=db)
 
-@api.get("/terminal/utmstatus", dependencies=[Security(__specific_terminalauth)], response_model=UtmStatusDTO)
-def get_utm_status():
-    return UtmStatusDTO(utmStatus='TODO ' + datetime.now().strftime('%H:%M'))
+@api.get("/terminal/status", dependencies=[Security(__specific_terminalauth)], response_model=TerminalStatusDTO)
+def get_status(x_terminal:Annotated[str, Header()]):
+    global utmSyncStatusDataDict
+    state = UtmSyncStatus.unknown
+    if x_terminal in utmSyncStatusDataDict:
+        state = utmSyncStatusDataDict[x_terminal].status
+    return TerminalStatusDTO(activePilots=4, utmStatus=state.name)
 
 
 @api.get("/terminal/flightsession/status", dependencies=[Security(__specific_terminalauth)], response_model=FlightSessionStatusDTO)
@@ -79,7 +85,7 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     )
 
 @api.post("/terminal/flightsession/start", dependencies=[Security(__specific_terminalauth)], response_model=None)
-async def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
+def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     if(pilot.active != True):
         raise inactive_pilot    
@@ -91,9 +97,10 @@ async def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Ann
     fsession.start = datetime.now()
     db.add(fsession)
     db.commit()
+    trigger_utm_sync_task();
 
 @api.post("/terminal/flightsession/end", dependencies=[Security(__specific_terminalauth)], response_model=None)
-async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], data:EndFlightSessionDTO, background_tasks:BackgroundTasks, db:Session = Depends(get_db)):  
+def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], data:EndFlightSessionDTO, background_tasks:BackgroundTasks, db:Session = Depends(get_db)):  
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
     if(fsession is None):
@@ -104,7 +111,8 @@ async def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annot
     fsession.airspaceObserver = data.airspaceObserver
     fsession.comment = data.comment
     db.commit()
-
+    trigger_utm_sync_task();
+    
     if(config.logbook.forward_comment and fsession.comment):
         send_admin_notification(
             background_tasks=background_tasks, 

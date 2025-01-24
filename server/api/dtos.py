@@ -34,6 +34,7 @@ class TerminalConfigDTO(BaseModel):
     airportname: str
     terminalname: str
 
-class UtmStatusDTO(BaseModel):
+class TerminalStatusDTO(BaseModel):
+    activePilots: int
     utmStatus: str
     

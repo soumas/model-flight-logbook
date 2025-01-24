@@ -15,11 +15,11 @@ def __adminauth(api_key_header: str = Security(api_key_header)):
     raise invalid_api_key
 
 @api.get("/admin/pilot/list", dependencies=[Security(__adminauth)])
-async def list_all_pilots(db: Session = Depends(get_db)):
+def list_all_pilots(db: Session = Depends(get_db)):
     return db.query(PilotEntity).all()
 
 @api.post("/admin/pilot/create_or_update", dependencies=[Security(__adminauth)], response_model=PilotDTO)
-async def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Session = Depends(get_db)):
+def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Session = Depends(get_db)):
     db_pilot : PilotEntity = db.query(PilotEntity).filter(PilotEntity.id == pilot.id).first()
     if db_pilot is None:
         db_pilot = PilotEntity(**pilot.model_dump())
@@ -37,14 +37,14 @@ async def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Sessio
     return db_pilot
 
 @api.post("/admin/pilot/deactivate_all", dependencies=[Security(__adminauth)])
-async def deactivate_all_pilots(db: Session = Depends(get_db)):
+def deactivate_all_pilots(db: Session = Depends(get_db)):
     for pilot in db.query(PilotEntity).all():
         pilot.active = False
     db.commit()
 
 
-@api.get("/admin/test/admin_notification", dependencies=[Security(__adminauth)])
-async def send_test_admin_notification(background_tasks:BackgroundTasks):
+@api.get("/admin/admin_notification_test", dependencies=[Security(__adminauth)])
+def send_test_admin_notification(background_tasks:BackgroundTasks):
     send_admin_notification(
         background_tasks=background_tasks, 
         subject='Test Admin Notification', 
