@@ -1,3 +1,4 @@
+import re
 import time
 import selenium
 import traceback
@@ -32,7 +33,7 @@ def __create_driver():
     options.add_argument("--headless")
 
     driver = webdriver.Chrome(service=service, options=options)
-    driver.set_window_size(1024,768)
+    driver.set_window_size(1920,1080)
     return driver
 
 def __dispose_driver(driver):
@@ -148,7 +149,7 @@ def start_flightplan(terminal:TerminalConfig, pilot:PilotEntity ):
         __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
         __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
         __wait_and_send_key(driver, "//label[normalize-space()='Last name *']/following-sibling::input", pilot.lastname)
-        __wait_and_send_key(driver, "//label[normalize-space()='Phone number *']/following-sibling::input",pilot.phonenumber)
+        __wait_and_send_key(driver, "//label[normalize-space()='Phone number *']/following-sibling::input", re.sub("[^0-9]", "", pilot.phonenumber))
         __wait_and_send_key(driver, "//label[normalize-space()='Maximum takeoff mass (g) *']/following-sibling::input", config.utm.mtom_g)
         __wait_and_send_key(driver, "//label[normalize-space()='Max. altitude above ground (m) *']/following-sibling::input",config.utm.max_altitude_m)
         __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight']/following-sibling::input", __build_flightplan_name(terminal=terminal))
