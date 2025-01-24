@@ -8,7 +8,6 @@ import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_s
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/fragments/end_flight_session_button.dart';
-import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
 import 'package:model_flight_logbook/ui/utils/toast.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';
@@ -71,7 +70,6 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
           if (context.mounted && state.completedAction != null) {
             _showActionCompletedInfo(context, state);
             if (context.mounted) {
-              context.read<PilotidInputCubit>().updateTerminalState();
               Navigator.popUntil(context, (route) => route.isFirst);
             }
           }
