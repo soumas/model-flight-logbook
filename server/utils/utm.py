@@ -16,6 +16,7 @@ from selenium.common.exceptions import StaleElementReferenceException
 from config.configmanager import TerminalConfig, config
 from db.entities import PilotEntity
 from utils.logger import log
+from utils.send_mail import send_admin_notification
 
  
 DEFAULT_WAIT_TIME = 30
@@ -28,7 +29,7 @@ def __create_driver():
     service = Service(config.logbook.chromedriver_path)
 
     options = Options()
-    #options.add_argument("--headless")
+    options.add_argument("--headless")
 
     driver = webdriver.Chrome(service=service, options=options)
     driver.set_window_size(800,600)
@@ -129,6 +130,7 @@ def close_active_flightplan(terminal:TerminalConfig):
         error = traceback.format_exc()
         log.error(error)
         __utm_save_error_screenshot(driver=driver, methodname='create_and_activate_flightplan')
+        __send_error_notification(error=error)
         raise
     finally:        
         __dispose_driver(driver)
@@ -170,10 +172,22 @@ def start_flightplan(terminal:TerminalConfig, pilot:PilotEntity ):
         error = traceback.format_exc()
         log.error(error)
         __utm_save_error_screenshot(driver=driver, methodname='start_flightplan')
+        __send_error_notification(error=error)
         raise
     finally:        
         __dispose_driver(driver)
 
+
+def __send_error_notification(terminal:TerminalConfig, error: str): 
+    # notify admin in case of an error
+    try:
+        send_admin_notification(
+            subject="UTM Interaktion fehlgeschlagen!",
+            body={'message':'Bei einer Interaktion mit dem UTM System bzgl. dem Flugplan <b>"' + __build_flightplan_name(terminal=terminal) + '"</b> ist folgender Fehler aufgetreten:<br/><br/>' + error }
+        )
+    except:
+        # don't throw exception when notification fails
+        log.error(traceback.format_exc())
 
 
 

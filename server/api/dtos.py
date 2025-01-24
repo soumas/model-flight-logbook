@@ -35,6 +35,5 @@ class TerminalConfigDTO(BaseModel):
     terminalname: str
 
 class TerminalStatusDTO(BaseModel):
-    activePilots: int
     utmStatus: str
     

@@ -42,7 +42,7 @@ def get_status(x_terminal:Annotated[str, Header()]):
     state = UtmSyncStatus.unknown
     if x_terminal in utmSyncStatusDataDict:
         state = utmSyncStatusDataDict[x_terminal].status
-    return TerminalStatusDTO(activePilots=4, utmStatus=state.name)
+    return TerminalStatusDTO(utmStatus=state.name)
 
 
 @api.get("/terminal/flightsession/status", dependencies=[Security(__specific_terminalauth)], response_model=FlightSessionStatusDTO)

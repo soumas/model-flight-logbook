@@ -57,4 +57,7 @@ def send_mail(background_tasks: BackgroundTasks, template_name:str, subject: str
         subtype=MessageType.html
     )
     fm = FastMail(smtpconf)
-    background_tasks.add_task(fm.send_message, message, template_name=template_name)
+    if(background_tasks != None):
+        background_tasks.add_task(fm.send_message, message, template_name=template_name)
+    else:
+        fm.send_message(message=message, template_name=template_name)
