@@ -24,7 +24,7 @@ if(config.smtp.server):
         SUPPRESS_SEND=config.smtp.suppress_send,
     )
 
-def send_admin_notification(background_tasks: BackgroundTasks, subject: str, body: dict):
+def send_admin_notification(background_tasks: BackgroundTasks | None, subject: str, body: dict):
 
     if not config.logbook.admin_email:
         log.debug('Should send admin notification with subject "' + subject + '" but logbook.admin_email is not configured')
@@ -38,7 +38,7 @@ def send_admin_notification(background_tasks: BackgroundTasks, subject: str, bod
         body=body
     )
 
-def send_mail(background_tasks: BackgroundTasks, template_name:str, subject: str, email_to: str,body: dict):
+def send_mail(background_tasks: BackgroundTasks | None, template_name:str, subject: str, email_to: str,body: dict):
 
     if not email_to:
         log.debug('Should send email with subject "' + subject + '" but email_to is not defined')

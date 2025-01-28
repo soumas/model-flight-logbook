@@ -8,7 +8,7 @@ from db.entities import FlightSessionEntity, PilotEntity
 from config.configmanager import TerminalConfig, config
 from utils.logger import log
 from utils.scheduler import scheduler
-from utils.utm import close_active_flightplan, start_flightplan
+from utils.utm import close_active_flightplans, start_flightplan
 
 class UtmSyncStatus(enum.Enum):
      unknown = 'unknown'
@@ -38,7 +38,7 @@ def sync_with_utm():
     # The secode thread has to wait until the first one has finished. So whenever on or more changees occure
     # during long running UTM Sync task, the second thread will do its job with newest data thereafter.
     lock.acquire()
-    try:
+    try:        
         for terminalid in config.terminals:
             try:
                 log.debug('Handling terminal with id ' + terminalid)
@@ -51,14 +51,13 @@ def sync_with_utm():
                 if(utmSyncStatusDataDict[terminalid].flightSessionShould is None):
                     log.debug('No relevant FlightSession found for Terminal ' + terminalid)
                     if(utmSyncStatusDataDict[terminalid].status != UtmSyncStatus.noActiveFlight):
-                        __closeUtmFlightplan(config.terminals[terminalid])
+                        __closeUtmFlightplans(config.terminals[terminalid])
                 else:
-                    fsIDShould = utmSyncStatusDataDict[terminalid].flightSessionShould.id
-                    fsIDIs = utmSyncStatusDataDict[terminalid].flightSessionIs.id if utmSyncStatusDataDict[terminalid].flightSessionIs != None else None
-                    log.debug('flightSessionShould: ' + str(fsIDShould))
-                    log.debug('flightSessionIs: ' + str(fsIDIs))
-                    if(fsIDShould != fsIDIs):
-                        __closeUtmFlightplan(config.terminals[terminalid])
+                    pilotIDShould = utmSyncStatusDataDict[terminalid].flightSessionShould.pilotid
+                    pilotIDIs = utmSyncStatusDataDict[terminalid].flightSessionIs.pilotid if utmSyncStatusDataDict[terminalid].flightSessionIs != None else None
+                    log.debug('pilotIDShould: ' + str(pilotIDShould))
+                    log.debug('pilotIDIs: ' + str(pilotIDIs))
+                    if(pilotIDShould != pilotIDIs):
                         __startUtmFlightplan(config.terminals[terminalid], utmSyncStatusDataDict[terminalid].flightSessionShould)
                         utmSyncStatusDataDict[terminalid].flightSessionIs = utmSyncStatusDataDict[terminalid].flightSessionShould
                     else:
@@ -70,12 +69,12 @@ def sync_with_utm():
 
 def __startUtmFlightplan(config:TerminalConfig, flightSession:FlightSessionEntity):
     utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.awaitClearanceForTakeOff    
-    start_flightplan(config, __findPilot(flightSession.pilotid))
+    start_flightplan(config.airportname, config.airportkml, __findPilot(flightSession.pilotid))
     utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.flying
 
-def __closeUtmFlightplan(config:TerminalConfig):
+def __closeUtmFlightplans(config:TerminalConfig):
     utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.awaitClearanceToLand
-    close_active_flightplan(config)
+    close_active_flightplans(config.airportname)
     utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.noActiveFlight
 
 def __findRelevantFlightSession(terminalid:str):

@@ -12,9 +12,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 
-from config.configmanager import TerminalConfig, config
+from config.configmanager import config
 from db.entities import PilotEntity
 from utils.logger import log
 from utils.send_mail import send_admin_notification
@@ -23,15 +23,13 @@ from utils.send_mail import send_admin_notification
 DEFAULT_WAIT_TIME = 30
 DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
+BASEURL = 'https://utm.dronespace.at/avm/#p=5/47.74/13.23'
 
 def __create_driver():
     log.debug('__create_driver')
-
     service = Service(config.logbook.chromedriver_path)
-
     options = Options()
-    options.add_argument("--headless")
-
+    #options.add_argument("--headless")
     driver = webdriver.Chrome(service=service, options=options)
     driver.set_window_size(1920,1080)
     return driver
@@ -79,10 +77,17 @@ def __wait_and_send_key(driver, xpath, text, timeout=DEFAULT_WAIT_TIME):
     driver.find_element(By.XPATH, xpath).send_keys(Keys.DELETE)
     driver.find_element(By.XPATH, xpath).send_keys(text)
 
+def __check_if_exists(driver, xpath):
+    try:
+        driver.find_element(By.XPATH, xpath)
+        return True
+    except NoSuchElementException:
+        return False
+
 def __utm_login(driver):    
     log.debug('__utm_login')
 
-    driver.get('https://utm.dronespace.at/avm/#p=5/47.74/13.23')
+    driver.get(BASEURL)
 
     log.debug('accept terms and conditions')
     __wait_and_click(driver, "//*[@class='button ok']") # agb akzeptieren
@@ -97,62 +102,83 @@ def __utm_login(driver):
     __wait_until_clickable(driver, "//a[normalize-space()='Sign out']")
 
 
-def __utm_open_menu(driver):
-    log.debug('__utm_open_menu')
-    # workaround for the buggy menu button
-    for i in range(2):
-        try:
-            __wait_and_click(driver, "//div[@id='menu-button']")
-            time.sleep(1)
-            __wait_until_clickable(driver, "//span[normalize-space()='Flight plans and log']")
-        except:
-            log.debug('bugy menu fallback')
-            pass
+def __utm_open_menu(driver, menutag):
+    log.debug('__utm_open_menu')    
+    driver.get(BASEURL+'&menu='+menutag)
 
-def __build_flightplan_name(terminal:TerminalConfig):
+def __build_flightplan_name(airportname:str, pilotid:str):
     log.debug('__build_flightplan_name')
-    return '{} ({})'.format(terminal.airportname, terminal.terminalname)
+    return '{} ({})'.format(airportname, pilotid)
 
-def close_active_flightplan(terminal:TerminalConfig):
+def __find_all_active_flight_plan_xpaths(driver, airportname:str):
+    log.debug('__login_and_find_all_active_flight_plan_xpaths')            
+    __utm_open_menu(driver,'operationplans')
+    # Wait until "closed flight plans" are loaded becaues that means that active flight plans (if any) are loaded too.
+    # # If this is a very new UTM account without any closed flight plans, this request will fall into the timeout exception.
+    try:
+        __wait_until_clickable(driver, "(//div[@class='logs']/div[@class='log'])[1]")
+    except selenium.common.exceptions.TimeoutException:
+        log.debug('Could not find any closed flight plan. Assuming that this is a very new UTM account and going on...')
+    xpaths = []
+    for i in range(1,100):
+        xpath = "(//div[@class='operation-plans']/div[@class='operation-plan']/p[@class='name' and starts-with(normalize-space(.),'" + airportname + "')])[" + str(i) + "]/parent::*"
+        if __check_if_exists(driver, xpath):
+            xpaths.append(xpath)
+        else:
+            break
+    return xpaths
+
+def __pilot_has_active_flight(driver, airportname:str, pilotid:str):
+    activeFlightPlanXPaths = __find_all_active_flight_plan_xpaths(driver, airportname)
+    for xpath in activeFlightPlanXPaths:
+        pElem = driver.find_element(By.XPATH, xpath+"/p[@class='name']")
+        regexstr = r"^" + airportname + " \((?P<pilotid>\d+)\)$"
+        matches = re.search(regexstr, pElem.text)
+        if matches != None and matches['pilotid'] == pilotid:
+            return True
+    return False
+
+def close_active_flightplans(airportname:str):
     driver = None
     error = None
     try:
         driver = __create_driver()
         __utm_login(driver)
-        __utm_open_menu(driver)
-        __wait_and_click(driver, "//span[normalize-space()='Flight plans and log']")
-        try:
-            __wait_and_click(driver, "//div[@class='operation-plans']/div[@class='operation-plan']/div[@class='status ACTIVATED']/following-sibling::p[contains(normalize-space(.), '" + __build_flightplan_name(terminal=terminal) + "')]", timeout=5)
-        except selenium.common.exceptions.TimeoutException:
-            log.debug('No active Flight with name ' + __build_flightplan_name(terminal=terminal) + ' found')
-            return
-        __wait_and_click(driver, "//button[normalize-space()='End flight']")
+        activeFlightPlanXPaths = __find_all_active_flight_plan_xpaths(driver, airportname)
+        for xpath in reversed(activeFlightPlanXPaths):
+            __wait_and_click(driver, xpath)
+            __wait_and_click(driver, "//button[normalize-space()='End flight']")            
     except:
         error = traceback.format_exc()
         log.error(error)
-        __utm_save_error_screenshot(driver=driver, methodname='create_and_activate_flightplan')
-        __send_error_notification(error=error)
+        __utm_save_error_screenshot(driver=driver, methodname='close_active_flightplans')
+        __send_error_notification(airportname=airportname, error=error)
         raise
     finally:        
         __dispose_driver(driver)
 
 
-def start_flightplan(terminal:TerminalConfig, pilot:PilotEntity ):
+def start_flightplan(airportname:str, airportkml:str, pilot:PilotEntity ):
     driver = None
     error = None
     try:
         driver = __create_driver()
         __utm_login(driver)
+        # check if pilot has already an active flight
+        if(__pilot_has_active_flight(driver, airportname, pilot.id)):
+            return
+        __wait_and_click(driver, "//i[@class='ti ti-arrow-left']") #back to main menu
+        __wait_and_click(driver, "//i[@class='ti ti-x']") # close menu
         __wait_and_click(driver, "//i[@class='ti ti-drone']")
         __wait_until_clickable(driver, "//i[@class='ti ti-arrow-right']") # await menu animation
-        driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(terminal.airportkml)
+        driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(airportkml)
         __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
         __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
         __wait_and_send_key(driver, "//label[normalize-space()='Last name *']/following-sibling::input", pilot.lastname)
         __wait_and_send_key(driver, "//label[normalize-space()='Phone number *']/following-sibling::input", re.sub("[^0-9]", "", pilot.phonenumber))
         __wait_and_send_key(driver, "//label[normalize-space()='Maximum takeoff mass (g) *']/following-sibling::input", config.utm.mtom_g)
         __wait_and_send_key(driver, "//label[normalize-space()='Max. altitude above ground (m) *']/following-sibling::input",config.utm.max_altitude_m)
-        __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight']/following-sibling::input", __build_flightplan_name(terminal=terminal))
+        __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight']/following-sibling::input", __build_flightplan_name(airportname, pilot.id))
         utmStartTime = datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=2)
         utmEndTime = utmStartTime + timedelta(hours=4, minutes=0)
         __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", (utmStartTime + timedelta(minutes=30)).strftime(DATETIME_FORMAT)) # first set end date to half an hour after startdate to avoid alert 'flight time too short'
@@ -162,7 +188,7 @@ def start_flightplan(terminal:TerminalConfig, pilot:PilotEntity ):
         __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", utmEndTime.strftime(DATETIME_FORMAT))
         __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
         __wait_and_click(driver, "//i[@class='ti ti-send']")
-        __wait_and_click(driver, "//div[@class='waiting-plans']/div[@class='operation-plan']/div[@class='status APPROVED']/following-sibling::p[contains(normalize-space(.), '" + __build_flightplan_name(terminal=terminal) + "')]", 300)
+        __wait_and_click(driver, "//div[@class='waiting-plans']/div[@class='operation-plan']/div[@class='status APPROVED']/following-sibling::p[contains(normalize-space(.), '" + __build_flightplan_name(airportname,pilot.id) + "')]", 300)
         secondsBeforeStartTime = (utmStartTime - datetime.now()).total_seconds() + 10 # 10 seconds buffer to be sure that start time is arrived
         if(secondsBeforeStartTime>0):
             log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
@@ -173,18 +199,19 @@ def start_flightplan(terminal:TerminalConfig, pilot:PilotEntity ):
         error = traceback.format_exc()
         log.error(error)
         __utm_save_error_screenshot(driver=driver, methodname='start_flightplan')
-        __send_error_notification(error=error)
+        __send_error_notification(airportname=airportname, error=error)
         raise
     finally:        
         __dispose_driver(driver)
 
 
-def __send_error_notification(terminal:TerminalConfig, error: str): 
+def __send_error_notification(airportname:str, error: str): 
     # notify admin in case of an error
     try:
         send_admin_notification(
+            background_tasks=None,
             subject="UTM Interaktion fehlgeschlagen!",
-            body={'message':'Bei einer Interaktion mit dem UTM System bzgl. dem Flugplan <b>"' + __build_flightplan_name(terminal=terminal) + '"</b> ist folgender Fehler aufgetreten:<br/><br/>' + error }
+            body={'message':'Bei einer Interaktion mit dem UTM System auf dem Flugplatz <b>"' + airportname + '"</b> ist folgender Fehler aufgetreten:<br/><br/>' + error }
         )
     except:
         # don't throw exception when notification fails
