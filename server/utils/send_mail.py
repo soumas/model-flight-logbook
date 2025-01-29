@@ -1,4 +1,5 @@
 #import os
+import asyncio
 from fastapi import BackgroundTasks
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from config.configmanager import config
@@ -60,4 +61,7 @@ def send_mail(background_tasks: BackgroundTasks | None, template_name:str, subje
     if(background_tasks != None):
         background_tasks.add_task(fm.send_message, message, template_name=template_name)
     else:
-        fm.send_message(message=message, template_name=template_name)
+        asyncio.run(send_message_async(fm, message, template_name))
+
+async def send_message_async(fm, message, template_name):
+    await fm.send_message(message, template_name)
