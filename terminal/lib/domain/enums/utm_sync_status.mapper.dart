@@ -29,12 +29,10 @@ class UtmSyncStatusMapper extends EnumMapper<UtmSyncStatus> {
         return UtmSyncStatus.unknown;
       case 'noActiveFlight':
         return UtmSyncStatus.noActiveFlight;
-      case 'awaitClearanceForTakeOff':
-        return UtmSyncStatus.awaitClearanceForTakeOff;
+      case 'busy':
+        return UtmSyncStatus.busy;
       case 'flying':
         return UtmSyncStatus.flying;
-      case 'awaitClearanceToLand':
-        return UtmSyncStatus.awaitClearanceToLand;
       case 'error':
         return UtmSyncStatus.error;
       default:
@@ -49,12 +47,10 @@ class UtmSyncStatusMapper extends EnumMapper<UtmSyncStatus> {
         return 'unknown';
       case UtmSyncStatus.noActiveFlight:
         return 'noActiveFlight';
-      case UtmSyncStatus.awaitClearanceForTakeOff:
-        return 'awaitClearanceForTakeOff';
+      case UtmSyncStatus.busy:
+        return 'busy';
       case UtmSyncStatus.flying:
         return 'flying';
-      case UtmSyncStatus.awaitClearanceToLand:
-        return 'awaitClearanceToLand';
       case UtmSyncStatus.error:
         return 'error';
     }
