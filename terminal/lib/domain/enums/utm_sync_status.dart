@@ -5,9 +5,8 @@ part 'utm_sync_status.mapper.dart';
 
 @MappableEnum()
 enum UtmSyncStatus {
-  unknown(icon: Icons.error, color: Colors.orange, animated: false, label: 'UTM Status unbekannt'),
-  noActiveFlight(icon: Icons.error, color: Colors.red, animated: false, label: 'Keine Starterlaubnis'),
-  busy(icon: Icons.hourglass_top, color: Colors.orange, animated: true, label: 'UTM Interaktion läuft ...'),
+  unknown(icon: Icons.circle, color: Colors.red, animated: false, label: 'Keine Flugfreigabe (warte)'),
+  noActiveFlight(icon: Icons.circle, color: Colors.red, animated: false, label: 'Keine Flugfreigabe'),
   flying(icon: Icons.check_circle, color: Colors.green, animated: false, label: 'Flugfreigabe erteilt'),
   error(icon: Icons.error, color: Colors.red, animated: false, label: 'UTM Interaktion fehlgeschlagen');
 
