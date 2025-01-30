@@ -129,21 +129,24 @@ def __find_all_active_flight_plan_xpaths(driver, airportname:str):
             break
     return xpaths
 
-def __close_active_flightplans(driver, airportname:str, pilotIdToIgnore:str | None):
+def __close_active_flightplans(driver, airportname:str, pilotToIgnore:PilotEntity | None):
     activeFlightPlanXPaths = __find_all_active_flight_plan_xpaths(driver, airportname)
     for xpath in reversed(activeFlightPlanXPaths):
+        __wait_until_clickable(driver, xpath)
+        nameElement = driver.find_element(By.XPATH, xpath+"/p[@class='name']")
+        nameText = nameElement.text
+
         doClose = True
-        if pilotIdToIgnore != None:
-            __wait_until_clickable(driver, xpath)
-            pElem = driver.find_element(By.XPATH, xpath+"/p[@class='name']")
+        if pilotToIgnore != None:
             regexstr = r"^" + airportname + " \((?P<pilotid>\d+)\)$"
-            matches = re.search(regexstr, pElem.text)
-            if matches != None and matches['pilotid'] == pilotIdToIgnore:
+            matches = re.search(regexstr, nameText)
+            if matches != None and matches['pilotid'] == pilotToIgnore.id:
                 doClose = False
 
         if doClose:
             __wait_and_click(driver, xpath)
-            __wait_and_click(driver, "//button[normalize-space()='End flight']")  
+            __wait_and_click(driver, "//button[normalize-space()='End flight']")
+            __send_admin_notification(airportname=airportname, subject='Flugplan "' + nameText + '" beendet', message='Flugplan wurde beendet<br/>Name: ' + nameText)
 
 def __pilot_has_active_flight(driver, airportname:str, pilotid:str):
     activeFlightPlanXPaths = __find_all_active_flight_plan_xpaths(driver, airportname)
@@ -163,7 +166,7 @@ def update_utm_operator(airportname:str, airportkml:str, operator:PilotEntity | 
         driver = __create_driver()
         __utm_login(driver)
 
-        doCreateNewFlightplan = operator != None and __pilot_has_active_flight(driver, airportname, operator.id) == False
+        doCreateNewFlightplan = operator != None and not __pilot_has_active_flight(driver, airportname, operator.id)
 
         if(doCreateNewFlightplan):
             __wait_and_click(driver, "//i[@class='ti ti-arrow-left']") #back to main menu
@@ -193,9 +196,10 @@ def update_utm_operator(airportname:str, airportkml:str, operator:PilotEntity | 
                 log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
                 time.sleep(secondsBeforeStartTime)
             __wait_and_click(driver, "//button[normalize-space()='Activate flight plan']")
-            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=300)
+            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=300)            
+            __send_admin_notification(airportname=airportname, subject='Flugplan "' + __build_flightplan_name(airportname,operator.id) + '" aktiviert', message='Ein neuer Flugplan wurde aktiviert<br/>Name: ' + __build_flightplan_name(airportname,operator.id) + '<br/>Pilot: ' + operator.firstname + ' ' + operator.lastname)
 
-        __close_active_flightplans(driver, airportname, None if operator is None else operator.id)
+        __close_active_flightplans(driver, airportname, None if operator is None else operator)
 
         # TODO: do fianl check if state is as desired
         return False if operator is None else True
@@ -204,19 +208,19 @@ def update_utm_operator(airportname:str, airportkml:str, operator:PilotEntity | 
         error = traceback.format_exc()
         log.error(error)
         __utm_save_error_screenshot(driver=driver, methodname='update_utm_operator')
-        __send_error_notification(airportname=airportname, error=error)
+        __send_admin_notification(airportname=airportname, subject='UTM Interaktion fehlgeschlagen', message='Flugplatz: ' + airportname + '<br/>Fehler: ' + error)
         raise
     finally:        
         __dispose_driver(driver)
 
 
-def __send_error_notification(airportname:str, error: str): 
+def __send_admin_notification(airportname:str, subject:str, message:str): 
     # notify admin in case of an error
     try:
         send_admin_notification(
             background_tasks=None,
-            subject="UTM Interaktion fehlgeschlagen!",
-            body={'message':'Bei einer Interaktion mit dem UTM System auf dem Flugplatz <b>"' + airportname + '"</b> ist folgender Fehler aufgetreten:<br/><br/>' + error }
+            subject=subject,
+            body={'message':message}
         )
     except:
         # don't throw exception when notification fails

@@ -13,7 +13,6 @@ from utils.utm import update_utm_operator
 class UtmSyncStatus(enum.Enum):
      unknown = 'unknown'
      noActiveFlight = 'noActiveFlight'
-     busy = 'busy'
      flying = 'flying'
      error = 'error'
 
@@ -51,6 +50,7 @@ def sync_with_utm():
                     log.debug('No relevant FlightSession found for Terminal ' + terminalid)
                     if(utmSyncStatusDataDict[terminalid].status != UtmSyncStatus.noActiveFlight):
                         __updateUtmOperator(config.terminals[terminalid], None)
+                        utmSyncStatusDataDict[terminalid].flightSessionIs = None
                 else:
                     pilotIDShould = utmSyncStatusDataDict[terminalid].flightSessionShould.pilotid
                     pilotIDIs = utmSyncStatusDataDict[terminalid].flightSessionIs.pilotid if utmSyncStatusDataDict[terminalid].flightSessionIs != None else None
@@ -67,7 +67,6 @@ def sync_with_utm():
         lock.release()
 
 def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
-    utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.busy    
     flying = update_utm_operator(config.airportname, config.airportkml, None if pilotid is None else __findPilot(pilotid))
     utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.flying if flying else UtmSyncStatus.noActiveFlight
 
