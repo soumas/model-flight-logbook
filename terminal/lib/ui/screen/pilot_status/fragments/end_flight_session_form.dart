@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
+import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
 import 'package:model_flight_logbook/ui/widgets/input_description_button.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
@@ -17,7 +19,7 @@ class EndFlightSessionForm extends StatefulWidget {
 }
 
 class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
-  final _data = EndFlightSessionData(takeoffcount: 1, airspaceObserver: false, maxAltitude: 119, comment: '');
+  final _data = EndFlightSessionData(takeoffcount: 0, airspaceObserver: false, maxAltitude: 119, comment: '');
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _commentTextEditingController;
   late final TextEditingController _numFlightsEditingController;
@@ -28,26 +30,22 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
   void initState() {
     super.initState();
     _commentTextEditingController = TextEditingController(text: _data.comment.toString());
-    _numFlightsEditingController = TextEditingController(text: _data.takeoffcount.toString());
+    _numFlightsEditingController = TextEditingController(text: _data.takeoffcount > 0 ? _data.takeoffcount.toString() : null);
     _maxAltitudeEditingController = TextEditingController(text: _data.maxAltitude.toString());
   }
 
   @override
   Widget build(BuildContext context) {
+    final state = ModalRoute.of(context)!.settings.arguments as PilotStatusState;
     return MflScaffold(
-      title: 'Flugtag beenden',
+      title: 'Protokoll zum Flugtag',
       child: Form(
         key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Protokoll zum Flugtag',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
+            Align(alignment: Alignment.centerLeft, child: Text(state.flightSessionStatus!.pilotName, style: Theme.of(context).textTheme.headlineLarge)),
+            Align(alignment: Alignment.centerLeft, child: Text('Checkin: ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr', style: Theme.of(context).textTheme.bodyMedium)),
             MflPaddings.verticalSmall(context),
             MflTextFormField(
               label: 'Flüge*',
@@ -63,6 +61,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                 return null;
               },
             ),
+            MflPaddings.verticalSmall(context),
             MflTextFormField(
               controller: _maxAltitudeEditingController,
               label: 'Maximale Flughöhe (m)*',
@@ -77,6 +76,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                 return null;
               },
             ),
+            MflPaddings.verticalSmall(context),
             DropdownButtonFormField(
               isDense: false,
               decoration: const InputDecoration(
@@ -108,6 +108,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
               },
               dropdownColor: Colors.blueGrey,
             ),
+            MflPaddings.verticalSmall(context),
             MflTextFormField(
               controller: _commentTextEditingController,
               label: 'Besondere Ereignisse',

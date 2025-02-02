@@ -9,9 +9,10 @@ class EndFlightSessionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<PilotStatusCubit>().state;
     return ElevatedButton.icon(
       onPressed: () async {
-        final data = (await Navigator.of(context).pushNamed(EndFlightSessionForm.route)) as EndFlightSessionData?;
+        final data = (await Navigator.of(context).pushNamed(EndFlightSessionForm.route, arguments: state)) as EndFlightSessionData?;
         if (data != null && context.mounted) {
           context.read<PilotStatusCubit>().endSession(data: data);
         }

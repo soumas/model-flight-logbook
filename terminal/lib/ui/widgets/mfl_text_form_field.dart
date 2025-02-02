@@ -36,71 +36,74 @@ class MflTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: padding,
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: label,
-          disabledBorder: InputBorder.none,
-          suffixIcon: description != null ? InputDescriptionButton(description: description) : null,
-        ),
-        controller: controller,
-        readOnly: readOnly || _useVirtualKeyboard,
-        dragStartBehavior: DragStartBehavior.start,
-        validator: validator,
-        initialValue: initialValue,
-        obscureText: obscureText,
-        onEditingComplete: !_useVirtualKeyboard ? onClose : null,
-        onTap: _useVirtualKeyboard && !readOnly
-            ? () {
-                showModalBottomSheet(
-                  constraints: BoxConstraints.expand(width: MediaQuery.of(context).size.width),
-                  isScrollControlled: true,
-                  context: context,
-                  backgroundColor: Colors.black,
-                  builder: (context) {
-                    return Column(
-                      children: [
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.95,
-                              child: TextFormField(
-                                controller: controller,
-                                decoration: InputDecoration(
-                                  fillColor: Colors.black,
-                                  filled: true,
-                                  labelText: label,
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ElevatedButton(onPressed: () => Navigator.of(context).pop(), child: const Text('⏎')),
+      child: ExcludeFocus(
+        excluding: readOnly || _useVirtualKeyboard,
+        child: TextFormField(
+          decoration: InputDecoration(
+            labelText: label,
+            disabledBorder: InputBorder.none,
+            suffixIcon: description != null ? InputDescriptionButton(description: description) : null,
+          ),
+          dragStartBehavior: DragStartBehavior.down,
+          controller: controller,
+          readOnly: readOnly || _useVirtualKeyboard,
+          validator: validator,
+          initialValue: initialValue,
+          obscureText: obscureText,
+          onEditingComplete: !_useVirtualKeyboard ? onClose : null,
+          onTap: _useVirtualKeyboard && !readOnly
+              ? () {
+                  showModalBottomSheet(
+                    constraints: BoxConstraints.expand(width: MediaQuery.of(context).size.width),
+                    isScrollControlled: true,
+                    context: context,
+                    backgroundColor: Colors.black,
+                    builder: (context) {
+                      return Column(
+                        children: [
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.95,
+                                child: TextFormField(
+                                  controller: controller,
+                                  decoration: InputDecoration(
+                                    fillColor: Colors.black,
+                                    filled: true,
+                                    labelText: label,
+                                    suffixIcon: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: ElevatedButton(onPressed: () => Navigator.of(context).pop(), child: const Text('⏎')),
+                                    ),
                                   ),
+                                  autofocus: true,
                                 ),
-                                autofocus: true,
                               ),
                             ),
                           ),
-                        ),
-                        VirtualKeyboard(
-                          height: MediaQuery.of(context).size.height * 0.75,
-                          width: MediaQuery.of(context).size.width * 0.95,
-                          textColor: Colors.white,
-                          textController: controller,
-                          type: inputType,
-                          customLayoutKeys: MflKeyboardLayouts(),
-                          fontSize: MediaQuery.of(context).size.height * 0.08,
-                        ),
-                      ],
-                    );
-                  },
-                ).then(
-                  (value) {
-                    if (onClose != null) {
-                      onClose!.call();
-                    }
-                  },
-                );
-              }
-            : null,
+                          VirtualKeyboard(
+                            height: MediaQuery.of(context).size.height * 0.75,
+                            width: MediaQuery.of(context).size.width * 0.95,
+                            textColor: Colors.white,
+                            textController: controller,
+                            type: inputType,
+                            customLayoutKeys: MflKeyboardLayouts(),
+                            fontSize: MediaQuery.of(context).size.height * 0.08,
+                          ),
+                        ],
+                      );
+                    },
+                  ).then(
+                    (value) {
+                      if (onClose != null) {
+                        onClose!.call();
+                      }
+                    },
+                  );
+                }
+              : null,
+        ),
       ),
     );
   }
