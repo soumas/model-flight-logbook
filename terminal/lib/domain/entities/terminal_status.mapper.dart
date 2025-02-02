@@ -21,22 +21,28 @@ class TerminalStatusMapper extends ClassMapperBase<TerminalStatus> {
   @override
   final String id = 'TerminalStatus';
 
-  static DateTime? _$statusReceiveTime(TerminalStatus v) => v.statusReceiveTime;
-  static const Field<TerminalStatus, DateTime> _f$statusReceiveTime =
-      Field('statusReceiveTime', _$statusReceiveTime);
   static UtmSyncStatus _$utmStatus(TerminalStatus v) => v.utmStatus;
   static const Field<TerminalStatus, UtmSyncStatus> _f$utmStatus =
       Field('utmStatus', _$utmStatus);
+  static bool _$utmBusy(TerminalStatus v) => v.utmBusy;
+  static const Field<TerminalStatus, bool> _f$utmBusy =
+      Field('utmBusy', _$utmBusy);
+  static DateTime? _$statusReceiveTime(TerminalStatus v) => v.statusReceiveTime;
+  static const Field<TerminalStatus, DateTime> _f$statusReceiveTime =
+      Field('statusReceiveTime', _$statusReceiveTime, opt: true);
 
   @override
   final MappableFields<TerminalStatus> fields = const {
-    #statusReceiveTime: _f$statusReceiveTime,
     #utmStatus: _f$utmStatus,
+    #utmBusy: _f$utmBusy,
+    #statusReceiveTime: _f$statusReceiveTime,
   };
 
   static TerminalStatus _instantiate(DecodingData data) {
-    return TerminalStatus(data.dec(_f$statusReceiveTime),
-        utmStatus: data.dec(_f$utmStatus));
+    return TerminalStatus(
+        utmStatus: data.dec(_f$utmStatus),
+        utmBusy: data.dec(_f$utmBusy),
+        statusReceiveTime: data.dec(_f$statusReceiveTime));
   }
 
   @override
@@ -92,7 +98,8 @@ extension TerminalStatusValueCopy<$R, $Out>
 
 abstract class TerminalStatusCopyWith<$R, $In extends TerminalStatus, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({DateTime? statusReceiveTime, UtmSyncStatus? utmStatus});
+  $R call(
+      {UtmSyncStatus? utmStatus, bool? utmBusy, DateTime? statusReceiveTime});
   TerminalStatusCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -106,15 +113,21 @@ class _TerminalStatusCopyWithImpl<$R, $Out>
   late final ClassMapperBase<TerminalStatus> $mapper =
       TerminalStatusMapper.ensureInitialized();
   @override
-  $R call({Object? statusReceiveTime = $none, UtmSyncStatus? utmStatus}) =>
+  $R call(
+          {UtmSyncStatus? utmStatus,
+          bool? utmBusy,
+          Object? statusReceiveTime = $none}) =>
       $apply(FieldCopyWithData({
-        if (statusReceiveTime != $none) #statusReceiveTime: statusReceiveTime,
-        if (utmStatus != null) #utmStatus: utmStatus
+        if (utmStatus != null) #utmStatus: utmStatus,
+        if (utmBusy != null) #utmBusy: utmBusy,
+        if (statusReceiveTime != $none) #statusReceiveTime: statusReceiveTime
       }));
   @override
-  TerminalStatus $make(CopyWithData data) =>
-      TerminalStatus(data.get(#statusReceiveTime, or: $value.statusReceiveTime),
-          utmStatus: data.get(#utmStatus, or: $value.utmStatus));
+  TerminalStatus $make(CopyWithData data) => TerminalStatus(
+      utmStatus: data.get(#utmStatus, or: $value.utmStatus),
+      utmBusy: data.get(#utmBusy, or: $value.utmBusy),
+      statusReceiveTime:
+          data.get(#statusReceiveTime, or: $value.statusReceiveTime));
 
   @override
   TerminalStatusCopyWith<$R2, TerminalStatus, $Out2> $chain<$R2, $Out2>(

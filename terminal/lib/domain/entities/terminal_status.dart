@@ -9,9 +9,11 @@ part 'terminal_status.mapper.dart';
 @mappableModelClass
 class TerminalStatus with TerminalStatusMappable {
   final UtmSyncStatus utmStatus;
+  final bool utmBusy;
   final DateTime? statusReceiveTime;
-  TerminalStatus(
-    this.statusReceiveTime, {
+  TerminalStatus({
     required this.utmStatus,
+    required this.utmBusy,
+    this.statusReceiveTime,
   });
 }
