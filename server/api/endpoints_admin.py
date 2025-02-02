@@ -6,7 +6,7 @@ from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key
 from db.entities import PilotEntity
 from db.dbmanager import get_db
-from utils.send_mail import send_admin_notification
+from utils.send_mail import send_mail
 
 
 def __adminauth(api_key_header: str = Security(api_key_header)):
@@ -45,8 +45,9 @@ def deactivate_all_pilots(db: Session = Depends(get_db)):
 
 @api.get("/admin/admin_notification_test", dependencies=[Security(__adminauth)])
 def send_test_admin_notification(background_tasks:BackgroundTasks):
-    send_admin_notification(
+    send_mail(
         background_tasks=background_tasks, 
+        to=config.logbook.admin_email,
         subject='Test Admin Notification', 
-        body={'message':'Die SMTP Server Konfiguration funktioniert - congrats!'}
+        body='Der SMTP Server wurde korrekt konfiguriert'
     )

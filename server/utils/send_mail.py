@@ -5,6 +5,8 @@ from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from config.configmanager import config
 from utils.logger import log
 
+import traceback
+
 
 smtpconf = None
 if(config.smtp.server):
@@ -25,43 +27,40 @@ if(config.smtp.server):
         SUPPRESS_SEND=config.smtp.suppress_send,
     )
 
-def send_admin_notification(background_tasks: BackgroundTasks | None, subject: str, body: dict):
+def send_mail(to: str, subject: str, body: dict | str, template_name:str = 'notification.html', bcc: str | None = None, background_tasks: BackgroundTasks | None = None):
 
-    if not config.logbook.admin_email:
-        log.debug('Should send admin notification with subject "' + subject + '" but logbook.admin_email is not configured')
-        return
+    try:
+        if not to:
+            log.debug('Should send email with subject "' + subject + '" but email_to is not defined')
+            return
 
-    send_mail(
-        background_tasks=background_tasks,
-        template_name='admin_notification.html',
-        email_to=config.logbook.admin_email,
-        subject=subject,
-        body=body
-    )
+        if not smtpconf:
+            log.debug('Should send email with subject "' + subject + '" to "' + to + '" but smtp is not configured')
+            return
 
-def send_mail(background_tasks: BackgroundTasks | None, template_name:str, subject: str, email_to: str,body: dict):
+        msgbody = None
+        if isinstance(body, str):
+            msgbody = {'message':body}
+        else:
+            msgbody = body
 
-    if not email_to:
-        log.debug('Should send email with subject "' + subject + '" but email_to is not defined')
-        return
+        log.debug('Sending email with subject "' + subject + '" to "' + to + '"')
 
-    if not smtpconf:
-        log.debug('Should send email with subject "' + subject + '" to "' + email_to + '" but smtp is not configured')
-        return
-
-    log.debug('Sending email with subject "' + subject + '" to "' + email_to + '"')
-
-    message = MessageSchema(
-        subject=subject,
-        recipients=[email_to],
-        template_body=body,
-        subtype=MessageType.html
-    )
-    fm = FastMail(smtpconf)
-    if(background_tasks != None):
-        background_tasks.add_task(fm.send_message, message, template_name=template_name)
-    else:
-        asyncio.run(send_message_async(fm, message, template_name))
+        message = MessageSchema(
+            subject=subject,
+            recipients=[to],
+            bcc=[bcc] if bcc is not None else [],
+            template_body=msgbody,
+            subtype=MessageType.html
+        )
+        fm = FastMail(smtpconf)
+        if(background_tasks != None):
+            background_tasks.add_task(fm.send_message, message, template_name=template_name)
+        else:
+            asyncio.run(send_message_async(fm, message, template_name))
+    except:
+        # don't throw exception when notification fails
+        log.error(traceback.format_exc())
 
 async def send_message_async(fm, message, template_name):
     await fm.send_message(message, template_name)

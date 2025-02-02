@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import enum
 import threading
 
@@ -8,7 +8,7 @@ from db.entities import FlightSessionEntity, PilotEntity
 from config.configmanager import TerminalConfig, config
 from utils.logger import log
 from utils.scheduler import scheduler
-from utils.utm import update_utm_operator
+from utils.utm import UTM_FLIGHTPLAN_DURATION_MINUTES, update_utm_operator
 
 class UtmSyncStatus(enum.Enum):
      unknown = 'unknown'
@@ -19,18 +19,19 @@ class UtmSyncStatus(enum.Enum):
 class UtmSyncStatusData:
     def __init__(self):
         self.status:UtmSyncStatus = UtmSyncStatus.unknown
+        self.busy:bool = False
         self.flightSessionShould:FlightSessionEntity = None
         self.flightSessionIs:FlightSessionEntity = None
 
 lock = threading.Lock()
 utmSyncStatusDataDict:dict = {}
 
-def trigger_utm_sync_task():
-    job = scheduler.get_job(job_id='utm_sync_task')
-    job.modify(next_run_time=datetime.now())
+def trigger_utm_sync_task(time:datetime = None):
+    job = scheduler.get_job(job_id='sync_with_utm')
+    job.modify(next_run_time=(time if time is not None else datetime.now()))
 
 
-@scheduler.scheduled_job('interval', id='utm_sync_task', max_instances=2, coalesce=True, hours=9999999)
+@scheduler.scheduled_job('interval', id='sync_with_utm', max_instances=2, coalesce=True, hours=9999999)
 def sync_with_utm():
     # This method is executed a maximum of twice at the same time (max_instances=2)
     # The secode thread has to wait until the first one has finished. So whenever on or more changees occure
@@ -58,17 +59,26 @@ def sync_with_utm():
                     log.debug('pilotIDIs: ' + str(pilotIDIs))
                     if(pilotIDShould != pilotIDIs):
                         __updateUtmOperator(config.terminals[terminalid], utmSyncStatusDataDict[terminalid].flightSessionShould.pilotid)
-                        utmSyncStatusDataDict[terminalid].flightSessionIs = utmSyncStatusDataDict[terminalid].flightSessionShould
+                        utmSyncStatusDataDict[terminalid].flightSessionIs = utmSyncStatusDataDict[terminalid].flightSessionShould                        
                     else:
                         log.debug('MFL and UTM are in sync')
+
+                # enqueue taskrun for the case a pilot is longer active as 4 hours
+                if(utmSyncStatusDataDict[terminalid].flightSessionIs != None):
+                    utmEndTime = utmSyncStatusDataDict[terminalid].flightSessionIs.start + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES + 2)
+                    trigger_utm_sync_task(time=utmEndTime)
             except:
                 utmSyncStatusDataDict[terminalid].status = UtmSyncStatus.error
     finally:
         lock.release()
 
 def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
-    flying = update_utm_operator(config.airportname, config.airportkml, None if pilotid is None else __findPilot(pilotid))
-    utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.flying if flying else UtmSyncStatus.noActiveFlight
+    utmSyncStatusDataDict[config.terminalid].busy = True
+    try:
+        flying = update_utm_operator(config.airportname, config.airportkml, None if pilotid is None else __findPilot(pilotid))
+        utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.flying if flying else UtmSyncStatus.noActiveFlight
+    finally:
+        utmSyncStatusDataDict[config.terminalid].busy = False
 
 def __findRelevantFlightSession(terminalid:str):
     # fetch the active flight session with the earliest startdate and an utm-operator pilot
@@ -89,4 +99,4 @@ def __findPilot(pilotid:str):
         db.rollback()
         raise
     finally:
-        db.close()        
+        db.close()

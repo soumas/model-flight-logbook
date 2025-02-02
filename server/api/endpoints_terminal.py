@@ -10,9 +10,9 @@ from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, unknown_terminal
 from db.entities import FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
-from tasks.utm_sync_task import UtmSyncStatus, UtmSyncStatusData, trigger_utm_sync_task
-from utils.send_mail import send_admin_notification
-from tasks.utm_sync_task import utmSyncStatusDataDict
+from tasks.utm_tasks import UtmSyncStatus, trigger_utm_sync_task
+from utils.send_mail import send_mail
+from tasks.utm_tasks import utmSyncStatusDataDict
 
 def __specific_terminalauth(x_terminal:Annotated[str, Header()], api_key_header:str = Security(api_key_header)):
     if not x_terminal in config.terminals:
@@ -38,11 +38,13 @@ def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, 
 
 @api.get("/terminal/status", dependencies=[Security(__specific_terminalauth)], response_model=TerminalStatusDTO)
 def get_status(x_terminal:Annotated[str, Header()]):
-    global utmSyncStatusDataDict
+    global utmSyncStatusDataDict    
     state = UtmSyncStatus.unknown
+    busy = False
     if x_terminal in utmSyncStatusDataDict:
-        state = utmSyncStatusDataDict[x_terminal].status
-    return TerminalStatusDTO(utmStatus=state.name)
+        state = utmSyncStatusDataDict[x_terminal].status    
+        busy = utmSyncStatusDataDict[x_terminal].busy
+    return TerminalStatusDTO(utmStatus=state.name, utmBusy=busy)
 
 
 @api.get("/terminal/flightsession/status", dependencies=[Security(__specific_terminalauth)], response_model=FlightSessionStatusDTO)
@@ -50,8 +52,8 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
     
-    #infoMessages = ['Hüttenfest am 12.12.2024 nicht versäumen und sonst auch noch eine ganz lange botschaft. Ich wünsch dir viele Spaß mit dieser langen Meldung Und auch noch drei Zeilenumbürche.']
     infoMessages = []
+    #infoMessages = ['Hüttenfest am 12.12.2024 nicht versäumen und sonst auch noch eine ganz lange botschaft. Ich wünsch dir viele Spaß mit dieser langen Meldung Und auch noch drei Zeilenumbürche.']
     warnMessages = []
     erroMessages = []
     if(pilot.active != True):
@@ -85,7 +87,7 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     )
 
 @api.post("/terminal/flightsession/start", dependencies=[Security(__specific_terminalauth)], response_model=None)
-def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], background_tasks:BackgroundTasks, db:Session = Depends(get_db)):
+def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], db:Session = Depends(get_db)):
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     if(pilot.active != True):
         raise inactive_pilot    
@@ -111,11 +113,12 @@ def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[s
     fsession.airspaceObserver = data.airspaceObserver
     fsession.comment = data.comment
     db.commit()
-    trigger_utm_sync_task();
+    trigger_utm_sync_task()
     
     if(config.logbook.forward_comment and fsession.comment):
-        send_admin_notification(
-            background_tasks=background_tasks, 
-            subject='Besonderes Ereignis', 
-            body={'message':pilot.firstname + ' ' + pilot.lastname + ' (' + pilot.id + ') hat am Flugplatz "' + config.terminals[x_terminal].airportname + '" (' + config.terminals[x_terminal].terminalname + ') im Protokoll zum Flugtag folgendes besondere Ereignis angegeben:<br/><br/>' + fsession.comment }
+        send_mail(
+            background_tasks=background_tasks,
+            to=config.logbook.admin_email,
+            subject='Besonderes Ereignis erfasst', 
+            body='Pilot: ' + pilot.firstname + ' ' + pilot.lastname + ' (' + pilot.id + ')<br/>Flugplatz: ' + config.terminals[x_terminal].airportname + ' (' + config.terminals[x_terminal].terminalname + ')<br/>Ereignis: ' + fsession.comment
         )

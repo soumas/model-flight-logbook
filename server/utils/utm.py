@@ -4,7 +4,6 @@ import selenium
 import traceback
 from datetime import datetime, timedelta
 from pathlib import Path
-from fastapi import BackgroundTasks
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
@@ -17,18 +16,21 @@ from selenium.common.exceptions import StaleElementReferenceException, NoSuchEle
 from config.configmanager import config
 from db.entities import PilotEntity
 from utils.logger import log
-from utils.send_mail import send_admin_notification
+from utils.send_mail import send_mail
+from db.dbmanager import SessionLocal
 
- 
-DEFAULT_WAIT_TIME = 30
+
+DEFAULT_WAIT_TIME_SECONDS = 30
 DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 BASEURL = 'https://utm.dronespace.at/avm/#p=5/47.74/13.23'
+UTM_FLIGHTPLAN_DURATION_MINUTES = 4 * 60
 
 def __create_driver():
     log.debug('__create_driver')
     service = Service(config.logbook.chromedriver_path)
     options = Options()
+    options.add_argument("--lang=de-DE");
     options.add_argument("--headless")
     driver = webdriver.Chrome(service=service, options=options)
     driver.set_window_size(1920,1080)
@@ -49,11 +51,11 @@ def __utm_save_error_screenshot(driver, methodname:str):
             log.error('Error on saving screenshot for error in method ' + methodname)
             log.error(traceback.format_exc())
 
-def __wait_until_url_loaded(driver, url, timeout=DEFAULT_WAIT_TIME):
+def __wait_until_url_loaded(driver, url, timeout=DEFAULT_WAIT_TIME_SECONDS):
     log.debug('__wait_until_url_loaded, url {}, timeout {}'.format(url, timeout))
     WebDriverWait(driver, timeout).until(EC.url_matches(url))
 
-def __wait_until_clickable(driver, xpath, timeout=DEFAULT_WAIT_TIME):
+def __wait_until_clickable(driver, xpath, timeout=DEFAULT_WAIT_TIME_SECONDS):
     log.debug('__wait_until_clickable, xpath {}, timeout {}'.format(xpath, timeout))
     errcnt = 0;
     while True:
@@ -65,12 +67,12 @@ def __wait_until_clickable(driver, xpath, timeout=DEFAULT_WAIT_TIME):
                 raise
             errcnt = errcnt+1
 
-def __wait_and_click(driver, xpath, timeout=DEFAULT_WAIT_TIME):
+def __wait_and_click(driver, xpath, timeout=DEFAULT_WAIT_TIME_SECONDS):
     log.debug('__wait_and_click, xpath {}, timeout {}'.format(xpath, timeout))
     __wait_until_clickable(driver, xpath, timeout)
     driver.find_element(By.XPATH, xpath).click()
 
-def __wait_and_send_key(driver, xpath, text, timeout=DEFAULT_WAIT_TIME):
+def __wait_and_send_key(driver, xpath, text, timeout=DEFAULT_WAIT_TIME_SECONDS):
     log.debug('__wait_and_send_key, xpath {}, text ***, timeout {}'.format(xpath, timeout))
     __wait_until_clickable(driver, xpath, timeout)
     driver.find_element(By.XPATH, xpath).send_keys(Keys.CONTROL + "a")
@@ -132,34 +134,61 @@ def __find_all_active_flight_plan_xpaths(driver, airportname:str):
 def __close_active_flightplans(driver, airportname:str, pilotToIgnore:PilotEntity | None):
     activeFlightPlanXPaths = __find_all_active_flight_plan_xpaths(driver, airportname)
     for xpath in reversed(activeFlightPlanXPaths):
-        __wait_until_clickable(driver, xpath)
-        nameElement = driver.find_element(By.XPATH, xpath+"/p[@class='name']")
-        nameText = nameElement.text
-
+        
+        flightname = __read_flightname_from_dom(driver=driver, xpath=xpath)
+        pilotid = __extract_pilotid_from_flightname(airportname=airportname, flightname=flightname)
+        
         doClose = True
-        if pilotToIgnore != None:
-            regexstr = r"^" + airportname + " \((?P<pilotid>\d+)\)$"
-            matches = re.search(regexstr, nameText)
-            if matches != None and matches['pilotid'] == pilotToIgnore.id:
-                doClose = False
+        if pilotToIgnore != None and pilotid == pilotToIgnore.id:
+            doClose = False
 
         if doClose:
             __wait_and_click(driver, xpath)
             __wait_and_click(driver, "//button[normalize-space()='End flight']")
-            __send_admin_notification(airportname=airportname, subject='Flugplan "' + nameText + '" beendet', message='Flugplan wurde beendet<br/>Name: ' + nameText)
+            pilot = __findPilot(pilotid=pilotid)
+            send_mail(
+                to=pilot.email, 
+                bcc=config.logbook.admin_email, 
+                subject='Flugplan geschlossen: ' + flightname, 
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplan "' + flightname + '" wurde geschlossen.<br/><br/>Vielen Dank!')
+                        
 
 def __pilot_has_active_flight(driver, airportname:str, pilotid:str):
     activeFlightPlanXPaths = __find_all_active_flight_plan_xpaths(driver, airportname)
     for xpath in activeFlightPlanXPaths:
-        __wait_until_clickable(driver, xpath)
-        pElem = driver.find_element(By.XPATH, xpath+"/p[@class='name']")
-        regexstr = r"^" + airportname + " \((?P<pilotid>\d+)\)$"
-        matches = re.search(regexstr, pElem.text)
-        if matches != None and matches['pilotid'] == pilotid:
-            return True
+        flightname = __read_flightname_from_dom(driver=driver, xpath=xpath)
+        utmpilotid = __extract_pilotid_from_flightname(airportname=airportname, flightname=flightname)        
+        if pilotid == utmpilotid:
+            utmStartTime = __read_startdate_from_dom(driver, xpath=xpath)
+            utmEndTime = utmStartTime + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES)
+            stillactive = datetime.now() < utmEndTime
+            return stillactive
     return False
 
-def update_utm_operator(airportname:str, airportkml:str, operator:PilotEntity | None):
+def __read_flightname_from_dom(driver, xpath:str):
+    __wait_until_clickable(driver, xpath)
+    return driver.find_element(By.XPATH, xpath+"/p[@class='name']").text
+
+def __read_startdate_from_dom(driver, xpath:str):
+    __wait_until_clickable(driver, xpath)
+    datestring = driver.find_element(By.XPATH, xpath+"/p[@class='meta']/span[2]").text
+    dateregex = r"^(?P<day>\d{1,2})\.(?P<month>\d{1,2})\.(?P<year>\d{4})$"
+    datematches = re.search(dateregex, datestring)
+
+    timestring = driver.find_element(By.XPATH, xpath+"/p[@class='meta']/span[3]").text
+    timeregex = r"^(?P<hour>\d{1,2}):(?P<minute>\d{1,2})-"
+    timematches = re.search(timeregex, timestring)
+
+    return datetime(year=int(datematches['year']), month=int(datematches['month']), day=int(datematches['day']), hour=int(timematches['hour']), minute=int(timematches['minute']))
+
+def __extract_pilotid_from_flightname(airportname:str, flightname:str):
+    regexstr = r"^" + airportname + " \((?P<pilotid>\d+)\)$"
+    matches = re.search(regexstr, flightname)
+    if matches != None:
+        return matches['pilotid']
+    return None
+
+def update_utm_operator(airportname:str, airportkml:str, pilot:PilotEntity | None):
 
     if(config.utm.enabled != True):
         return
@@ -170,7 +199,7 @@ def update_utm_operator(airportname:str, airportkml:str, operator:PilotEntity | 
         driver = __create_driver()
         __utm_login(driver)
 
-        doCreateNewFlightplan = operator != None and not __pilot_has_active_flight(driver, airportname, operator.id)
+        doCreateNewFlightplan = pilot != None and not __pilot_has_active_flight(driver, airportname, pilot.id)
 
         if(doCreateNewFlightplan):
             __wait_and_click(driver, "//i[@class='ti ti-arrow-left']") #back to main menu
@@ -179,14 +208,14 @@ def update_utm_operator(airportname:str, airportkml:str, operator:PilotEntity | 
             __wait_until_clickable(driver, "//i[@class='ti ti-arrow-right']") # await menu animation
             driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(airportkml)
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
-            __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", operator.firstname)
-            __wait_and_send_key(driver, "//label[normalize-space()='Last name *']/following-sibling::input", operator.lastname)
-            __wait_and_send_key(driver, "//label[normalize-space()='Phone number *']/following-sibling::input", re.sub("[^0-9]", "", operator.phonenumber))
+            __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
+            __wait_and_send_key(driver, "//label[normalize-space()='Last name *']/following-sibling::input", pilot.lastname)
+            __wait_and_send_key(driver, "//label[normalize-space()='Phone number *']/following-sibling::input", re.sub("[^\+0-9]", "", pilot.phonenumber))
             __wait_and_send_key(driver, "//label[normalize-space()='Maximum takeoff mass (g) *']/following-sibling::input", config.utm.mtom_g)
             __wait_and_send_key(driver, "//label[normalize-space()='Max. altitude above ground (m) *']/following-sibling::input",config.utm.max_altitude_m)
-            __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight']/following-sibling::input", __build_flightplan_name(airportname, operator.id))
+            __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight']/following-sibling::input", __build_flightplan_name(airportname, pilot.id))
             utmStartTime = datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=2)
-            utmEndTime = utmStartTime + timedelta(hours=4, minutes=0)
+            utmEndTime = utmStartTime + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES)
             __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", (utmStartTime + timedelta(minutes=30)).strftime(DATETIME_FORMAT)) # first set end date to half an hour after startdate to avoid alert 'flight time too short'
             __wait_and_click(driver, "//label[normalize-space()='Phone number *']/following-sibling::input") # close calendar control by clicking into another field
             __wait_and_send_key(driver, "//label[normalize-space()='Start date and time *']/following-sibling::div/input", utmStartTime.strftime(DATETIME_FORMAT)) # now we can set the starttime without alert
@@ -194,71 +223,39 @@ def update_utm_operator(airportname:str, airportkml:str, operator:PilotEntity | 
             __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", utmEndTime.strftime(DATETIME_FORMAT))
             __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
             __wait_and_click(driver, "//i[@class='ti ti-send']")
-            __wait_and_click(driver, "//div[@class='waiting-plans']/div[@class='operation-plan']/div[@class='status APPROVED']/following-sibling::p[contains(normalize-space(.), '" + __build_flightplan_name(airportname,operator.id) + "')]", 300)
+            __wait_and_click(driver, "//div[@class='waiting-plans']/div[@class='operation-plan']/div[@class='status APPROVED']/following-sibling::p[contains(normalize-space(.), '" + __build_flightplan_name(airportname,pilot.id) + "')]", 300)
             secondsBeforeStartTime = (utmStartTime - datetime.now()).total_seconds() + 10 # 10 seconds buffer to be sure that start time is arrived
             if(secondsBeforeStartTime>0):
                 log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
                 time.sleep(secondsBeforeStartTime)
             __wait_and_click(driver, "//button[normalize-space()='Activate flight plan']")
             __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=300)            
-            __send_admin_notification(airportname=airportname, subject='Flugplan "' + __build_flightplan_name(airportname,operator.id) + '" aktiviert', message='Ein neuer Flugplan wurde aktiviert<br/>Name: ' + __build_flightplan_name(airportname,operator.id) + '<br/>Pilot: ' + operator.firstname + ' ' + operator.lastname)
+            send_mail(
+                to=pilot.email, 
+                bcc=config.logbook.admin_email, 
+                subject='Flugplan aktiviert: ' + __build_flightplan_name(airportname,pilot.id), 
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplatz "' + airportname + '" wurde in deinem Namen und deiner Telefonnummer ' + pilot.phonenumber + ' bei der Luftfahrtbehörde aktiviert.<br/><br/>' + __build_flightplan_name(airportname, pilot.id) + '<br/>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr <br/>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr<br/><br/><strong>Wichtig!</strong> Beende deinen Flugtag am MFL Terminal bevor du den Flugplatz verlässt. Dadurch wirst du automatisch auch bei der Luftfahrbehörde abgemeldet.<br/><br/>Vielen Dank!')
             
-
-        __close_active_flightplans(driver, airportname, None if operator is None else operator)
+        __close_active_flightplans(driver, airportname, None if pilot is None else pilot)
 
         # TODO: do fianl check if state is as desired
-        return False if operator is None else True
+        return False if pilot is None else True
 
     except:
         error = traceback.format_exc()
         log.error(error)
         __utm_save_error_screenshot(driver=driver, methodname='update_utm_operator')
-        __send_admin_notification(airportname=airportname, subject='UTM Interaktion fehlgeschlagen', message='Flugplatz: ' + airportname + '<br/>Fehler: ' + error)
+        send_mail(to=config.logbook.admin_email, subject='UTM Interaktion fehlgeschlagen', body='Flugplatz: ' + airportname + '<br/><br/>Fehler:<br/>' + error)
         raise
     finally:        
         __dispose_driver(driver)
 
-
-def __send_admin_notification(airportname:str, subject:str, message:str): 
-    # notify admin in case of an error
+def __findPilot(pilotid:str):
+    db = SessionLocal()
     try:
-        send_admin_notification(
-            background_tasks=None,
-            subject=subject,
-            body={'message':message}
-        )
+        return db.query(PilotEntity).filter(PilotEntity.id == pilotid).first()
     except:
-        # don't throw exception when notification fails
-        log.error(traceback.format_exc())
-
-
-
-# def __send_notification(background_tasks: BackgroundTasks, pilot: PilotEntity, fsession:FlightSessionEntity, terminal:TerminalConfig, error: str):    
-#     log.debug('__send_notification ({})'.format(pilot.id))
-
-#     # notify pilot
-#     try:
-#         if config.utm.notify_pilot:
-#             send_mail(
-#                 background_tasks=background_tasks,
-#                 template_name="pilot_utm_status.html",
-#                 email_to=pilot.email,
-#                 subject="UTM Status: " + fsession.flightplanstatus.value,
-#                 body={'status':fsession.flightplanstatus.value, 'flightname':__build_flight_title(pilot, terminal), 'adminmail':config.logbook.admin_email, 'airportname':terminal.airportname, 'terminalname':terminal.terminalname, 'starttime':fsession.utmlaststart, 'endtime':fsession.utmlastend}
-#             )
-#     except:
-#         # don't throw exception when notification fails
-#         log.error(traceback.format_exc())
-
-#     # notify admin in case of an error
-#     try:
-#         if fsession.flightplanstatus == FlightPlanStatus.error:
-#             send_admin_notification(
-#                 background_tasks=background_tasks,
-#                 subject="UTM Interaktion fehlgeschlagen!",
-#                 body={'message':'Bei einer Interaktion mit dem UTM System bzgl. dem Flug <b>"' + __build_flight_title(pilot,terminal) + '"</b> ist folgender Fehler aufgetreten:<br/><br/>' + error }
-#             )
-#     except:
-#         # don't throw exception when notification fails
-#         log.error(traceback.format_exc())
-
+        db.rollback()
+        raise
+    finally:
+        db.close()

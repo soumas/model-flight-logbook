@@ -36,4 +36,5 @@ class TerminalConfigDTO(BaseModel):
 
 class TerminalStatusDTO(BaseModel):
     utmStatus: str
+    utmBusy: bool
     
