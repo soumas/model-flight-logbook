@@ -80,10 +80,10 @@ class SelectedEndpointView extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${state.terminalStatus?.utmStatus.label}', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: state.terminalStatus?.utmStatus.color)),
+                      Text('${state.terminalStatus?.utmStatus.label}', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: state.terminalStatus?.utmStatus.color, height: 0.9)),
                       Text(
-                        'Letzte Update: ${DateFormat.Hm().format(state.terminalStatus!.statusReceiveTime!)} Uhr',
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurface.withAlpha(100)),
+                        'Letztes Update: ${DateFormat.Hm().format(state.terminalStatus!.statusReceiveTime!)} Uhr',
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurface.withAlpha(80)),
                       ),
                     ],
                   ),
