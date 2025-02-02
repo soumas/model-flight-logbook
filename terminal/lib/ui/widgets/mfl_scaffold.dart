@@ -30,7 +30,7 @@ class _MflScaffoldState extends State<MflScaffold> {
           controller: _scrollController,
           child: SingleChildScrollView(
             controller: _scrollController,
-            hitTestBehavior: HitTestBehavior.deferToChild,
+            hitTestBehavior: HitTestBehavior.translucent,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: widget.child,
