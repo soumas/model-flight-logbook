@@ -19,7 +19,7 @@ class EndFlightSessionForm extends StatefulWidget {
 }
 
 class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
-  final _data = EndFlightSessionData(takeoffcount: 0, airspaceObserver: false, maxAltitude: 119, comment: '');
+  final _data = EndFlightSessionData(takeoffcount: 1, airspaceObserver: false, maxAltitude: 119, comment: '');
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _commentTextEditingController;
   late final TextEditingController _numFlightsEditingController;
