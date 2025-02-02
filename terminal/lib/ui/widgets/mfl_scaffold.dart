@@ -18,7 +18,7 @@ class MflScaffold extends StatefulWidget {
 
 class _MflScaffoldState extends State<MflScaffold> {
   final ScrollController _scrollController = ScrollController();
-  final double _scrollbarWidth = 32;
+  final double _scrollbarWidth = 20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +26,12 @@ class _MflScaffoldState extends State<MflScaffold> {
         title: widget.title != null ? Text(widget.title!) : null,
       ),
       body: Builder(builder: (context) {
-        return Scrollbar(
+        return RawScrollbar(
           controller: _scrollController,
           thickness: _scrollbarWidth,
-          trackVisibility: true,
           thumbVisibility: true,
+          thumbColor: Colors.grey.shade800,
+          radius: const Radius.circular(5),
           child: SingleChildScrollView(
             controller: _scrollController,
             child: Padding(
