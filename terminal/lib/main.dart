@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/fragments/end_flight_session_form.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
@@ -10,6 +8,7 @@ import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/pilotid_input_screen.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
+import 'package:model_flight_logbook/ui/utils/mfl_scroll_behavior.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,23 +17,13 @@ Future<void> main() async {
   runApp(const MainApp());
 }
 
-class MyCustomScrollBehavior extends MaterialScrollBehavior {
-  // Override behavior methods and getters like dragDevices
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-        // etc.
-      };
-}
-
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scrollBehavior: MyCustomScrollBehavior(),
+      scrollBehavior: MflScrollBehavior(),
       theme: ThemeData.dark().copyWith(
         textTheme: ThemeData.dark().textTheme.copyWith(
               bodySmall: ThemeData.dark().textTheme.bodySmall!.copyWith(fontSize: 18),
