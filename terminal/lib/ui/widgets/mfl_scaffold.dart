@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class MflScaffold extends StatelessWidget {
@@ -20,7 +21,7 @@ class MflScaffold extends StatelessWidget {
       ),
       body: Builder(builder: (context) {
         return SingleChildScrollView(
-          hitTestBehavior: HitTestBehavior.translucent,
+          dragStartBehavior: DragStartBehavior.down,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: child,
