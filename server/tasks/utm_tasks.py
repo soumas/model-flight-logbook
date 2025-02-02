@@ -63,10 +63,10 @@ def sync_with_utm():
                     else:
                         log.debug('MFL and UTM are in sync')
 
-                # enqueue taskrun for the case a pilot is longer active as 4 hours
+                # enqueue taskrun for recreate a flightplan when the old one runs out
                 if(utmSyncStatusDataDict[terminalid].flightSessionIs != None):
-                    utmEndTime = utmSyncStatusDataDict[terminalid].flightSessionIs.start + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES + 2)
-                    trigger_utm_sync_task(time=utmEndTime)
+                    createNextFlightPlanTime = utmSyncStatusDataDict[terminalid].flightSessionIs.start + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES + 5)
+                    trigger_utm_sync_task(time=createNextFlightPlanTime)
             except:
                 utmSyncStatusDataDict[terminalid].status = UtmSyncStatus.error
     finally:
