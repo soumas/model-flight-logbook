@@ -50,9 +50,10 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
     
-    infoMessages = [];
-    warnMessages = [];
-    erroMessages = [];
+    #infoMessages = ['Hüttenfest am 12.12.2024 nicht versäumen und sonst auch noch eine ganz lange botschaft. Ich wünsch dir viele Spaß mit dieser langen Meldung Und auch noch drei Zeilenumbürche.']
+    infoMessages = []
+    warnMessages = []
+    erroMessages = []
     if(pilot.active != True):
         erroMessages.append('Konto inaktiv');
     
@@ -78,7 +79,6 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
         sessionId=None if fsession == None else fsession.id,
         sessionStarttime=None if fsession == None else fsession.start,
         sessionEndtime=None if fsession == None else fsession.end,
-        #infoMessages=['Hüttenfest am 12.12.2024 nicht versäumen und sonst auch noch eine ganz lange botschaft. Ich wünsch dir viele Spaß mit dieser langen Meldung\n\n\nUnd auch noch drei Zeilenumbürche.'],
         infoMessages=infoMessages,
         warnMessages=warnMessages,
         errorMessages=erroMessages,

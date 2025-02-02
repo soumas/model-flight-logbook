@@ -160,6 +160,10 @@ def __pilot_has_active_flight(driver, airportname:str, pilotid:str):
     return False
 
 def update_utm_operator(airportname:str, airportkml:str, operator:PilotEntity | None):
+
+    if(config.utm.enabled != True):
+        return
+
     driver = None
     error = None
     try:        
@@ -198,6 +202,7 @@ def update_utm_operator(airportname:str, airportkml:str, operator:PilotEntity | 
             __wait_and_click(driver, "//button[normalize-space()='Activate flight plan']")
             __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=300)            
             __send_admin_notification(airportname=airportname, subject='Flugplan "' + __build_flightplan_name(airportname,operator.id) + '" aktiviert', message='Ein neuer Flugplan wurde aktiviert<br/>Name: ' + __build_flightplan_name(airportname,operator.id) + '<br/>Pilot: ' + operator.firstname + ' ' + operator.lastname)
+            
 
         __close_active_flightplans(driver, airportname, None if operator is None else operator)
 
