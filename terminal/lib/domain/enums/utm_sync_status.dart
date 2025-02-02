@@ -5,19 +5,17 @@ part 'utm_sync_status.mapper.dart';
 
 @MappableEnum()
 enum UtmSyncStatus {
-  unknown(icon: Icons.circle, color: Colors.red, animated: false, label: 'Keine Flugfreigabe (warte)'),
-  noActiveFlight(icon: Icons.circle, color: Colors.red, animated: false, label: 'Keine Flugfreigabe'),
-  flying(icon: Icons.check_circle, color: Colors.green, animated: false, label: 'Flugfreigabe erteilt'),
-  error(icon: Icons.error, color: Colors.red, animated: false, label: 'UTM Interaktion fehlgeschlagen');
+  unknown(icon: Icons.warning, color: Colors.red, label: 'Keine Flugfreigabe'),
+  noActiveFlight(icon: Icons.warning, color: Colors.red, label: 'Keine Flugfreigabe'),
+  flying(icon: Icons.airplanemode_active, color: Colors.green, label: 'Flugfreigabe vorhanden'),
+  error(icon: Icons.error, color: Colors.red, label: 'UTM Interaktion fehlgeschlagen');
 
   final IconData icon;
   final Color color;
   final String label;
-  final bool animated;
   const UtmSyncStatus({
     required this.icon,
     required this.color,
     required this.label,
-    required this.animated,
   });
 }

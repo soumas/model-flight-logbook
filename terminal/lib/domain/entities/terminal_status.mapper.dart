@@ -21,17 +21,22 @@ class TerminalStatusMapper extends ClassMapperBase<TerminalStatus> {
   @override
   final String id = 'TerminalStatus';
 
+  static DateTime? _$statusReceiveTime(TerminalStatus v) => v.statusReceiveTime;
+  static const Field<TerminalStatus, DateTime> _f$statusReceiveTime =
+      Field('statusReceiveTime', _$statusReceiveTime);
   static UtmSyncStatus _$utmStatus(TerminalStatus v) => v.utmStatus;
   static const Field<TerminalStatus, UtmSyncStatus> _f$utmStatus =
       Field('utmStatus', _$utmStatus);
 
   @override
   final MappableFields<TerminalStatus> fields = const {
+    #statusReceiveTime: _f$statusReceiveTime,
     #utmStatus: _f$utmStatus,
   };
 
   static TerminalStatus _instantiate(DecodingData data) {
-    return TerminalStatus(utmStatus: data.dec(_f$utmStatus));
+    return TerminalStatus(data.dec(_f$statusReceiveTime),
+        utmStatus: data.dec(_f$utmStatus));
   }
 
   @override
@@ -87,7 +92,7 @@ extension TerminalStatusValueCopy<$R, $Out>
 
 abstract class TerminalStatusCopyWith<$R, $In extends TerminalStatus, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({UtmSyncStatus? utmStatus});
+  $R call({DateTime? statusReceiveTime, UtmSyncStatus? utmStatus});
   TerminalStatusCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -101,11 +106,15 @@ class _TerminalStatusCopyWithImpl<$R, $Out>
   late final ClassMapperBase<TerminalStatus> $mapper =
       TerminalStatusMapper.ensureInitialized();
   @override
-  $R call({UtmSyncStatus? utmStatus}) =>
-      $apply(FieldCopyWithData({if (utmStatus != null) #utmStatus: utmStatus}));
+  $R call({Object? statusReceiveTime = $none, UtmSyncStatus? utmStatus}) =>
+      $apply(FieldCopyWithData({
+        if (statusReceiveTime != $none) #statusReceiveTime: statusReceiveTime,
+        if (utmStatus != null) #utmStatus: utmStatus
+      }));
   @override
   TerminalStatus $make(CopyWithData data) =>
-      TerminalStatus(utmStatus: data.get(#utmStatus, or: $value.utmStatus));
+      TerminalStatus(data.get(#statusReceiveTime, or: $value.statusReceiveTime),
+          utmStatus: data.get(#utmStatus, or: $value.utmStatus));
 
   @override
   TerminalStatusCopyWith<$R2, TerminalStatus, $Out2> $chain<$R2, $Out2>(

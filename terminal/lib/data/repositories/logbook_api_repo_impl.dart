@@ -52,7 +52,7 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
     _dio.options.headers['x-terminal'] = endpoint.config.terminalid;
     _dio.options.headers['x-api-key'] = endpoint.apiKey;
     final response = await _dio.get('/terminal/status');
-    return TerminalStatusMapper.fromMap(response.data);
+    return TerminalStatusMapper.fromMap(response.data).copyWith(statusReceiveTime: DateTime.now());
   }
 
   void _prepareDio(TerminalEndpoint endpoint, String pilotid) {

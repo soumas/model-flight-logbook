@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/domain/enums/terminal_type.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
@@ -24,7 +25,7 @@ class _PilotidInputViewState extends State<PilotidInputView> {
   void initState() {
     super.initState();
     _refreshTerminalStateTimer = Timer.periodic(
-      const Duration(seconds: 15),
+      const Duration(minutes: 1),
       (timer) => context.read<PilotidInputCubit>().updateTerminalState(),
     );
   }
@@ -65,19 +66,29 @@ class SelectedEndpointView extends StatelessWidget {
           const Divider(),
           MflPaddings.verticalMedium(context),
           if (state.terminalStatus != null)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (state.terminalStatus?.utmStatus.animated ?? false) const CircularProgressIndicator(),
-                if (state.terminalStatus?.utmStatus.animated == false)
+            GestureDetector(
+              onTap: () => context.read<PilotidInputCubit>().updateTerminalState(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Icon(
                     state.terminalStatus?.utmStatus.icon,
                     color: state.terminalStatus?.utmStatus.color,
                     size: 64,
                   ),
-                const SizedBox(width: 15),
-                Text('${state.terminalStatus?.utmStatus.label}'),
-              ],
+                  const SizedBox(width: 15),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('${state.terminalStatus?.utmStatus.label}', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: state.terminalStatus?.utmStatus.color)),
+                      Text(
+                        'Letzte Update: ${DateFormat.Hm().format(state.terminalStatus!.statusReceiveTime!)} Uhr',
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurface.withAlpha(100)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           MflPaddings.verticalMedium(context),
           if (TerminalType.singleuser == state.selectedEndpoint!.config.terminaltype)

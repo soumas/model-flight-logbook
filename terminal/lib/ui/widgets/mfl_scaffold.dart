@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MflScaffold extends StatelessWidget {
+class MflScaffold extends StatefulWidget {
   const MflScaffold({
     super.key,
     this.title,
@@ -13,20 +13,32 @@ class MflScaffold extends StatelessWidget {
   final Widget? endDrawer;
 
   @override
+  State<MflScaffold> createState() => _MflScaffoldState();
+}
+
+class _MflScaffoldState extends State<MflScaffold> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: title != null ? Text(title!) : null,
+        title: widget.title != null ? Text(widget.title!) : null,
       ),
       body: Builder(builder: (context) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: child,
+        return RawScrollbar(
+          controller: _scrollController,
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            hitTestBehavior: HitTestBehavior.deferToChild,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: widget.child,
+            ),
           ),
         );
       }),
-      endDrawer: endDrawer,
+      endDrawer: widget.endDrawer,
     );
   }
 }
