@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_keyboard_layouts.dart';
@@ -43,6 +44,7 @@ class MflTextFormField extends StatelessWidget {
         ),
         controller: controller,
         readOnly: readOnly || _useVirtualKeyboard,
+        dragStartBehavior: DragStartBehavior.start,
         validator: validator,
         initialValue: initialValue,
         obscureText: obscureText,
