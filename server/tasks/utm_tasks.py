@@ -64,7 +64,7 @@ def sync_with_utm():
     finally:
         lock.release()
 
-@scheduler.scheduled_job('interval', id='schedule_next_utm_sync', max_instances=2, coalesce=True, minutes=1)
+@scheduler.scheduled_job('interval', id='schedule_next_utm_sync', max_instances=1, minutes=1)
 def schedule_next_utm_sync():
     # enqueue taskrun for recreate a flightplan when the old one runs out
     eraliestTriggerDate = None
@@ -76,7 +76,10 @@ def schedule_next_utm_sync():
             if(eraliestTriggerDate == None or eraliestTriggerDate > createNextFlightPlanTime):
                 eraliestTriggerDate = createNextFlightPlanTime
     if eraliestTriggerDate != None:
+        log.debug('XXXXXXXXx eraliestTriggerDate' + eraliestTriggerDate)
         trigger_utm_sync_task(time=eraliestTriggerDate)
+    else:
+        log.debug('XXXXXXXXx eraliestTriggerDate None')
 
 
 def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
