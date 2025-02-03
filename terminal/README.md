@@ -14,5 +14,9 @@ Terminal=false
 
 ---------
 disable mouse cursor for touch device:
-nano /etc/lightdm/lightdm.conf
-REPLACE '#xserver-command=X'  WITH '#xserver-command=X -nocursor'
+dirty, but works: 
+- rename cursor images: 
+    sudo mv /usr/share/icons/PiXflat/cursors/left_ptr /usr/share/icons/PiXflat/cursors/left_ptr.bak
+    sudo mv /usr/share/icons/PiXflat/cursors/hand /usr/share/icons/PiXflat/cursors/hand.bak
+    sudo mv /usr/share/icons/PiXflat/cursors/text /usr/share/icons/PiXflat/cursors/text.bak
+- rename it back to reactivet cursors
