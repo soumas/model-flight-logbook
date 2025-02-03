@@ -79,7 +79,7 @@ def schedule_next_utm_sync():
         if terminalid in utmSyncStatusDataDict and utmSyncStatusDataDict[terminalid].flightSessionIs != None:
             createNextFlightPlanTime = utmSyncStatusDataDict[terminalid].flightSessionIs.start + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES + 5)
             while createNextFlightPlanTime < datetime.now():
-                createNextFlightPlanTime = createNextFlightPlanTime + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES)
+                createNextFlightPlanTime = createNextFlightPlanTime + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES + 5)
             if(eraliestTriggerDate == None or eraliestTriggerDate > createNextFlightPlanTime):
                 eraliestTriggerDate = createNextFlightPlanTime
     if eraliestTriggerDate != None:
