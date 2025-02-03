@@ -12,3 +12,7 @@ Type=Application
 Exec=/home/pi/mfl/model-flight-logbook/terminal/build/linux/arm64/release/bundle/model_flight_logbook
 Terminal=false
 
+---------
+disable mouse cursor for touch device:
+nano /etc/lightdm/lightdm.conf
+REPLACE '#xserver-command=X'  WITH '#xserver-command=X -nocursor'
