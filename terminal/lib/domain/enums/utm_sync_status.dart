@@ -8,7 +8,8 @@ enum UtmSyncStatus {
   unknown(icon: Icons.warning, color: Colors.red, label: 'Keine Flugfreigabe'),
   noActiveFlight(icon: Icons.warning, color: Colors.red, label: 'Keine Flugfreigabe'),
   flying(icon: Icons.airplanemode_active, color: Colors.green, label: 'Flugfreigabe vorhanden'),
-  error(icon: Icons.error, color: Colors.red, label: 'UTM Interaktion fehlgeschlagen');
+  error(icon: Icons.error, color: Colors.red, label: 'UTM Interaktion fehlgeschlagen'),
+  updateFailed(icon: Icons.error, color: Colors.red, label: 'Update fehlgeschlagen');
 
   final IconData icon;
   final Color color;

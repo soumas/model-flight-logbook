@@ -33,6 +33,8 @@ class UtmSyncStatusMapper extends EnumMapper<UtmSyncStatus> {
         return UtmSyncStatus.flying;
       case 'error':
         return UtmSyncStatus.error;
+      case 'updateFailed':
+        return UtmSyncStatus.updateFailed;
       default:
         throw MapperException.unknownEnumValue(value);
     }
@@ -49,6 +51,8 @@ class UtmSyncStatusMapper extends EnumMapper<UtmSyncStatus> {
         return 'flying';
       case UtmSyncStatus.error:
         return 'error';
+      case UtmSyncStatus.updateFailed:
+        return 'updateFailed';
     }
   }
 }
