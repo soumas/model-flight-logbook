@@ -24,7 +24,7 @@ DEFAULT_WAIT_TIME_SECONDS = 30
 DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 DATETIME_FORMAT_WITH_SECONDS = '%d.%m.%Y %H:%M:%S'
 BASEURL = 'https://utm.dronespace.at/avm/#p=5/47.74/13.23'
-UTM_FLIGHTPLAN_DURATION_MINUTES = 1 * 60
+UTM_FLIGHTPLAN_DURATION_MINUTES = 15 # 4 * 60
 
 def __create_driver():
     log.debug('__create_driver')
