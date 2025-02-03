@@ -234,7 +234,7 @@ def update_utm_operator(airportname:str, airportkml:str, pilot:PilotEntity | Non
                 to=pilot.email, 
                 bcc=config.logbook.admin_email, 
                 subject='Flugplan aktiviert: ' + __build_flightplan_name(airportname,pilot.id), 
-                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplatz "' + airportname + '" wurde in deinem Namen und deiner Telefonnummer ' + pilot.phonenumber + ' bei der Luftfahrtbehörde aktiviert.<br/><br/>' + __build_flightplan_name(airportname, pilot.id) + '<br/>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr <br/>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr<br/><br/><strong>Wichtig!</strong> Beende deinen Flugtag am MFL Terminal bevor du den Flugplatz verlässt. Dadurch wirst du automatisch auch bei der Luftfahrbehörde abgemeldet.<br/><br/>Vielen Dank!')
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplatz "' + airportname + '" wurde in deinem Namen und deiner Telefonnummer ' + pilot.phonenumber + ' bei der Luftfahrtbehörde aktiviert.<br/><br/>' + __build_flightplan_name(airportname, pilot.id) + '<br/>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr <br/>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr<br/><br/><strong>Wichtig!</strong> Beende deinen Flugtag am MFL Terminal bevor du den Flugplatz verlässt. Dadurch wirst du automatisch auch bei der Luftfahrtbehörde abgemeldet.<br/><br/>Vielen Dank!')
             
         __close_active_flightplans(driver, airportname, None if pilot is None else pilot)
 
