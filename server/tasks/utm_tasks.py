@@ -30,8 +30,7 @@ def trigger_utm_sync_task(time:datetime = None):
     job = scheduler.get_job(job_id='sync_with_utm')
     job.modify(next_run_time=(time if time is not None else datetime.now()))
 
-
-@scheduler.scheduled_job('date', id='sync_with_utm', max_instances=2, coalesce=True)
+@scheduler.scheduled_job('interval', id='sync_with_utm', max_instances=2, coalesce=True, hours=9999999)
 def sync_with_utm():
     # This method is executed a maximum of twice at the same time (max_instances=2)
     # The secode thread has to wait until the first one has finished. So whenever on or more changees occure
@@ -40,8 +39,6 @@ def sync_with_utm():
     try:        
         for terminalid in config.terminals:
             try:
-                log.debug('Handling terminal with id ' + terminalid)
-
                 if not terminalid in utmSyncStatusDataDict:
                     utmSyncStatusDataDict[terminalid] = UtmSyncStatusData()
 
@@ -62,17 +59,25 @@ def sync_with_utm():
                         utmSyncStatusDataDict[terminalid].flightSessionIs = utmSyncStatusDataDict[terminalid].flightSessionShould                        
                     else:
                         log.debug('MFL and UTM are in sync')
-
-                # enqueue taskrun for recreate a flightplan when the old one runs out
-                if(utmSyncStatusDataDict[terminalid].flightSessionIs != None):                    
-                    createNextFlightPlanTime = utmSyncStatusDataDict[terminalid].flightSessionIs.start + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES + 5)
-                    while createNextFlightPlanTime < datetime.now():
-                        createNextFlightPlanTime = createNextFlightPlanTime + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES)
-                    trigger_utm_sync_task(time=createNextFlightPlanTime)
             except:
                 utmSyncStatusDataDict[terminalid].status = UtmSyncStatus.error
     finally:
         lock.release()
+
+@scheduler.scheduled_job('interval', id='schedule_next_utm_sync', max_instances=2, coalesce=True, minutes=1)
+def schedule_next_utm_sync():
+    # enqueue taskrun for recreate a flightplan when the old one runs out
+    eraliestTriggerDate = None
+    for terminalid in config.terminals:
+        if terminalid in utmSyncStatusDataDict and utmSyncStatusDataDict[terminalid].flightSessionIs != None:
+            createNextFlightPlanTime = utmSyncStatusDataDict[terminalid].flightSessionIs.start + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES + 5)
+            while createNextFlightPlanTime < datetime.now():
+                createNextFlightPlanTime = createNextFlightPlanTime + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES)
+            if(eraliestTriggerDate == None or eraliestTriggerDate > createNextFlightPlanTime):
+                eraliestTriggerDate = createNextFlightPlanTime
+    if eraliestTriggerDate != None:
+        trigger_utm_sync_task(time=eraliestTriggerDate)
+
 
 def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
     utmSyncStatusDataDict[config.terminalid].busy = True
@@ -81,6 +86,7 @@ def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
         utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.flying if flying else UtmSyncStatus.noActiveFlight
     finally:
         utmSyncStatusDataDict[config.terminalid].busy = False
+
 
 def __findRelevantFlightSession(terminalid:str):
     # fetch the active flight session with the earliest startdate and an utm-operator pilot
@@ -92,6 +98,7 @@ def __findRelevantFlightSession(terminalid:str):
         raise
     finally:
         db.close()
+
 
 def __findPilot(pilotid:str):
     db = SessionLocal()
