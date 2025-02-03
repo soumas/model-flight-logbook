@@ -26,9 +26,9 @@ class UtmSyncStatusData:
 lock = threading.Lock()
 utmSyncStatusDataDict:dict = {}
 
-def trigger_utm_sync_task(time:datetime = None):
+def trigger_utm_sync_task():
     job = scheduler.get_job(job_id='sync_with_utm')
-    job.modify(next_run_time=(time if time is not None else datetime.now()))
+    job.modify(next_run_time=(datetime.now()))
 
 @scheduler.scheduled_job('interval', id='sync_with_utm', max_instances=2, coalesce=True, hours=9999999)
 def sync_with_utm():
@@ -64,6 +64,13 @@ def sync_with_utm():
     finally:
         lock.release()
 
+@scheduler.scheduled_job('interval', id='force_sync_with_utm', max_instances=1, coalesce=True, hours=9999999)
+def force_sync_with_utm():
+    for terminalid in config.terminals:
+        if terminalid in utmSyncStatusDataDict:
+            utmSyncStatusDataDict[terminalid].flightSessionIs = None
+    trigger_utm_sync_task()
+
 @scheduler.scheduled_job('interval', id='schedule_next_utm_sync', max_instances=1, minutes=1)
 def schedule_next_utm_sync():
     # enqueue taskrun for recreate a flightplan when the old one runs out
@@ -76,11 +83,9 @@ def schedule_next_utm_sync():
             if(eraliestTriggerDate == None or eraliestTriggerDate > createNextFlightPlanTime):
                 eraliestTriggerDate = createNextFlightPlanTime
     if eraliestTriggerDate != None:
-        log.debug('XXXXXXXXx eraliestTriggerDate' + eraliestTriggerDate.strftime('%d.%m.%Y, %H:%M'))
-        trigger_utm_sync_task(time=eraliestTriggerDate)
-    else:
-        log.debug('XXXXXXXXx eraliestTriggerDate None')
-
+        log.debug('schedule force_sync_with_utm at ' + eraliestTriggerDate.strftime('%d.%m.%Y, %H:%M'))
+        job = scheduler.get_job(job_id='force_sync_with_utm')
+        job.modify(next_run_time=(datetime.now()))
 
 def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
     utmSyncStatusDataDict[config.terminalid].busy = True

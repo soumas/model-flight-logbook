@@ -8,7 +8,7 @@ from config.configmanager import TerminalConfig, config
 from db.dbmanager import SessionLocal
 from utils.send_mail import send_mail
 
-@scheduler.scheduled_job('cron', id='close_all_flightsessions', hour=22, minute=30)
+@scheduler.scheduled_job('cron', id='close_all_flightsessions', hour=23, minute=00)
 def close_all_flightsessions():
     try:
         for fsession in __findOpenFlightSession():
