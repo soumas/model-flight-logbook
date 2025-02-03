@@ -85,7 +85,7 @@ def schedule_next_utm_sync():
     if eraliestTriggerDate != None:
         log.debug('schedule force_sync_with_utm at ' + eraliestTriggerDate.strftime('%d.%m.%Y, %H:%M'))
         job = scheduler.get_job(job_id='force_sync_with_utm')
-        job.modify(next_run_time=(datetime.now()))
+        job.modify(next_run_time=eraliestTriggerDate)
 
 def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
     utmSyncStatusDataDict[config.terminalid].busy = True
