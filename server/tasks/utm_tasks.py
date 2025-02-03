@@ -31,7 +31,7 @@ def trigger_utm_sync_task(time:datetime = None):
     job.modify(next_run_time=(time if time is not None else datetime.now()))
 
 
-@scheduler.scheduled_job('interval', id='sync_with_utm', max_instances=2, coalesce=True, hours=9999999)
+@scheduler.scheduled_job('date', id='sync_with_utm', max_instances=2, coalesce=True)
 def sync_with_utm():
     # This method is executed a maximum of twice at the same time (max_instances=2)
     # The secode thread has to wait until the first one has finished. So whenever on or more changees occure
