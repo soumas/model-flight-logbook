@@ -27,7 +27,7 @@ def __closeFlightSession(fsession:FlightSessionEntity):
     db = SessionLocal()
     try:    
         fsession.end = datetime.now()
-        fsession.comment = 'Durch MFL Server geschlossen'
+        fsession.comment = 'autoclose'
         db.merge(fsession)
         db.commit() 
     except:
