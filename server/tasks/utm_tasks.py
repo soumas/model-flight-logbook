@@ -76,7 +76,7 @@ def schedule_next_utm_sync():
             if(eraliestTriggerDate == None or eraliestTriggerDate > createNextFlightPlanTime):
                 eraliestTriggerDate = createNextFlightPlanTime
     if eraliestTriggerDate != None:
-        log.debug('XXXXXXXXx eraliestTriggerDate' + eraliestTriggerDate)
+        log.debug('XXXXXXXXx eraliestTriggerDate' + eraliestTriggerDate.strftime('%d.%m.%Y, %H:%M'))
         trigger_utm_sync_task(time=eraliestTriggerDate)
     else:
         log.debug('XXXXXXXXx eraliestTriggerDate None')
