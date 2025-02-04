@@ -14,9 +14,5 @@ Terminal=false
 
 ---------
 disable mouse cursor for touch device:
-dirty, but works: 
-- rename cursor images: 
-    sudo mv /usr/share/icons/PiXflat/cursors/left_ptr /usr/share/icons/PiXflat/cursors/left_ptr.bak
-    sudo mv /usr/share/icons/PiXflat/cursors/hand /usr/share/icons/PiXflat/cursors/hand.bak
-    sudo mv /usr/share/icons/PiXflat/cursors/text /usr/share/icons/PiXflat/cursors/text.bak
-- rename it back to reactivet cursors
+switch from Wayland to x11 --> sudo raspi-config --> Advanced Options --> Wayland
+edit /etc/lightdm/lightdm.conf --> from "#xserver-command = X" to "xserver-command = X -nocursor"
