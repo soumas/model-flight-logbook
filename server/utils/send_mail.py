@@ -27,7 +27,7 @@ if(config.smtp.server):
         SUPPRESS_SEND=config.smtp.suppress_send,
     )
 
-def send_mail(to: str, subject: str, body: dict | str, template_name:str = 'notification.html', bcc: str | None = None, background_tasks: BackgroundTasks | None = None):
+def send_mail(to: str, subject: str, body: dict | str, template_name:str = 'notification.html', bcc: str | None = None, background_tasks: BackgroundTasks | None = None, attachmentpath: str | None = None):
 
     try:
         if not to:
@@ -51,7 +51,8 @@ def send_mail(to: str, subject: str, body: dict | str, template_name:str = 'noti
             recipients=[to],
             bcc=[bcc] if bcc is not None else [],
             template_body=msgbody,
-            subtype=MessageType.html
+            subtype=MessageType.html,
+            attachments=[attachmentpath] if attachmentpath is not None else []
         )
         fm = FastMail(smtpconf)
         if(background_tasks != None):

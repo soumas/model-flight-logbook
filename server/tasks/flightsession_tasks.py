@@ -19,7 +19,7 @@ def close_all_flightsessions():
                 to=pilot.email, 
                 bcc=config.logbook.admin_email, 
                 subject='⚠ Fehlendes Protokoll (' + fsession.start.strftime('%d.%m.%Y') + ')', 
-                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Dein Flugtag vom ' + fsession.start.strftime('%d.%m.%Y') + ' (Checkin um ' + fsession.start.strftime('%H:%M') + ' Uhr) am Flugplatz "' + terminalconfig.airportname + '" wurde nicht vollständig protokolliert.<br/><br/><strong>Wichtig!</strong> Bitte schließe künftige Flugtage verlässlich über das MFL Terminal ab, damit wir als Verein durch eine lückenlose Aufzeichnung den gesetzlichen Anforderungen nachkommen können.<br/><br/>Vielen Dank!')
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Dein Flugtag vom ' + fsession.start.strftime('%d.%m.%Y') + ' (Checkin um ' + fsession.start.strftime('%H:%M') + ' Uhr) am Flugplatz "' + terminalconfig.airportname + '" wurde nicht vollständig protokolliert.<br/><br/><strong>Wichtig!</strong> Bitte schließe künftige Flugtage verlässlich über das MFL Terminal ab, damit wir als Verein durch eine lückenlose Aufzeichnung den gesetzlichen Anforderungen nachkommen können.<br/>')
     finally:
         trigger_utm_sync_task()
 

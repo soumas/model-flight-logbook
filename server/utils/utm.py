@@ -39,14 +39,16 @@ def __create_driver():
 def __dispose_driver(driver):
     log.debug('__dispose_driver')
     if driver != None:
-        driver.close()
+        driver.quit()
 
 def __utm_save_error_screenshot(driver, methodname:str):
     if driver != None:
         try:
             utmerrorpath = './utm_error_screenshots/'
             Path(utmerrorpath).mkdir(parents=True, exist_ok=True)
-            driver.save_screenshot(utmerrorpath + datetime.now().strftime('%Y%m%d%H%M%S') + '_' + methodname +  '.png')
+            errorimgpath = utmerrorpath + datetime.now().strftime('%Y%m%d%H%M%S') + '_' + methodname +  '.png'
+            driver.save_screenshot(errorimgpath)
+            return errorimgpath
         except:
             log.error('Error on saving screenshot for error in method ' + methodname)
             log.error(traceback.format_exc())
@@ -139,7 +141,7 @@ def __close_active_flightplans(driver, airportname:str, pilotToIgnore:PilotEntit
         pilotid = __extract_pilotid_from_flightname(airportname=airportname, flightname=flightname)
         
         doClose = True
-        if pilotToIgnore != None and pilotid == pilotToIgnore.id:
+        if pilotToIgnore != None and pilotid == pilotToIgnore.id and __read_flightplan_is_active_from_dom(driver=driver, xpath=xpath):
             doClose = False
 
         if doClose:
@@ -150,7 +152,7 @@ def __close_active_flightplans(driver, airportname:str, pilotToIgnore:PilotEntit
                 to=pilot.email, 
                 bcc=config.logbook.admin_email, 
                 subject='Flugplan geschlossen: ' + flightname, 
-                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplan "' + flightname + '" wurde geschlossen.<br/><br/>Vielen Dank!')
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplan "' + flightname + '" wurde geschlossen.<br/>')
                         
 
 def __pilot_has_active_flight(driver, airportname:str, pilotid:str):
@@ -158,12 +160,14 @@ def __pilot_has_active_flight(driver, airportname:str, pilotid:str):
     for xpath in activeFlightPlanXPaths:
         flightname = __read_flightname_from_dom(driver=driver, xpath=xpath)
         utmpilotid = __extract_pilotid_from_flightname(airportname=airportname, flightname=flightname)        
-        if pilotid == utmpilotid:
-            utmStartTime = __read_startdate_from_dom(driver, xpath=xpath)
-            utmEndTime = utmStartTime + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES)
-            stillactive = datetime.now() < utmEndTime
-            return stillactive
+        if pilotid == utmpilotid and __read_flightplan_is_active_from_dom(driver=driver, xpath=xpath):
+            return True
     return False
+
+def __read_flightplan_is_active_from_dom(driver, xpath:str):
+    utmStartTime = __read_startdate_from_dom(driver, xpath=xpath)
+    utmEndTime = utmStartTime + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES)
+    return datetime.now() < utmEndTime
 
 def __read_flightname_from_dom(driver, xpath:str):
     __wait_until_clickable(driver, xpath)
@@ -234,7 +238,7 @@ def update_utm_operator(airportname:str, airportkml:str, pilot:PilotEntity | Non
                 to=pilot.email, 
                 bcc=config.logbook.admin_email, 
                 subject='Flugplan aktiviert: ' + __build_flightplan_name(airportname,pilot.id), 
-                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplatz "' + airportname + '" wurde in deinem Namen und deiner Telefonnummer ' + pilot.phonenumber + ' bei der Luftfahrtbehörde aktiviert.<br/><br/>' + __build_flightplan_name(airportname, pilot.id) + '<br/>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr <br/>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr<br/><br/><strong>Wichtig!</strong> Beende deinen Flugtag am MFL Terminal bevor du den Flugplatz verlässt. Dadurch wirst du automatisch auch bei der Luftfahrtbehörde abgemeldet.<br/><br/>Vielen Dank!')
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplatz "' + airportname + '" wurde in deinem Namen und deiner Telefonnummer ' + pilot.phonenumber + ' bei der Luftfahrtbehörde aktiviert.<br/><br/>' + __build_flightplan_name(airportname, pilot.id) + '<br/>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr <br/>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + 'Uhr<br/><br/><strong>Wichtig!</strong> Beende deinen Flugtag am MFL Terminal bevor du den Flugplatz verlässt. Dadurch wirst du automatisch auch bei der Luftfahrtbehörde abgemeldet.<br/>')
             
         __close_active_flightplans(driver, airportname, None if pilot is None else pilot)
 
@@ -244,8 +248,8 @@ def update_utm_operator(airportname:str, airportkml:str, pilot:PilotEntity | Non
     except:
         error = traceback.format_exc()
         log.error(error)
-        __utm_save_error_screenshot(driver=driver, methodname='update_utm_operator')
-        send_mail(to=config.logbook.admin_email, subject='UTM Interaktion fehlgeschlagen', body='Flugplatz: ' + airportname + '<br/><br/>Fehler:<br/>' + error)
+        screenshotpath = __utm_save_error_screenshot(driver=driver, methodname='update_utm_operator')
+        send_mail(to=config.logbook.admin_email, subject='UTM Interaktion fehlgeschlagen', body='Flugplatz: ' + airportname + '<br/><br/>Fehler:<br/>' + error, attachmentpath=screenshotpath)
         raise
     finally:        
         __dispose_driver(driver)

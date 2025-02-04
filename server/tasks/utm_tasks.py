@@ -25,6 +25,7 @@ class UtmSyncStatusData:
 
 lock = threading.Lock()
 utmSyncStatusDataDict:dict = {}
+utmSyncErrorCount = 0
 
 def trigger_utm_sync_task():
     job = scheduler.get_job(job_id='sync_with_utm')
@@ -32,7 +33,7 @@ def trigger_utm_sync_task():
 
 @scheduler.scheduled_job('interval', id='sync_with_utm', max_instances=2, coalesce=True, hours=9999999)
 def sync_with_utm():
-    # This method is executed a maximum of twice at the same time (max_instances=2)
+    # This method is executed twice the same time at maximum (max_instances=2)
     # The secode thread has to wait until the first one has finished. So whenever on or more changees occure
     # during long running UTM Sync task, the second thread will do its job with newest data thereafter.
     lock.acquire()
@@ -61,19 +62,32 @@ def sync_with_utm():
                         log.debug('MFL and UTM are in sync')
             except:
                 utmSyncStatusDataDict[terminalid].status = UtmSyncStatus.error
+                utmSyncErrorCount = utmSyncErrorCount + 1
     finally:
         lock.release()
 
-@scheduler.scheduled_job('interval', id='force_sync_with_utm', max_instances=1, coalesce=True, hours=9999999)
-def force_sync_with_utm():
+@scheduler.scheduled_job('interval', id='utm_sync_scheduler', max_instances=1, minutes=1)
+def utm_sync_scheduler():
+    # check if any state is unknown (usually after server start)
     for terminalid in config.terminals:
-        if terminalid in utmSyncStatusDataDict:
-            utmSyncStatusDataDict[terminalid].flightSessionIs = None
-    trigger_utm_sync_task()
+        if terminalid not in utmSyncStatusDataDict or utmSyncStatusDataDict[terminalid].status == UtmSyncStatus.unknown:
+            log.debug(msg='State of terminal ' + terminalid + ' is unknown --> trigger_utm_sync_task')
+            trigger_utm_sync_task()
+            return
+        
+    # retrigger utm sync if any state is error
+    for terminalid in config.terminals:
+        if terminalid in utmSyncStatusDataDict and utmSyncStatusDataDict[terminalid].status == UtmSyncStatus.error:
+            if utmSyncErrorCount  < 3:
+                log.warning(msg='utmSyncErrorCount is ' + str(utmSyncErrorCount) + ', next try now')
+                trigger_utm_sync_task()
+            else:
+                log.warning(msg='utmSyncErrorCount is ' + str(utmSyncErrorCount) + ', next try in one hour')
+                job = scheduler.get_job(job_id='utm_sync_scheduler')
+                job.modify(next_run_time=datetime.now() + timedelta(minutes=60))
+            return
 
-@scheduler.scheduled_job('interval', id='schedule_next_utm_sync', max_instances=1, minutes=1)
-def schedule_next_utm_sync():
-    # enqueue taskrun for recreate a flightplan when the old one runs out
+    # everything is fine but it could be that a pilot is longer active as the maximum flightplan duration (UTM_FLIGHTPLAN_DURATION_MINUTES)
     eraliestTriggerDate = None
     for terminalid in config.terminals:
         if terminalid in utmSyncStatusDataDict and utmSyncStatusDataDict[terminalid].flightSessionIs != None:
@@ -86,6 +100,14 @@ def schedule_next_utm_sync():
         log.debug('schedule force_sync_with_utm at ' + eraliestTriggerDate.strftime('%d.%m.%Y, %H:%M'))
         job = scheduler.get_job(job_id='force_sync_with_utm')
         job.modify(next_run_time=eraliestTriggerDate)
+
+
+@scheduler.scheduled_job('interval', id='force_sync_with_utm', max_instances=1, coalesce=True, hours=9999999)
+def force_sync_with_utm():
+    for terminalid in config.terminals:
+        if terminalid in utmSyncStatusDataDict:
+            utmSyncStatusDataDict[terminalid].flightSessionIs = None
+    trigger_utm_sync_task()
 
 def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
     utmSyncStatusDataDict[config.terminalid].busy = True

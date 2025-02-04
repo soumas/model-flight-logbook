@@ -14,7 +14,6 @@ async def lifespan(app: FastAPI):
     # before first reqeust (startup event)
     execute_db_migration()
     scheduler.start()
-    trigger_utm_sync_task()
     # run server
     yield
     # after last request (shutdown event)
