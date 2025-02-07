@@ -64,7 +64,7 @@ class SelectedEndpointView extends StatelessWidget {
           ),
           Text(
             state.selectedEndpoint?.config.terminalname ?? 'Unbekanntes Terminal',
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface.withAlpha(90)),
           ),
           MflPaddings.verticalMedium(context),
           const Divider(),
@@ -92,9 +92,9 @@ class SelectedEndpointView extends StatelessWidget {
                             style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurface.withAlpha(90)),
                           ),
                           if (state.terminalStatus?.utmBusy ?? false)
-                            const Padding(
-                              padding: EdgeInsets.only(left: 8.0),
-                              child: SizedBox(height: 12, width: 12, child: CircularProgressIndicator(strokeWidth: 1, color: Colors.grey)),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: SizedBox(height: 12, width: 12, child: CircularProgressIndicator(strokeWidth: 1, color: Theme.of(context).colorScheme.onSurface.withAlpha(90))),
                             ),
                         ],
                       ),
