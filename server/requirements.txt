@@ -7,3 +7,4 @@ alembic==1.14.0
 selenium==4.27.1
 requests==2.32.3
 apscheduler==3.11.0
+cryptography==44.0.0
