@@ -38,17 +38,16 @@ static void my_application_activate(GApplication* application) {
   }
 #endif
   if (use_header_bar) {
-    // GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
-    // gtk_widget_show(GTK_WIDGET(header_bar));
-    // gtk_header_bar_set_title(header_bar, "Model Flight Logbook");
-    // gtk_header_bar_set_show_close_button(header_bar, TRUE);
-    // gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
+    GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
+    gtk_widget_show(GTK_WIDGET(header_bar));
+    gtk_header_bar_set_title(header_bar, "Model Flight Logbook");
+    gtk_header_bar_set_show_close_button(header_bar, TRUE);
+    gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
   } else {
-    //gtk_window_set_title(window, "Model Flight Logbook");
+    gtk_window_set_title(window, "Model Flight Logbook");
   }
 
-  //gtk_window_set_default_size(window, 800, 500);
-  //gtk_window_set_decorated(window, FALSE);
+  gtk_window_set_default_size(window, 800, 460);
   gtk_window_fullscreen(GTK_WINDOW(window));
   gtk_widget_show(GTK_WIDGET(window));
 
