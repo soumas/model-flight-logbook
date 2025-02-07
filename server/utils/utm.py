@@ -1,3 +1,4 @@
+import functools
 import re
 import time
 import selenium
@@ -53,33 +54,61 @@ def __utm_save_error_screenshot(driver, methodname:str):
             log.error('Error on saving screenshot for error in method ' + methodname)
             log.error(traceback.format_exc())
 
+
+def __run_with_retry(func, *args):
+    errcnt = 0;
+    while True:
+        try:
+            if(len(args) == 0):
+                return func()
+            elif(len(args) == 1):
+                return func(args[0])
+            elif(len(args) == 2):
+                return func(args[0],args[1])
+            elif (len(args) == 3):
+                return func(args[0],args[1],args[2])
+            elif(len(args) == 4):
+                return func(args[0],args[1],args[2],args[3])
+            elif(len(args) == 5):
+                return func(args[0],args[1],args[2],args[3], args[4])
+            else:
+                raise 'too much arguments - not supported'
+        except StaleElementReferenceException:
+            if errcnt >= 2:
+                raise
+            errcnt = errcnt+1
+
 def __wait_until_url_loaded(driver, url, timeout=DEFAULT_WAIT_TIME_SECONDS):
     log.debug('__wait_until_url_loaded, url {}, timeout {}'.format(url, timeout))
     WebDriverWait(driver, timeout).until(EC.url_matches(url))
 
 def __wait_until_clickable(driver, xpath, timeout=DEFAULT_WAIT_TIME_SECONDS):
     log.debug('__wait_until_clickable, xpath {}, timeout {}'.format(xpath, timeout))
-    errcnt = 0;
-    while True:
-        try:
-            WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath)))
-            return
-        except StaleElementReferenceException:
-            if errcnt >= 5:
-                raise
-            errcnt = errcnt+1
+    __run_with_retry(
+        lambda driver, xpath, timeout: WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath))),
+        driver,xpath,timeout
+    )
 
 def __wait_and_click(driver, xpath, timeout=DEFAULT_WAIT_TIME_SECONDS):
     log.debug('__wait_and_click, xpath {}, timeout {}'.format(xpath, timeout))
     __wait_until_clickable(driver, xpath, timeout)
-    driver.find_element(By.XPATH, xpath).click()
+    __run_with_retry(
+        lambda driver, xpath: driver.find_element(By.XPATH, xpath).click(),
+        driver, xpath
+    )
 
 def __wait_and_send_key(driver, xpath, text, timeout=DEFAULT_WAIT_TIME_SECONDS):
     log.debug('__wait_and_send_key, xpath {}, text ***, timeout {}'.format(xpath, timeout))
     __wait_until_clickable(driver, xpath, timeout)
-    driver.find_element(By.XPATH, xpath).send_keys(Keys.CONTROL + "a")
-    driver.find_element(By.XPATH, xpath).send_keys(Keys.DELETE)
-    driver.find_element(By.XPATH, xpath).send_keys(text)
+    __run_with_retry(
+        lambda driver, xpath:driver.find_element(By.XPATH, xpath).send_keys(Keys.CONTROL + "a"),
+        driver, xpath)
+    __run_with_retry(
+        lambda driver, xpath:driver.find_element(By.XPATH, xpath).send_keys(Keys.DELETE),
+        driver,xpath)
+    __run_with_retry(
+        lambda driver, xpath:driver.find_element(By.XPATH, xpath).send_keys(text),
+        driver,xpath)
 
 def __check_if_exists(driver, xpath):
     try:

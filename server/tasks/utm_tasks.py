@@ -33,6 +33,7 @@ def trigger_utm_sync_task():
 
 @scheduler.scheduled_job('interval', id='sync_with_utm', max_instances=2, coalesce=True, hours=9999999)
 def sync_with_utm():
+    global utmSyncErrorCount
     # This method is executed twice the same time at maximum (max_instances=2)
     # The secode thread has to wait until the first one has finished. So whenever on or more changees occure
     # during long running UTM Sync task, the second thread will do its job with newest data thereafter.
@@ -104,6 +105,7 @@ def utm_sync_scheduler():
 
 @scheduler.scheduled_job('interval', id='force_sync_with_utm', max_instances=1, coalesce=True, hours=9999999)
 def force_sync_with_utm():
+    global utmSyncErrorCount
     for terminalid in config.terminals:
         if terminalid in utmSyncStatusDataDict:
             utmSyncStatusDataDict[terminalid].flightSessionIs = None
