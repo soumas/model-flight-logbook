@@ -47,7 +47,7 @@ static void my_application_activate(GApplication* application) {
     gtk_window_set_title(window, "Model Flight Logbook");
   }
 
-  gtk_window_set_default_size(window, 800, 480);
+  gtk_window_set_default_size(window, 800, 500);
   gtk_window_set_decorated(window, FALSE);
   //gtk_window_fullscreen(GTK_WINDOW(window));
   gtk_widget_show(GTK_WIDGET(window));
