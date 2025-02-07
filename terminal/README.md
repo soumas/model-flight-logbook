@@ -13,6 +13,14 @@ Exec=/home/pi/mfl/model-flight-logbook/terminal/build/linux/arm64/release/bundle
 Terminal=false
 
 ---------
-disable mouse cursor for touch device:
-switch from Wayland to x11 --> sudo raspi-config --> Advanced Options --> Wayland
-edit /etc/lightdm/lightdm.conf --> from "#xserver-command = X" to "xserver-command = X -nocursor"
+dirty way to disable mouse cursor for touch device (rename pointer images):
+
+``` bash
+for file in /usr/share/icons/PiXflat/cursors/*; do mv "$file" "${file}.bak"; done 
+```
+
+reverse
+
+``` bash
+for file in /usr/share/icons/PiXflat/cursors/*.bak; do mv "$file" "${file/.bak/}"; done 
+```

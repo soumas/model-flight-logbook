@@ -62,6 +62,10 @@ class SelectedEndpointView extends StatelessWidget {
             state.selectedEndpoint?.config.airportname ?? 'Unbekannter Flugplatz',
             style: Theme.of(context).textTheme.headlineLarge,
           ),
+          Text(
+            state.selectedEndpoint?.config.terminalname ?? 'Unbekanntes Terminal',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
           MflPaddings.verticalMedium(context),
           const Divider(),
           MflPaddings.verticalMedium(context),
