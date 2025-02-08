@@ -34,6 +34,10 @@ def trigger_utm_sync_task():
 
 @scheduler.scheduled_job('interval', id='sync_with_utm', max_instances=2, coalesce=True, hours=9999999)
 def sync_with_utm():
+
+    if(config.utm.enabled != True):
+        return
+
     global utmSyncErrorCount
     # This method is executed twice the same time at maximum (max_instances=2)
     # The secode thread has to wait until the first one has finished. So whenever on or more changees occure
