@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/domain/enums/terminal_type.dart';
+import 'package:model_flight_logbook/domain/enums/utm_sync_status.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_state.dart';
@@ -69,7 +70,7 @@ class SelectedEndpointView extends StatelessWidget {
           MflPaddings.verticalMedium(context),
           const Divider(),
           MflPaddings.verticalMedium(context),
-          if (state.terminalStatus != null)
+          if (state.terminalStatus != null && state.terminalStatus!.utmStatus != UtmSyncStatus.disabled)
             GestureDetector(
               onTap: () => context.read<PilotidInputCubit>().updateTerminalState(),
               child: Row(

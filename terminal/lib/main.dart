@@ -51,6 +51,10 @@ class MainApp extends StatelessWidget {
           fillColor: Colors.grey.withAlpha(30),
           filled: true,
           border: const OutlineInputBorder(),
+          errorStyle: ThemeData.dark().textTheme.labelMedium!.copyWith(
+                fontSize: 24,
+                color: Colors.red,
+              ),
         ),
         listTileTheme: ListTileThemeData(
           titleTextStyle: ThemeData.dark().textTheme.headlineLarge!.copyWith(fontSize: 28),

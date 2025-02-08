@@ -25,6 +25,8 @@ class UtmSyncStatusMapper extends EnumMapper<UtmSyncStatus> {
   @override
   UtmSyncStatus decode(dynamic value) {
     switch (value) {
+      case 'disabled':
+        return UtmSyncStatus.disabled;
       case 'unknown':
         return UtmSyncStatus.unknown;
       case 'noActiveFlight':
@@ -43,6 +45,8 @@ class UtmSyncStatusMapper extends EnumMapper<UtmSyncStatus> {
   @override
   dynamic encode(UtmSyncStatus self) {
     switch (self) {
+      case UtmSyncStatus.disabled:
+        return 'disabled';
       case UtmSyncStatus.unknown:
         return 'unknown';
       case UtmSyncStatus.noActiveFlight:

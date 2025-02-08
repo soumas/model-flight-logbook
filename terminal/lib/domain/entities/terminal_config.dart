@@ -10,10 +10,14 @@ class TerminalConfig with TerminalConfigMappable {
   final TerminalType terminaltype;
   final String airportname;
   final String terminalname;
+  final int maxAltitudeM;
+  final int maxNumFlights;
   TerminalConfig({
     required this.terminalid,
     required this.terminaltype,
     required this.airportname,
     required this.terminalname,
+    required this.maxAltitudeM,
+    required this.maxNumFlights,
   });
 }

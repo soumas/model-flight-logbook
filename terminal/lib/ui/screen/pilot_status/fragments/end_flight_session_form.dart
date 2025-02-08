@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
+import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
+import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
+import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
 import 'package:model_flight_logbook/ui/widgets/input_description_button.dart';
@@ -25,6 +28,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
   late final TextEditingController _numFlightsEditingController;
   late final TextEditingController _maxAltitudeEditingController;
   var _luftraumbeobachter = false;
+  TerminalEndpoint? _selectedEndpoint;
 
   @override
   void initState() {
@@ -32,6 +36,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
     _commentTextEditingController = TextEditingController(text: _data.comment.toString());
     _numFlightsEditingController = TextEditingController(text: _data.takeoffcount > 0 ? _data.takeoffcount.toString() : null);
     _maxAltitudeEditingController = TextEditingController(text: _data.maxAltitude.toString());
+    _loadSelectedEndpoint();
   }
 
   @override
@@ -44,8 +49,9 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            MflPaddings.verticalSmall(context),
             Align(alignment: Alignment.centerLeft, child: Text(state.flightSessionStatus!.pilotName, style: Theme.of(context).textTheme.headlineLarge)),
-            Align(alignment: Alignment.centerLeft, child: Text('Checkin: ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr', style: Theme.of(context).textTheme.bodyMedium)),
+            Align(alignment: Alignment.centerLeft, child: Text('Beginn: ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr', style: Theme.of(context).textTheme.bodyMedium)),
             MflPaddings.verticalSmall(context),
             MflTextFormField(
               label: 'Flüge*',
@@ -57,8 +63,15 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                   return 'Dieses Feld darf nicht leer bleiben';
                 } else if (int.tryParse(value!) == null) {
                   return 'Bitte geben Sie eine Ganzzahl ein.';
+                } else if (int.parse(value) < 0) {
+                  return 'Kleinster Wert: 0';
+                } else if (int.parse(value) > _selectedEndpoint!.config.maxNumFlights) {
+                  return 'Maximalwert: ${_selectedEndpoint!.config.maxNumFlights}';
                 }
                 return null;
+              },
+              onClose: () {
+                _formKey.currentState!.validate();
               },
             ),
             MflPaddings.verticalSmall(context),
@@ -72,8 +85,15 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                   return 'Dieses Feld darf nicht leer bleiben';
                 } else if (int.tryParse(value!) == null) {
                   return 'Bitte geben Sie eine Ganzzahl ein.';
+                } else if (int.parse(value) < 0) {
+                  return 'Kleinster Wert: 0';
+                } else if (int.parse(value) > _selectedEndpoint!.config.maxAltitudeM) {
+                  return 'Maximalwert: ${_selectedEndpoint!.config.maxAltitudeM}';
                 }
                 return null;
+              },
+              onClose: () {
+                _formKey.currentState!.validate();
               },
             ),
             MflPaddings.verticalSmall(context),
@@ -135,5 +155,12 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
         ),
       ),
     );
+  }
+
+  void _loadSelectedEndpoint() async {
+    final sep = await injector.get<LocalStorageRepo>().loadSelectedTerminalEndpoint();
+    setState(() {
+      _selectedEndpoint = sep;
+    });
   }
 }
