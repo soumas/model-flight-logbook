@@ -33,6 +33,8 @@ class TerminalConfigDTO(BaseModel):
     terminaltype : str
     airportname: str
     terminalname: str
+    maxAltitudeM: str
+    maxNumFlights: str
 
 class TerminalStatusDTO(BaseModel):
     utmStatus: str

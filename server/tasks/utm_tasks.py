@@ -11,6 +11,7 @@ from utils.scheduler import scheduler
 from utils.utm import UTM_FLIGHTPLAN_DURATION_MINUTES, update_utm_operator
 
 class UtmSyncStatus(enum.Enum):
+     disabled = 'disabled'
      unknown = 'unknown'
      noActiveFlight = 'noActiveFlight'
      flying = 'flying'
@@ -69,6 +70,11 @@ def sync_with_utm():
 
 @scheduler.scheduled_job('interval', id='utm_sync_scheduler', max_instances=1, minutes=1)
 def utm_sync_scheduler():
+
+    if(config.utm.enabled != True):
+        scheduler.remove_job('utm_sync_scheduler')
+        return
+
     # check if any state is unknown (usually after server start)
     for terminalid in config.terminals:
         if terminalid not in utmSyncStatusDataDict or utmSyncStatusDataDict[terminalid].status == UtmSyncStatus.unknown:

@@ -61,17 +61,17 @@ class UtmConfig:
         self.password = _ini.get('utm','password')
         self.max_altitude_m = _ini.get('utm','max_altitude_m')
         self.mtom_g = _ini.get('utm','mtom_g')
-        self.notify_pilot = _ini.getboolean('utm','notify_pilot')
-        self.simulate = _ini.getboolean('utm','simulate')
 
 class TerminalConfig:
-    def __init__(self, terminalid, airportname, terminaltype, apikey, airportkml, terminalname):
+    def __init__(self, terminalid, airportname, terminaltype, apikey, airportkml, terminalname, max_altitude_m, max_num_flights):
         self.terminalid = terminalid
         self.terminaltype = terminaltype
         self.terminalname = terminalname
         self.apikey = apikey
         self.airportname = airportname
         self.airportkml = airportkml
+        self.max_altitude_m = max_altitude_m
+        self.max_num_flights = max_num_flights
 
 class Config:
     def __init__(self):
@@ -91,6 +91,8 @@ def _buildTerminalDict():
                 apikey = _ini.get(sectionname, 'apikey'),
                 airportname = _ini.get(sectionname, 'airportname'),
                 airportkml = _ini.get(sectionname, 'airportkml'),
+                max_altitude_m = _ini.get(sectionname, 'max_altitude_m'),
+                max_num_flights = _ini.get(sectionname, 'max_num_flights'),
             )
     return retdict
 

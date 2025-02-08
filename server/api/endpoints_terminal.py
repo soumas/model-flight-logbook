@@ -39,8 +39,8 @@ def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, 
 @api.get("/terminal/status", dependencies=[Security(__specific_terminalauth)], response_model=TerminalStatusDTO)
 def get_status(x_terminal:Annotated[str, Header()]):
     global utmSyncStatusDataDict    
-    state = UtmSyncStatus.unknown
-    busy = False
+    state = UtmSyncStatus.unknown if config.utm.enabled else UtmSyncStatus.disabled
+    busy = config.utm.enabled
     if x_terminal in utmSyncStatusDataDict:
         state = utmSyncStatusDataDict[x_terminal].status    
         busy = utmSyncStatusDataDict[x_terminal].busy

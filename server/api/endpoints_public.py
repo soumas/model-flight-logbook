@@ -9,4 +9,6 @@ def get_terminal_config_list():
         terminaltype=config.terminals[cfg].terminaltype,
         airportname=config.terminals[cfg].airportname,
         terminalname=config.terminals[cfg].terminalname,
+        maxAltitudeM=config.terminals[cfg].max_altitude_m,
+        maxNumFlights=config.terminals[cfg].max_num_flights
     ) for cfg in config.terminals]
