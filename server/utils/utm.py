@@ -183,7 +183,7 @@ def __close_active_flightplans(driver, airportname:str, pilotToIgnore:PilotEntit
                 to=pilot.email, 
                 bcc=config.logbook.admin_email, 
                 subject='Flugplan beendet (' + airportname + ', ' + utmStartTime.strftime('%H:%M') + ' - ' + utmEndTime.strftime('%H:%M') + ')',
-                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Folgender Flugplan wurde bei der Luftfahrtbehörde beendet:<br/><ul><li>' + flightname + '</li><li>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Operator: ' + pilot.firstname + ' ' + pilot.lastname + '</li></ul><br/>Model Flight Logbook')
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Folgender Flugplan wurde bei der Luftfahrtbehörde beendet:<br/><ul><li>' + flightname + '</li><li>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Operator: ' + pilot.firstname + ' ' + pilot.lastname + '</li></ul>')
                         
 
 def __pilot_has_active_flight(driver, airportname:str, pilotid:str):
@@ -266,7 +266,7 @@ def update_utm_operator(airportname:str, airportkml:str, pilot:PilotEntity | Non
                 to=pilot.email, 
                 bcc=config.logbook.admin_email, 
                 subject='Flugplan aktiviert (' + airportname + ', ' + utmStartTime.strftime('%H:%M') + ' - ' + utmEndTime.strftime('%H:%M') + ')', 
-                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Folgender Flugplan wurde bei der Luftfahrtbehörde aktiviert. Bis zur Beendigung ist die persönliche Anwesenheit und die telefonische Erreichbarkeit unter <strong>' + pilot.phonenumber + '</strong> erforderlich.<br/><ul><li>' + __build_flightplan_name(airportname, pilot.id) + '</li><li>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Operator: ' + pilot.firstname + ' ' + pilot.lastname + '</li></ul><br/><strong>Wichtig!</strong> Der Flugtag muss vor dem Verlassen des Flugplatzes am MFL Terminal beendet werden, wodurch auch die Abmeldung bei der Luftfahrtbehörde erfolgt.<br/><br/>Model Flight Logbook')
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Folgender Flugplan wurde bei der Luftfahrtbehörde aktiviert. Bis zur Beendigung ist die persönliche Anwesenheit und die telefonische Erreichbarkeit unter <strong>' + pilot.phonenumber + '</strong> erforderlich.<br/><ul><li>' + __build_flightplan_name(airportname, pilot.id) + '</li><li>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Operator: ' + pilot.firstname + ' ' + pilot.lastname + '</li></ul><br/><strong>Wichtig!</strong> Der Flugtag muss vor dem Verlassen des Flugplatzes am MFL Terminal beendet werden, wodurch auch die Abmeldung bei der Luftfahrtbehörde erfolgt.')
             
         __close_active_flightplans(driver, airportname, None if pilot is None else pilot)
 
