@@ -183,7 +183,7 @@ def __close_active_flightplans(driver, airportname:str, pilotToIgnore:PilotEntit
                 to=pilot.email, 
                 bcc=config.logbook.admin_email, 
                 subject='Flugplan geschlossen (' + airportname + ', ' + utmStartTime.strftime('%H:%M') + ' - ' + utmEndTime.strftime('%H:%M') + ')',
-                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Folgender Flugplan wurde bei der Luftfahrtbehörde geschlossen.<br/><ul><li>Flugbezeichnung: ' + flightname + '</li><li>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li></ul><br/><br/>Model Flight Logbook')
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Folgender Flugplan wurde bei der Luftfahrtbehörde geschlossen.<br/><ul><li>Flugbezeichnung: ' + flightname + '</li><li>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Operator: ' + pilot.firstname + ' ' + pilot.lastname + '</li></ul><br/><br/>Model Flight Logbook')
                         
 
 def __pilot_has_active_flight(driver, airportname:str, pilotid:str):
@@ -266,7 +266,7 @@ def update_utm_operator(airportname:str, airportkml:str, pilot:PilotEntity | Non
                 to=pilot.email, 
                 bcc=config.logbook.admin_email, 
                 subject='Flugplan aktiviert (' + airportname + ', ' + utmStartTime.strftime('%H:%M') + ' - ' + utmEndTime.strftime('%H:%M') + ')', 
-                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplatz "' + airportname + '" wurde bei der zuständigen Luftfahrtbehörde aktiviert.<br/><ul><li>Flugbezeichnung: ' + __build_flightplan_name(airportname, pilot.id) + '</li><li>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Operator: ' + pilot.firstname + ' ' + pilot.lastname + '</li><li>Telefon: ' + pilot.phonenumber + ' (⚠ Erreichbarkeit sicherstellen!)</li></ul><br/><strong>Wichtig!</strong> Flugtag am MFL Terminal beenden, bevor der Flugplatz verlassen wird.<br/><br/>Model Flight Logbook')
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Der Flugplatz "' + airportname + '" wurde bei der zuständigen Luftfahrtbehörde aktiviert.<br/><ul><li>Flugbezeichnung: ' + __build_flightplan_name(airportname, pilot.id) + '</li><li>Beginn: ' + utmStartTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Ende: ' + utmEndTime.strftime('%d.%m.%Y, %H:%M') + ' Uhr</li><li>Operator: ' + pilot.firstname + ' ' + pilot.lastname + '</li></ul><br/><strong>Wichtig!</strong>Im relevanten Zeitraum ist die telefonische Erreichbarkeit unter ' + pilot.phonenumber + ' sicherzustellen. Weiters muss der Flugtag vor dem Verlassen des Flugplatzes am MFL Terminal beenden werden.<br/><br/>Model Flight Logbook')
             
         __close_active_flightplans(driver, airportname, None if pilot is None else pilot)
 
