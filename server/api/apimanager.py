@@ -2,6 +2,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.security import APIKeyHeader
+from fastapi.staticfiles import StaticFiles
 from utils.scheduler import scheduler
 from config.configmanager import config
 from db.dbmanager import execute_db_migration
@@ -21,4 +22,7 @@ async def lifespan(app: FastAPI):
 
 
 api = FastAPI(debug=config.logbook.debug, lifespan=lifespan)
+
+api.mount("/mfl-admin", StaticFiles(directory="mfl-admin", html=True), name="mfl-admin")
+
 api_key_header = APIKeyHeader(name="x-api-key")
