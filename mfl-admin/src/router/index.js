@@ -22,18 +22,18 @@ const router = createRouter({
                     path: '/logbook',
                     name: 'logbook',
                     component: () => import('@/views/pages/Logbook.vue')
+                },
+                {
+                    path: '/messages',
+                    name: 'messages',
+                    component: () => import('@/views/pages/Messages.vue')
                 }
             ]
         },
         {
-            path: '/',
-            children: [
-                {
-                    path: '/login',
-                    name: 'login',
-                    component: () => import('@/views/pages/Login.vue')
-                }
-            ]
+            path: '/login',
+            name: 'login',
+            component: () => import('@/views/pages/Login.vue')
         }
     ]
 });

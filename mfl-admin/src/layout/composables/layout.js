@@ -1,10 +1,6 @@
 import { computed, reactive } from 'vue';
 
 const layoutConfig = reactive({
-    preset: 'Aura',
-    primary: 'emerald',
-    surface: null,
-    darkTheme: false,
     menuMode: 'static'
 });
 

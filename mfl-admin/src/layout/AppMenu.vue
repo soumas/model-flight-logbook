@@ -7,8 +7,9 @@ const model = ref([
     {
         items: [
             { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' },
+            { label: 'Piloten', icon: 'pi pi-fw pi-users', to: '/pilots' },
             { label: 'Flugbuch', icon: 'pi pi-fw pi-book', to: '/logbook' },
-            { label: 'Piloten', icon: 'pi pi-fw pi-users', to: '/pilots' }
+            { label: 'Nachrichten', icon: 'pi pi-fw pi-bell', to: '/messages' }
         ]
     },
     {
@@ -24,10 +25,6 @@ const model = ref([
             <li v-if="item.separator" class="menu-separator"></li>
         </template>
     </ul>
-    <div class="logocontainer">
-        <img src="@/assets/images/logo_frameless.svg" alt="MFL Logo" width="60px" /><br />
-        <span>Model Flight Logbook</span>
-    </div>
 </template>
 
 <style lang="scss" scoped>

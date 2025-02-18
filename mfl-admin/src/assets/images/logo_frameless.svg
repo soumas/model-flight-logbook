@@ -28,11 +28,11 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="1.3800706"
-     inkscape:cx="-60.504152"
+     inkscape:cx="-60.504151"
      inkscape:cy="125.35591"
-     inkscape:window-width="1920"
-     inkscape:window-height="1008"
-     inkscape:window-x="0"
+     inkscape:window-width="2560"
+     inkscape:window-height="1368"
+     inkscape:window-x="2560"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
@@ -130,7 +130,7 @@
      transform="translate(-66.041017,-61.946277)">
     <path
        id="rect3-6"
-       style="opacity:0.6;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.851772;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:0.6;fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.851772;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
        d="m 72.337121,92.889244 c -2.788692,2.96e-4 -3.512322,-1.23288 -3.512322,-2.763286 0,-1.530405 0.723631,-2.761864 3.512322,-2.76164 l 45.763939,0.0037 c 0,0 -1.03495,1.260313 -0.98064,2.690165 0.0543,1.429852 1.03908,2.826214 1.03908,2.826214 z"
        sodipodi:nodetypes="sssczcs"
        inkscape:export-filename="../../assets/images/mfl_logo_slim.png"
@@ -138,40 +138,40 @@
        inkscape:export-ydpi="102.09732" />
     <path
        id="rect3"
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:1.2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
        d="m 119.63591,94.755895 -37.263917,6.13e-4 m -8.332241,7.2e-5 -2.35952,3.8e-5 c -2.958445,4.8e-5 -5.039215,-2.098873 -5.039215,-4.705102 0,-2.606228 2.08077,-4.703615 5.039215,-4.703659 l 47.955678,-7.23e-4"
        sodipodi:nodetypes="cccsssc" />
     <g
        id="g7"
        transform="matrix(1.1162412,-0.27224733,0.27224733,1.1162412,-33.469052,9.6060053)"
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-opacity:1">
+       style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-opacity:1">
       <circle
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.20397;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:1.20397;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          id="path4"
          r="1.0295721"
          cy="90.21505"
          cx="103.9253" />
       <path
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.204;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:1.204;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          d="m 75.344543,84.045287 c 0,0 7.310695,1.002815 23.077468,2.456925 11.400379,1.051414 14.146829,-0.246713 14.003249,-3.927473 -0.14357,-3.68076 -2.68476,-0.431682 -7.46126,-5.039913 -0.76498,-0.738029 -1.57931,-1.563926 -2.49702,-1.750358 -4.812473,-0.977647 -6.843636,3.832571 -10.671305,4.778113 -3.252567,0.803476 -9.23348,0.588322 -11.412037,0.574964 -0.603561,-0.0037 -0.500009,-0.01988 -0.500009,-0.01988 0,0 -0.864684,-4.545399 -2.352954,-6.207851 -0.519115,-0.579871 -2.123216,-0.489587 -2.435691,-0.498096 0,0 -0.783815,7.588415 -0.704618,8.516484 0.0792,0.928069 0.954177,1.117089 0.954177,1.117089 z"
          id="path5"
          sodipodi:nodetypes="cszsssscsczcc" />
       <path
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.963173;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.963173;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          d="m 102.6042,87.060419 0.79685,1.751468"
          id="path6"
          sodipodi:nodetypes="cc" />
       <path
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.963173;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.963173;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          d="m 113.84047,78.47119 v 8.647919"
          id="path7" />
     </g>
     <g
        id="g8"
        transform="rotate(-3.57341,234.28928,86.39441)"
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-opacity:1">
+       style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-opacity:1">
       <ellipse
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.411715;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.411715;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          id="path14"
          cx="89.935165"
          cy="58.850075"
@@ -179,7 +179,7 @@
          ry="0.24321105"
          transform="matrix(0.99857318,-0.05340033,0.10639983,0.99432343,0,0)" />
       <path
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;fill-opacity:1;stroke:#4199b9;stroke-width:0.3;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          d="M 96.753694,59.83525 C 96.357146,58.641454 95.608079,57.567156 94.625005,56.782322 94.104421,56.366716 93.52,56.031223 92.898589,55.791256"
          id="path8"
          inkscape:path-effect="#path-effect8"
@@ -188,7 +188,7 @@
          sodipodi:nodetypes="csc" />
     </g>
     <path
-       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.142202;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#4199b9;fill-opacity:1;stroke:#4199b9;stroke-width:0.142202;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
        d="m 81.757201,88.662367 c 0,0 -0.739915,0.106732 -0.739915,0.881794 v -2.6e-5 c 0,1.31183 0.110239,8.418541 0.110239,8.418541 l -2.976548,-2.446103 -2.862005,2.447443 c 0,0 0.0058,-8.122561 0.0058,-8.539863 0,-0.65533 0.553426,-0.762792 0.553426,-0.762792"
        id="path10"
        sodipodi:nodetypes="csscccsc" />
