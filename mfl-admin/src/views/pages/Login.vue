@@ -1,14 +1,16 @@
 <script setup>
-import axios from 'axios';
+import { AuthService } from '@/service/AuthService';
+import { useToast } from 'primevue/usetoast';
 import { ref } from 'vue';
+const toast = useToast();
 
 const endpoint = ref('http://localhost:8082');
 const apikey = ref('');
+
 async function login() {
-    //localStorage.setItem('host', host);
-    //localStorage.setItem('apikey', apikey);
-    var result = await axios.get(endpoint.value + '/admin/pilot/list', { headers: { accept: 'application/json', 'x-api-key': apikey.value } });
-    console.debug(result);
+    if ((await AuthService.login(endpoint.value, apikey.value)) == false) {
+        toast.add({ severity: 'error', summary: 'Login fehlgeschlagen', detail: 'Bitte überprüfen Sie Ihre Eingabe', life: 3000 });
+    }
 }
 </script>
 
@@ -22,9 +24,11 @@ async function login() {
                         <span class="text-muted-color font-medium">&nbsp;</span>
                     </div>
                     <div>
-                        <InputText id="endpoint" type="text" placeholder="Endpoint" class="w-full md:w-[30rem] mb-8" v-model="endpoint" />
-                        <Password id="apikey" v-model="apikey" placeholder="Admin API Key" :toggleMask="true" class="mb-4" fluid :feedback="false"></Password><br />
-                        <Button label="Login" class="w-full" @click="login"></Button>
+                        <form @submit.prevent="printToConsole">
+                            <InputText id="endpoint" v-model="endpoint" type="text" placeholder="Endpoint" class="w-full md:w-[30rem] mb-8" />
+                            <Password id="apikey" v-model="apikey" placeholder="Admin API Key" :toggleMask="true" class="mb-4" fluid :feedback="false"></Password>
+                            <Button label="Login" class="w-full" @click="login" type="submit"></Button>
+                        </form>
                     </div>
                 </div>
             </div>

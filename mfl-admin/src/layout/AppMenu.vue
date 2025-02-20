@@ -6,14 +6,14 @@ import AppMenuItem from './AppMenuItem.vue';
 const model = ref([
     {
         items: [
-            { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' },
-            { label: 'Piloten', icon: 'pi pi-fw pi-users', to: '/pilots' },
+            { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/dashboard' },
+            { label: 'Pilot:innen', icon: 'pi pi-fw pi-users', to: '/pilots' },
             { label: 'Flugbuch', icon: 'pi pi-fw pi-book', to: '/logbook' },
             { label: 'Nachrichten', icon: 'pi pi-fw pi-bell', to: '/messages' }
         ]
     },
     {
-        items: [{ label: 'Logout', icon: 'pi pi-fw pi-sign-out', to: '/login' }]
+        items: [{ label: 'Logout', icon: 'pi pi-fw pi-sign-out', to: '/logout' }]
     }
 ]);
 </script>

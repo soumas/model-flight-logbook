@@ -10,6 +10,10 @@ const router = createRouter({
             children: [
                 {
                     path: '/',
+                    redirect: '/dashboard'
+                },
+                {
+                    path: '/dashboard',
                     name: 'dashboard',
                     component: () => import('@/views/Dashboard.vue')
                 },
@@ -34,6 +38,11 @@ const router = createRouter({
             path: '/login',
             name: 'login',
             component: () => import('@/views/pages/Login.vue')
+        },
+        {
+            path: '/logout',
+            name: 'logout',
+            component: () => import('@/views/pages/Logout.vue')
         }
     ]
 });

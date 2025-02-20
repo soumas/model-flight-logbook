@@ -14,7 +14,8 @@ def __adminauth(api_key_header: str = Security(api_key_header)):
         return api_key_header
     raise invalid_api_key
 
-@api.get("/admin/pilot/list", dependencies=[Security(__adminauth)])
+
+@api.get("/admin/pilot/list", dependencies=[Security(__adminauth)],response_model=list[PilotDTO])
 def list_all_pilots(db: Session = Depends(get_db)):
     return db.query(PilotEntity).all()
 
@@ -51,3 +52,7 @@ def send_test_admin_notification(background_tasks:BackgroundTasks):
         subject='Test Admin Notification', 
         body='Der SMTP Server wurde korrekt konfiguriert'
     )
+
+@api.get("/admin/checkauth", dependencies=[Security(__adminauth)])
+def list_all_pilots(db: Session = Depends(get_db)):
+    return "OK"
