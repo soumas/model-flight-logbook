@@ -1,11 +1,12 @@
-from fastapi import BackgroundTasks, Depends, Response, Security, status
+from fastapi import BackgroundTasks, Depends, HTTPException, Response, Security, status
 from requests import Session
 from config.configmanager import config
-from api.dtos import PilotDTO
+from api.dtos import FlightSessionDTO, PilotDTO
 from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key
-from db.entities import PilotEntity
+from db.entities import FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
+from utils.dbutils import commit_with_httpexceptionhandling
 from utils.send_mail import send_mail
 
 
@@ -14,10 +15,55 @@ def __adminauth(api_key_header: str = Security(api_key_header)):
         return api_key_header
     raise invalid_api_key
 
+############################ PILOT ################################
 
-@api.get("/admin/pilot/list", dependencies=[Security(__adminauth)],response_model=list[PilotDTO])
-def list_all_pilots(db: Session = Depends(get_db)):
+@api.get("/admin/pilot", dependencies=[Security(__adminauth)],response_model=list[PilotDTO])
+def get_all_pilots(db: Session = Depends(get_db)):
     return db.query(PilotEntity).all()
+
+@api.get("/admin/pilot/{id}", dependencies=[Security(__adminauth)],response_model=PilotDTO)
+def get_pilot(id: str, db: Session = Depends(get_db)):
+    db_pilot : PilotEntity = db.query(PilotEntity).filter(PilotEntity.id == id).first()
+    if db_pilot is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+    else:
+        return db_pilot
+
+@api.delete("/admin/pilot/{id}", dependencies=[Security(__adminauth)])
+def delete_pilot(id: str, db: Session = Depends(get_db)):
+    db.query(FlightSessionEntity).filter(FlightSessionEntity.pilotid == id).delete()
+    db.query(PilotEntity).filter(PilotEntity.id == id).delete()
+    commit_with_httpexceptionhandling(db)
+
+@api.post("/admin/pilot", dependencies=[Security(__adminauth)], response_model=PilotDTO)
+def create_pilot(pilot: PilotDTO, db: Session = Depends(get_db)):
+    db_pilot = PilotEntity(**pilot.model_dump())
+    db.add(db_pilot)
+    commit_with_httpexceptionhandling(db)
+    return db_pilot
+
+@api.put("/admin/pilot/{id}", dependencies=[Security(__adminauth)], response_model=PilotDTO)
+def update_pilot(id: str, pilot: PilotDTO, db: Session = Depends(get_db)):
+    db_pilot : PilotEntity = db.query(PilotEntity).filter(PilotEntity.id == id).first()
+    if db_pilot is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+    else:
+        if pilot.id != id:
+            for fsess in db.query(FlightSessionEntity).filter(FlightSessionEntity.pilotid == id).all():
+                fsess.pilotid = pilot.id
+                db.add(fsess)
+        db_pilot.id = pilot.id
+        db_pilot.active = pilot.active
+        db_pilot.firstname = pilot.firstname
+        db_pilot.lastname = pilot.lastname
+        db_pilot.phonenumber = pilot.phonenumber
+        db_pilot.acIsUtmOperator = pilot.acIsUtmOperator
+        db_pilot.acRegistrationValidTo = pilot.acRegistrationValidTo
+        db_pilot.acPilotlicenseValidTo = pilot.acPilotlicenseValidTo
+        db.add(db_pilot)
+        commit_with_httpexceptionhandling(db)
+        return db_pilot
+
 
 @api.post("/admin/pilot/create_or_update", dependencies=[Security(__adminauth)], response_model=PilotDTO)
 def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Session = Depends(get_db)):
@@ -34,15 +80,22 @@ def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Session = De
         db_pilot.acIsUtmOperator = pilot.acIsUtmOperator
         db_pilot.acRegistrationValidTo = pilot.acRegistrationValidTo
         db_pilot.acPilotlicenseValidTo = pilot.acPilotlicenseValidTo
-    db.commit()
+    commit_with_httpexceptionhandling(db)
     return db_pilot
 
 @api.post("/admin/pilot/deactivate_all", dependencies=[Security(__adminauth)])
 def deactivate_all_pilots(db: Session = Depends(get_db)):
     for pilot in db.query(PilotEntity).all():
         pilot.active = False
-    db.commit()
+    commit_with_httpexceptionhandling(db)
 
+########################### FLIGHT SESSIONS ################################
+
+@api.get("/admin/flightsession", dependencies=[Security(__adminauth)],response_model=list[FlightSessionDTO])
+def get_all_flightsessions(db: Session = Depends(get_db)):
+    return db.query(FlightSessionEntity).all()
+
+########################### OTHERS #########################################
 
 @api.get("/admin/admin_notification_test", dependencies=[Security(__adminauth)])
 def send_test_admin_notification(background_tasks:BackgroundTasks):

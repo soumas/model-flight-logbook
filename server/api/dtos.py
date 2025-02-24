@@ -14,6 +14,17 @@ class PilotDTO(BaseModel):
     acRegistrationValidTo: Optional[datetime.date]=None
     acPilotlicenseValidTo: Optional[datetime.date]=None
 
+class FlightSessionDTO(BaseModel):
+    id: int
+    pilotid: str
+    terminalid: str
+    start: datetime.datetime
+    end: Optional[datetime.datetime]=None
+    takeoffcount: Optional[int]=None
+    maxAltitude: Optional[int]=None
+    airspaceObserver: Optional[bool]=None
+    comment: Optional[str]=None 
+
 class FlightSessionStatusDTO(BaseModel):
     pilotName: str
     sessionId: Optional[int]=None
