@@ -14,34 +14,32 @@ const router = createRouter({
                 },
                 {
                     path: '/dashboard',
-                    name: 'dashboard',
                     component: () => import('@/views/Dashboard.vue')
                 },
                 {
                     path: '/pilots',
-                    name: 'pilots',
                     component: () => import('@/views/pages/Pilots.vue')
                 },
                 {
+                    path: '/pilots/:id',
+                    component: () => import('@/views/pages/PilotDetail.vue')
+                },
+                {
                     path: '/logbook',
-                    name: 'logbook',
                     component: () => import('@/views/pages/Logbook.vue')
                 },
                 {
                     path: '/messages',
-                    name: 'messages',
                     component: () => import('@/views/pages/Messages.vue')
                 }
             ]
         },
         {
             path: '/login',
-            name: 'login',
             component: () => import('@/views/pages/Login.vue')
         },
         {
             path: '/logout',
-            name: 'logout',
             component: () => import('@/views/pages/Logout.vue')
         }
     ]

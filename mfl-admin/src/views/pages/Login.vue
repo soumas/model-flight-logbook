@@ -24,10 +24,10 @@ async function login() {
                         <span class="text-muted-color font-medium">&nbsp;</span>
                     </div>
                     <div>
-                        <form @submit.prevent="printToConsole">
+                        <form @submit.prevent="login">
                             <InputText id="endpoint" v-model="endpoint" type="text" placeholder="Endpoint" class="w-full md:w-[30rem] mb-8" />
                             <Password id="apikey" v-model="apikey" placeholder="Admin API Key" :toggleMask="true" class="mb-4" fluid :feedback="false"></Password>
-                            <Button label="Login" class="w-full" @click="login" type="submit"></Button>
+                            <Button label="Login" class="w-full" type="submit"></Button>
                         </form>
                     </div>
                 </div>

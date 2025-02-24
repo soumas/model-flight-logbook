@@ -6,7 +6,7 @@ import { definePreset } from '@primevue/themes';
 import Aura from '@primevue/themes/aura';
 import PrimeVue from 'primevue/config';
 
-// import ConfirmationService from 'primevue/confirmationservice';
+import ConfirmationService from 'primevue/confirmationservice';
 import ToastService from 'primevue/toastservice';
 
 import '@/assets/styles.scss';
@@ -38,6 +38,6 @@ app.use(PrimeVue, {
     }
 });
 app.use(ToastService);
-// app.use(ConfirmationService);
+app.use(ConfirmationService);
 
 app.mount('#app');

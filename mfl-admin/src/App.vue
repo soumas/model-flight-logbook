@@ -2,7 +2,8 @@
 
 <template>
     <router-view />
-    <Toast position="top-center" />
+    <Toast position="center" />
+    <ConfirmDialog></ConfirmDialog>
 </template>
 
 <style scoped></style>
