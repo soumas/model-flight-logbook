@@ -23,7 +23,7 @@ async def lifespan(app: FastAPI):
 
 
 api = FastAPI(debug=config.logbook.debug, lifespan=lifespan)
-api.mount("/mfl-admin", StaticFiles(directory="mfl-admin", html=True), name="mfl-admin")
+api.mount("/mfl-admin/", StaticFiles(directory="mfl-admin", html=True), name="mfl-admin")
 if(config.logbook.debug):
     api.add_middleware(
         CORSMiddleware,

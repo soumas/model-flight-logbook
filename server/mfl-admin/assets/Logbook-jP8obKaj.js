@@ -1,0 +1,1 @@
+import{_ as o,c as s,o as t,a as e}from"./index-B9aKXaCd.js";const c={},a={className:"card"},_=e("h1",null,"Flugbuch",-1),n=e("div",{class:"font-semibold text-xl mb-4"},"Empty Page",-1),r=[_,n];function d(l,i){return t(),s("div",a,r)}const f=o(c,[["render",d]]);export{f as default};
