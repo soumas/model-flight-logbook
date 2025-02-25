@@ -1,16 +1,15 @@
 <script setup>
 import { AuthService } from '@/service/AuthService';
-import { useToast } from 'primevue/usetoast';
 import { ref } from 'vue';
-const toast = useToast();
 
-const endpoint = ref('http://localhost:8082');
 const apikey = ref('');
+const errorMsg = ref('');
 
-async function login() {
-    if ((await AuthService.login(endpoint.value, apikey.value)) == false) {
-        toast.add({ severity: 'error', summary: 'Login fehlgeschlagen', detail: 'Bitte überprüfen Sie Ihre Eingabe', life: 3000 });
-    }
+function login() {
+    errorMsg.value = '';
+    AuthService.login(apikey.value).then((success) => {
+        if (!success) errorMsg.value = '<strong>Login fehlgeschlagen</strong>';
+    });
 }
 </script>
 
@@ -25,8 +24,14 @@ async function login() {
                     </div>
                     <div>
                         <form @submit.prevent="login">
-                            <InputText id="endpoint" v-model="endpoint" type="text" placeholder="Endpoint" class="w-full md:w-[30rem] mb-8" />
-                            <Password id="apikey" v-model="apikey" placeholder="Admin API Key" :toggleMask="true" class="mb-4" fluid :feedback="false"></Password>
+                            <div v-if="errorMsg.length > 0">
+                                <Message severity="error" v-bind:closable="true"><div v-html="errorMsg" /></Message>
+                                <br />
+                            </div>
+                            <IftaLabel variant="in">
+                                <Password id="apikey" v-model="apikey" :toggleMask="true" class="mb-4" :feedback="false" required />
+                                <label for="apikey">Admin API Key</label>
+                            </IftaLabel>
                             <Button label="Login" class="w-full" type="submit"></Button>
                         </form>
                     </div>

@@ -7,6 +7,7 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: '/mfl-admin',
     optimizeDeps: {
         noDiscovery: true
     },
@@ -20,5 +21,8 @@ export default defineConfig({
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
+    },
+    build: {
+        outDir: '../server/mfl-admin'
     }
 });

@@ -1,5 +1,5 @@
 <script setup>
-import router from '@/router';
+import router, { routes } from '@/router';
 import { handleApiError } from '@/utils/HttpErrorUtils';
 import { useConfirm } from 'primevue/useconfirm';
 import { onMounted, ref } from 'vue';
@@ -13,7 +13,7 @@ const errorMsg = ref('');
 const model = ref({});
 
 const isCreate = ref(route.params.id == 'create');
-const menu = Array({ label: 'Zur Liste', icon: 'pi pi-fw pi-arrow-left', command: () => router.push('/pilots') }, { label: 'Löschen', icon: 'pi pi-fw pi-trash', command: deleteIem, visible: !isCreate.value });
+const menu = Array({ label: 'Zur Liste', icon: 'pi pi-fw pi-arrow-left', command: () => router.push(routes.pilots) }, { label: 'Löschen', icon: 'pi pi-fw pi-trash', command: deleteIem, visible: !isCreate.value });
 
 function deleteIem() {
     confirm.require({
@@ -29,7 +29,7 @@ function deleteIem() {
         },
         accept: () =>
             PilotService.delete(route.params.id)
-                .then(() => router.push('/pilots'))
+                .then(() => router.push(routes.pilots))
                 .catch((e) => handleApiError(e, errorMsg))
     });
 }
@@ -42,7 +42,7 @@ async function onFormSubmit() {
             .then((persisted) => {
                 successMsg.value = 'Pilot:in wurde hinzugefügt';
                 model.value = persisted;
-                router.push('/pilots/' + model.value.id);
+                router.push(routes.pilots + '/' + model.value.id);
                 isCreate.value = false;
             })
             .catch((e) => handleApiError(e, errorMsg));
@@ -51,7 +51,7 @@ async function onFormSubmit() {
             .then((persisted) => {
                 successMsg.value = 'Pilot:in wurde gespeichert';
                 model.value = persisted;
-                router.push('/pilots/' + model.value.id);
+                router.push(routes.pilots + '/' + model.value.id);
             })
             .catch((e) => handleApiError(e, errorMsg));
     }

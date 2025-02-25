@@ -1,19 +1,20 @@
 <script setup>
 import { ref } from 'vue';
 
+import { routes } from '@/router';
 import AppMenuItem from './AppMenuItem.vue';
 
 const model = ref([
     {
         items: [
-            { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/dashboard' },
-            { label: 'Pilot:innen', icon: 'pi pi-fw pi-users', to: '/pilots' },
-            { label: 'Flugbuch', icon: 'pi pi-fw pi-book', to: '/logbook' },
-            { label: 'Nachrichten', icon: 'pi pi-fw pi-bell', to: '/messages' }
+            { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: routes.dashboard },
+            { label: 'Pilot:innen', icon: 'pi pi-fw pi-users', to: routes.pilots },
+            { label: 'Flugbuch', icon: 'pi pi-fw pi-book', to: routes.logbook },
+            { label: 'Nachrichten', icon: 'pi pi-fw pi-bell', to: routes.messages }
         ]
     },
     {
-        items: [{ label: 'Logout', icon: 'pi pi-fw pi-sign-out', to: '/logout' }]
+        items: [{ label: 'Logout', icon: 'pi pi-fw pi-sign-out', to: routes.logout }]
     }
 ]);
 </script>

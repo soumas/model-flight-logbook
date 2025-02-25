@@ -1,14 +1,14 @@
 import axios from 'axios';
-import router from '../router/index';
+import router, { routes } from '../router/index';
 
 export const AuthService = {
-    login(pEndpoint, pApikey) {
+    login(pApikey) {
+        console.info(this.getEndpoint());
         return axios
-            .get(pEndpoint + '/admin/checkauth', { headers: { accept: 'application/json', 'x-api-key': pApikey } })
+            .get(this.getEndpoint() + 'admin/checkauth', { headers: { accept: 'application/json', 'x-api-key': pApikey } })
             .then(function () {
-                localStorage.setItem('endpoint', pEndpoint);
-                localStorage.setItem('apikey', pApikey);
-                router.push('/');
+                sessionStorage.setItem('apikey', pApikey);
+                router.push(routes.dashboard);
                 return true;
             })
             .catch(function (reason) {
@@ -17,14 +17,13 @@ export const AuthService = {
             });
     },
     logout() {
-        localStorage.removeItem('endpoint');
-        localStorage.removeItem('apikey');
-        router.push('/login');
+        sessionStorage.removeItem('apikey');
+        router.push(routes.login);
     },
     getEndpoint() {
-        return localStorage.getItem('endpoint');
+        return import.meta.env.VITE_ENDPOINT;
     },
     getApikey() {
-        return localStorage.getItem('apikey');
+        return sessionStorage.getItem('apikey');
     }
 };

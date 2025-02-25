@@ -1,11 +1,12 @@
 <script setup>
 import { handleApiError } from '@/utils/HttpErrorUtils';
 import { ref, watch } from 'vue';
-import router from '../../router/index';
+import router, { routes } from '../../router/index';
 import { PilotService } from '../../service/PilotService';
+import.meta.env;
 
 const model = ref([]);
-const menu = Array({ label: 'Pilot:in hinzufügen', icon: 'pi pi-fw pi-user-plus', command: () => router.push('/pilots/create') });
+const menu = Array({ label: 'Pilot:in hinzufügen', icon: 'pi pi-fw pi-user-plus', command: () => router.push(routes.pilots + '/create') });
 const errorMsg = ref('');
 
 watch(() => router.path, fetchData, { immediate: true });
@@ -17,7 +18,7 @@ function fetchData() {
 }
 
 function rowClick(e) {
-    router.push('/pilots/' + e.data.id);
+    router.push(routes.pilots + '/' + e.data.id);
 }
 </script>
 <template>

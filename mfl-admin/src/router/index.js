@@ -1,8 +1,17 @@
 import AppLayout from '@/layout/AppLayout.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
+
+export const routes = {
+    dashboard: '/dashboard',
+    pilots: '/pilots',
+    logbook: '/logbook',
+    messages: '/messages',
+    login: '/login',
+    logout: '/logout'
+};
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes: [
         {
             path: '/',
@@ -10,36 +19,40 @@ const router = createRouter({
             children: [
                 {
                     path: '/',
-                    redirect: '/dashboard'
+                    redirect: routes.dashboard
                 },
                 {
-                    path: '/dashboard',
+                    path: '/mfl-admin',
+                    redirect: routes.dashboard
+                },
+                {
+                    path: routes.dashboard,
                     component: () => import('@/views/Dashboard.vue')
                 },
                 {
-                    path: '/pilots',
+                    path: routes.pilots,
                     component: () => import('@/views/pages/Pilots.vue')
                 },
                 {
-                    path: '/pilots/:id',
+                    path: routes.pilots + '/:id',
                     component: () => import('@/views/pages/PilotDetail.vue')
                 },
                 {
-                    path: '/logbook',
+                    path: routes.logbook,
                     component: () => import('@/views/pages/Logbook.vue')
                 },
                 {
-                    path: '/messages',
+                    path: routes.messages,
                     component: () => import('@/views/pages/Messages.vue')
                 }
             ]
         },
         {
-            path: '/login',
+            path: routes.login,
             component: () => import('@/views/pages/Login.vue')
         },
         {
-            path: '/logout',
+            path: routes.logout,
             component: () => import('@/views/pages/Logout.vue')
         }
     ]
