@@ -8,7 +8,9 @@ export function handleApiError(e, errorMsgRef) {
     }
 
     var msg = '<strong>Ein Fehler ist aufgetreten</strong><br/>';
-    if (e.message != null) {
+    if (e.response != null && e.response.data != null && e.response.data.detail != null) {
+        msg = msg + e.response.data.detail;
+    } else if (e.message != null) {
         msg = msg + e.message;
     }
     errorMsgRef.value = msg;

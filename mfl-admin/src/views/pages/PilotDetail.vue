@@ -38,7 +38,7 @@ async function onFormSubmit() {
     resetMsgs();
     if (isCreate.value) {
         console.warn(model.value);
-        PilotService.create(model.value)
+        PilotService.post(model.value)
             .then((persisted) => {
                 successMsg.value = 'Pilot:in wurde hinzugefügt';
                 model.value = persisted;

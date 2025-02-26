@@ -64,7 +64,7 @@ function itemClick(event, item) {
 }
 
 function checkActiveRoute(item) {
-    return route.path === item.to;
+    return route.path.startsWith(item.to);
 }
 </script>
 
