@@ -1,4 +1,4 @@
-import{B as e,b as l,o as i,c as o,r as p,m as s}from"./index-B9aKXaCd.js";var r=function(n){var a=n.dt;return`
+import{B as e,S as l,o as i,c as o,i as p,m as s}from"./index-DJzmeOUY.js";var r=function(n){var a=n.dt;return`
 .p-iftalabel {
     display: block;
     position: relative;
@@ -45,4 +45,4 @@ import{B as e,b as l,o as i,c as o,r as p,m as s}from"./index-B9aKXaCd.js";var r
     transform: translateY(25%);
     margin-top: 0;
 }
-`)},c={root:"p-iftalabel"},b=e.extend({name:"iftalabel",theme:r,classes:c}),f={name:"BaseIftaLabel",extends:l,style:b,provide:function(){return{$pcIftaLabel:this,$parentInstance:this}}},d={name:"IftaLabel",extends:f,inheritAttrs:!1};function u(t,n,a,m,h,v){return i(),o("span",s({class:t.cx("root")},t.ptmi("root")),[p(t.$slots,"default")],16)}d.render=u;export{d as s};
+`)},c={root:"p-iftalabel"},f=e.extend({name:"iftalabel",theme:r,classes:c}),b={name:"BaseIftaLabel",extends:l,style:f,provide:function(){return{$pcIftaLabel:this,$parentInstance:this}}},d={name:"IftaLabel",extends:b,inheritAttrs:!1};function u(t,n,a,m,h,v){return i(),o("span",s({class:t.cx("root")},t.ptmi("root")),[p(t.$slots,"default")],16)}d.render=u;export{d as s};
