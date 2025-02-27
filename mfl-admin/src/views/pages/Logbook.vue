@@ -59,8 +59,18 @@ function exportValue(obj) {
     <div className="card">
         <h1>Flugbuch</h1>
         <div v-if="errorMsg.length > 0">
-            <br />
             <Message severity="error" v-bind:closable="true"><div v-html="errorMsg" /></Message>
+            <br />
+        </div>
+        <div class="flex justify-end">
+            <Select v-model="selctedYear" :options="yearOptions" v-on:change="fetchData" />
+            <IconField>
+                <InputIcon>
+                    <i class="pi pi-search" />
+                </InputIcon>
+                <InputText v-model="filters['global'].value" placeholder="Volltextfilter" v-on:input="updateExportFilename" />
+            </IconField>
+            <Button label="Exportieren" @click="exportCSV" />
         </div>
         <br />
         <DataTable
@@ -73,23 +83,22 @@ function exportValue(obj) {
             @row-click="rowClick($event)"
             paginator
             :rows="20"
-            :rowsPerPageOptions="[20, 50, 100, 200, 500]"
             v-model:filters="filters"
             :globalFilterFields="['airport', 'pilotname', 'comment', 'start']"
             :exportFunction="exportValue"
             :export-filename="exportFilename"
         >
-            <template #empty> Es gibt noch keinen Eintrag im Logbuch </template>
-            <template #header>
-                <div class="flex justify-end">
-                    <Select v-model="selctedYear" :options="yearOptions" v-on:change="fetchData" />
-                    <IconField>
-                        <InputIcon>
-                            <i class="pi pi-search" />
-                        </InputIcon>
-                        <InputText v-model="filters['global'].value" placeholder="Volltextfilter" v-on:input="updateExportFilename" />
-                    </IconField>
-                    <Button label="Exportieren" @click="exportCSV" />
+            <template #empty><Message>Im ausgewählten Zeitraum gibt es keinen Logbucheintrag.</Message></template>
+            <template #paginatorcontainer="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords, firstPageCallback, lastPageCallback }">
+                <div class="flex items-center gap-4 py-1 px-2 justify-between">
+                    <Button icon="pi pi-angle-double-left" rounded text @click="firstPageCallback" :disabled="page === 0" />
+                    <Button icon="pi pi-angle-left" rounded text @click="prevPageCallback" :disabled="page === 0" />
+                    <div class="text-color font-medium">
+                        <span class="hidden sm:block">Zeilen {{ first }}-{{ last }} von {{ totalRecords }}</span>
+                        <span class="block sm:hidden">Seite {{ page + 1 }} von {{ pageCount }}</span>
+                    </div>
+                    <Button icon="pi pi-angle-right" rounded text @click="nextPageCallback" :disabled="page === pageCount - 1" />
+                    <Button icon="pi pi-angle-double-right" rounded text @click="lastPageCallback" :disabled="page === pageCount - 1" />
                 </div>
             </template>
             <Column field="startDate" header="Datum" sortable>

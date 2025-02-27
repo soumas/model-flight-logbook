@@ -13,7 +13,6 @@ const errorMsg = ref('');
 const model = ref({});
 
 const isCreate = ref(route.params.id == 'create');
-const menu = Array({ label: 'Zur Liste', icon: 'pi pi-fw pi-arrow-left', command: () => router.push(routes.pilots) }, { label: 'Löschen', icon: 'pi pi-fw pi-trash', command: deleteIem, visible: !isCreate.value });
 
 function deleteIem() {
     confirm.require({
@@ -38,7 +37,7 @@ async function onFormSubmit() {
     resetMsgs();
     if (isCreate.value) {
         console.warn(model.value);
-        PilotService.post(model.value)
+        PilotService.create(model.value)
             .then((persisted) => {
                 successMsg.value = 'Pilot:in wurde hinzugefügt';
                 model.value = persisted;
@@ -77,21 +76,24 @@ onMounted(() => {
         <div class="card">
             <h1 v-if="isCreate">Pilot:in hinzufügen</h1>
             <h1 v-else>Pilot:in bearbeiten</h1>
-            <Menubar :model="menu" />
-            <div v-if="successMsg.length > 0">
-                <br />
-                <Message severity="success" v-bind:closable="true"><div v-html="successMsg" /></Message>
+            <div class="flex justify-start gap-4">
+                <Button label="Zur Liste" icon="pi pi-fw pi-arrow-left" severity="secondary" @click="() => router.push(routes.pilots)" />
             </div>
             <div v-if="errorMsg.length > 0">
                 <br />
                 <Message severity="error" v-bind:closable="true"><div v-html="errorMsg" /></Message>
             </div>
+            <div v-if="successMsg.length > 0">
+                <br />
+                <Message severity="success" v-bind:closable="true"><div v-html="successMsg" /></Message>
+            </div>
+            <br />
             <Fieldset legend="Stammdaten">
                 <div class="flex flex-col gap-4">
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <InputText id="id" type="text" v-model="model.id" required />
+                                <InputText id="id" type="text" v-model="model.id" required autocomplete="off" />
                                 <label for="id">ID</label>
                             </IftaLabel>
                         </div>
@@ -99,13 +101,13 @@ onMounted(() => {
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <InputText id="firstname" type="text" v-model="model.firstname" required />
+                                <InputText id="firstname" type="text" v-model="model.firstname" required autocomplete="off" />
                                 <label for="firstname">Vorname</label>
                             </IftaLabel>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <InputText id="lastname" type="text" v-model="model.lastname" required />
+                                <InputText id="lastname" type="text" v-model="model.lastname" required autocomplete="off" />
                                 <label for="lastname">Nachname</label>
                             </IftaLabel>
                         </div>
@@ -113,13 +115,13 @@ onMounted(() => {
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <InputText id="phonenumber" type="tel" v-model="model.phonenumber" required />
+                                <InputText id="phonenumber" type="tel" v-model="model.phonenumber" required autocomplete="off" />
                                 <label for="phonenumber">Telefonnummer</label>
                             </IftaLabel>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <InputText id="email" type="email" v-model="model.email" required />
+                                <InputText id="email" type="email" v-model="model.email" required autocomplete="off" />
                                 <label for="email">E-Mail</label>
                             </IftaLabel>
                         </div>
@@ -164,9 +166,9 @@ onMounted(() => {
             </Fieldset>
             <br />
             <div class="flex flex-col md:flex-row gap-4">
-                <div class="flex flex-wrap gap-2">
-                    <Button label="Speichern" class="w-full" type="submit"></Button>
-                </div>
+                <Button label="Speichern" type="submit"></Button>
+
+                <Button label="Löschen" icon="pi pi-fw pi-trash" severity="secondary" @click="deleteIem" v-if="!isCreate" />
             </div>
         </div>
     </form>

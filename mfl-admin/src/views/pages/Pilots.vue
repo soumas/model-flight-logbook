@@ -5,7 +5,6 @@ import router, { routes } from '../../router/index';
 import { PilotService } from '../../service/PilotService';
 
 const model = ref([]);
-const menu = Array({ label: 'Pilot:in hinzufügen', icon: 'pi pi-fw pi-user-plus', command: () => router.push(routes.pilots + '/create') });
 const errorMsg = ref('');
 const filters = ref({ global: {} });
 
@@ -24,33 +23,30 @@ function rowClick(e) {
 <template>
     <div className="card">
         <h1>Pilot:innen</h1>
-        <Menubar :model="menu" />
         <div v-if="errorMsg.length > 0">
-            <br />
             <Message severity="error" v-bind:closable="true"><div v-html="errorMsg" /></Message>
+            <br />
+        </div>
+        <div class="flex justify-between">
+            <Button label="Pilot:in hinzufügen" @click="() => router.push(routes.pilots + '/create')" icon="pi pi-fw pi-user-plus" severity="secondary"></Button>
+            <IconField>
+                <InputIcon>
+                    <i class="pi pi-search" />
+                </InputIcon>
+                <InputText v-model="filters['global'].value" placeholder="Volltextfilter" />
+            </IconField>
         </div>
         <br />
-        <DataTable
-            :value="model"
-            sortField="lastname"
-            :sortOrder="1"
-            selectionMode="multiple"
-            @row-click="rowClick($event)"
-            paginator
-            :rows="20"
-            :rowsPerPageOptions="[20, 50, 100, 200, 500]"
-            v-model:filters="filters"
-            :globalFilterFields="['email', 'lastname', 'firstname', 'id']"
-        >
-            <template #empty> Es gibt noch keine:n Pilot:in</template>
-            <template #header>
-                <div class="flex justify-end">
-                    <IconField>
-                        <InputIcon>
-                            <i class="pi pi-search" />
-                        </InputIcon>
-                        <InputText v-model="filters['global'].value" placeholder="Filter" />
-                    </IconField>
+        <DataTable :value="model" sortField="lastname" :sortOrder="1" selectionMode="multiple" @row-click="rowClick($event)" paginator :rows="20" v-model:filters="filters" :globalFilterFields="['email', 'lastname', 'firstname', 'id']">
+            <template #empty><Message>Es wurde noch kein:e Pilot:in erstellt</Message></template>
+            <template #paginatorcontainer="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords }">
+                <div class="flex items-center gap-4 py-1 px-2 justify-between">
+                    <Button icon="pi pi-chevron-left" rounded text @click="prevPageCallback" :disabled="page === 0" />
+                    <div class="text-color font-medium">
+                        <span class="hidden sm:block">Zeilen {{ first }}-{{ last }} von {{ totalRecords }}</span>
+                        <span class="block sm:hidden">Seite {{ page + 1 }} von {{ pageCount }}</span>
+                    </div>
+                    <Button icon="pi pi-chevron-right" rounded text @click="nextPageCallback" :disabled="page === pageCount - 1" />
                 </div>
             </template>
             <Column field="lastname" header="Name" sortable>
