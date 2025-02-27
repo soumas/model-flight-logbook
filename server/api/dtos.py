@@ -24,6 +24,8 @@ class FlightSessionDTO(BaseModel):
     maxAltitude: Optional[int]=None
     airspaceObserver: Optional[bool]=None
     comment: Optional[str]=None 
+    pilotname: Optional[str]=None 
+    airport: Optional[str]=None 
 
 class FlightSessionStatusDTO(BaseModel):
     pilotName: str

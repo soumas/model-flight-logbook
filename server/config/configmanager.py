@@ -76,7 +76,7 @@ class TerminalConfig:
 class Config:
     def __init__(self):
         self.logbook = LogbookConfig()
-        self.terminals = _buildTerminalDict()
+        self.terminals : dict[str,TerminalConfig] = _buildTerminalDict()
         self.smtp = SmtpConfig()
         self.utm = UtmConfig()
 

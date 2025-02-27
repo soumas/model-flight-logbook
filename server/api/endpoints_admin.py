@@ -91,9 +91,15 @@ def deactivate_all_pilots(db: Session = Depends(get_db)):
 
 ########################### FLIGHT SESSIONS ################################
 
-@api.get("/admin/flightsession", dependencies=[Security(__adminauth)],response_model=list[FlightSessionDTO])
-def get_all_flightsessions(db: Session = Depends(get_db)):
-    return db.query(FlightSessionEntity).all()
+@api.get("/admin/flightsession/{year}", dependencies=[Security(__adminauth)],response_model=list[FlightSessionDTO])
+def get_all_flightsessions(year: int, db: Session = Depends(get_db)):
+    sessions : list[FlightSessionEntity] =  db.query(FlightSessionEntity).filter(FlightSessionEntity.start.between('{:04d}-01-01'.format(year),'{:04d}-12-31'.format(year))).all()
+    pilots : list[PilotEntity] = db.query(PilotEntity).filter(PilotEntity.id.in_(dict.fromkeys([o.pilotid for o in sessions]))).all()
+    for session in sessions:
+        pilot = [p for p in pilots if p.id == session.pilotid ][0]
+        session.pilotname = pilot.lastname + ' ' + pilot.firstname
+        session.airport =  config.terminals[session.terminalid].airportname if session.terminalid in config.terminals.keys() else 'Unbekannt'
+    return sessions
 
 ########################### OTHERS #########################################
 
