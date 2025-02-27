@@ -58,6 +58,8 @@ function exportValue(obj) {
 <template>
     <div className="card">
         <h1>Flugbuch</h1>
+    </div>
+    <div className="card">
         <div v-if="errorMsg.length > 0">
             <Message severity="error" v-bind:closable="true"><div v-html="errorMsg" /></Message>
             <br />
@@ -88,7 +90,7 @@ function exportValue(obj) {
             :exportFunction="exportValue"
             :export-filename="exportFilename"
         >
-            <template #empty><Message>Im ausgewählten Zeitraum gibt es keinen Logbucheintrag.</Message></template>
+            <template #empty><Message>Für den ausgewählten Zeitraum wurde kein Logbucheintrag gefunden</Message></template>
             <template #paginatorcontainer="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords, firstPageCallback, lastPageCallback }">
                 <div class="flex items-center gap-4 py-1 px-2 justify-between">
                     <Button icon="pi pi-angle-double-left" rounded text @click="firstPageCallback" :disabled="page === 0" />

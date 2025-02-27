@@ -23,6 +23,8 @@ function rowClick(e) {
 <template>
     <div className="card">
         <h1>Pilot:innen</h1>
+    </div>
+    <div className="card">
         <div v-if="errorMsg.length > 0">
             <Message severity="error" v-bind:closable="true"><div v-html="errorMsg" /></Message>
             <br />
@@ -38,7 +40,7 @@ function rowClick(e) {
         </div>
         <br />
         <DataTable :value="model" sortField="lastname" :sortOrder="1" selectionMode="multiple" @row-click="rowClick($event)" paginator :rows="20" v-model:filters="filters" :globalFilterFields="['email', 'lastname', 'firstname', 'id']">
-            <template #empty><Message>Es wurde noch kein:e Pilot:in erstellt</Message></template>
+            <template #empty><Message>Es wurde kein:e Pilot:in gefunden</Message></template>
             <template #paginatorcontainer="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords }">
                 <div class="flex items-center gap-4 py-1 px-2 justify-between">
                     <Button icon="pi pi-chevron-left" rounded text @click="prevPageCallback" :disabled="page === 0" />

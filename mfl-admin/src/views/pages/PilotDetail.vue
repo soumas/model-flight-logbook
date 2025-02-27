@@ -76,6 +76,8 @@ onMounted(() => {
         <div class="card">
             <h1 v-if="isCreate">Pilot:in hinzufügen</h1>
             <h1 v-else>Pilot:in bearbeiten</h1>
+        </div>
+        <div class="card">
             <div class="flex justify-start gap-4">
                 <Button label="Zur Liste" icon="pi pi-fw pi-arrow-left" severity="secondary" @click="() => router.push(routes.pilots)" />
             </div>
