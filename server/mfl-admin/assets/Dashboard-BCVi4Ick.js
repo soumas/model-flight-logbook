@@ -1,1 +1,0 @@
-import{_ as s,c as o,o as t,a as e}from"./index-DJzmeOUY.js";const a={},c={className:"card"},_=e("h1",null,"Dashboard",-1),n=e("div",{class:"font-semibold text-xl mb-4"},"Empty Page",-1),r=[_,n];function d(i,l){return t(),o("div",c,r)}const m=s(a,[["render",d]]);export{m as default};

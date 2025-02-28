@@ -1,0 +1,1 @@
+import{A as a,J as e}from"./ApiService-91fyH-iC.js";const i={getPath(s){const t="/admin/flightsession";return s?t+"/"+s:t},async get(s){const t=(await a.get(this.getPath(s))).data;return e.stringsToDates(t),t}};export{i as L};
