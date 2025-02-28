@@ -10,7 +10,7 @@
     "dependencies": {
         "@primevue/themes": "^4.2.4",
         "axios": "^1.7.9",
-        "chart.js": "3.3.2",
+        "chart.js": "^3.3.2",
         "primeicons": "^7.0.0",
         "primevue": "^4.2.4",
         "vue": "^3.4.34",

@@ -11,6 +11,7 @@ const filters = ref({ global: {} });
 watch(() => router.path, fetchData, { immediate: true });
 
 function fetchData() {
+    model.value = [];
     PilotService.get()
         .then((data) => (model.value = data))
         .catch((e) => handleApiError(e, errorMsg));
@@ -19,10 +20,23 @@ function fetchData() {
 function rowClick(e) {
     router.push(routes.pilots + '/' + e.data.id);
 }
+
+function evalAcDateSeverity(date) {
+    let now = new Date();
+    now.setHours(0, 0, 0, 0);
+    if (date == null || now > date) {
+        return 'danger';
+    } else if (Math.abs((now - date) / (1000 * 60 * 60 * 24)) <= 30) {
+        return 'warn';
+    }
+    return 'secondary';
+}
 </script>
 <template>
     <div className="card">
-        <h1>Pilot:innen</h1>
+        <h1 style="float: left">Pilot:innen</h1>
+        <Button @click="fetchData" icon="pi pi-refresh" severity="secondary" style="float: right"></Button>
+        <div style="clear: both"></div>
     </div>
     <div className="card">
         <div v-if="errorMsg.length > 0">
@@ -55,7 +69,18 @@ function rowClick(e) {
                 <template #body="{ data }">{{ data.lastname }} {{ data.firstname }}</template>
             </Column>
             <Column field="id" header="ID" sortable></Column>
+            <Column field="phonenumber" header="Telefon" sortable></Column>
             <Column field="email" header="E-Mail" sortable></Column>
+            <Column field="acRegistrationValidTo" header="Registrierung" sortable>
+                <template #body="{ data }">
+                    <Badge v-if="data.acRegistrationValidTo != null" :severity="evalAcDateSeverity(data.acRegistrationValidTo)" :value="data.acRegistrationValidTo.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' })" />
+                </template>
+            </Column>
+            <Column field="acPilotlicenseValidTo" header="Führerschein" sortable>
+                <template #body="{ data }">
+                    <Badge v-if="data.acPilotlicenseValidTo != null" :severity="evalAcDateSeverity(data.acPilotlicenseValidTo)" :value="data.acPilotlicenseValidTo.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' })" />
+                </template>
+            </Column>
             <Column field="active" header="Aktiv" sortable>
                 <template #body="{ data }">
                     <Checkbox v-model="data.active" binary readonly="readonly"></Checkbox>

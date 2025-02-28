@@ -9,8 +9,8 @@ const model = ref([
         items: [
             { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: routes.dashboard },
             { label: 'Pilot:innen', icon: 'pi pi-fw pi-users', to: routes.pilots },
-            { label: 'Flugbuch', icon: 'pi pi-fw pi-book', to: routes.logbook },
-            { label: 'Nachrichten', icon: 'pi pi-fw pi-bell', to: routes.messages }
+            { label: 'Flugbuch', icon: 'pi pi-fw pi-book', to: routes.logbook }
+            // { label: 'Nachrichten', icon: 'pi pi-fw pi-bell', to: routes.messages }
         ]
     },
     {

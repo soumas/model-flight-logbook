@@ -2,6 +2,7 @@ import { computed, reactive } from 'vue';
 
 const layoutConfig = reactive({
     menuMode: 'static'
+    //menuMode: 'overlay'
 });
 
 const layoutState = reactive({

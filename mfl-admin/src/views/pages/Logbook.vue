@@ -15,8 +15,8 @@ const exportFilename = ref('MFL Flugbuch');
 watch(() => router.path, fetchData, { immediate: true });
 
 function fetchData() {
-    updateExportFilename();
     model.value = [];
+    updateExportFilename();
     LogbookService.get(selctedYear.value)
         .then((data) => {
             data.forEach((e) => {
@@ -57,7 +57,9 @@ function exportValue(obj) {
 </script>
 <template>
     <div className="card">
-        <h1>Flugbuch</h1>
+        <h1 style="float: left">Flugbuch</h1>
+        <Button @click="fetchData" icon="pi pi-refresh" severity="secondary" style="float: right"></Button>
+        <div style="clear: both"></div>
     </div>
     <div className="card">
         <div v-if="errorMsg.length > 0">
