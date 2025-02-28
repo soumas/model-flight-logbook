@@ -26,6 +26,7 @@ class FlightSessionDTO(BaseModel):
     comment: Optional[str]=None 
     pilotname: Optional[str]=None 
     airport: Optional[str]=None 
+    endedby: Optional[str]=None 
 
 class FlightSessionStatusDTO(BaseModel):
     pilotName: str

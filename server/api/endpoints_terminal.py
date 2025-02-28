@@ -112,6 +112,7 @@ def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[s
     fsession.maxAltitude = data.maxAltitude
     fsession.airspaceObserver = data.airspaceObserver
     fsession.comment = data.comment
+    fsession.endedby = x_pilotid
     db.commit()
     trigger_utm_sync_task()
     

@@ -28,4 +28,5 @@ class FlightSessionEntity(Base):
     maxAltitude = Column(Integer, nullable=True)
     airspaceObserver = Column(Boolean, nullable=True)
     comment = Column(String, nullable=True)
+    endedby = Column(String, nullable=True)
 

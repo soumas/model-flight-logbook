@@ -27,7 +27,7 @@ def __closeFlightSession(fsession:FlightSessionEntity):
     db = SessionLocal()
     try:    
         fsession.end = datetime.now()
-        fsession.comment = 'autoclose'
+        fsession.endedby = 'sys'
         db.merge(fsession)
         db.commit() 
     except:
