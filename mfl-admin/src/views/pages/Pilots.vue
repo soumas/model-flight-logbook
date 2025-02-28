@@ -7,6 +7,7 @@ import { PilotService } from '../../service/PilotService';
 const model = ref([]);
 const errorMsg = ref('');
 const filters = ref({ global: {} });
+const table = ref(null);
 
 watch(() => router.path, fetchData, { immediate: true });
 
@@ -31,6 +32,21 @@ function evalAcDateSeverity(date) {
     }
     return 'secondary';
 }
+
+function exportCSV() {
+    table.value.exportCSV();
+}
+
+function exportValue(obj) {
+    if (obj.data instanceof Date) {
+        return obj.data.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' });
+    } else if (obj.data === true) {
+        return 'Ja';
+    } else if (obj.data === false) {
+        return 'Nein';
+    }
+    return obj.data;
+}
 </script>
 <template>
     <div className="card">
@@ -51,9 +67,23 @@ function evalAcDateSeverity(date) {
                 </InputIcon>
                 <InputText v-model="filters['global'].value" placeholder="Volltextfilter" />
             </IconField>
+            <Button label="Exportieren" @click="exportCSV" />
         </div>
         <br />
-        <DataTable :value="model" sortField="lastname" :sortOrder="1" selectionMode="multiple" @row-click="rowClick($event)" paginator :rows="20" v-model:filters="filters" :globalFilterFields="['email', 'lastname', 'firstname', 'id']">
+        <DataTable
+            ref="table"
+            :value="model"
+            sortField="lastname"
+            :sortOrder="1"
+            selectionMode="multiple"
+            @row-click="rowClick($event)"
+            paginator
+            :rows="20"
+            v-model:filters="filters"
+            :globalFilterFields="['email', 'lastname', 'firstname', 'id', 'phonenumber']"
+            :exportFunction="exportValue"
+            export-filename="MFL PilotInnen"
+        >
             <template #empty><Message>Es wurde kein:e Pilot:in gefunden</Message></template>
             <template #paginatorcontainer="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords }">
                 <div class="flex items-center gap-4 py-1 px-2 justify-between">
@@ -65,10 +95,9 @@ function evalAcDateSeverity(date) {
                     <Button icon="pi pi-chevron-right" rounded text @click="nextPageCallback" :disabled="page === pageCount - 1" />
                 </div>
             </template>
-            <Column field="lastname" header="Name" sortable>
-                <template #body="{ data }">{{ data.lastname }} {{ data.firstname }}</template>
-            </Column>
             <Column field="id" header="ID" sortable></Column>
+            <Column field="lastname" header="Nachname" sortable></Column>
+            <Column field="firstname" header="Vorname" sortable></Column>
             <Column field="phonenumber" header="Telefon" sortable></Column>
             <Column field="email" header="E-Mail" sortable></Column>
             <Column field="acRegistrationValidTo" header="Registrierung" sortable>

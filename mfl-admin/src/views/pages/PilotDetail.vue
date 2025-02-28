@@ -103,14 +103,14 @@ onMounted(() => {
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <InputText id="firstname" type="text" v-model="model.firstname" required autocomplete="off" />
-                                <label for="firstname">Vorname</label>
+                                <InputText id="lastname" type="text" v-model="model.lastname" required autocomplete="off" />
+                                <label for="lastname">Nachname</label>
                             </IftaLabel>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <InputText id="lastname" type="text" v-model="model.lastname" required autocomplete="off" />
-                                <label for="lastname">Nachname</label>
+                                <InputText id="firstname" type="text" v-model="model.firstname" required autocomplete="off" />
+                                <label for="firstname">Vorname</label>
                             </IftaLabel>
                         </div>
                     </div>
