@@ -60,7 +60,7 @@ function exportValue(obj) {
             <br />
         </div>
         <div class="flex justify-between">
-            <Button label="Pilot:in hinzufügen" @click="() => router.push(routes.pilots + '/create')" icon="pi pi-fw pi-user-plus" severity="secondary"></Button>
+            <Button label="Pilot:in hinzufügen" @click="() => router.push(routes.pilots + '/create')" icon="pi pi-fw pi-user-plus"></Button>
             <div class="flex justify-end">
                 <IconField>
                     <InputIcon>
@@ -68,7 +68,7 @@ function exportValue(obj) {
                     </InputIcon>
                     <InputText v-model="filters['global'].value" placeholder="Volltextfilter" />
                 </IconField>
-                <Button label="Exportieren" @click="exportCSV" />
+                <Button label="Exportieren" @click="exportCSV" severity="secondary" />
             </div>
         </div>
         <br />

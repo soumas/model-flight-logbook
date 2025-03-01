@@ -74,7 +74,7 @@ function exportValue(obj) {
                 </InputIcon>
                 <InputText v-model="filters['global'].value" placeholder="Volltextfilter" v-on:input="updateExportFilename" />
             </IconField>
-            <Button label="Exportieren" @click="exportCSV" />
+            <Button label="Exportieren" @click="exportCSV" severity="secondary" />
         </div>
         <br />
         <DataTable
