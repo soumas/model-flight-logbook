@@ -4,3 +4,4 @@ __pycache__
 **server-config.ini
 **logs/logfile*
 **utm_error_screenshots/*
+venv
