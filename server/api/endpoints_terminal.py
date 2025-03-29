@@ -120,6 +120,6 @@ def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[s
         send_mail(
             background_tasks=background_tasks,
             to=config.logbook.admin_email,
-            subject='Besonderes Ereignis erfasst', 
-            body= pilot.firstname + ' ' + pilot.lastname + ' hat am Flugplatz "' + config.terminals[x_terminal].airportname + '" bei der Protokollierung seines Flugtages folgendes besondere Ereignis angegeben:<br/><br/>' + fsession.comment + '<br><br>Kontaktdaten für Rückfragen:<ul><li><a href="mailto:' + pilot.email + '">' + pilot.email + '</a></li><li><a href="tel:' + pilot.phonenumber + '">' + pilot.phonenumber + '</a></li></ul>'
+            subject='Besonderes Ereignis', 
+            body= pilot.firstname + ' ' + pilot.lastname + ' hat am Flugplatz "' + config.terminals[x_terminal].airportname + '" folgendes Ereignis angegeben:<br/><br/>' + fsession.comment + '<br><br>Kontaktdaten für Rückfragen:<ul><li><a href="mailto:' + pilot.email + '">' + pilot.email + '</a></li><li><a href="tel:' + pilot.phonenumber + '">' + pilot.phonenumber + '</a></li></ul>'
         )
