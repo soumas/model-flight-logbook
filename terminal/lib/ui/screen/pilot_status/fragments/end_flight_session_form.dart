@@ -7,6 +7,7 @@ import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
+import 'package:model_flight_logbook/ui/utils/toast.dart';
 import 'package:model_flight_logbook/ui/widgets/input_description_button.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_text_form_field.dart';
@@ -22,7 +23,7 @@ class EndFlightSessionForm extends StatefulWidget {
 }
 
 class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
-  final _data = EndFlightSessionData(takeoffcount: 1, airspaceObserver: false, maxAltitude: 119, comment: '');
+  final _data = EndFlightSessionData(takeoffcount: 0, airspaceObserver: false, maxAltitude: 119, comment: '');
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _commentTextEditingController;
   late final TextEditingController _numFlightsEditingController;
@@ -40,6 +41,15 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
   }
 
   @override
+  void dispose() {
+    _commentTextEditingController.dispose();
+    _numFlightsEditingController.dispose();
+    _maxAltitudeEditingController.dispose();
+    _formKey.currentState?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final state = ModalRoute.of(context)!.settings.arguments as PilotStatusState;
     return MflScaffold(
@@ -51,10 +61,10 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
           children: [
             MflPaddings.verticalSmall(context),
             Align(alignment: Alignment.centerLeft, child: Text(state.flightSessionStatus!.pilotName, style: Theme.of(context).textTheme.headlineLarge)),
-            Align(alignment: Alignment.centerLeft, child: Text('Beginn: ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr', style: Theme.of(context).textTheme.bodyMedium)),
+            Align(alignment: Alignment.centerLeft, child: Text('Startzeit: ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr', style: Theme.of(context).textTheme.bodyMedium)),
             MflPaddings.verticalSmall(context),
             MflTextFormField(
-              label: 'Flüge*',
+              label: 'Anzahl Flüge*',
               description: 'Gesamtanzahl der durchgeführten Flüge',
               controller: _numFlightsEditingController,
               inputType: VirtualKeyboardType.Numeric,
@@ -146,6 +156,8 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                       maxAltitude: int.parse(_maxAltitudeEditingController.text),
                     ),
                   );
+                } else {
+                  Toast.error(context: context, message: 'Formular enthält Fehler');
                 }
               },
               child: const Text('Absenden'),
