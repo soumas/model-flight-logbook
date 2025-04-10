@@ -63,7 +63,7 @@ function resetMsgs() {
 
 onMounted(() => {
     if (isCreate.value) {
-        model.value = { active: true, acIsUtmOperator: false };
+        model.value = { active: true, validateAcRegistration: true, validateAcPilotlicense: true };
     } else {
         PilotService.get(route.params.id)
             .then((data) => (model.value = data))
@@ -139,18 +139,24 @@ onMounted(() => {
                                 <label for="acRegistrationValidTo">Registrierung gültig bis</label>
                             </IftaLabel>
                         </div>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex flex-wrap gap-2" style="margin: auto;">
+                                <ToggleSwitch inputId="validateAcRegistration" v-model="model.validateAcRegistration" binary />
+                                <label for="validateAcPilotlicense">Registrierung prüfen</label><span class="pi pi-info-circle" style="font-size: 1.3rem;color:green;font-weight:bold;cursor: pointer;" v-tooltip="'Checkin bei fehlender oder abgelaufener Registrierung verweigern. Hinweis: UTM Interaktionen sind nur mit aktiver Prüfung möglich'"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
                                 <DatePicker id="acPilotlicenseValidTo" v-model="model.acPilotlicenseValidTo" dateFormat="dd.mm.yy" />
                                 <label for="acPilotlicenseValidTo">Drohnenführerschein gültig bis</label>
                             </IftaLabel>
                         </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex flex-col md:flex-row gap-4">
-                            <div class="flex flex-wrap gap-2">
-                                <ToggleSwitch inputId="acIsUtmOperator" v-model="model.acIsUtmOperator" binary />
-                                <label for="acIsUtmOperator">UTM Interaktionen mit diesem User erlauben</label>
+                            <div class="flex flex-wrap gap-2" style="margin: auto;">
+                                <ToggleSwitch inputId="validateAcPilotlicense" v-model="model.validateAcPilotlicense" binary />
+                                <label for="validateAcPilotlicense">Drohnenführerschein prüfen</label><span class="pi pi-info-circle" style="font-size: 1.3rem;color:green;font-weight:bold;cursor: pointer;" v-tooltip="'Checkin bei fehlendem oder abgelaufenen Drohnenführerschein verweigern'"></span>
                             </div>
                         </div>
                     </div>

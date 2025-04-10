@@ -22,12 +22,12 @@ function rowClick(e) {
     router.push(routes.pilots + '/' + e.data.id);
 }
 
-function evalAcDateSeverity(date) {
+function evalAcDateSeverity(date, validate) {
     let now = new Date();
     now.setHours(0, 0, 0, 0);
-    if (date == null || now > date) {
+    if (validate && (date == null || now > date)) {
         return 'danger';
-    } else if (Math.abs((now - date) / (1000 * 60 * 60 * 24)) <= 30) {
+    } else if (validate && (Math.abs((now - date) / (1000 * 60 * 60 * 24)) <= 30)) {
         return 'warn';
     }
     return 'secondary';
@@ -104,12 +104,14 @@ function exportValue(obj) {
             <Column field="email" header="E-Mail" sortable></Column>
             <Column field="acRegistrationValidTo" header="Registrierung" sortable>
                 <template #body="{ data }">
-                    <Badge v-if="data.acRegistrationValidTo != null" :severity="evalAcDateSeverity(data.acRegistrationValidTo)" :value="data.acRegistrationValidTo.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' })" />
+                    <Badge v-if="data.acRegistrationValidTo != null" :severity="evalAcDateSeverity(data.acRegistrationValidTo, data.validateAcRegistration)" :value="data.acRegistrationValidTo.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' })" />
+                    <Badge v-if="data.acRegistrationValidTo == null && data.validateAcRegistration" severity="danger">Datum fehlt</Badge>
                 </template>
             </Column>
             <Column field="acPilotlicenseValidTo" header="Führerschein" sortable>
                 <template #body="{ data }">
-                    <Badge v-if="data.acPilotlicenseValidTo != null" :severity="evalAcDateSeverity(data.acPilotlicenseValidTo)" :value="data.acPilotlicenseValidTo.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' })" />
+                    <Badge v-if="data.acPilotlicenseValidTo != null" :severity="evalAcDateSeverity(data.acPilotlicenseValidTo, data.validateAcPilotlicense)" :value="data.acPilotlicenseValidTo.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' })" />
+                    <Badge v-if="data.acPilotlicenseValidTo == null && data.validateAcPilotlicense" severity="danger">Datum fehlt</Badge>
                 </template>
             </Column>
             <Column field="active" header="Aktiv" sortable>
