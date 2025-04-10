@@ -13,9 +13,10 @@ class PilotEntity(Base):
     phonenumber = Column(String, nullable=False)
     email = Column(String, nullable=False)
     active = Column(Boolean, nullable=False)
-    acIsUtmOperator = Column(Boolean, nullable=False)
     acRegistrationValidTo = Column(Date, nullable=True)    
-    acPilotlicenseValidTo = Column(Date, nullable=True)    
+    validateAcRegistration = Column(Boolean, nullable=False)
+    acPilotlicenseValidTo = Column(Date, nullable=True)
+    validateAcPilotlicense = Column(Boolean, nullable=False)
 
 class FlightSessionEntity(Base):
     __tablename__ = "flightsessions"

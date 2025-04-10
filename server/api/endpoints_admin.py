@@ -57,9 +57,10 @@ def update_pilot(id: str, pilot: PilotDTO, db: Session = Depends(get_db)):
         db_pilot.firstname = pilot.firstname
         db_pilot.lastname = pilot.lastname
         db_pilot.phonenumber = pilot.phonenumber
-        db_pilot.acIsUtmOperator = pilot.acIsUtmOperator
         db_pilot.acRegistrationValidTo = pilot.acRegistrationValidTo
+        db_pilot.validateAcRegistration = pilot.validateAcRegistration
         db_pilot.acPilotlicenseValidTo = pilot.acPilotlicenseValidTo
+        db_pilot.validateAcPilotlicense = pilot.validateAcPilotlicense        
         db.add(db_pilot)
         commit_with_httpexceptionhandling(db)
         return db_pilot
@@ -77,9 +78,10 @@ def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Session = De
         db_pilot.firstname = pilot.firstname
         db_pilot.lastname = pilot.lastname
         db_pilot.phonenumber = pilot.phonenumber
-        db_pilot.acIsUtmOperator = pilot.acIsUtmOperator
         db_pilot.acRegistrationValidTo = pilot.acRegistrationValidTo
+        db_pilot.validateAcRegistration = pilot.validateAcRegistration
         db_pilot.acPilotlicenseValidTo = pilot.acPilotlicenseValidTo
+        db_pilot.validateAcPilotlicense = pilot.validateAcPilotlicense
     commit_with_httpexceptionhandling(db)
     return db_pilot
 

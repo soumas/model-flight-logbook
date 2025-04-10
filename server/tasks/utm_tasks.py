@@ -134,7 +134,7 @@ def __findRelevantFlightSession(terminalid:str):
     # fetch the active flight session with the earliest startdate and an utm-operator pilot
     db = SessionLocal()
     try:
-        return db.query(FlightSessionEntity).join(PilotEntity).filter(and_(FlightSessionEntity.end == None, FlightSessionEntity.terminalid == terminalid, PilotEntity.acIsUtmOperator == True)).order_by(FlightSessionEntity.start).first()
+        return db.query(FlightSessionEntity).join(PilotEntity).filter(and_(FlightSessionEntity.end == None, FlightSessionEntity.terminalid == terminalid, PilotEntity.validateAcRegistration == True)).order_by(FlightSessionEntity.start).first()
     except:
         db.rollback()
         raise

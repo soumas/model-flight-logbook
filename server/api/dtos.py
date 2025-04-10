@@ -9,10 +9,11 @@ class PilotDTO(BaseModel):
     lastname: str
     phonenumber: str
     email: str
-    active: bool
-    acIsUtmOperator: bool
+    active: bool    
     acRegistrationValidTo: Optional[datetime.date]=None
+    validateAcRegistration: bool
     acPilotlicenseValidTo: Optional[datetime.date]=None
+    validateAcPilotlicense: bool
 
 class FlightSessionDTO(BaseModel):
     id: int

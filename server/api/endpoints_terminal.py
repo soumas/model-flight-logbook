@@ -53,14 +53,14 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
     
     infoMessages = []
-    #infoMessages = ['Hüttenfest am 12.12.2024 nicht versäumen und sonst auch noch eine ganz lange botschaft. Ich wünsch dir viele Spaß mit dieser langen Meldung Und auch noch drei Zeilenumbürche.']
+    infoMessages = []
     warnMessages = []
     erroMessages = []
     if(pilot.active != True):
         erroMessages.append('Konto inaktiv');
     
-    if(config.utm.enabled  and pilot.acIsUtmOperator != True):
-        warnMessages.append('Keine UTM Freigabeanforderung über dieses Konto')
+    if(pilot.validateAcRegistration != True):
+        infoMessages.append('Keine UTM Freigabeanforderung über dieses Konto')
 
     if(pilot.acPilotlicenseValidTo == None):
         erroMessages.append('Drohnenführerschein fehlt');
