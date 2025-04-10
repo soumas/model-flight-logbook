@@ -60,21 +60,23 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
         erroMessages.append('Konto inaktiv');
     
     if(pilot.validateAcRegistration != True):
-        infoMessages.append('Keine UTM Freigabeanforderung über dieses Konto')
+        infoMessages.append('Keine UTM Interaktion über dieses Konto')
 
-    if(pilot.acPilotlicenseValidTo == None):
-        erroMessages.append('Drohnenführerschein fehlt');
-    elif(pilot.acPilotlicenseValidTo < datetime.now().date()):
-        erroMessages.append('Drohnenführerschein abgelaufen');
-    elif(pilot.acPilotlicenseValidTo < datetime.now().date() + timedelta(days=30)):
-        warnMessages.append('Dein Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab!');
+    if(pilot.validateAcPilotlicense):
+        if(pilot.acPilotlicenseValidTo == None):
+            erroMessages.append('Drohnenführerschein fehlt');
+        elif(pilot.acPilotlicenseValidTo < datetime.now().date()):
+            erroMessages.append('Drohnenführerschein abgelaufen');
+        elif(pilot.acPilotlicenseValidTo < datetime.now().date() + timedelta(days=30)):
+            warnMessages.append('Dein Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab!');
     
-    if(pilot.acRegistrationValidTo == None):
-        erroMessages.append('Registrierung fehlt');
-    elif(pilot.acRegistrationValidTo < datetime.now().date()):
-        erroMessages.append('Registrierung abgelaufen');
-    elif(pilot.acRegistrationValidTo < datetime.now().date() + timedelta(days=30)):
-        warnMessages.append('Deine Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab!');
+    if(pilot.validateAcRegistration):
+        if(pilot.acRegistrationValidTo == None):
+            erroMessages.append('Registrierung fehlt');
+        elif(pilot.acRegistrationValidTo < datetime.now().date()):
+            erroMessages.append('Registrierung abgelaufen');
+        elif(pilot.acRegistrationValidTo < datetime.now().date() + timedelta(days=30)):
+            warnMessages.append('Deine Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab!');
 
     return FlightSessionStatusDTO(
         pilotName=pilot.firstname + ' ' + pilot.lastname,
