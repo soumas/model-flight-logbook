@@ -142,7 +142,7 @@ onMounted(() => {
                         <div class="flex flex-col md:flex-row gap-4">
                             <div class="flex flex-wrap gap-2" style="margin: auto;">
                                 <ToggleSwitch inputId="validateAcRegistration" v-model="model.validateAcRegistration" binary />
-                                <label for="validateAcPilotlicense">Registrierung prüfen</label><span class="pi pi-info-circle" style="font-size: 1.3rem;color:green;font-weight:bold;cursor: pointer;" v-tooltip="'Checkin bei fehlender oder abgelaufener Registrierung verweigern. Hinweis: UTM Interaktionen sind nur mit aktiver Prüfung möglich'"></span>
+                                <label for="validateAcPilotlicense">Registrierung prüfen</label><span class="pi pi-info-circle" style="font-size: 1.3rem;color:green;font-weight:bold;cursor: pointer;" v-tooltip="'Checkin bei fehlender oder abgelaufener Registrierung verweigern.'"></span>
                             </div>
                         </div>
                     </div>
