@@ -8,7 +8,7 @@ from db.entities import FlightSessionEntity, PilotEntity
 from config.configmanager import TerminalConfig, config
 from utils.logger import log
 from utils.scheduler import scheduler
-from utils.utm import UTM_FLIGHTPLAN_DURATION_MINUTES, update_utm_operator
+from utils.utm import UTM_FLIGHTPLAN_DURATION_MINUTES, check_utm_prmitted, update_utm_operator
 
 class UtmSyncStatus(enum.Enum):
      disabled = 'disabled'
@@ -131,10 +131,17 @@ def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
 
 
 def __findRelevantFlightSession(terminalid:str):
-    # fetch the active flight session with the earliest startdate and an utm-operator pilot
+    # fetch the active flight session with the earliest startdate and a valid "utm-pilot"
     db = SessionLocal()
     try:
-        return db.query(FlightSessionEntity).join(PilotEntity).filter(and_(FlightSessionEntity.end == None, FlightSessionEntity.terminalid == terminalid, PilotEntity.validateAcRegistration == True)).order_by(FlightSessionEntity.start).first()
+        activeSessions = db.query(FlightSessionEntity).join(PilotEntity).filter(
+            and_(FlightSessionEntity.end == None, FlightSessionEntity.terminalid == terminalid)
+        ).order_by(FlightSessionEntity.start).all()
+        for fsess in activeSessions:
+            # todo cascade fetch pilot
+            if(check_utm_prmitted(__findPilot(fsess.pilotid)) == True):
+                return fsess
+        return None
     except:
         db.rollback()
         raise

@@ -13,6 +13,7 @@ from db.dbmanager import get_db
 from tasks.utm_tasks import UtmSyncStatus, trigger_utm_sync_task
 from utils.send_mail import send_mail
 from tasks.utm_tasks import utmSyncStatusDataDict
+from utils.utm import check_utm_prmitted
 
 def __specific_terminalauth(x_terminal:Annotated[str, Header()], api_key_header:str = Security(api_key_header)):
     if not x_terminal in config.terminals:
@@ -59,8 +60,8 @@ def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = De
     if(pilot.active != True):
         erroMessages.append('Konto inaktiv');
     
-    if(pilot.validateAcRegistration != True):
-        infoMessages.append('Keine UTM Interaktion über dieses Konto')
+    if(not check_utm_prmitted(pilot)):
+        warnMessages.append('Keine UTM Anmeldung erlaubt')
 
     if(pilot.validateAcPilotlicense):
         if(pilot.acPilotlicenseValidTo == None):

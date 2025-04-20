@@ -223,6 +223,12 @@ def __extract_pilotid_from_flightname(airportname:str, flightname:str):
         return matches['pilotid']
     return None
 
+def _strNullOrEmpty(string:str):
+    return not bool(string and string.strip())
+
+def check_utm_prmitted(pilot: PilotEntity):
+    return pilot.acRegistrationValidTo != None and pilot.acRegistrationValidTo >= datetime.now().date() and not _strNullOrEmpty(pilot.firstname) and not _strNullOrEmpty(pilot.lastname) and not _strNullOrEmpty(pilot.phonenumber)
+
 def update_utm_operator(airportname:str, airportkml:str, pilot:PilotEntity | None):
 
     driver = None
