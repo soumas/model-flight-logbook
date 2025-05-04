@@ -48,7 +48,7 @@ def validateTakeoffPermission(terminalid:str, pilot:PilotEntity, allowNonePilot 
                 vr._utmPermittedPilot = True
             else:
                 vr._utmPermittedPilot = False
-                vr._infoMessagesPilot.append('UTM Anmeldung über Pilot:in nicht möglich')
+                vr._infoMessagesPilot.append('Keine Flugfreigabeanforderung (UTM) über dieses Konto')
 
     elif allowNonePilot != True:
         raise Exception('validation without pilot not allowed!')
