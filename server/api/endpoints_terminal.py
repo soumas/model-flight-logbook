@@ -11,8 +11,10 @@ from api.exceptions import invalid_api_key, active_flightsession_found, unknown_
 from db.entities import FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
 from tasks.utm_tasks import UtmSyncStatus, trigger_utm_sync_task
+from utils.operatinghours_utils import findOperatinghourDayDefinition
 from utils.send_mail import send_mail
 from tasks.utm_tasks import utmSyncStatusDataDict
+from utils.takeoff_permission_utils import validateTakeoffPermission
 from utils.utm import check_utm_prmitted
 
 def __specific_terminalauth(x_terminal:Annotated[str, Header()], api_key_header:str = Security(api_key_header)):
@@ -39,54 +41,48 @@ def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, 
 
 @api.get("/terminal/status", dependencies=[Security(__specific_terminalauth)], response_model=TerminalStatusDTO)
 def get_status(x_terminal:Annotated[str, Header()]):
+    
+    # UTM
     global utmSyncStatusDataDict    
     state = UtmSyncStatus.unknown if config.utm.enabled else UtmSyncStatus.disabled
     busy = config.utm.enabled
     if x_terminal in utmSyncStatusDataDict:
         state = utmSyncStatusDataDict[x_terminal].status    
         busy = utmSyncStatusDataDict[x_terminal].busy
-    return TerminalStatusDTO(utmStatus=state.name, utmBusy=busy)
+    
+    # Operating hours
+    ohours = findOperatinghourDayDefinition(x_terminal, datetime.now())
+    ohoursStart = ohours.start if ohours != None else None
+    ohoursEnd = ohours.end if ohours != None else None
+
+    # messages
+    takeoffPermission = validateTakeoffPermission(terminalid=x_terminal, pilot=None, allowNonePilot=True)
+
+    return TerminalStatusDTO(
+        utmStatus=state.name, 
+        utmBusy=busy, 
+        operatinghourStart=ohoursStart, 
+        operatinghourEnd=ohoursEnd,
+        infoMessages=[], #takeoffPermission.getInfoMessages(),
+        warnMessages=[], #takeoffPermission.getWarnMessages(),
+        errorMessages=[], #takeoffPermission.getErrorMessages(),
+    )
 
 
 @api.get("/terminal/flightsession/status", dependencies=[Security(__specific_terminalauth)], response_model=FlightSessionStatusDTO)
-def get_flightsession_status(x_pilotid:Annotated[str, Header()], db:Session = Depends(get_db)):
+def get_flightsession_status(x_terminal:Annotated[str, Header()], x_pilotid:Annotated[str, Header()], db:Session = Depends(get_db)):
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
-    
-    infoMessages = []
-    infoMessages = []
-    warnMessages = []
-    erroMessages = []
-    if(pilot.active != True):
-        erroMessages.append('Konto inaktiv');
-    
-    if(not check_utm_prmitted(pilot)):
-        warnMessages.append('Keine UTM Anmeldung erlaubt')
-
-    if(pilot.validateAcPilotlicense):
-        if(pilot.acPilotlicenseValidTo == None):
-            erroMessages.append('Drohnenführerschein fehlt');
-        elif(pilot.acPilotlicenseValidTo < datetime.now().date()):
-            erroMessages.append('Drohnenführerschein abgelaufen');
-        elif(pilot.acPilotlicenseValidTo < datetime.now().date() + timedelta(days=30)):
-            warnMessages.append('Dein Drohnenführerschein läuft am ' + pilot.acPilotlicenseValidTo.strftime('%d.%m.%Y') + ' ab!');
-    
-    if(pilot.validateAcRegistration):
-        if(pilot.acRegistrationValidTo == None):
-            erroMessages.append('Registrierung fehlt');
-        elif(pilot.acRegistrationValidTo < datetime.now().date()):
-            erroMessages.append('Registrierung abgelaufen');
-        elif(pilot.acRegistrationValidTo < datetime.now().date() + timedelta(days=30)):
-            warnMessages.append('Deine Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab!');
+    takeoffPermission = validateTakeoffPermission(x_terminal, pilot)
 
     return FlightSessionStatusDTO(
         pilotName=pilot.firstname + ' ' + pilot.lastname,
         sessionId=None if fsession == None else fsession.id,
         sessionStarttime=None if fsession == None else fsession.start,
         sessionEndtime=None if fsession == None else fsession.end,
-        infoMessages=infoMessages,
-        warnMessages=warnMessages,
-        errorMessages=erroMessages,
+        infoMessages=takeoffPermission.getInfoMessages(),
+        warnMessages=takeoffPermission.getWarnMessages(),
+        errorMessages=takeoffPermission.getErrorMessages(),
     )
 
 @api.post("/terminal/flightsession/start", dependencies=[Security(__specific_terminalauth)], response_model=None)

@@ -54,21 +54,33 @@ class SelectedEndpointView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final errorMessages = state.terminalStatus?.errorMessages != null ? state.terminalStatus?.errorMessages! : [];
+    final warnMessages = state.terminalStatus?.warnMessages != null ? state.terminalStatus?.warnMessages! : [];
+    final infoMessages = state.terminalStatus?.infoMessages != null ? state.terminalStatus?.infoMessages! : [];
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          MflPaddings.verticalMedium(context),
           Text(
             state.selectedEndpoint?.config.airportname ?? 'Unbekannter Flugplatz',
             style: Theme.of(context).textTheme.headlineLarge,
           ),
-          Text(
-            state.selectedEndpoint?.config.terminalname ?? 'Unbekanntes Terminal',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface.withAlpha(90)),
-          ),
+          // Text(
+          //   state.selectedEndpoint?.config.terminalname ?? 'Unbekanntes Terminal',
+          //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface.withAlpha(90)),
+          // ),
+          if (state.terminalStatus != null && state.terminalStatus!.operatinghourStart != null && state.terminalStatus!.operatinghourEnd != null) MflPaddings.verticalSmall(context),
+          if (state.terminalStatus != null && state.terminalStatus!.operatinghourStart != null && state.terminalStatus!.operatinghourEnd != null)
+            Text(
+              'Öffnungszeit:  ${DateFormat.Hm().format(state.terminalStatus!.operatinghourStart!)} Uhr - ${DateFormat.Hm().format(state.terminalStatus!.operatinghourEnd!)} Uhr',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           MflPaddings.verticalMedium(context),
           const Divider(),
+          // MflPaddings.verticalMedium(context),
+          ...errorMessages!.map((e) => MflMessage(text: e, severity: MflMessageSeverity.error)),
+          ...warnMessages!.map((e) => MflMessage(text: e, severity: MflMessageSeverity.warn)),
+          ...infoMessages!.map((e) => MflMessage(text: e, severity: MflMessageSeverity.info)),
           MflPaddings.verticalMedium(context),
           if (state.terminalStatus != null && state.terminalStatus!.utmStatus != UtmSyncStatus.disabled)
             GestureDetector(

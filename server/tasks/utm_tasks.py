@@ -8,6 +8,7 @@ from db.entities import FlightSessionEntity, PilotEntity
 from config.configmanager import TerminalConfig, config
 from utils.logger import log
 from utils.scheduler import scheduler
+from utils.takeoff_permission_utils import validateTakeoffPermission
 from utils.utm import UTM_FLIGHTPLAN_DURATION_MINUTES, check_utm_prmitted, update_utm_operator
 
 class UtmSyncStatus(enum.Enum):
@@ -137,9 +138,10 @@ def __findRelevantFlightSession(terminalid:str):
         activeSessions = db.query(FlightSessionEntity).join(PilotEntity).filter(
             and_(FlightSessionEntity.end == None, FlightSessionEntity.terminalid == terminalid)
         ).order_by(FlightSessionEntity.start).all()
-        for fsess in activeSessions:
-            # todo cascade fetch pilot
-            if(check_utm_prmitted(__findPilot(fsess.pilotid)) == True):
+        for fsess in activeSessions:            
+            pilot = __findPilot(fsess.pilotid) # todo cascade fetch pilot
+            takeoffPermission = validateTakeoffPermission(pilot)
+            if(takeoffPermission.isUtmPermitted()):
                 return fsess
         return None
     except:

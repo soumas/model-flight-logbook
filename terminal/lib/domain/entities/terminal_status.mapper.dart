@@ -30,19 +30,45 @@ class TerminalStatusMapper extends ClassMapperBase<TerminalStatus> {
   static DateTime? _$statusReceiveTime(TerminalStatus v) => v.statusReceiveTime;
   static const Field<TerminalStatus, DateTime> _f$statusReceiveTime =
       Field('statusReceiveTime', _$statusReceiveTime, opt: true);
+  static DateTime? _$operatinghourStart(TerminalStatus v) =>
+      v.operatinghourStart;
+  static const Field<TerminalStatus, DateTime> _f$operatinghourStart =
+      Field('operatinghourStart', _$operatinghourStart, opt: true);
+  static DateTime? _$operatinghourEnd(TerminalStatus v) => v.operatinghourEnd;
+  static const Field<TerminalStatus, DateTime> _f$operatinghourEnd =
+      Field('operatinghourEnd', _$operatinghourEnd, opt: true);
+  static List<String>? _$infoMessages(TerminalStatus v) => v.infoMessages;
+  static const Field<TerminalStatus, List<String>> _f$infoMessages =
+      Field('infoMessages', _$infoMessages, opt: true);
+  static List<String>? _$warnMessages(TerminalStatus v) => v.warnMessages;
+  static const Field<TerminalStatus, List<String>> _f$warnMessages =
+      Field('warnMessages', _$warnMessages, opt: true);
+  static List<String>? _$errorMessages(TerminalStatus v) => v.errorMessages;
+  static const Field<TerminalStatus, List<String>> _f$errorMessages =
+      Field('errorMessages', _$errorMessages, opt: true);
 
   @override
   final MappableFields<TerminalStatus> fields = const {
     #utmStatus: _f$utmStatus,
     #utmBusy: _f$utmBusy,
     #statusReceiveTime: _f$statusReceiveTime,
+    #operatinghourStart: _f$operatinghourStart,
+    #operatinghourEnd: _f$operatinghourEnd,
+    #infoMessages: _f$infoMessages,
+    #warnMessages: _f$warnMessages,
+    #errorMessages: _f$errorMessages,
   };
 
   static TerminalStatus _instantiate(DecodingData data) {
     return TerminalStatus(
         utmStatus: data.dec(_f$utmStatus),
         utmBusy: data.dec(_f$utmBusy),
-        statusReceiveTime: data.dec(_f$statusReceiveTime));
+        statusReceiveTime: data.dec(_f$statusReceiveTime),
+        operatinghourStart: data.dec(_f$operatinghourStart),
+        operatinghourEnd: data.dec(_f$operatinghourEnd),
+        infoMessages: data.dec(_f$infoMessages),
+        warnMessages: data.dec(_f$warnMessages),
+        errorMessages: data.dec(_f$errorMessages));
   }
 
   @override
@@ -98,8 +124,21 @@ extension TerminalStatusValueCopy<$R, $Out>
 
 abstract class TerminalStatusCopyWith<$R, $In extends TerminalStatus, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get infoMessages;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get warnMessages;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get errorMessages;
   $R call(
-      {UtmSyncStatus? utmStatus, bool? utmBusy, DateTime? statusReceiveTime});
+      {UtmSyncStatus? utmStatus,
+      bool? utmBusy,
+      DateTime? statusReceiveTime,
+      DateTime? operatinghourStart,
+      DateTime? operatinghourEnd,
+      List<String>? infoMessages,
+      List<String>? warnMessages,
+      List<String>? errorMessages});
   TerminalStatusCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -113,21 +152,63 @@ class _TerminalStatusCopyWithImpl<$R, $Out>
   late final ClassMapperBase<TerminalStatus> $mapper =
       TerminalStatusMapper.ensureInitialized();
   @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get infoMessages => $value.infoMessages != null
+          ? ListCopyWith(
+              $value.infoMessages!,
+              (v, t) => ObjectCopyWith(v, $identity, t),
+              (v) => call(infoMessages: v))
+          : null;
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get warnMessages => $value.warnMessages != null
+          ? ListCopyWith(
+              $value.warnMessages!,
+              (v, t) => ObjectCopyWith(v, $identity, t),
+              (v) => call(warnMessages: v))
+          : null;
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
+      get errorMessages => $value.errorMessages != null
+          ? ListCopyWith(
+              $value.errorMessages!,
+              (v, t) => ObjectCopyWith(v, $identity, t),
+              (v) => call(errorMessages: v))
+          : null;
+  @override
   $R call(
           {UtmSyncStatus? utmStatus,
           bool? utmBusy,
-          Object? statusReceiveTime = $none}) =>
+          Object? statusReceiveTime = $none,
+          Object? operatinghourStart = $none,
+          Object? operatinghourEnd = $none,
+          Object? infoMessages = $none,
+          Object? warnMessages = $none,
+          Object? errorMessages = $none}) =>
       $apply(FieldCopyWithData({
         if (utmStatus != null) #utmStatus: utmStatus,
         if (utmBusy != null) #utmBusy: utmBusy,
-        if (statusReceiveTime != $none) #statusReceiveTime: statusReceiveTime
+        if (statusReceiveTime != $none) #statusReceiveTime: statusReceiveTime,
+        if (operatinghourStart != $none)
+          #operatinghourStart: operatinghourStart,
+        if (operatinghourEnd != $none) #operatinghourEnd: operatinghourEnd,
+        if (infoMessages != $none) #infoMessages: infoMessages,
+        if (warnMessages != $none) #warnMessages: warnMessages,
+        if (errorMessages != $none) #errorMessages: errorMessages
       }));
   @override
   TerminalStatus $make(CopyWithData data) => TerminalStatus(
       utmStatus: data.get(#utmStatus, or: $value.utmStatus),
       utmBusy: data.get(#utmBusy, or: $value.utmBusy),
       statusReceiveTime:
-          data.get(#statusReceiveTime, or: $value.statusReceiveTime));
+          data.get(#statusReceiveTime, or: $value.statusReceiveTime),
+      operatinghourStart:
+          data.get(#operatinghourStart, or: $value.operatinghourStart),
+      operatinghourEnd:
+          data.get(#operatinghourEnd, or: $value.operatinghourEnd),
+      infoMessages: data.get(#infoMessages, or: $value.infoMessages),
+      warnMessages: data.get(#warnMessages, or: $value.warnMessages),
+      errorMessages: data.get(#errorMessages, or: $value.errorMessages));
 
   @override
   TerminalStatusCopyWith<$R2, TerminalStatus, $Out2> $chain<$R2, $Out2>(

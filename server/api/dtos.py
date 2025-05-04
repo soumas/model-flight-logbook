@@ -54,4 +54,9 @@ class TerminalConfigDTO(BaseModel):
 class TerminalStatusDTO(BaseModel):
     utmStatus: str
     utmBusy: bool
+    operatinghourStart: Optional[datetime.datetime]=None
+    operatinghourEnd: Optional[datetime.datetime]=None
+    infoMessages: Optional[List[str]]=None
+    warnMessages: Optional[List[str]]=None
+    errorMessages: Optional[List[str]]=None
     
