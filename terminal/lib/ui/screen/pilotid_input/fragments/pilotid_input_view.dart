@@ -72,7 +72,7 @@ class SelectedEndpointView extends StatelessWidget {
           if (state.terminalStatus != null && state.terminalStatus!.operatinghourStart != null && state.terminalStatus!.operatinghourEnd != null) MflPaddings.verticalSmall(context),
           if (state.terminalStatus != null && state.terminalStatus!.operatinghourStart != null && state.terminalStatus!.operatinghourEnd != null)
             Text(
-              'Öffnungszeit:  ${DateFormat.Hm().format(state.terminalStatus!.operatinghourStart!)} Uhr - ${DateFormat.Hm().format(state.terminalStatus!.operatinghourEnd!)} Uhr',
+              'Betriebszeit:  ${DateFormat.Hm().format(state.terminalStatus!.operatinghourStart!)} Uhr - ${DateFormat.Hm().format(state.terminalStatus!.operatinghourEnd!)} Uhr',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           MflPaddings.verticalMedium(context),
