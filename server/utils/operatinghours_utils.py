@@ -64,7 +64,7 @@ def _parseOperatinghourscsv(terminalid:str):
                     hoursTo = int(re.search(_operatinghourstimeregex,   row[3])['hours'])
                     minutesTo = int(re.search(_operatinghourstimeregex, row[3])['minutes'])
                     fromLocalTZ = datetime(
-                        year=1900,
+                        year=datetime.now().year,
                         month=csvmonth,
                         day=csvday,
                         hour=hoursFrom,
@@ -73,7 +73,7 @@ def _parseOperatinghourscsv(terminalid:str):
                         microsecond=0, 
                         tzinfo=timezone.utc).astimezone()
                     toLocalTZ = datetime(
-                        year=1900,
+                        year=datetime.now().year,
                         month=csvmonth,
                         day=csvday,
                         hour=hoursTo,
