@@ -42,10 +42,10 @@ def _getNearestOperatinghourDefinition(terminalid:str, refdate:datetime):
         daydef.applyYear(refdate.year)
         if nearest == None:
             nearest = daydef
-        if daydef.start <= refdate:
-            daysFromDayDefToRef = abs((refdate - daydef.start).days)
-            daysFromNearestToRef = abs((refdate - nearest.start).days)
-            if daysFromDayDefToRef < daysFromNearestToRef:
+        if daydef.start.date()  <= refdate.date():
+            daysFromDayDefToRef = abs((refdate.date() - daydef.start.date()).days)
+            daysFromNearestToRef = abs((refdate.date() - nearest.start.date()).days)
+            if daysFromDayDefToRef <= daysFromNearestToRef:
                 nearest = daydef
 
     return nearest
