@@ -13,9 +13,9 @@ def validateTakeoffPermission(terminalid:str, pilot:PilotEntity, allowNonePilot 
     operatingHourDayDefinition = findOperatinghourDayDefinition(terminalid, now)
     if operatingHourDayDefinition != None:
         if not isInOperatinghour(operatingHourDayDefinition, now):
-            vr._errorMessagesGlobal.append('Außerhalb der Öffnungszeit')
+            vr._errorMessagesGlobal.append('Außerhalb der Betriebszeit')
         elif isNearOperatinghourEnd(operatingHourDayDefinition, now):
-            vr._warnMessagesGlobal.append('Öffnungszeit endet um ' + operatingHourDayDefinition.end.strftime('%H:%M') + ' Uhr')
+            vr._warnMessagesGlobal.append('Betriebszeit endet um ' + operatingHourDayDefinition.end.strftime('%H:%M') + ' Uhr')
 
     # pilot dependent validations
     if pilot != None:

@@ -50,7 +50,7 @@ def close_all_flightsessions():
                 send_mail(
                     to=pilot.email, 
                     bcc=config.logbook.admin_email, 
-                    subject='⚠ Aktiver Flugtag außerhalb der Öffnungszeit', 
+                    subject='⚠ Aktiver Flugtag außerhalb der Betriebszeit', 
                     body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Dein Flugtag vom ' + fsession.start.strftime('%d.%m.%Y') + ' (Checkin um ' + fsession.start.strftime('%H:%M') + ' Uhr) am Flugplatz "' + terminalconfig.airportname + '" wurde nicht vor Betriebsende (' + operatingHourDayDefinition.end.strftime('%H:%M') + ' Uhr) protokolliert und geschlossen.<br/><br/><strong>Wichtig!</strong> Bitte protokolliere und schließe künftige Flugtage verlässlich über das MFL Terminal bevor du den Flugplatz verlässt, damit wir als Verein durch eine lückenlose Aufzeichnung den gesetzlichen Anforderungen nachkommen können.<br/>')
     finally:
         trigger_utm_sync_task()
