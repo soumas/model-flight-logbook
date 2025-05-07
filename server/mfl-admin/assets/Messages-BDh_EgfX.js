@@ -1,0 +1,1 @@
+import{aP as e,o as t,c as o,a as s}from"./index-C8DqRj8t.js";const c={},a={className:"card"},n=s("h1",null,"Messages",-1),_=s("div",{class:"font-semibold text-xl mb-4"},"TODO",-1),r=[n,_];function d(i,l){return t(),o("div",a,r)}const m=e(c,[["render",d]]);export{m as default};

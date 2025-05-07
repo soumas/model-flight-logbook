@@ -1,4 +1,4 @@
-import{B as y,X as w,aq as k,s as z,Y as S,$ as x,o as a,j as m,d as O,a5 as u,a as j,m as t,L as r,c as i,a0 as P,a2 as $,e as p,a6 as B,a3 as I}from"./index-BE3eIa9X.js";var C=function(s){var e=s.dt;return`
+import{B as y,X as w,aq as k,s as z,Y as S,$ as x,o as a,j as m,d as O,a5 as u,a as j,m as t,L as r,c as i,a0 as P,a2 as $,e as p,a6 as B,a3 as I}from"./index-C8DqRj8t.js";var C=function(s){var e=s.dt;return`
 .p-message {
     border-radius: `.concat(e("message.border.radius"),`;
     outline-width: `).concat(e("message.border.width"),`;
