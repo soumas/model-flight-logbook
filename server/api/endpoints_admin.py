@@ -60,7 +60,10 @@ def update_pilot(id: str, pilot: PilotDTO, db: Session = Depends(get_db)):
         db_pilot.acRegistrationValidTo = pilot.acRegistrationValidTo
         db_pilot.validateAcRegistration = pilot.validateAcRegistration
         db_pilot.acPilotlicenseValidTo = pilot.acPilotlicenseValidTo
-        db_pilot.validateAcPilotlicense = pilot.validateAcPilotlicense        
+        db_pilot.validateAcPilotlicense = pilot.validateAcPilotlicense
+        db_pilot.infoMessages = pilot.infoMessages
+        db_pilot.warnMessages = pilot.warnMessages
+        db_pilot.errorMessages = pilot.errorMessages
         db.add(db_pilot)
         commit_with_httpexceptionhandling(db)
         return db_pilot
@@ -82,6 +85,9 @@ def create_or_update_pilot(pilot: PilotDTO, response: Response, db: Session = De
         db_pilot.validateAcRegistration = pilot.validateAcRegistration
         db_pilot.acPilotlicenseValidTo = pilot.acPilotlicenseValidTo
         db_pilot.validateAcPilotlicense = pilot.validateAcPilotlicense
+        db_pilot.infoMessages = pilot.infoMessages
+        db_pilot.warnMessages = pilot.warnMessages
+        db_pilot.errorMessages = pilot.errorMessages
     commit_with_httpexceptionhandling(db)
     return db_pilot
 

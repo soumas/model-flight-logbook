@@ -17,6 +17,9 @@ class PilotEntity(Base):
     validateAcRegistration = Column(Boolean, nullable=False)
     acPilotlicenseValidTo = Column(Date, nullable=True)
     validateAcPilotlicense = Column(Boolean, nullable=False)
+    infoMessages = Column(String, nullable=True)
+    warnMessages = Column(String, nullable=True)
+    errorMessages = Column(String, nullable=True)
 
 class FlightSessionEntity(Base):
     __tablename__ = "flightsessions"
@@ -30,4 +33,3 @@ class FlightSessionEntity(Base):
     airspaceObserver = Column(Boolean, nullable=True)
     comment = Column(String, nullable=True)
     endedby = Column(String, nullable=True)
-

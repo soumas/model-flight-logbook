@@ -14,6 +14,9 @@ class PilotDTO(BaseModel):
     validateAcRegistration: bool
     acPilotlicenseValidTo: Optional[datetime.date]=None
     validateAcPilotlicense: bool
+    infoMessages: Optional[str]=None
+    warnMessages: Optional[str]=None
+    errorMessages: Optional[str]=None
 
 class FlightSessionDTO(BaseModel):
     id: int
