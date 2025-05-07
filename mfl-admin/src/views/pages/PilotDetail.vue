@@ -168,7 +168,7 @@ onMounted(() => {
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <Textarea id="infoMessages" type="text" v-model="model.infoMessages" required autocomplete="off" />
+                                <Textarea id="infoMessages" type="text" v-model="model.infoMessages" autocomplete="off" />
                                 <label for="infoMessages">Infomeldungen</label>
                             </IftaLabel>
                         </div>
@@ -176,7 +176,7 @@ onMounted(() => {
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <Textarea id="warnMessages" type="text" v-model="model.warnMessages" required autocomplete="off" />
+                                <Textarea id="warnMessages" type="text" v-model="model.warnMessages" autocomplete="off" />
                                 <label for="warnMessages">Warnmeldungen</label>
                             </IftaLabel>
                         </div>
@@ -184,7 +184,7 @@ onMounted(() => {
                     <div class="flex flex-col md:flex-row gap-4">
                         <div class="flex flex-wrap gap-2">
                             <IftaLabel variant="in">
-                                <Textarea id="errorMessages" type="text" v-model="model.errorMessages" required autocomplete="off" />
+                                <Textarea id="errorMessages" type="text" v-model="model.errorMessages" autocomplete="off" />
                                 <label for="errorMessages">Fehlermeldungen ⚠ Info beachten ⚠</label> <span class="pi pi-info-circle" style="font-size: 1.3rem;color:green;font-weight:bold;cursor: pointer;" v-tooltip="'Verweigert Checkin für Pilot:in'"></span>
                             </IftaLabel>
                         </div>
