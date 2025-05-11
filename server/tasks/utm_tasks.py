@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import enum
 import threading
+import traceback
 
 from sqlalchemy import and_
 from db.dbmanager import SessionLocal
@@ -68,8 +69,11 @@ def sync_with_utm():
                     else:
                         log.debug('MFL and UTM are in sync')
             except:
+                log.error(traceback.format_exc())
                 utmSyncStatusDataDict[terminalid].status = UtmSyncStatus.error
                 utmSyncErrorCount = utmSyncErrorCount + 1
+    except:
+        log.error(traceback.format_exc())
     finally:
         lock.release()
 
@@ -127,6 +131,8 @@ def __updateUtmOperator(config:TerminalConfig, pilotid:str | None):
     try:
         flying = update_utm_operator(config.airportname, config.airportkml, None if pilotid is None else __findPilot(pilotid))
         utmSyncStatusDataDict[config.terminalid].status = UtmSyncStatus.flying if flying else UtmSyncStatus.noActiveFlight
+    except:
+        log.error(traceback.format_exc())
     finally:
         utmSyncStatusDataDict[config.terminalid].busy = False
 
@@ -140,7 +146,7 @@ def __findRelevantFlightSession(terminalid:str):
         ).order_by(FlightSessionEntity.start).all()
         for fsess in activeSessions:            
             pilot = __findPilot(fsess.pilotid) # todo cascade fetch pilot
-            takeoffPermission = validateTakeoffPermission(pilot)
+            takeoffPermission = validateTakeoffPermission(terminalid=fsess.terminalid, pilot=pilot)
             if(takeoffPermission.isUtmPermitted()):
                 return fsess
         return None

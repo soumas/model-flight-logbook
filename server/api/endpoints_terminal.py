@@ -47,8 +47,8 @@ def get_status(x_terminal:Annotated[str, Header()]):
     state = UtmSyncStatus.unknown if config.utm.enabled else UtmSyncStatus.disabled
     busy = config.utm.enabled
     if x_terminal in utmSyncStatusDataDict:
-        state = UtmSyncStatus.flying
-        busy = False
+        state = utmSyncStatusDataDict[x_terminal].status    
+        busy = utmSyncStatusDataDict[x_terminal].busy
     
     # Operating hours
     ohours = findOperatinghourDayDefinition(x_terminal, datetime.now())
@@ -73,7 +73,7 @@ def get_status(x_terminal:Annotated[str, Header()]):
 def get_flightsession_status(x_terminal:Annotated[str, Header()], x_pilotid:Annotated[str, Header()], db:Session = Depends(get_db)):
     pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
     fsession:FlightSessionEntity = __findCurrentFlightSession(x_pilotid, db)
-    takeoffPermission = validateTakeoffPermission(x_terminal, pilot)
+    takeoffPermission = validateTakeoffPermission(terminalid=x_terminal, pilot=pilot)
 
     return FlightSessionStatusDTO(
         pilotName=pilot.firstname + ' ' + pilot.lastname,
