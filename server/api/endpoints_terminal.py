@@ -47,8 +47,8 @@ def get_status(x_terminal:Annotated[str, Header()]):
     state = UtmSyncStatus.unknown if config.utm.enabled else UtmSyncStatus.disabled
     busy = config.utm.enabled
     if x_terminal in utmSyncStatusDataDict:
-        state = utmSyncStatusDataDict[x_terminal].status    
-        busy = utmSyncStatusDataDict[x_terminal].busy
+        state = UtmSyncStatus.flying
+        busy = False
     
     # Operating hours
     ohours = findOperatinghourDayDefinition(x_terminal, datetime.now())
