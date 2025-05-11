@@ -40,7 +40,7 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
   void _initAutoCloseTimer() {
     _disposeAutoCloseTimer();
     _autoCloseTimer = Timer(
-      const Duration(seconds: 15),
+      const Duration(seconds: 150000),
       () {
         if (!context.mounted) return;
         if (ModalRoute.of(context)?.isCurrent ?? false) {

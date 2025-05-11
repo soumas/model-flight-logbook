@@ -15,32 +15,45 @@ class MflMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: _evalBackgroundColor(),
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.85,
+        width: MediaQuery.of(context).size.width * 0.90,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.015),
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.015, vertical: 10),
           child: child ??
-              Text(
-                text?.replaceAll('\\n', '\n') ?? '',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: _evalFontColor()),
-                textAlign: TextAlign.center,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Padding(
+                  //   padding: const EdgeInsets.only(right: 10.0),
+                  //   child: Icon(_evalIcon(), color: _evalFontColor()),
+                  // ),
+                  Flexible(
+                    child: Text(
+                      text?.replaceAll('\\n', '\n') ?? '',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: _evalFontColor(),
+                            fontWeight: FontWeight.bold,
+                          ),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
               ),
         ),
       ),
     );
   }
 
-  _evalBackgroundColor() {
+  _evalIcon() {
     switch (severity) {
       case MflMessageSeverity.none:
-        return null;
       case MflMessageSeverity.info:
-        return Colors.lightBlueAccent;
+        return Icons.info_outline;
       case MflMessageSeverity.warn:
-        return Colors.orangeAccent.shade100;
       case MflMessageSeverity.error:
-        return Colors.red;
+        return Icons.warning_amber_outlined;
     }
   }
 
@@ -49,11 +62,11 @@ class MflMessage extends StatelessWidget {
       case MflMessageSeverity.none:
         return null;
       case MflMessageSeverity.info:
-        return Colors.black54;
+        return Colors.lightBlueAccent;
       case MflMessageSeverity.warn:
-        return Colors.red;
+        return Colors.orangeAccent;
       case MflMessageSeverity.error:
-        return Colors.amberAccent;
+        return Colors.red;
     }
   }
 }

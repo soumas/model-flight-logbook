@@ -2,18 +2,24 @@ from datetime import datetime, timedelta
 from db.entities import PilotEntity
 from utils.operatinghours_utils import findOperatinghourDayDefinition, isInOperatinghour, isNearOperatinghourEnd
 from utils.utm import check_utm_prmitted
+from utils.messages_utils import appendMessages
 from config.configmanager import config
 
 def validateTakeoffPermission(terminalid:str, pilot:PilotEntity, allowNonePilot = False):
     
     vr = TakeoffPermissionValidationResult()
     
-    # common validations
+    # configured global validations
+    appendMessages(vr._infoMessagesGlobal, config.terminals[terminalid].infoMessages)
+    appendMessages(vr._warnMessagesGlobal, config.terminals[terminalid].warnMessages)
+    appendMessages(vr._errorMessagesGlobal, config.terminals[terminalid].errorMessages)
+
+    # operating hours
     now = datetime.now()
     operatingHourDayDefinition = findOperatinghourDayDefinition(terminalid, now)
     if operatingHourDayDefinition != None:
         if not isInOperatinghour(operatingHourDayDefinition, now):
-            vr._errorMessagesGlobal.append('Außerhalb der Betriebszeit')
+            vr._errorMessagesGlobal.append('Aktuell ist keine Betriebszeit')
         elif isNearOperatinghourEnd(operatingHourDayDefinition, now):
             vr._warnMessagesGlobal.append('Betriebszeit endet um ' + operatingHourDayDefinition.end.strftime('%H:%M') + ' Uhr')
 
@@ -23,6 +29,11 @@ def validateTakeoffPermission(terminalid:str, pilot:PilotEntity, allowNonePilot 
         # active
         if(pilot.active != True):
             vr._errorMessagesPilot.append('Konto inaktiv')
+
+        # pilot specific messages
+        appendMessages(vr._infoMessagesGlobal, pilot.infoMessages)
+        appendMessages(vr._warnMessagesGlobal, pilot.warnMessages)
+        appendMessages(vr._errorMessagesGlobal, pilot.errorMessages)                  
 
         # pilot license
         if(pilot.validateAcPilotlicense):
