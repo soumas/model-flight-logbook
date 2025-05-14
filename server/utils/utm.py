@@ -30,7 +30,7 @@ def __create_driver():
     log.debug('__create_driver')
     service = Service(config.logbook.chromedriver_path)
     options = Options()
-    options.add_argument("--lang=de-DE");
+    options.add_argument("--lang=de-DE")
     options.add_argument("--headless")
     driver = webdriver.Chrome(service=service, options=options)
     driver.set_window_size(1920,1080)
@@ -119,7 +119,7 @@ def __check_if_exists(driver, xpath):
 def __utm_login(driver):    
     log.debug('__utm_login')
 
-    driver.get(BASEURL)
+    __utm_open_baseurl(driver)
 
     log.debug('accept terms and conditions')
     __wait_and_click(driver, "//*[@class='button ok']") # agb akzeptieren
@@ -133,6 +133,8 @@ def __utm_login(driver):
     __wait_until_url_loaded(driver, 'https://utm.dronespace.at/avm/')
     __wait_until_clickable(driver, "//a[normalize-space()='Sign out']")
 
+def __utm_open_baseurl(driver):
+    __utm_open_menu(driver=driver,menutag='')
 
 def __utm_open_menu(driver, menutag):
     log.debug('__utm_open_menu')    
@@ -146,10 +148,10 @@ def __build_flightplan_name(airportname:str, pilotid:str):
 def __find_all_active_flight_plan_xpaths(driver, airportname:str):
     log.debug('__login_and_find_all_active_flight_plan_xpaths')            
     __utm_open_menu(driver,'operationplans')
-    # Wait until "closed flight plans" are loaded becaues that means that active flight plans (if any) are loaded too.
-    # # If this is a very new UTM account without any closed flight plans, this request will fall into the timeout exception.
+    # Wait until any operation-plan div is clickable becaues that means that active flight plans (if any) are loaded too.
+    # If this is a very new UTM account without any closed flight plans, this request will fall into the timeout exception.
     try:
-        __wait_until_clickable(driver, "(//div[@class='logs']/div[@class='log'])[1]")
+        __wait_until_clickable(driver, "(//div[@class='operation-plan'])[1]")
     except selenium.common.exceptions.TimeoutException:
         log.debug('Could not find any closed flight plan. Assuming that this is a very new UTM account and going on...')
     xpaths = []
@@ -174,9 +176,8 @@ def __close_active_flightplans(driver, airportname:str, pilotToIgnore:PilotEntit
 
         if doClose:
             utmStartTime = __read_startdate_from_dom(driver, xpath=xpath)
-            utmEndTime = utmStartTime + timedelta(minutes=UTM_FLIGHTPLAN_DURATION_MINUTES)
             __wait_and_click(driver, xpath)
-            __wait_and_click(driver, "//button[normalize-space()='End flight']")
+            __wait_and_click(driver, "//div[normalize-space()='End flight']")
             pilot = __findPilot(pilotid=pilotid)         
             send_mail(
                 to=pilot.email, 
@@ -216,7 +217,7 @@ def __read_startdate_from_dom(driver, xpath:str):
     return datetime(year=int(datematches['year']), month=int(datematches['month']), day=int(datematches['day']), hour=int(timematches['hour']), minute=int(timematches['minute']))
 
 def __extract_pilotid_from_flightname(airportname:str, flightname:str):
-    regexstr = r"^" + airportname + " \((?P<pilotid>\d+)\)$"
+    regexstr = fr"^{airportname} \((?P<pilotid>[^\)]+)\)$"
     matches = re.search(regexstr, flightname)
     if matches != None:
         return matches['pilotid']
@@ -239,15 +240,14 @@ def update_utm_operator(airportname:str, airportkml:str, pilot:PilotEntity | Non
         doCreateNewFlightplan = pilot != None and not __pilot_has_active_flight(driver, airportname, pilot.id)
 
         if(doCreateNewFlightplan):
-            __wait_and_click(driver, "//i[@class='ti ti-arrow-left']") #back to main menu
-            __wait_and_click(driver, "//i[@class='ti ti-x']") # close menu
-            __wait_and_click(driver, "//i[@class='ti ti-drone']")
-            __wait_until_clickable(driver, "//i[@class='ti ti-arrow-right']") # await menu animation
+            __utm_open_baseurl(driver) # go to baseurl to close all menus
+            __wait_and_click(driver, "//div[@id='fly-button']")
+            time.sleep(1) # await menu animation
             driver.find_element(By.CSS_SELECTOR, "input[type='file']").send_keys(airportkml)
-            __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
+            __wait_and_click(driver, "//div[@class='button' and normalize-space()='Create flight plan']")
             __wait_and_send_key(driver, "//label[normalize-space()='First name *']/following-sibling::input", pilot.firstname)
             __wait_and_send_key(driver, "//label[normalize-space()='Last name *']/following-sibling::input", pilot.lastname)
-            __wait_and_send_key(driver, "//label[normalize-space()='Phone number *']/following-sibling::input", re.sub("[^\+0-9]", "", pilot.phonenumber))
+            __wait_and_send_key(driver, "//label[normalize-space()='Phone number *']/following-sibling::input", re.sub("[^+0-9]", "", pilot.phonenumber))
             __wait_and_send_key(driver, "//label[normalize-space()='Maximum takeoff mass (g) *']/following-sibling::input", config.utm.mtom_g)
             __wait_and_send_key(driver, "//label[normalize-space()='Max. altitude above ground (m) *']/following-sibling::input",config.utm.max_altitude_m)
             __wait_and_send_key(driver, "//label[normalize-space()='Public title of your flight']/following-sibling::input", __build_flightplan_name(airportname, pilot.id))
@@ -258,15 +258,15 @@ def update_utm_operator(airportname:str, airportkml:str, pilot:PilotEntity | Non
             __wait_and_send_key(driver, "//label[normalize-space()='Start date and time *']/following-sibling::div/input", utmStartTime.strftime(DATETIME_FORMAT)) # now we can set the starttime without alert
             __wait_and_click(driver, "//label[normalize-space()='Phone number *']/following-sibling::input") # close calendar control by clicking into another field
             __wait_and_send_key(driver, "//label[normalize-space()='End date and time *']/following-sibling::div/input", utmEndTime.strftime(DATETIME_FORMAT))
-            __wait_and_click(driver, "//i[@class='ti ti-arrow-right']")
-            __wait_and_click(driver, "//i[@class='ti ti-send']")
-            __wait_and_click(driver, "//div[@class='waiting-plans']/div[@class='operation-plan']/div[@class='status APPROVED']/following-sibling::p[contains(normalize-space(.), '" + __build_flightplan_name(airportname,pilot.id) + "')]", 300)
+            __wait_and_click(driver, "//button[@class='button circle' and @type='submit']")
+            __wait_and_click(driver, "//div[@class='button circle']")
+            __wait_and_click(driver, "//div[@class='waiting-plans']/div[@class='operation-plan']/div[@class='status AUTHORIZED']/following-sibling::p[contains(normalize-space(.), '" + __build_flightplan_name(airportname,pilot.id) + "')]", 300)
             secondsBeforeStartTime = (utmStartTime - datetime.now()).total_seconds() + 10 # 10 seconds buffer to be sure that start time is arrived
             if(secondsBeforeStartTime>0):
                 log.debug('waiting ' + str(secondsBeforeStartTime) + 'seconds for start time')
                 time.sleep(secondsBeforeStartTime)
-            __wait_and_click(driver, "//button[normalize-space()='Activate flight plan']")
-            __wait_until_clickable(driver, "//button[normalize-space()='End flight']", timeout=300)            
+            __wait_and_click(driver, "//div[normalize-space()='Activate flight plan']")
+            __wait_until_clickable(driver, "//div[normalize-space()='End flight']", timeout=300)            
             send_mail(
                 to=pilot.email, 
                 bcc=config.logbook.admin_email, 
