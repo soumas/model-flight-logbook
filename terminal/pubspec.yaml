@@ -32,3 +32,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/mfl_logo_slim.png
+    - assets/images/bg_image.jpg

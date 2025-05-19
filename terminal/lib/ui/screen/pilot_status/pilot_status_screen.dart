@@ -77,7 +77,7 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
         builder: (context, state) {
           return MflScaffold(
             title: 'Checkin / Checkout',
-            child: Builder(
+            child1: Builder(
               builder: (context) {
                 if (state.loading) {
                   return Center(

@@ -142,7 +142,7 @@ class SetupRequired extends StatelessWidget {
     return const Center(
       child: MflMessage(
         severity: MflMessageSeverity.info,
-        text: 'Model Flight Logbook\nSetup erforderlich',
+        text: 'Setup erforderlich',
       ),
     );
   }

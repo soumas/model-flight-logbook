@@ -32,7 +32,7 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
     final localizations = AppLocalizations.of(context)!;
     return MflScaffold(
       title: AppLocalizations.of(context)!.addServerConnection,
-      child: BlocProvider<ServerConnectionCubit>(
+      child1: BlocProvider<ServerConnectionCubit>(
         create: (context) => injector.get<ServerConnectionCubit>()..init(localizations),
         child: BlocConsumer<ServerConnectionCubit, ServerConnectionState>(
           listener: (context, state) {

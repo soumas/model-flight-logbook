@@ -54,7 +54,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
     final state = ModalRoute.of(context)!.settings.arguments as PilotStatusState;
     return MflScaffold(
       title: 'Protokoll zum Flugtag',
-      child: Form(
+      child1: Form(
         key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,

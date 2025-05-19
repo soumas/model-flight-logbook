@@ -34,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return MflScaffold(
       title: 'Einstellungen',
-      child: BlocProvider<SettingsCubit>(
+      child1: BlocProvider<SettingsCubit>(
         create: (context) => injector.get<SettingsCubit>()..load(),
         child: BlocBuilder<SettingsCubit, SettingsState>(builder: (context, state) {
           if (state.locked) {

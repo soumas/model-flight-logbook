@@ -25,6 +25,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       scrollBehavior: MflScrollBehavior(),
       theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.transparent,
         textTheme: ThemeData.dark().textTheme.copyWith(
               bodySmall: ThemeData.dark().textTheme.bodySmall!.copyWith(fontSize: 18),
               bodyMedium: ThemeData.dark().textTheme.bodyMedium!.copyWith(fontSize: 28),
@@ -61,8 +62,15 @@ class MainApp extends StatelessWidget {
           subtitleTextStyle: ThemeData.dark().textTheme.headlineLarge!.copyWith(fontSize: 18),
         ),
         iconTheme: ThemeData.dark().iconTheme.copyWith(size: 38),
-        dialogBackgroundColor: Colors.blueGrey,
-        appBarTheme: ThemeData.dark().appBarTheme.copyWith(foregroundColor: Colors.grey, iconTheme: const IconThemeData(size: 38, color: Colors.grey)),
+        appBarTheme: ThemeData.dark().appBarTheme.copyWith(
+              foregroundColor: Colors.white,
+              scrolledUnderElevation: 0,
+              color: Colors.black.withAlpha(128),
+              iconTheme: const IconThemeData(
+                size: 38,
+                color: Colors.white,
+              ),
+            ),
       ),
       debugShowCheckedModeBanner: false,
       routes: {
