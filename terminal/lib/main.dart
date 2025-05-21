@@ -9,6 +9,7 @@ import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/pilotid_input_screen.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_scroll_behavior.dart';
+import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,54 +25,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       scrollBehavior: MflScrollBehavior(),
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Colors.transparent,
-        textTheme: ThemeData.dark().textTheme.copyWith(
-              bodySmall: ThemeData.dark().textTheme.bodySmall!.copyWith(fontSize: 18),
-              bodyMedium: ThemeData.dark().textTheme.bodyMedium!.copyWith(fontSize: 28),
-              bodyLarge: ThemeData.dark().textTheme.bodyLarge!.copyWith(fontSize: 38, fontWeight: FontWeight.bold),
-              headlineSmall: ThemeData.dark().textTheme.headlineSmall!.copyWith(fontSize: 32),
-              headlineMedium: ThemeData.dark().textTheme.headlineMedium!.copyWith(fontSize: 42),
-              headlineLarge: ThemeData.dark().textTheme.headlineLarge!.copyWith(fontSize: 52),
-              labelSmall: ThemeData.dark().textTheme.labelSmall!.copyWith(fontSize: 16),
-              labelMedium: ThemeData.dark().textTheme.labelMedium!.copyWith(fontSize: 24),
-              labelLarge: ThemeData.dark().textTheme.labelLarge!.copyWith(fontSize: 32, fontWeight: FontWeight.w500),
-            ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            shadowColor: Colors.white,
-            elevation: 4.0,
-            backgroundColor: Colors.blueGrey,
-            foregroundColor: Colors.yellow,
-            iconColor: Colors.yellow,
-            iconSize: 38,
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-          ),
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          fillColor: Colors.grey.withAlpha(30),
-          filled: true,
-          border: const OutlineInputBorder(),
-          errorStyle: ThemeData.dark().textTheme.labelMedium!.copyWith(
-                fontSize: 24,
-                color: Colors.red,
-              ),
-        ),
-        listTileTheme: ListTileThemeData(
-          titleTextStyle: ThemeData.dark().textTheme.headlineLarge!.copyWith(fontSize: 28),
-          subtitleTextStyle: ThemeData.dark().textTheme.headlineLarge!.copyWith(fontSize: 18),
-        ),
-        iconTheme: ThemeData.dark().iconTheme.copyWith(size: 38),
-        appBarTheme: ThemeData.dark().appBarTheme.copyWith(
-              foregroundColor: Colors.white,
-              scrolledUnderElevation: 0,
-              color: Colors.black.withAlpha(128),
-              iconTheme: const IconThemeData(
-                size: 38,
-                color: Colors.white,
-              ),
-            ),
-      ),
+      theme: mflThemeData,
       debugShowCheckedModeBanner: false,
       routes: {
         PilotidInputScreen.route: (context) => const PilotidInputScreen(),

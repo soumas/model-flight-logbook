@@ -77,6 +77,7 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
         builder: (context, state) {
           return MflScaffold(
             title: 'Checkin / Checkout',
+            showBackgroundImage: true,
             child1: Builder(
               builder: (context) {
                 if (state.loading) {
@@ -113,6 +114,7 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
                 }
               },
             ),
+            child2: Text(state.pilotid),
           );
         },
       ),

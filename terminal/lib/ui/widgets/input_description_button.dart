@@ -20,7 +20,7 @@ class InputDescriptionButton extends StatelessWidget {
               return AlertDialog(
                 content: Text(description!),
                 actions: [
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(),
                     child: const Text('Schließen'),
                   ),

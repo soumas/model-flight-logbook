@@ -55,8 +55,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Server', style: Theme.of(context).textTheme.headlineSmall),
+                Text('Server', style: Theme.of(context).textTheme.headlineLarge),
                 const Divider(),
+                if (state.settings!.terminalEndpoints.isEmpty)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text('Es wurde noch kein Server hinzugefügt'),
+                  ),
                 FormField(
                   builder: (field) {
                     return Column(
@@ -119,18 +124,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     );
                   },
                 ),
-                TextButton.icon(
+                ElevatedButton(
                   onPressed: () async {
                     final endpoint = await Navigator.of(context).pushNamed(ServerConnectionScreen.route);
                     if (endpoint != null && context.mounted) {
                       context.read<SettingsCubit>().addOrUpdateEndpointAndSave(endpoint as TerminalEndpoint);
                     }
                   },
-                  label: Text(AppLocalizations.of(context)!.addServerConnection),
-                  icon: const Icon(Icons.add, size: 38),
+                  child: Text(AppLocalizations.of(context)!.addServerConnection),
                 ),
                 MflPaddings.verticalMedium(context),
-                Text('Zugriffsschutz für diese Maske', style: Theme.of(context).textTheme.headlineSmall),
+                Text('Zugriffsschutz für diese Maske', style: Theme.of(context).textTheme.headlineLarge),
                 const Divider(),
                 MflTextFormField(
                   controller: _aminPinController,
@@ -141,9 +145,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   obscureText: true,
                 ),
                 MflPaddings.verticalMedium(context),
-                Text('Weitere Aktionen', style: Theme.of(context).textTheme.headlineSmall),
+                Text('Weitere Aktionen', style: Theme.of(context).textTheme.headlineLarge),
                 const Divider(),
-                TextButton.icon(
+                ElevatedButton(
                   onPressed: () {
                     try {
                       exit(0);
@@ -151,8 +155,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Toast.error(context: context, message: 'Funktion wird nicht unterstüzt.');
                     }
                   },
-                  icon: const Icon(Icons.close, size: 38),
-                  label: const Text('Terminal beenden'),
+                  child: const Text('Terminal beenden'),
                 ),
                 MflPaddings.verticalMedium(context),
               ],

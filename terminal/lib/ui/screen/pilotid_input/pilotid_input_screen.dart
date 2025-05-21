@@ -1,14 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
+import 'package:model_flight_logbook/ui/screen/pilotid_input/fragments/terminal_info_widget.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/fragments/main_menu.dart';
-import 'package:model_flight_logbook/ui/screen/pilotid_input/fragments/pilotid_input_view.dart';
+import 'package:model_flight_logbook/ui/screen/pilotid_input/fragments/uhr_widget.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
 
@@ -64,67 +62,24 @@ class _PilotidInputScreenState extends State<PilotidInputScreen> {
           child1: Column(
             children: [
               MflMessage(
-                text: 'Betriebszeit: 04:34 Uhr - 21:45 Uhr',
                 severity: MflMessageSeverity.info,
+                text: 'Betriebszeit: 04:34 Uhr - 21:34 Uhr',
               ),
               MflMessage(
-                text: 'Die Betriebszeit endet in Küze. Bitte bei der Planung berücksichtigen!',
                 severity: MflMessageSeverity.warn,
+                text: 'Die Betriebszeit endet in Kürze. Bitte bei der Planung berücksichtigen! Und damit es länger wird noch was!',
               ),
               MflMessage(
-                text: 'Außerhalb der Betriebszeit ist kein Flugbetrieb erlaubt',
                 severity: MflMessageSeverity.error,
+                text: 'Außerhalb der Betriebszeit ist kein Flugbetrieb erlaubt.',
               ),
             ],
-          ),
+          ), // PilotidInputView(),
           child2: Column(
-            children: [
-              Uhr(),
-            ],
-          ), //PilotidInputView(),
+            children: [UhrWidget(), SizedBox(height: 30), TerminalInfoWidget(), SizedBox(height: 30)],
+          ),
         );
       }),
     );
-  }
-}
-
-class Uhr extends StatefulWidget {
-  const Uhr({super.key});
-
-  @override
-  State<Uhr> createState() => _UhrState();
-}
-
-class _UhrState extends State<Uhr> {
-  DateTime time = DateTime.now();
-
-  @override
-  void initState() {
-    super.initState();
-    Timer.periodic(const Duration(seconds: 1), update);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          DateFormat.Hm().format(time),
-          style: Theme.of(context).textTheme.displayLarge,
-        ),
-        Text(
-          DateFormat('EEEE, d. MMM').format(time),
-          style: Theme.of(context).textTheme.displaySmall,
-        )
-      ],
-    );
-  }
-
-  update(Timer timer) {
-    if (mounted) {
-      setState(() {
-        time = DateTime.now();
-      });
-    }
   }
 }

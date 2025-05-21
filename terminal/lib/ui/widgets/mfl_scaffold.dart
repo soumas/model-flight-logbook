@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:model_flight_logbook/constants.dart';
+import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
 
 class MflScaffold extends StatefulWidget {
   const MflScaffold({
@@ -23,6 +24,8 @@ class MflScaffold extends StatefulWidget {
 
 class _MflScaffoldState extends State<MflScaffold> {
   final double _scrollbarWidth = 16;
+  final double _outerPadding = 24;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -36,7 +39,27 @@ class _MflScaffoldState extends State<MflScaffold> {
                   ),
                 )
               : null,
-          color: widget.showBackgroundImage ? null : Colors.black,
+          color: widget.showBackgroundImage ? null : kColorBackground,
+        ),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Opacity(
+              opacity: 0.5,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Image.asset(
+                    kAssetMflLogoSlim,
+                    height: 40,
+                  ),
+                  Text('v 1.2.0', style: Theme.of(context).textTheme.labelSmall)
+                ],
+              ),
+            ),
+          ),
         ),
         Scaffold(
           appBar: AppBar(
@@ -72,9 +95,10 @@ class _MflScaffoldState extends State<MflScaffold> {
     }
 
     final sc = ScrollController();
+    final colwidth = constraints.maxWidth * (width ?? 1);
     result.add(
       SizedBox(
-        width: constraints.maxWidth * (width ?? 1),
+        width: colwidth,
         height: constraints.maxHeight,
         child: RawScrollbar(
           controller: sc,
@@ -85,7 +109,7 @@ class _MflScaffoldState extends State<MflScaffold> {
           child: SingleChildScrollView(
             controller: sc,
             child: Padding(
-              padding: EdgeInsets.only(top: 16, bottom: 16, left: 16, right: 16 + _scrollbarWidth),
+              padding: EdgeInsets.only(top: _outerPadding, bottom: _outerPadding, left: colwidth < 0.5 ? 0 : _outerPadding, right: _outerPadding + _scrollbarWidth),
               child: child,
             ),
           ),

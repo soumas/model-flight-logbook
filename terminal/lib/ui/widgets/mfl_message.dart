@@ -1,65 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
 
 class MflMessage extends StatelessWidget {
   const MflMessage({
     super.key,
-    this.severity = MflMessageSeverity.none,
+    this.severity = MflMessageSeverity.info,
     this.text,
-    this.child,
   });
+
+  static const contentPadding = 10.0;
+  static const severityIndicatorWidth = 30.0;
 
   final MflMessageSeverity severity;
   final String? text;
-  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: _evalBackgroundColor(),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.85,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: contentPadding * 2),
+      child: Container(
+        width: double.infinity,
+        decoration: CustomDecoration(severityColor: _evalBackgroundColor()),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.015),
-          child: child ??
-              Text(
-                text?.replaceAll('\\n', '\n') ?? '',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: _evalFontColor()),
-                textAlign: TextAlign.center,
-              ),
+          padding: const EdgeInsets.only(left: severityIndicatorWidth + contentPadding, bottom: contentPadding, top: contentPadding, right: contentPadding),
+          child: Text(
+            text?.replaceAll('\\n', '\n') ?? '',
+            style: Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.left,
+          ),
         ),
       ),
     );
   }
 
-  _evalBackgroundColor() {
+  Color _evalBackgroundColor() {
     switch (severity) {
-      case MflMessageSeverity.none:
-        return null;
       case MflMessageSeverity.info:
-        return Colors.lightBlueAccent;
+        return kColorInfo;
       case MflMessageSeverity.warn:
-        return Colors.orangeAccent.shade100;
+        return kColorWarning;
       case MflMessageSeverity.error:
-        return Colors.red;
-    }
-  }
-
-  _evalFontColor() {
-    switch (severity) {
-      case MflMessageSeverity.none:
-        return null;
-      case MflMessageSeverity.info:
-        return Colors.black54;
-      case MflMessageSeverity.warn:
-        return Colors.red;
-      case MflMessageSeverity.error:
-        return Colors.amberAccent;
+        return kColorError;
     }
   }
 }
 
+class CustomDecoration extends Decoration {
+  const CustomDecoration({required this.severityColor});
+
+  final Color severityColor;
+
+  @override
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
+    return BoxDecorationPainter(severityColor: severityColor);
+  }
+}
+
+class BoxDecorationPainter extends BoxPainter {
+  const BoxDecorationPainter({required this.severityColor});
+
+  final Color severityColor;
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
+    final Rect bounds = offset & configuration.size!;
+    _drawDecoration(canvas, bounds, severityColor);
+  }
+}
+
+void _drawDecoration(Canvas canvas, Rect size, Color severtyColor) {
+  const cornderRadius = 10.0;
+  final fullRect = RRect.fromRectAndRadius(size, const Radius.circular(cornderRadius));
+  final severityRect = RRect.fromRectAndCorners(
+    Rect.fromLTRB(size.left, size.top, size.left + MflMessage.severityIndicatorWidth, size.bottom),
+    topLeft: const Radius.circular(cornderRadius),
+    bottomLeft: const Radius.circular(cornderRadius),
+  );
+
+  var bgPaint = Paint()..color = kColorCard;
+  var severityPaint = Paint()..color = severtyColor;
+
+  canvas.drawRRect(fullRect, bgPaint);
+  canvas.drawRRect(severityRect, severityPaint);
+}
+
 enum MflMessageSeverity {
-  none,
   info,
   warn,
   error,

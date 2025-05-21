@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
@@ -47,25 +46,6 @@ class MainMenu extends StatelessWidget {
                 context.read<PilotidInputCubit>().init();
               }
             },
-          ),
-          const Divider(),
-          MflPaddings.verticalSmall(context),
-          Opacity(
-            opacity: 0.4,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Image.asset(
-                  kAssetMflLogoSlim,
-                  height: 40,
-                ),
-                Text(
-                  'Model Flight Logbook',
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
           ),
           MflPaddings.verticalSmall(context),
         ],
