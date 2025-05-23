@@ -36,6 +36,10 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
   static int _$maxAltitudeM(TerminalConfig v) => v.maxAltitudeM;
   static const Field<TerminalConfig, int> _f$maxAltitudeM =
       Field('maxAltitudeM', _$maxAltitudeM);
+  static int _$maxAltitudeWithoutObserverM(TerminalConfig v) =>
+      v.maxAltitudeWithoutObserverM;
+  static const Field<TerminalConfig, int> _f$maxAltitudeWithoutObserverM =
+      Field('maxAltitudeWithoutObserverM', _$maxAltitudeWithoutObserverM);
   static int _$maxNumFlights(TerminalConfig v) => v.maxNumFlights;
   static const Field<TerminalConfig, int> _f$maxNumFlights =
       Field('maxNumFlights', _$maxNumFlights);
@@ -47,6 +51,7 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
     #airportname: _f$airportname,
     #terminalname: _f$terminalname,
     #maxAltitudeM: _f$maxAltitudeM,
+    #maxAltitudeWithoutObserverM: _f$maxAltitudeWithoutObserverM,
     #maxNumFlights: _f$maxNumFlights,
   };
 
@@ -57,6 +62,7 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
         airportname: data.dec(_f$airportname),
         terminalname: data.dec(_f$terminalname),
         maxAltitudeM: data.dec(_f$maxAltitudeM),
+        maxAltitudeWithoutObserverM: data.dec(_f$maxAltitudeWithoutObserverM),
         maxNumFlights: data.dec(_f$maxNumFlights));
   }
 
@@ -119,6 +125,7 @@ abstract class TerminalConfigCopyWith<$R, $In extends TerminalConfig, $Out>
       String? airportname,
       String? terminalname,
       int? maxAltitudeM,
+      int? maxAltitudeWithoutObserverM,
       int? maxNumFlights});
   TerminalConfigCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
@@ -139,6 +146,7 @@ class _TerminalConfigCopyWithImpl<$R, $Out>
           String? airportname,
           String? terminalname,
           int? maxAltitudeM,
+          int? maxAltitudeWithoutObserverM,
           int? maxNumFlights}) =>
       $apply(FieldCopyWithData({
         if (terminalid != null) #terminalid: terminalid,
@@ -146,6 +154,8 @@ class _TerminalConfigCopyWithImpl<$R, $Out>
         if (airportname != null) #airportname: airportname,
         if (terminalname != null) #terminalname: terminalname,
         if (maxAltitudeM != null) #maxAltitudeM: maxAltitudeM,
+        if (maxAltitudeWithoutObserverM != null)
+          #maxAltitudeWithoutObserverM: maxAltitudeWithoutObserverM,
         if (maxNumFlights != null) #maxNumFlights: maxNumFlights
       }));
   @override
@@ -155,6 +165,8 @@ class _TerminalConfigCopyWithImpl<$R, $Out>
       airportname: data.get(#airportname, or: $value.airportname),
       terminalname: data.get(#terminalname, or: $value.terminalname),
       maxAltitudeM: data.get(#maxAltitudeM, or: $value.maxAltitudeM),
+      maxAltitudeWithoutObserverM: data.get(#maxAltitudeWithoutObserverM,
+          or: $value.maxAltitudeWithoutObserverM),
       maxNumFlights: data.get(#maxNumFlights, or: $value.maxNumFlights));
 
   @override

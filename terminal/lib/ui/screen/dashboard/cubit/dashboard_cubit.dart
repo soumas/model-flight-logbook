@@ -1,21 +1,23 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
+import 'package:model_flight_logbook/domain/entities/terminal_status.dart';
 import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
 import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
-import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_state.dart';
+import 'package:model_flight_logbook/ui/screen/dashboard/cubit/dashboard_state.dart';
 
-class PilotidInputCubit extends Cubit<PilotidInputState> {
-  PilotidInputCubit({
+class DashboardCubit extends Cubit<DashboardState> {
+  DashboardCubit({
     required this.localStorageRepo,
     required this.logbookApiRepo,
-  }) : super(PilotidInputState());
+  }) : super(DashboardState());
 
   final LocalStorageRepo localStorageRepo;
   final LogbookApiRepo logbookApiRepo;
 
   Future init() async {
     try {
-      emit(state.copyWith(endpointOptions: null, selectedEndpoint: null));
+      emit(DashboardState());
       final settings = await localStorageRepo.loadSettings();
       var selectedEndpoint = await localStorageRepo.loadSelectedTerminalEndpoint();
       if (selectedEndpoint == null && settings.terminalEndpoints.isNotEmpty) {
@@ -44,10 +46,11 @@ class PilotidInputCubit extends Cubit<PilotidInputState> {
         final ts = await logbookApiRepo.loadTerminalStatus(endpoint: state.selectedEndpoint!);
         emit(state.copyWith(terminalStatus: ts));
       } catch (e) {
-        emit(state.copyWith(terminalStatus: null));
+        final lastSuccUpdate = state.terminalStatus?.statusReceiveTime ?? DateTime.now();
+        emit(state.copyWith(terminalStatus: TerminalStatus(statusReceiveTime: lastSuccUpdate, errorMessages: ['Fehler beim Zugriff auf den MFL Server (Zeitpunkt: ${DateFormat.Hm().format(DateTime.now())} Uhr)'])));
       }
     } else {
-      emit(state.copyWith(terminalStatus: null));
+      emit(state.copyWith(terminalStatus: TerminalStatus(infoMessages: ['Setup erforderlich'])));
     }
   }
 }

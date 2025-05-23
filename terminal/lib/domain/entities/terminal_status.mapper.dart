@@ -13,7 +13,6 @@ class TerminalStatusMapper extends ClassMapperBase<TerminalStatus> {
   static TerminalStatusMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = TerminalStatusMapper._());
-      UtmSyncStatusMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -21,12 +20,6 @@ class TerminalStatusMapper extends ClassMapperBase<TerminalStatus> {
   @override
   final String id = 'TerminalStatus';
 
-  static UtmSyncStatus _$utmStatus(TerminalStatus v) => v.utmStatus;
-  static const Field<TerminalStatus, UtmSyncStatus> _f$utmStatus =
-      Field('utmStatus', _$utmStatus);
-  static bool _$utmBusy(TerminalStatus v) => v.utmBusy;
-  static const Field<TerminalStatus, bool> _f$utmBusy =
-      Field('utmBusy', _$utmBusy);
   static DateTime? _$statusReceiveTime(TerminalStatus v) => v.statusReceiveTime;
   static const Field<TerminalStatus, DateTime> _f$statusReceiveTime =
       Field('statusReceiveTime', _$statusReceiveTime, opt: true);
@@ -49,8 +42,6 @@ class TerminalStatusMapper extends ClassMapperBase<TerminalStatus> {
 
   @override
   final MappableFields<TerminalStatus> fields = const {
-    #utmStatus: _f$utmStatus,
-    #utmBusy: _f$utmBusy,
     #statusReceiveTime: _f$statusReceiveTime,
     #operatinghourStart: _f$operatinghourStart,
     #operatinghourEnd: _f$operatinghourEnd,
@@ -61,8 +52,6 @@ class TerminalStatusMapper extends ClassMapperBase<TerminalStatus> {
 
   static TerminalStatus _instantiate(DecodingData data) {
     return TerminalStatus(
-        utmStatus: data.dec(_f$utmStatus),
-        utmBusy: data.dec(_f$utmBusy),
         statusReceiveTime: data.dec(_f$statusReceiveTime),
         operatinghourStart: data.dec(_f$operatinghourStart),
         operatinghourEnd: data.dec(_f$operatinghourEnd),
@@ -131,9 +120,7 @@ abstract class TerminalStatusCopyWith<$R, $In extends TerminalStatus, $Out>
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
       get errorMessages;
   $R call(
-      {UtmSyncStatus? utmStatus,
-      bool? utmBusy,
-      DateTime? statusReceiveTime,
+      {DateTime? statusReceiveTime,
       DateTime? operatinghourStart,
       DateTime? operatinghourEnd,
       List<String>? infoMessages,
@@ -177,17 +164,13 @@ class _TerminalStatusCopyWithImpl<$R, $Out>
           : null;
   @override
   $R call(
-          {UtmSyncStatus? utmStatus,
-          bool? utmBusy,
-          Object? statusReceiveTime = $none,
+          {Object? statusReceiveTime = $none,
           Object? operatinghourStart = $none,
           Object? operatinghourEnd = $none,
           Object? infoMessages = $none,
           Object? warnMessages = $none,
           Object? errorMessages = $none}) =>
       $apply(FieldCopyWithData({
-        if (utmStatus != null) #utmStatus: utmStatus,
-        if (utmBusy != null) #utmBusy: utmBusy,
         if (statusReceiveTime != $none) #statusReceiveTime: statusReceiveTime,
         if (operatinghourStart != $none)
           #operatinghourStart: operatinghourStart,
@@ -198,8 +181,6 @@ class _TerminalStatusCopyWithImpl<$R, $Out>
       }));
   @override
   TerminalStatus $make(CopyWithData data) => TerminalStatus(
-      utmStatus: data.get(#utmStatus, or: $value.utmStatus),
-      utmBusy: data.get(#utmBusy, or: $value.utmBusy),
       statusReceiveTime:
           data.get(#statusReceiveTime, or: $value.statusReceiveTime),
       operatinghourStart:

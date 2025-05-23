@@ -11,6 +11,7 @@ class TerminalConfig with TerminalConfigMappable {
   final String airportname;
   final String terminalname;
   final int maxAltitudeM;
+  final int maxAltitudeWithoutObserverM;
   final int maxNumFlights;
   TerminalConfig({
     required this.terminalid,
@@ -18,6 +19,7 @@ class TerminalConfig with TerminalConfigMappable {
     required this.airportname,
     required this.terminalname,
     required this.maxAltitudeM,
+    required this.maxAltitudeWithoutObserverM,
     required this.maxNumFlights,
   });
 }

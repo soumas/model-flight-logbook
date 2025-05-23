@@ -6,7 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
 import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
-import 'package:model_flight_logbook/ui/screen/pilotid_input/pilotid_input_screen.dart';
+import 'package:model_flight_logbook/ui/screen/dashboard/dashboard_screen.dart';
 import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_scroll_behavior.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
@@ -28,7 +28,7 @@ class MainApp extends StatelessWidget {
       theme: mflThemeData,
       debugShowCheckedModeBanner: false,
       routes: {
-        PilotidInputScreen.route: (context) => const PilotidInputScreen(),
+        DashboardScreen.route: (context) => const DashboardScreen(),
         SettingsScreen.route: (context) => const SettingsScreen(),
         PilotStatusScreen.route: (context) => const PilotStatusScreen(),
         ServerConnectionScreen.route: (context) => const ServerConnectionScreen(),

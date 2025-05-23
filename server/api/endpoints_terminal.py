@@ -63,9 +63,9 @@ def get_status(x_terminal:Annotated[str, Header()]):
         utmBusy=busy, 
         operatinghourStart=ohoursStart, 
         operatinghourEnd=ohoursEnd,
-        infoMessages=[], #takeoffPermission.getInfoMessages(),
-        warnMessages=[], #takeoffPermission.getWarnMessages(),
-        errorMessages=[], #takeoffPermission.getErrorMessages(),
+        infoMessages=takeoffPermission.getInfoMessagesGlobal(),
+        warnMessages=takeoffPermission.getWarnMessagesGlobal(),
+        errorMessages=takeoffPermission.getErrorMessagesGlobal(),
     )
 
 
@@ -80,9 +80,9 @@ def get_flightsession_status(x_terminal:Annotated[str, Header()], x_pilotid:Anno
         sessionId=None if fsession == None else fsession.id,
         sessionStarttime=None if fsession == None else fsession.start,
         sessionEndtime=None if fsession == None else fsession.end,
-        infoMessages=takeoffPermission.getInfoMessages(),
-        warnMessages=takeoffPermission.getWarnMessages(),
-        errorMessages=takeoffPermission.getErrorMessages(),
+        infoMessages=takeoffPermission.getInfoMessagesPilot(),
+        warnMessages=takeoffPermission.getWarnMessagesPilot(),
+        errorMessages=takeoffPermission.getErrorMessagesPilot(),
     )
 
 @api.post("/terminal/flightsession/start", dependencies=[Security(__specific_terminalauth)], response_model=None)

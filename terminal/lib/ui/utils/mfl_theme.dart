@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:model_flight_logbook/constants.dart';
 
-const kColorPrimary = Colors.lightBlue;
+const kColorPrimary = Color(0xFF419ABA);
 final kColorOnPrimary = Colors.grey.shade100;
 const kColorBackground = Colors.black;
 final kColorCard = Colors.grey.shade600.withAlpha((256 * 0.8).toInt());
 const kColorFontMain = Colors.white;
 final kColorFontSub = Colors.grey.shade300;
+final kColorInputBg = Colors.grey.shade800;
+
+const kColorSuccess = Colors.green;
 const kColorInfo = Color(0xFF79B7E0);
 const kColorWarning = Color(0xFFDCAF1F);
 const kColorError = Color(0xFFCC0000);
@@ -35,20 +39,23 @@ final mflThemeData = ThemeData.dark().copyWith(
       ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      // shadowColor: Colors.white,
-      // elevation: 4.0,
+      elevation: 8.0,
       backgroundColor: kColorPrimary,
       foregroundColor: kColorOnPrimary,
       iconColor: kColorOnPrimary,
-      // iconSize: 38,
-      // padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+      iconSize: 26,
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kCornderRadius)),
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
-    fillColor: kColorCard,
+    fillColor: kColorInputBg,
     filled: true,
     border: const OutlineInputBorder(),
-    errorStyle: kTextThemeBodyMedium.copyWith(color: Colors.red),
+    errorStyle: kTextThemeBodyMedium.copyWith(
+      color: kColorError,
+      fontWeight: FontWeight.bold,
+    ),
   ),
   listTileTheme: ListTileThemeData(
     titleTextStyle: kTextThemeBodyMedium,
@@ -63,5 +70,10 @@ final mflThemeData = ThemeData.dark().copyWith(
           color: kColorFontMain,
         ),
       ),
-  cardTheme: CardThemeData(color: kColorCard),
+  cardTheme: CardThemeData(
+    color: kColorCard,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(kCornderRadius),
+    ),
+  ),
 );

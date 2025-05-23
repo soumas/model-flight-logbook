@@ -55,7 +55,7 @@ class _MflScaffoldState extends State<MflScaffold> {
                     kAssetMflLogoSlim,
                     height: 40,
                   ),
-                  Text('v 1.2.0', style: Theme.of(context).textTheme.labelSmall)
+                  Text('v 2.0.0', style: Theme.of(context).textTheme.labelSmall)
                 ],
               ),
             ),

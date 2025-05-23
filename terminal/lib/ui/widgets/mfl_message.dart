@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
 
 class MflMessage extends StatelessWidget {
@@ -9,7 +10,7 @@ class MflMessage extends StatelessWidget {
   });
 
   static const contentPadding = 10.0;
-  static const severityIndicatorWidth = 30.0;
+  static const severityIndicatorWidth = 20.0;
 
   final MflMessageSeverity severity;
   final String? text;
@@ -68,12 +69,11 @@ class BoxDecorationPainter extends BoxPainter {
 }
 
 void _drawDecoration(Canvas canvas, Rect size, Color severtyColor) {
-  const cornderRadius = 10.0;
-  final fullRect = RRect.fromRectAndRadius(size, const Radius.circular(cornderRadius));
+  final fullRect = RRect.fromRectAndRadius(size, const Radius.circular(kCornderRadius));
   final severityRect = RRect.fromRectAndCorners(
     Rect.fromLTRB(size.left, size.top, size.left + MflMessage.severityIndicatorWidth, size.bottom),
-    topLeft: const Radius.circular(cornderRadius),
-    bottomLeft: const Radius.circular(cornderRadius),
+    topLeft: const Radius.circular(kCornderRadius),
+    bottomLeft: const Radius.circular(kCornderRadius),
   );
 
   var bgPaint = Paint()..color = kColorCard;

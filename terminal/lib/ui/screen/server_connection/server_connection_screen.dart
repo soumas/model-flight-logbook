@@ -64,7 +64,6 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                   if (state.configOptions.isNotEmpty)
                     DropdownButtonFormField(
                       isDense: false,
-                      padding: kFormFieldPadding,
                       value: state.selectedConfig,
                       items: state.configOptions
                           .map(
@@ -81,7 +80,6 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                         context.read<ServerConnectionCubit>().selectTerminalconfig(value);
                       },
                       decoration: const InputDecoration(label: Text('Terminal Konfiguration')),
-                      dropdownColor: Colors.blueGrey,
                     ),
                   if (state.selectedConfig != null)
                     MflTextFormField(

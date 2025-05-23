@@ -7,4 +7,6 @@ const kLocalStorageKeySettings = 'settings';
 const kLocalStorageKeySelectedTerminalEndpoint = 'selectedTerminalEndpoint';
 
 //const kContentWidth = 800.0;
-const kFormFieldPadding = EdgeInsets.symmetric(vertical: 25.0);
+const kFormFieldPadding = EdgeInsets.symmetric(vertical: 20.0);
+
+const kCornderRadius = 10.0;

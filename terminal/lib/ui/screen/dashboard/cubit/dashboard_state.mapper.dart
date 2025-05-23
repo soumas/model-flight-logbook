@@ -4,15 +4,15 @@
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
-part of 'pilotid_input_state.dart';
+part of 'dashboard_state.dart';
 
-class PilotidInputStateMapper extends ClassMapperBase<PilotidInputState> {
-  PilotidInputStateMapper._();
+class DashboardStateMapper extends ClassMapperBase<DashboardState> {
+  DashboardStateMapper._();
 
-  static PilotidInputStateMapper? _instance;
-  static PilotidInputStateMapper ensureInitialized() {
+  static DashboardStateMapper? _instance;
+  static DashboardStateMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = PilotidInputStateMapper._());
+      MapperContainer.globals.use(_instance = DashboardStateMapper._());
       TerminalEndpointMapper.ensureInitialized();
       TerminalStatusMapper.ensureInitialized();
     }
@@ -20,31 +20,30 @@ class PilotidInputStateMapper extends ClassMapperBase<PilotidInputState> {
   }
 
   @override
-  final String id = 'PilotidInputState';
+  final String id = 'DashboardState';
 
-  static List<TerminalEndpoint> _$endpointOptions(PilotidInputState v) =>
+  static List<TerminalEndpoint> _$endpointOptions(DashboardState v) =>
       v.endpointOptions;
-  static const Field<PilotidInputState, List<TerminalEndpoint>>
+  static const Field<DashboardState, List<TerminalEndpoint>>
       _f$endpointOptions =
       Field('endpointOptions', _$endpointOptions, opt: true, def: const []);
-  static TerminalEndpoint? _$selectedEndpoint(PilotidInputState v) =>
+  static TerminalEndpoint? _$selectedEndpoint(DashboardState v) =>
       v.selectedEndpoint;
-  static const Field<PilotidInputState, TerminalEndpoint> _f$selectedEndpoint =
+  static const Field<DashboardState, TerminalEndpoint> _f$selectedEndpoint =
       Field('selectedEndpoint', _$selectedEndpoint, opt: true);
-  static TerminalStatus? _$terminalStatus(PilotidInputState v) =>
-      v.terminalStatus;
-  static const Field<PilotidInputState, TerminalStatus> _f$terminalStatus =
+  static TerminalStatus? _$terminalStatus(DashboardState v) => v.terminalStatus;
+  static const Field<DashboardState, TerminalStatus> _f$terminalStatus =
       Field('terminalStatus', _$terminalStatus, opt: true);
 
   @override
-  final MappableFields<PilotidInputState> fields = const {
+  final MappableFields<DashboardState> fields = const {
     #endpointOptions: _f$endpointOptions,
     #selectedEndpoint: _f$selectedEndpoint,
     #terminalStatus: _f$terminalStatus,
   };
 
-  static PilotidInputState _instantiate(DecodingData data) {
-    return PilotidInputState(
+  static DashboardState _instantiate(DecodingData data) {
+    return DashboardState(
         endpointOptions: data.dec(_f$endpointOptions),
         selectedEndpoint: data.dec(_f$selectedEndpoint),
         terminalStatus: data.dec(_f$terminalStatus));
@@ -54,39 +53,37 @@ class PilotidInputStateMapper extends ClassMapperBase<PilotidInputState> {
   final Function instantiate = _instantiate;
 }
 
-mixin PilotidInputStateMappable {
-  PilotidInputStateCopyWith<PilotidInputState, PilotidInputState,
-          PilotidInputState>
-      get copyWith => _PilotidInputStateCopyWithImpl(
-          this as PilotidInputState, $identity, $identity);
+mixin DashboardStateMappable {
+  DashboardStateCopyWith<DashboardState, DashboardState, DashboardState>
+      get copyWith => _DashboardStateCopyWithImpl(
+          this as DashboardState, $identity, $identity);
   @override
   String toString() {
-    return PilotidInputStateMapper.ensureInitialized()
-        .stringifyValue(this as PilotidInputState);
+    return DashboardStateMapper.ensureInitialized()
+        .stringifyValue(this as DashboardState);
   }
 
   @override
   bool operator ==(Object other) {
-    return PilotidInputStateMapper.ensureInitialized()
-        .equalsValue(this as PilotidInputState, other);
+    return DashboardStateMapper.ensureInitialized()
+        .equalsValue(this as DashboardState, other);
   }
 
   @override
   int get hashCode {
-    return PilotidInputStateMapper.ensureInitialized()
-        .hashValue(this as PilotidInputState);
+    return DashboardStateMapper.ensureInitialized()
+        .hashValue(this as DashboardState);
   }
 }
 
-extension PilotidInputStateValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, PilotidInputState, $Out> {
-  PilotidInputStateCopyWith<$R, PilotidInputState, $Out>
-      get $asPilotidInputState =>
-          $base.as((v, t, t2) => _PilotidInputStateCopyWithImpl(v, t, t2));
+extension DashboardStateValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, DashboardState, $Out> {
+  DashboardStateCopyWith<$R, DashboardState, $Out> get $asDashboardState =>
+      $base.as((v, t, t2) => _DashboardStateCopyWithImpl(v, t, t2));
 }
 
-abstract class PilotidInputStateCopyWith<$R, $In extends PilotidInputState,
-    $Out> implements ClassCopyWith<$R, $In, $Out> {
+abstract class DashboardStateCopyWith<$R, $In extends DashboardState, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, TerminalEndpoint,
           TerminalEndpointCopyWith<$R, TerminalEndpoint, TerminalEndpoint>>
       get endpointOptions;
@@ -98,18 +95,18 @@ abstract class PilotidInputStateCopyWith<$R, $In extends PilotidInputState,
       {List<TerminalEndpoint>? endpointOptions,
       TerminalEndpoint? selectedEndpoint,
       TerminalStatus? terminalStatus});
-  PilotidInputStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+  DashboardStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
 
-class _PilotidInputStateCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, PilotidInputState, $Out>
-    implements PilotidInputStateCopyWith<$R, PilotidInputState, $Out> {
-  _PilotidInputStateCopyWithImpl(super.value, super.then, super.then2);
+class _DashboardStateCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, DashboardState, $Out>
+    implements DashboardStateCopyWith<$R, DashboardState, $Out> {
+  _DashboardStateCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<PilotidInputState> $mapper =
-      PilotidInputStateMapper.ensureInitialized();
+  late final ClassMapperBase<DashboardState> $mapper =
+      DashboardStateMapper.ensureInitialized();
   @override
   ListCopyWith<$R, TerminalEndpoint,
           TerminalEndpointCopyWith<$R, TerminalEndpoint, TerminalEndpoint>>
@@ -134,14 +131,14 @@ class _PilotidInputStateCopyWithImpl<$R, $Out>
         if (terminalStatus != $none) #terminalStatus: terminalStatus
       }));
   @override
-  PilotidInputState $make(CopyWithData data) => PilotidInputState(
+  DashboardState $make(CopyWithData data) => DashboardState(
       endpointOptions: data.get(#endpointOptions, or: $value.endpointOptions),
       selectedEndpoint:
           data.get(#selectedEndpoint, or: $value.selectedEndpoint),
       terminalStatus: data.get(#terminalStatus, or: $value.terminalStatus));
 
   @override
-  PilotidInputStateCopyWith<$R2, PilotidInputState, $Out2> $chain<$R2, $Out2>(
+  DashboardStateCopyWith<$R2, DashboardState, $Out2> $chain<$R2, $Out2>(
           Then<$Out2, $R2> t) =>
-      _PilotidInputStateCopyWithImpl($value, $cast, t);
+      _DashboardStateCopyWithImpl($value, $cast, t);
 }

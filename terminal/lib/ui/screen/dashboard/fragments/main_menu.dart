@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/ui/screen/pilotid_input/cubit/pilotid_input_cubit.dart';
+import 'package:model_flight_logbook/ui/screen/dashboard/cubit/dashboard_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({
@@ -11,7 +10,7 @@ class MainMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<PilotidInputCubit>().state;
+    final state = context.watch<DashboardCubit>().state;
     return Drawer(
       width: MediaQuery.of(context).size.width * 0.8,
       child: ListView(
@@ -31,7 +30,7 @@ class MainMenu extends StatelessWidget {
               subtitle: Text(opt.config.terminalname),
               onTap: () {
                 Navigator.of(context).pop();
-                context.read<PilotidInputCubit>().selectEndpoint(opt);
+                context.read<DashboardCubit>().selectEndpoint(opt);
               },
             );
           }),
@@ -43,11 +42,10 @@ class MainMenu extends StatelessWidget {
               Navigator.of(context).pop();
               await Navigator.of(context).pushNamed(SettingsScreen.route);
               if (context.mounted) {
-                context.read<PilotidInputCubit>().init();
+                context.read<DashboardCubit>().init();
               }
             },
           ),
-          MflPaddings.verticalSmall(context),
         ],
       ),
     );

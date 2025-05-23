@@ -52,6 +52,7 @@ class TerminalConfigDTO(BaseModel):
     airportname: str
     terminalname: str
     maxAltitudeM: str
+    maxAltitudeWithoutObserverM: str
     maxNumFlights: str
 
 class TerminalStatusDTO(BaseModel):

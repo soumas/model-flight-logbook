@@ -1,4 +1,5 @@
 import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
+import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
 import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
 import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
@@ -26,7 +27,8 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
 
       emit(state.copyWith(flightSessionStatus: fss));
     } catch (e) {
-      emit(state.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()]));
+      final ps = state.flightSessionStatus ?? PilotStatus(pilotName: '');
+      emit(state.copyWith(flightSessionStatus: ps.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()])));
     } finally {
       emit(state.copyWith(loading: false));
     }
@@ -37,9 +39,10 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
       _resetMessages();
       emit(state.copyWith(loading: true));
       await logbookApiRepo.startFlightSession(endpoint: await _loadSelectedEndpoint(), pilotid: state.pilotid);
-      emit(state.copyWith(completedAction: 'Flugtag begonnen'));
+      emit(state.copyWith(completedAction: 'OK - Viel Spaß beim Fliegen'));
     } catch (e) {
-      emit(state.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()]));
+      final ps = state.flightSessionStatus ?? PilotStatus(pilotName: '');
+      emit(state.copyWith(flightSessionStatus: ps.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()])));
     } finally {
       emit(state.copyWith(loading: false, completedAction: null));
     }
@@ -54,9 +57,10 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
         pilotid: state.pilotid,
         data: data,
       );
-      emit(state.copyWith(completedAction: 'Flugtag beendet'));
+      emit(state.copyWith(completedAction: 'OK - Auf Wiedersehen'));
     } catch (e) {
-      emit(state.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()]));
+      final ps = state.flightSessionStatus ?? PilotStatus(pilotName: '');
+      emit(state.copyWith(flightSessionStatus: ps.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()])));
     } finally {
       emit(state.copyWith(loading: false, completedAction: null));
     }
@@ -71,6 +75,15 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
   }
 
   void _resetMessages() {
-    emit(state.copyWith(infoMessages: null, errorMessages: null, warnMessages: null));
+    final ps = state.flightSessionStatus ?? PilotStatus(pilotName: '');
+    emit(
+      state.copyWith(
+        flightSessionStatus: ps.copyWith(
+          errorMessages: [],
+          infoMessages: [],
+          warnMessages: [],
+        ),
+      ),
+    );
   }
 }

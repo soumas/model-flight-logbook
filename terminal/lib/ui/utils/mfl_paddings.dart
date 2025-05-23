@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class MflPaddings {
   static verticalSmallSize(BuildContext context) {
-    return MediaQuery.of(context).size.height * 0.04;
+    return 10.0;
   }
 
   static verticalMediumSize(BuildContext context) {
-    return MediaQuery.of(context).size.height * 0.08;
+    return verticalSmallSize(context) * 1.5;
   }
 
   static verticalLargeSize(BuildContext context) {
-    return MediaQuery.of(context).size.height * 0.12;
+    return verticalSmallSize(context) * 3;
   }
 
   static verticalSmall(BuildContext context) => Padding(padding: EdgeInsets.only(top: verticalSmallSize(context)));

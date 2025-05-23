@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
 import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
@@ -53,16 +52,15 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
   Widget build(BuildContext context) {
     final state = ModalRoute.of(context)!.settings.arguments as PilotStatusState;
     return MflScaffold(
-      title: 'Protokoll zum Flugtag',
+      title: 'Gehen',
       child1: Form(
         key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            MflPaddings.verticalSmall(context),
             Align(alignment: Alignment.centerLeft, child: Text(state.flightSessionStatus!.pilotName, style: Theme.of(context).textTheme.headlineLarge)),
             Align(alignment: Alignment.centerLeft, child: Text('Startzeit: ${DateFormat.Hm().format(state.flightSessionStatus!.sessionStarttime!)} Uhr', style: Theme.of(context).textTheme.bodyMedium)),
-            MflPaddings.verticalSmall(context),
+            MflPaddings.verticalLarge(context),
             MflTextFormField(
               label: 'Anzahl Flüge*',
               description: 'Gesamtanzahl der durchgeführten Flüge',
@@ -94,7 +92,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                 if ((value ?? '').isEmpty) {
                   return 'Dieses Feld darf nicht leer bleiben';
                 } else if (int.tryParse(value!) == null) {
-                  return 'Bitte geben Sie eine Ganzzahl ein.';
+                  return 'Bitte geben Sie eine Ganzzahl ein';
                 } else if (int.parse(value) < 0) {
                   return 'Kleinster Wert: 0';
                 } else if (int.parse(value) > _selectedEndpoint!.config.maxAltitudeM) {
@@ -106,7 +104,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                 _formKey.currentState!.validate();
               },
             ),
-            MflPaddings.verticalSmall(context),
+            MflPaddings.verticalLarge(context),
             DropdownButtonFormField(
               isDense: false,
               decoration: const InputDecoration(
@@ -115,7 +113,6 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                   description: 'Bei Flughöhen ab 120m ist ein Luftraumbeobachter einzusetzen, der selbst am Flugbetrieb nicht teilnehmen darf',
                 ),
               ),
-              padding: kFormFieldPadding,
               value: _luftraumbeobachter,
               items: [
                 DropdownMenuItem(
@@ -135,17 +132,25 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
               ],
               onChanged: <bool>(value) {
                 _luftraumbeobachter = value;
+                _formKey.currentState!.validate();
               },
-              dropdownColor: Colors.blueGrey,
+              validator: (value) {
+                if (value == null) {
+                  return 'Dieses Feld darf nicht leer bleiben';
+                } else if (value == false && int.parse(_maxAltitudeEditingController.text) > _selectedEndpoint!.config.maxAltitudeWithoutObserverM) {
+                  return 'Ab ${_selectedEndpoint!.config.maxAltitudeWithoutObserverM}m ist ein Luftraumbeobachter erforderlich';
+                }
+                return null;
+              },
             ),
-            MflPaddings.verticalSmall(context),
+            MflPaddings.verticalLarge(context),
             MflTextFormField(
               controller: _commentTextEditingController,
               label: 'Besondere Ereignisse',
               description: 'z.B. Absinken auf 120m wegen Annäherung eines manntragenden Luftfahrzeuges oder Flug >25kg\n\nAngaben in diesem Feld werden ggf. an den Administrator versendet.',
             ),
             MflPaddings.verticalMedium(context),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   Navigator.of(context).pop(
@@ -160,7 +165,8 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                   Toast.error(context: context, message: 'Formular enthält Fehler');
                 }
               },
-              child: const Text('Absenden'),
+              label: const Text('Gehen'),
+              icon: const Icon(Icons.logout),
             ),
             MflPaddings.verticalLarge(context),
           ],
