@@ -10,7 +10,9 @@ jobs:
       run:
         working-directory: ./terminal    
     steps:
+    - name: checkout repo
+      uses: actions/checkout@master    
     - name: Build MFL terminal for linux arm64
-      uses: soumas/build-mfl-terminal-linux@main
+      uses: ./.github/actions/build-mfl-terminal-linux
       with:
         arch: 'arm64'

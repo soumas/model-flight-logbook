@@ -7,9 +7,6 @@ runs:
   using: "composite"
   steps:
 
-    - name: checkout repo
-      uses: actions/checkout@master
-
     - name: get version from GITHUB_REF
       id: get_version
       run: |
