@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
+import 'package:model_flight_logbook/domain/entities/flight_session.dart';
 import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
@@ -36,7 +37,8 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
   }
 
   @override
-  Future<void> checkTerminalConnection({required String apiEndpoint, required String terminalid, required String apiKey, String? pilotid}) async {
+  Future<void> checkTerminalConnection(
+      {required String apiEndpoint, required String terminalid, required String apiKey, String? pilotid}) async {
     _dio.options.baseUrl = apiEndpoint;
     _dio.options.headers['x-terminal'] = terminalid;
     _dio.options.headers['x-api-key'] = apiKey;
@@ -53,6 +55,13 @@ class LogbookApiRepoImpl implements LogbookApiRepo {
     _dio.options.headers['x-api-key'] = endpoint.apiKey;
     final response = await _dio.get('/terminal/status');
     return TerminalStatusMapper.fromMap(response.data).copyWith(statusReceiveTime: DateTime.now());
+  }
+
+  @override
+  Future<List<FlightSession>> loadFlightSessions({required TerminalEndpoint endpoint, required String pilotid, required int year}) async {
+    _prepareDio(endpoint, pilotid);
+    final response = await _dio.get('/terminal/flightsession/list/$year');
+    return response.data.map<FlightSession>((item) => FlightSessionMapper.fromMap(item)).toList();
   }
 
   void _prepareDio(TerminalEndpoint endpoint, String pilotid) {

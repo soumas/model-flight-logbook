@@ -64,7 +64,7 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                   if (state.configOptions.isNotEmpty)
                     DropdownButtonFormField(
                       isDense: false,
-                      value: state.selectedConfig,
+                      initialValue: state.selectedConfig,
                       items: state.configOptions
                           .map(
                             (opt) => DropdownMenuItem<TerminalConfig>(
@@ -76,7 +76,7 @@ class _ServerConnectionScreenState extends State<ServerConnectionScreen> {
                             ),
                           )
                           .toList(),
-                      onChanged: <TerminalConfig>(value) {
+                      onChanged: <T>(value) {
                         context.read<ServerConnectionCubit>().selectTerminalconfig(value);
                       },
                       decoration: const InputDecoration(label: Text('Terminal Konfiguration')),

@@ -23,12 +23,13 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
       this.localizations = localizations;
       _resetMessages();
       emit(state.copyWith(loading: true, pilotid: pilotid));
-      final fss = await logbookApiRepo.loadPilotStatus(endpoint: await _loadSelectedEndpoint(), pilotid: pilotid);
+      final fss = await logbookApiRepo.loadPilotStatus(endpoint: await loadSelectedEndpoint(localStorageRepo), pilotid: pilotid);
 
       emit(state.copyWith(flightSessionStatus: fss));
     } catch (e) {
       final ps = state.flightSessionStatus ?? PilotStatus(pilotName: '');
-      emit(state.copyWith(flightSessionStatus: ps.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()])));
+      emit(state.copyWith(
+          flightSessionStatus: ps.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()])));
     } finally {
       emit(state.copyWith(loading: false));
     }
@@ -38,11 +39,12 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
     try {
       _resetMessages();
       emit(state.copyWith(loading: true));
-      await logbookApiRepo.startFlightSession(endpoint: await _loadSelectedEndpoint(), pilotid: state.pilotid);
-      emit(state.copyWith(completedAction: 'OK - Viel Spaß beim Fliegen'));
+      await logbookApiRepo.startFlightSession(endpoint: await loadSelectedEndpoint(localStorageRepo), pilotid: state.pilotid);
+      emit(state.copyWith(completedAction: 'Check-In erfolgreich'));
     } catch (e) {
       final ps = state.flightSessionStatus ?? PilotStatus(pilotName: '');
-      emit(state.copyWith(flightSessionStatus: ps.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()])));
+      emit(state.copyWith(
+          flightSessionStatus: ps.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()])));
     } finally {
       emit(state.copyWith(loading: false, completedAction: null));
     }
@@ -53,21 +55,22 @@ class PilotStatusCubit extends Cubit<PilotStatusState> {
       _resetMessages();
       emit(state.copyWith(loading: true));
       await logbookApiRepo.endFlightSession(
-        endpoint: await _loadSelectedEndpoint(),
+        endpoint: await loadSelectedEndpoint(localStorageRepo),
         pilotid: state.pilotid,
         data: data,
       );
-      emit(state.copyWith(completedAction: 'OK - Auf Wiedersehen'));
+      emit(state.copyWith(completedAction: 'Check-Out erfolgreich'));
     } catch (e) {
       final ps = state.flightSessionStatus ?? PilotStatus(pilotName: '');
-      emit(state.copyWith(flightSessionStatus: ps.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()])));
+      emit(state.copyWith(
+          flightSessionStatus: ps.copyWith(errorMessages: [DioExceptionUtil.getUiMessage(e, localizations) ?? e.toString()])));
     } finally {
       emit(state.copyWith(loading: false, completedAction: null));
     }
   }
 
-  Future<TerminalEndpoint> _loadSelectedEndpoint() async {
-    final endpoint = await localStorageRepo.loadSelectedTerminalEndpoint();
+  static Future<TerminalEndpoint> loadSelectedEndpoint(LocalStorageRepo lsrepo) async {
+    final endpoint = await lsrepo.loadSelectedTerminalEndpoint();
     if (endpoint == null) {
       throw Exception('NO ENDPOINT SELECTED!');
     }

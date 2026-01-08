@@ -1,4 +1,5 @@
 import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
+import 'package:model_flight_logbook/domain/entities/flight_session.dart';
 import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
 import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
@@ -11,4 +12,5 @@ abstract class LogbookApiRepo {
   Future<PilotStatus> loadPilotStatus({required TerminalEndpoint endpoint, required String pilotid});
   Future<void> startFlightSession({required TerminalEndpoint endpoint, required String pilotid});
   Future<void> endFlightSession({required TerminalEndpoint endpoint, required String pilotid, required EndFlightSessionData data});
+  Future<List<FlightSession>> loadFlightSessions({required TerminalEndpoint endpoint, required String pilotid, required int year});
 }

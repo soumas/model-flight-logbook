@@ -59,7 +59,7 @@ class UtmConfig:
         self.mtom_g = _ini.get('utm','mtom_g')
 
 class TerminalConfig:
-    def __init__(self, terminalid, airportname, terminaltype, apikey, airportkml, terminalname, max_altitude_m, max_altitude_without_observer_m, max_num_flights, operatinghourscsv, infoMessages, warnMessages, errorMessages):
+    def __init__(self, terminalid, airportname, terminaltype, apikey, airportkml, terminalname, max_altitude_m, max_altitude_without_observer_m, max_num_flights, operatinghourscsv, dashboard_info_messages, pilot_info_messages, pilot_warn_messages, pilot_error_messages):
         self.terminalid = terminalid
         self.terminaltype = terminaltype
         self.terminalname = terminalname
@@ -70,9 +70,10 @@ class TerminalConfig:
         self.max_altitude_without_observer_m = max_altitude_without_observer_m
         self.max_num_flights = max_num_flights
         self.operatinghourscsv = operatinghourscsv
-        self.infoMessages = infoMessages
-        self.warnMessages = warnMessages
-        self.errorMessages = errorMessages
+        self.dashboard_info_messages = dashboard_info_messages
+        self.pilot_info_messages = pilot_info_messages
+        self.pilot_warn_messages = pilot_warn_messages
+        self.pilot_error_messages = pilot_error_messages
 
 class Config:
     def __init__(self):
@@ -96,9 +97,10 @@ def _buildTerminalDict():
                 max_altitude_without_observer_m = _ini.get(sectionname, 'max_altitude_without_observer_m', fallback=9999),
                 max_num_flights = _ini.get(sectionname, 'max_num_flights', fallback=9999),
                 operatinghourscsv = _ini.get(sectionname, 'operatinghourscsv', fallback=None),
-                infoMessages = _ini.get(sectionname, 'infoMessages', fallback=None),
-                warnMessages = _ini.get(sectionname, 'warnMessages', fallback=None),
-                errorMessages = _ini.get(sectionname, 'errorMessages', fallback=None),
+                dashboard_info_messages = _ini.get(sectionname, 'dashboard_info_messages', fallback=None),
+                pilot_info_messages = _ini.get(sectionname, 'pilot_info_messages', fallback=None),
+                pilot_warn_messages = _ini.get(sectionname, 'pilot_warn_messages', fallback=None),
+                pilot_error_messages = _ini.get(sectionname, 'pilot_error_messages', fallback=None),
             )
     return retdict
 

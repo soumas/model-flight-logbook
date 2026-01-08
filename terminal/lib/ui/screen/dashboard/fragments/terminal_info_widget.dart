@@ -12,7 +12,7 @@ class TerminalInfoWidget extends StatelessWidget {
     final state = context.watch<DashboardCubit>().state;
     return Column(
       children: [
-        Text(state.selectedEndpoint?.config.airportname ?? '', style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1), textAlign: TextAlign.center),
+        Text(state.selectedEndpoint?.config.airportname ?? '', style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.3), textAlign: TextAlign.center),
         Text(state.selectedEndpoint?.config.terminalname ?? '', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: kColorFontSub), textAlign: TextAlign.center),
         if (state.terminalStatus?.operatinghourStart != null)
           Padding(

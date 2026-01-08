@@ -21,4 +21,6 @@ class PilotStatus with PilotStatusMappable {
     this.warnMessages,
     this.errorMessages,
   });
+
+  bool get isActiveSession => sessionId != null && sessionStarttime != null;
 }

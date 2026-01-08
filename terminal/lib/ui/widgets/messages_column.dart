@@ -7,11 +7,13 @@ class MessagesColumn extends StatelessWidget {
     required this.errorMessages,
     required this.warnMessages,
     required this.infoMessages,
+    this.onWarnMessageAcceptedChanged,
   });
 
   final List<String> errorMessages;
   final List<String> warnMessages;
   final List<String> infoMessages;
+  final Function(String message, bool accepted)? onWarnMessageAcceptedChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class MessagesColumn extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ...errorMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.error)),
-        ...warnMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.warn)),
+        ...warnMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.warn, onAcceptedChanged: onWarnMessageAcceptedChanged)),
         ...infoMessages.map((e) => MflMessage(text: e, severity: MflMessageSeverity.info)),
       ],
     );

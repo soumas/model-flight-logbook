@@ -1,41 +1,81 @@
 import 'package:flutter/material.dart';
-import 'package:model_flight_logbook/constants.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
 
-class MflMessage extends StatelessWidget {
-  const MflMessage({
-    super.key,
-    this.severity = MflMessageSeverity.info,
-    this.text,
-  });
+class MflMessage extends StatefulWidget {
+  const MflMessage({super.key, this.severity = MflMessageSeverity.info, this.text, this.onAcceptedChanged});
 
   static const contentPadding = 10.0;
   static const severityIndicatorWidth = 20.0;
 
   final MflMessageSeverity severity;
   final String? text;
+  final Function(String message, bool accepted)? onAcceptedChanged;
+
+  @override
+  State<MflMessage> createState() => _MflMessageState();
+}
+
+class _MflMessageState extends State<MflMessage> {
+  bool _isAccepted = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: contentPadding * 2),
+      padding: const EdgeInsets.only(bottom: MflMessage.contentPadding * 2),
       child: Container(
         width: double.infinity,
         decoration: CustomDecoration(severityColor: _evalBackgroundColor()),
-        child: Padding(
-          padding: const EdgeInsets.only(left: severityIndicatorWidth + contentPadding, bottom: contentPadding, top: contentPadding, right: contentPadding),
-          child: Text(
-            text?.replaceAll('\\n', '\n') ?? '',
-            style: Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.left,
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: MflMessage.severityIndicatorWidth + MflMessage.contentPadding,
+                  bottom: MflMessage.contentPadding,
+                  top: MflMessage.contentPadding,
+                  right: MflMessage.contentPadding),
+              child: Text(
+                widget.text?.replaceAll('\\n', '\n') ?? '',
+                style: Theme.of(context).textTheme.bodyLarge,
+                textAlign: TextAlign.left,
+              ),
+            ),
+            if (widget.onAcceptedChanged != null) ...[
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: MflMessage.severityIndicatorWidth + MflMessage.contentPadding,
+                    bottom: MflMessage.contentPadding,
+                    top: MflMessage.contentPadding,
+                    right: MflMessage.contentPadding),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'akzeptiert',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const SizedBox(width: MflMessage.contentPadding),
+                    Switch(
+                      value: _isAccepted,
+                      onChanged: (value) {
+                        setState(() {
+                          _isAccepted = value;
+                          widget.onAcceptedChanged?.call(widget.text ?? '', _isAccepted);
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ]
+          ],
         ),
       ),
     );
   }
 
   Color _evalBackgroundColor() {
-    switch (severity) {
+    switch (widget.severity) {
       case MflMessageSeverity.info:
         return kColorInfo;
       case MflMessageSeverity.warn:

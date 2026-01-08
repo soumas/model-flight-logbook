@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
 import 'package:model_flight_logbook/injector.dart';
 import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
+import 'package:model_flight_logbook/ui/screen/flight_session_list/flight_session_list_screen.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
 import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +14,15 @@ import 'package:model_flight_logbook/ui/screen/pilot_status/fragments/pilot_mess
 import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
 import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
 import 'package:model_flight_logbook/ui/utils/toast.dart';
+import 'package:model_flight_logbook/ui/widgets/flight_session_status_info_widget.dart';
 import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
 
 class PilotStatusScreen extends StatefulWidget {
-  const PilotStatusScreen({super.key});
+  const PilotStatusScreen({super.key, required this.pilotId});
 
   static const route = '/pilotstate';
+
+  final String pilotId;
 
   @override
   State<PilotStatusScreen> createState() => _PilotStatusScreenState();
@@ -25,6 +30,7 @@ class PilotStatusScreen extends StatefulWidget {
 
 class _PilotStatusScreenState extends State<PilotStatusScreen> {
   Timer? _autoCloseTimer;
+  final Set<String> _acceptedWarnMessages = {};
 
   @override
   void initState() {
@@ -41,11 +47,11 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
   void _initAutoCloseTimer() {
     _disposeAutoCloseTimer();
     _autoCloseTimer = Timer(
-      const Duration(seconds: 15),
+      const Duration(seconds: 30),
       () {
         if (!context.mounted) return;
         if (ModalRoute.of(context)?.isCurrent ?? false) {
-          Navigator.of(context).pop();
+          Navigator.of(context).popUntil((route) => route.isFirst);
         } else {
           _initAutoCloseTimer();
         }
@@ -61,7 +67,7 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final pilotid = (ModalRoute.of(context)!.settings.arguments ?? 'UNKNOWN_PILOT').toString();
+    final pilotid = widget.pilotId;
     final localizations = AppLocalizations.of(context)!;
     return BlocProvider(
       create: (context) => injector.get<PilotStatusCubit>()..init(localizations, pilotid),
@@ -75,61 +81,89 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
           }
         },
         builder: (context, state) {
-          final hasActiveSession = state.flightSessionStatus?.sessionId != null && state.flightSessionStatus!.sessionStarttime != null;
-          return MflScaffold(
-            title: 'Status Pilot:in',
-            showBackgroundImage: true,
-            child1: const PilotMessagesView(),
-            child2: Column(
-              children: [
-                Text(
-                  state.flightSessionStatus?.pilotName ?? '',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 26, height: 1, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: MflPaddings.verticalSmallSize(context)),
-                Card(
-                  color: hasActiveSession ? kColorSuccess : kColorWarning,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
-                    child: Text(hasActiveSession ? 'anwesend' : 'abwesend'),
-                  ),
-                ),
-                SizedBox(height: MflPaddings.verticalLargeSize(context)),
-                if (!hasActiveSession)
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: (state.flightSessionStatus?.errorMessages ?? []).isEmpty ? () => context.read<PilotStatusCubit>().startSession() : null,
-                      label: const Text('Kommen'),
-                      icon: const Icon(Icons.login),
-                    ),
-                  ),
-                if (hasActiveSession)
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: () async {
-                        final data = (await Navigator.of(context).pushNamed(EndFlightSessionForm.route, arguments: state)) as EndFlightSessionData?;
-                        if (data != null && context.mounted) {
-                          context.read<PilotStatusCubit>().endSession(data: data);
+          final pilotUnknown = state.flightSessionStatus?.pilotName.isEmpty ?? true;
+          final hasActiveSession = state.flightSessionStatus?.isActiveSession ?? false;
+          final hasErrors = (state.flightSessionStatus?.errorMessages ?? []).isNotEmpty;
+          final allWarningsAccepted =
+              hasErrors || (state.flightSessionStatus?.warnMessages ?? []).every((msg) => _acceptedWarnMessages.contains(msg));
+          return GestureDetector(
+            onTapDown: (details) {
+              log('GestureDetector');
+              _initAutoCloseTimer();
+            },
+            child: MflScaffold(
+              showBackgroundImage: true,
+              child1: PilotMessagesView(
+                onWarnMessageAcceptedChanged: !hasActiveSession && !hasErrors
+                    ? (String message, bool accepted) {
+                        if (accepted) {
+                          _acceptedWarnMessages.add(message);
+                        } else {
+                          _acceptedWarnMessages.remove(message);
                         }
-                      },
-                      label: const Text('Gehen'),
-                      icon: const Icon(Icons.logout),
+                        setState(() {});
+                      }
+                    : null,
+              ),
+              child2: Column(
+                children: [
+                  FlightSessionStatusInfoWidget(pilotStatus: state.flightSessionStatus),
+                  if (!hasActiveSession && hasErrors) ...[
+                    const Text('Check-In verweigert!', style: TextStyle(color: kColorError, fontWeight: FontWeight.bold)),
+                  ],
+                  if (!hasActiveSession && !allWarningsAccepted) ...[
+                    const Text('Warnungen akzeptieren!', style: TextStyle(color: kColorWarning, fontWeight: FontWeight.bold)),
+                  ],
+                  if (!hasActiveSession)
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: (hasErrors || !allWarningsAccepted) ? null : () => context.read<PilotStatusCubit>().startSession(),
+                        label: const Text('Check-In'),
+                        icon: const Icon(Icons.login),
+                      ),
+                    ),
+                  if (hasActiveSession)
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () async {
+                          final data = (await Navigator.of(context).push(
+                            PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => EndFlightSessionForm(state: state)),
+                          )) as EndFlightSessionData?;
+                          if (data != null && context.mounted) {
+                            context.read<PilotStatusCubit>().endSession(data: data);
+                          }
+                        },
+                        label: const Text('Check-Out'),
+                        icon: const Icon(Icons.logout),
+                      ),
+                    ),
+                  SizedBox(height: MflPaddings.verticalLargeSize(context)),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: pilotUnknown
+                          ? null
+                          : () => Navigator.of(context).push(
+                                PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => PilotLogbookScreen(state: state)),
+                              ),
+                      label: const Text('Flugbuch'),
+                      icon: const Icon(Icons.book_outlined),
                     ),
                   ),
-                // SizedBox(height: MflPaddings.verticalMediumSize(context)),
-                // SizedBox(
-                //   width: double.infinity,
-                //   child: ElevatedButton.icon(
-                //     onPressed: () {
-                //       Navigator.of(context).pop();
-                //     },
-                //     label: const Text('Schließen'),
-                //     icon: const Icon(Icons.close),
-                //   ),
-                // ),
-              ],
+                  SizedBox(height: MflPaddings.verticalMediumSize(context)),
+                  const Divider(),
+                  SizedBox(height: MflPaddings.verticalMediumSize(context)),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+                      label: const Text('Schließen'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },

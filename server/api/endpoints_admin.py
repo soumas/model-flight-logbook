@@ -1,5 +1,6 @@
 from fastapi import BackgroundTasks, Depends, HTTPException, Response, Security, status
 from requests import Session
+from sqlalchemy import func
 from config.configmanager import config
 from api.dtos import FlightSessionDTO, PilotDTO
 from api.apimanager import api, api_key_header
@@ -101,8 +102,8 @@ def deactivate_all_pilots(db: Session = Depends(get_db)):
 ########################### FLIGHT SESSIONS ################################
 
 @api.get("/admin/flightsession/{year}", dependencies=[Security(__adminauth)],response_model=list[FlightSessionDTO])
-def get_all_flightsessions(year: int, db: Session = Depends(get_db)):
-    sessions : list[FlightSessionEntity] =  db.query(FlightSessionEntity).filter(FlightSessionEntity.start.between('{:04d}-01-01'.format(year),'{:04d}-12-31'.format(year))).all()
+def get_all_flightsessions(year: str, db: Session = Depends(get_db)):
+    sessions : list[FlightSessionEntity] =  db.query(FlightSessionEntity).filter(func.strftime('%Y', FlightSessionEntity.start).in_([year])).all()
     pilots : list[PilotEntity] = db.query(PilotEntity).filter(PilotEntity.id.in_(dict.fromkeys([o.pilotid for o in sessions]))).all()
     for session in sessions:
         pilot = [p for p in pilots if p.id == session.pilotid ][0]
@@ -111,6 +112,9 @@ def get_all_flightsessions(year: int, db: Session = Depends(get_db)):
     return sessions
 
 ########################### OTHERS #########################################
+
+
+    return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilot.id,  func.strftime('%Y', FlightSessionEntity.start).in_([year]))).order_by(FlightSessionEntity.start.desc()).all()
 
 @api.get("/admin/admin_notification_test", dependencies=[Security(__adminauth)])
 def send_test_admin_notification(background_tasks:BackgroundTasks):

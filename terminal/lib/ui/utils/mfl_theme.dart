@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:model_flight_logbook/constants.dart';
 
 const kColorPrimary = Color(0xFF419ABA);
 final kColorOnPrimary = Colors.grey.shade100;
 const kColorBackground = Colors.black;
 final kColorCard = Colors.grey.shade600.withAlpha((256 * 0.8).toInt());
+// final kColorCard = kColorBackground.withAlpha(128);
 const kColorFontMain = Colors.white;
 final kColorFontSub = Colors.grey.shade300;
 final kColorInputBg = Colors.grey.shade800;
@@ -17,6 +17,8 @@ const kColorError = Color(0xFFCC0000);
 final kTextThemeBodySmall = ThemeData.dark().textTheme.bodySmall!.copyWith(fontSize: 12, color: kColorFontMain);
 final kTextThemeBodyMedium = ThemeData.dark().textTheme.bodyMedium!.copyWith(fontSize: 16, color: kColorFontMain);
 final kTextThemeBodyLarge = ThemeData.dark().textTheme.bodyLarge!.copyWith(fontSize: 20, color: kColorFontMain);
+
+const kCornderRadius = 0.0;
 
 final mflThemeData = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: Colors.transparent,
@@ -39,13 +41,14 @@ final mflThemeData = ThemeData.dark().copyWith(
       ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      elevation: 8.0,
+      elevation: 1.0,
       backgroundColor: kColorPrimary,
       foregroundColor: kColorOnPrimary,
       iconColor: kColorOnPrimary,
-      iconSize: 26,
+      iconSize: 24,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kCornderRadius)),
+      textStyle: kTextThemeBodyLarge,
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
@@ -64,7 +67,8 @@ final mflThemeData = ThemeData.dark().copyWith(
   appBarTheme: ThemeData.dark().appBarTheme.copyWith(
         foregroundColor: kColorFontMain,
         scrolledUnderElevation: 0,
-        color: kColorBackground.withAlpha(128),
+        //backgroundColor: kColorBackground.withAlpha(128),
+        backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(
           size: 38,
           color: kColorFontMain,
@@ -72,6 +76,14 @@ final mflThemeData = ThemeData.dark().copyWith(
       ),
   cardTheme: CardThemeData(
     color: kColorCard,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(kCornderRadius),
+    ),
+  ),
+  dialogTheme: DialogThemeData(
+    elevation: 6,
+    shadowColor: kColorCard,
+    alignment: Alignment.center,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(kCornderRadius),
     ),

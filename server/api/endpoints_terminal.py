@@ -3,14 +3,15 @@ from typing import Annotated
 from fastapi import Depends, Security, BackgroundTasks
 from fastapi.params import Header
 from requests import Session
-from sqlalchemy import and_, or_
-from api.dtos import EndFlightSessionDTO, FlightSessionStatusDTO, TerminalStatusDTO
+from sqlalchemy import and_, func, or_
+from api.dtos import EndFlightSessionDTO, FlightSessionDTO, FlightSessionStatusDTO, TerminalStatusDTO
 from config.configmanager import config
 from api.apimanager import api, api_key_header
-from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, unknown_terminal
+from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, unknown_terminal, unknown_session
 from db.entities import FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
 from tasks.utm_tasks import UtmSyncStatus, trigger_utm_sync_task
+from utils.messages_utils import appendMessages
 from utils.operatinghours_utils import findOperatinghourDayDefinition
 from utils.send_mail import send_mail
 from tasks.utm_tasks import utmSyncStatusDataDict
@@ -55,17 +56,16 @@ def get_status(x_terminal:Annotated[str, Header()]):
     ohoursStart = ohours.start if ohours != None else None
     ohoursEnd = ohours.end if ohours != None else None
 
-    # messages
-    takeoffPermission = validateTakeoffPermission(terminalid=x_terminal, pilot=None, allowNonePilot=True)
+    # dashboard messages
+    dashboardMessages = []
+    appendMessages(dashboardMessages, config.terminals[x_terminal].dashboard_info_messages)
 
     return TerminalStatusDTO(
         utmStatus=state.name, 
         utmBusy=busy, 
         operatinghourStart=ohoursStart, 
         operatinghourEnd=ohoursEnd,
-        infoMessages=takeoffPermission.getInfoMessagesGlobal(),
-        warnMessages=takeoffPermission.getWarnMessagesGlobal(),
-        errorMessages=takeoffPermission.getErrorMessagesGlobal(),
+        infoMessages=dashboardMessages,
     )
 
 
@@ -122,3 +122,17 @@ def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[s
             subject='Besonderes Ereignis', 
             body= pilot.firstname + ' ' + pilot.lastname + ' hat am Flugplatz "' + config.terminals[x_terminal].airportname + '" folgendes Ereignis angegeben:<br/><br/>' + fsession.comment + '<br><br>Kontaktdaten für Rückfragen:<ul><li><a href="mailto:' + pilot.email + '">' + pilot.email + '</a></li><li><a href="tel:' + pilot.phonenumber + '">' + pilot.phonenumber + '</a></li></ul>'
         )
+
+@api.get("/terminal/flightsession/list/{year}", dependencies=[Security(__specific_terminalauth)], response_model=list[FlightSessionDTO])
+def get_flightsession_list(year: str, x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], db:Session = Depends(get_db)):
+    pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
+    return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilot.id,  func.strftime('%Y', FlightSessionEntity.start).in_([year]))).order_by(FlightSessionEntity.start.desc()).all()
+
+
+@api.get("/terminal/flightsession/detail/{id}", dependencies=[Security(__specific_terminalauth)], response_model=FlightSessionDTO)
+def get_flightsession_detail(id: int, x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], db:Session = Depends(get_db)):
+    pilot:PilotEntity = __findPilot(pilotid=x_pilotid, db=db)
+    session:FlightSessionEntity = db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilot.id,  FlightSessionEntity.id == id)).first()
+    if(session is None):
+        raise unknown_session
+    return session

@@ -1,6 +1,4 @@
 import 'package:intl/intl.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/fragments/end_flight_session_form.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:model_flight_logbook/injector.dart';
@@ -30,9 +28,7 @@ class MainApp extends StatelessWidget {
       routes: {
         DashboardScreen.route: (context) => const DashboardScreen(),
         SettingsScreen.route: (context) => const SettingsScreen(),
-        PilotStatusScreen.route: (context) => const PilotStatusScreen(),
         ServerConnectionScreen.route: (context) => const ServerConnectionScreen(),
-        EndFlightSessionForm.route: (context) => const EndFlightSessionForm(),
       },
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [

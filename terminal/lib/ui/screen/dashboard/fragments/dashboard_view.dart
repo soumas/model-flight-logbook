@@ -46,7 +46,11 @@ class _DashboardViewState extends State<DashboardView> {
       if (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.numpadEnter) {
         final input = _input;
         _input = '';
-        Navigator.of(context).pushNamed(PilotStatusScreen.route, arguments: input);
+        Navigator.of(context).push(PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) => PilotStatusScreen(pilotId: input),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        ));
       } else {
         _input += event.character ?? '';
       }
@@ -58,7 +62,7 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return const MflScaffold(
-      title: 'Model Flight Logbook',
+      //itle: 'Model Flight Logbook',
       showBackgroundImage: true,
       endDrawer: MainMenu(),
       child1: GlobalMessagesView(),
