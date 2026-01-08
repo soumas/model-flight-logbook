@@ -1,11 +1,11 @@
-name: release terminal linux-arm64
+name: release terminal linux-x64
 on: 
   push:
     tags:
     - 'mfl-*'
 jobs:
   build:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./terminal    
@@ -42,8 +42,8 @@ jobs:
       run: flutter build linux --release
     - name: rename
       run: |
-        mv ./build/linux/arm64/release/bundle/model_flight_logbook ./mfl-terminal-linux-arm64
+        mv ./build/linux/x64/release/bundle/model_flight_logbook ./mfl-terminal-linux-x64
     - name: Upload zip to release
       uses: softprops/action-gh-release@v2
       with: 
-        files: "./terminal/mfl-terminal-linux-arm64"
+        files: "./terminal/mfl-terminal-linux-x64"
