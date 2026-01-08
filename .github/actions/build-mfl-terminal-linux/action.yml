@@ -12,6 +12,9 @@ runs:
       run: |
         GITREV="${GITHUB_REF/refs\/tags\//}"
         echo "VERSION=${GITREV:4}" >> "$GITHUB_OUTPUT"
+    - name: read dir content
+      shell: bash
+      run: ls 
     - name: write version to pubspec.yaml
       shell: bash
       run: |
