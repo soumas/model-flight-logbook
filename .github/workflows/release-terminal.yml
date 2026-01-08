@@ -5,7 +5,7 @@ on:
     - 'mfl-*'
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     defaults:
       run:
         working-directory: ./terminal    
@@ -39,8 +39,8 @@ jobs:
         ls ./
         ls ./build/
         ls ./build/linux/
-        mv ./build/linux/x64/release/bundle/model_flight_logbook ./mfl-terminal-linux
+        mv ./build/linux/arm64/release/bundle/model_flight_logbook ./mfl-terminal-linux-arm64
     - name: Upload zip to release
       uses: softprops/action-gh-release@v2
       with: 
-        files: "./terminal/mfl-terminal-linux"
+        files: "./terminal/mfl-terminal-linux-arm64"
