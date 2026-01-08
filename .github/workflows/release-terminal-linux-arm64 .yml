@@ -1,4 +1,4 @@
-name: release terminal
+name: release terminal linux-arm64
 on: 
   push:
     tags:
