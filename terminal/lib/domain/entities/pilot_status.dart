@@ -1,7 +1,7 @@
 import 'dart:core';
 
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:model_flight_logbook/mappable.dart';
+import 'package:mfl_terminal/mappable.dart';
 
 part 'pilot_status.mapper.dart';
 

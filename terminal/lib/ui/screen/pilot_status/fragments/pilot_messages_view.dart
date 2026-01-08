@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
-import 'package:model_flight_logbook/ui/widgets/messages_column.dart';
+import 'package:mfl_terminal/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
+import 'package:mfl_terminal/ui/widgets/messages_column.dart';
 
 class PilotMessagesView extends StatelessWidget {
   const PilotMessagesView({

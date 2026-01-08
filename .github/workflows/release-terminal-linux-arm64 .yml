@@ -10,40 +10,7 @@ jobs:
       run:
         working-directory: ./terminal    
     steps:
-    - name: checkout repo
-      uses: actions/checkout@master
-    - name: get version from GITHUB_REF
-      id: get_version
-      run: |
-        GITREV="${GITHUB_REF/refs\/tags\//}"
-        echo "VERSION=${GITREV:4}" >> "$GITHUB_OUTPUT"
-    - name: write version to pubspec.yaml
-      run: |
-        sed -i.bak -E "s/version: [0-9]+\.[0-9]+\.[0-9]+(\+[0-9]+)?/version: ${{steps.get_version.outputs.VERSION }}/g" pubspec.yaml && rm pubspec.yaml.bak
-    - name: apt update
-      run: |
-        sudo apt-get update -y
-        sudo apt-get upgrade -y
-    - name: Install build dependencies
-      run: sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev libstdc++-12-dev
-    - name: Set Up Java
-      uses: actions/setup-java@v3.12.0
+    - name: Build MFL terminal for linux arm64
+      uses: soumas/build-mfl-terminal-linux@main
       with:
-        distribution: 'oracle'
-        java-version: '17'
-    - name: Set Up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.35.7'
-        channel: 'master'
-    - name: Install flutter dependencies
-      run: flutter pub get
-    - name: Build linux
-      run: flutter build linux --release
-    - name: rename
-      run: |
-        mv ./build/linux/arm64/release/bundle/model_flight_logbook ./mfl-terminal-linux-arm64
-    - name: Upload zip to release
-      uses: softprops/action-gh-release@v2
-      with: 
-        files: "./terminal/mfl-terminal-linux-arm64"
+        arch: 'arm64'

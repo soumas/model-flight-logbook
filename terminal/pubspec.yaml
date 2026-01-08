@@ -1,5 +1,5 @@
-name: model_flight_logbook
-description: "A new Flutter project."
+name: mfl_terminal
+description: "Kiosk terminal ui for Model Flight Logbook"
 publish_to: 'none'
 version: 0.0.1
 

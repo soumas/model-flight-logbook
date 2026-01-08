@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
-import 'package:model_flight_logbook/mappable.dart';
+import 'package:mfl_terminal/domain/entities/pilot_status.dart';
+import 'package:mfl_terminal/mappable.dart';
 
 part 'pilot_status_state.mapper.dart';
 

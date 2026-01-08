@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:model_flight_logbook/domain/enums/api_response_reason.dart';
-import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
+import 'package:mfl_terminal/domain/enums/api_response_reason.dart';
+import 'package:mfl_terminal/l10n/generated/app_localizations.dart';
 
 class DioExceptionUtil {
   static String? getUiMessage(dynamic e, AppLocalizations localizations) {

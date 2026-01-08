@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:model_flight_logbook/constants.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_keyboard_layouts.dart';
-import 'package:model_flight_logbook/ui/widgets/input_description_button.dart';
+import 'package:mfl_terminal/constants.dart';
+import 'package:mfl_terminal/ui/utils/mfl_keyboard_layouts.dart';
+import 'package:mfl_terminal/ui/widgets/input_description_button.dart';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 
 class MflTextFormField extends StatelessWidget {
@@ -108,5 +108,6 @@ class MflTextFormField extends StatelessWidget {
     );
   }
 
-  bool get _useVirtualKeyboard => kIsWeb || (defaultTargetPlatform != TargetPlatform.iOS && defaultTargetPlatform != TargetPlatform.android);
+  bool get _useVirtualKeyboard =>
+      kIsWeb || (defaultTargetPlatform != TargetPlatform.iOS && defaultTargetPlatform != TargetPlatform.android);
 }

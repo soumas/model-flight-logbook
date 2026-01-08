@@ -1,9 +1,9 @@
-import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
-import 'package:model_flight_logbook/domain/entities/flight_session.dart';
-import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_status.dart';
+import 'package:mfl_terminal/domain/entities/end_flight_session_data.dart';
+import 'package:mfl_terminal/domain/entities/flight_session.dart';
+import 'package:mfl_terminal/domain/entities/pilot_status.dart';
+import 'package:mfl_terminal/domain/entities/terminal_config.dart';
+import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
+import 'package:mfl_terminal/domain/entities/terminal_status.dart';
 
 abstract class LogbookApiRepo {
   Future<List<TerminalConfig>> loadTerminalConfigs({required String apiEndpoint});

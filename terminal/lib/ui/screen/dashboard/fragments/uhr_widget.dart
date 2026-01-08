@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
+import 'package:mfl_terminal/ui/utils/mfl_theme.dart';
 
 class UhrWidget extends StatefulWidget {
   const UhrWidget({super.key});
@@ -24,8 +24,11 @@ class _UhrWidgetState extends State<UhrWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(DateFormat.Hm().format(time), style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 72, height: 1, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-        Text(DateFormat('EEEE, d. MMM').format(time), style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: kColorFontSub), textAlign: TextAlign.center),
+        Text(DateFormat.Hm().format(time),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 72, height: 1, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center),
+        Text(DateFormat('EEEE, d. MMM').format(time),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: kColorFontSub), textAlign: TextAlign.center),
       ],
     );
   }

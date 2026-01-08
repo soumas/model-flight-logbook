@@ -1,12 +1,12 @@
-import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
-import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
-import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
-import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
+import 'package:mfl_terminal/domain/entities/end_flight_session_data.dart';
+import 'package:mfl_terminal/domain/entities/pilot_status.dart';
+import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
+import 'package:mfl_terminal/domain/repositories/local_storage_repo.dart';
+import 'package:mfl_terminal/domain/repositories/logbook_api_repo.dart';
+import 'package:mfl_terminal/l10n/generated/app_localizations.dart';
+import 'package:mfl_terminal/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/ui/utils/dio_exception_util.dart';
+import 'package:mfl_terminal/ui/utils/dio_exception_util.dart';
 
 class PilotStatusCubit extends Cubit<PilotStatusState> {
   PilotStatusCubit({

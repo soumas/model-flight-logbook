@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/cubit/dashboard_cubit.dart';
-import 'package:model_flight_logbook/ui/widgets/messages_column.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/cubit/dashboard_cubit.dart';
+import 'package:mfl_terminal/ui/widgets/messages_column.dart';
 
 class GlobalMessagesView extends StatelessWidget {
   const GlobalMessagesView({

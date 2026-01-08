@@ -1,5 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:model_flight_logbook/mappable.dart';
+import 'package:mfl_terminal/mappable.dart';
 
 part 'end_flight_session_data.mapper.dart';
 

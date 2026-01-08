@@ -1,8 +1,8 @@
-import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
+import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:model_flight_logbook/constants.dart';
-import 'package:model_flight_logbook/domain/entities/settings.dart';
-import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
+import 'package:mfl_terminal/constants.dart';
+import 'package:mfl_terminal/domain/entities/settings.dart';
+import 'package:mfl_terminal/domain/repositories/local_storage_repo.dart';
 
 class LocalStorageRepoImpl extends LocalStorageRepo {
   @override

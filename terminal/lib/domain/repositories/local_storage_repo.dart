@@ -1,5 +1,5 @@
-import 'package:model_flight_logbook/domain/entities/settings.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
+import 'package:mfl_terminal/domain/entities/settings.dart';
+import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
 
 abstract class LocalStorageRepo {
   Future<Settings> loadSettings();

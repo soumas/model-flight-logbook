@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "model_flight_logbook",
+            "name": "mfl_terminal",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -14,13 +14,13 @@
             ]
         },
         {
-            "name": "model_flight_logbook (profile mode)",
+            "name": "mfl_terminal (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "model_flight_logbook (release mode)",
+            "name": "mfl_terminal (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
-import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
-import 'package:model_flight_logbook/ui/screen/settings/cubit/settings_state.dart';
+import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
+import 'package:mfl_terminal/domain/repositories/local_storage_repo.dart';
+import 'package:mfl_terminal/domain/repositories/logbook_api_repo.dart';
+import 'package:mfl_terminal/ui/screen/settings/cubit/settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit({required this.localStorageRepo, required this.logbookApiRepo}) : super(SettingsState());
@@ -42,7 +42,9 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   void deleteEndpointAndSave(TerminalEndpoint endpoint) {
     final lst = [...state.settings!.terminalEndpoints];
-    lst.removeWhere((existingep) => endpoint.apiEndpoint.compareTo(existingep.apiEndpoint) == 0 && endpoint.config.terminalid.compareTo(existingep.config.terminalid) == 0);
+    lst.removeWhere((existingep) =>
+        endpoint.apiEndpoint.compareTo(existingep.apiEndpoint) == 0 &&
+        endpoint.config.terminalid.compareTo(existingep.config.terminalid) == 0);
     emit(state.copyWith(settings: state.settings!.copyWith(terminalEndpoints: lst)));
     save();
   }
@@ -68,7 +70,9 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   Future addOrUpdateEndpointAndSave(TerminalEndpoint endpoint, {bool selectSavedEndpoint = true}) async {
     final lst = [...state.settings!.terminalEndpoints];
-    lst.removeWhere((existingep) => endpoint.apiEndpoint.compareTo(existingep.apiEndpoint) == 0 && endpoint.config.terminalid.compareTo(existingep.config.terminalid) == 0);
+    lst.removeWhere((existingep) =>
+        endpoint.apiEndpoint.compareTo(existingep.apiEndpoint) == 0 &&
+        endpoint.config.terminalid.compareTo(existingep.config.terminalid) == 0);
     lst.add(endpoint);
     emit(state.copyWith(settings: state.settings!.copyWith(terminalEndpoints: lst)));
     await save();

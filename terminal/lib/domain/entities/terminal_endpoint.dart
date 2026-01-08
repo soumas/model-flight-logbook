@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
-import 'package:model_flight_logbook/mappable.dart';
+import 'package:mfl_terminal/domain/entities/terminal_config.dart';
+import 'package:mfl_terminal/mappable.dart';
 
 part 'terminal_endpoint.mapper.dart';
 

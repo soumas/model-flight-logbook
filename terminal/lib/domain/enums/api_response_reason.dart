@@ -1,4 +1,4 @@
-import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
+import 'package:mfl_terminal/l10n/generated/app_localizations.dart';
 
 enum ApiResponseReason {
   invalidApiKey,

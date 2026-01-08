@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_message.dart';
 
 class MessagesColumn extends StatelessWidget {
   const MessagesColumn({

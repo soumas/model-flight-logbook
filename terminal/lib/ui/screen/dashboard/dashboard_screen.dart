@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/injector.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/cubit/dashboard_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/fragments/dashboard_view.dart';
+import 'package:mfl_terminal/injector.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/cubit/dashboard_cubit.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/fragments/dashboard_view.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatefulWidget {

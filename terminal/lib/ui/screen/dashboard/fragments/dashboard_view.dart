@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/cubit/dashboard_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/fragments/global_messages_view.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/fragments/main_menu.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/fragments/terminal_info_widget.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/fragments/uhr_widget.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/pilot_status_screen.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/cubit/dashboard_cubit.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/fragments/global_messages_view.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/fragments/main_menu.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/fragments/terminal_info_widget.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/fragments/uhr_widget.dart';
+import 'package:mfl_terminal/ui/screen/pilot_status/pilot_status_screen.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_scaffold.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({

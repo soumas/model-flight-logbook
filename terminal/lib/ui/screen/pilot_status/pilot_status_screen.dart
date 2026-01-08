@@ -1,21 +1,21 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
-import 'package:model_flight_logbook/injector.dart';
-import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/screen/flight_session_list/flight_session_list_screen.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
+import 'package:mfl_terminal/domain/entities/end_flight_session_data.dart';
+import 'package:mfl_terminal/injector.dart';
+import 'package:mfl_terminal/l10n/generated/app_localizations.dart';
+import 'package:mfl_terminal/ui/screen/flight_session_list/flight_session_list_screen.dart';
+import 'package:mfl_terminal/ui/screen/pilot_status/cubit/pilot_status_cubit.dart';
+import 'package:mfl_terminal/ui/screen/pilot_status/cubit/pilot_status_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/fragments/end_flight_session_form.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/fragments/pilot_messages_view.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
-import 'package:model_flight_logbook/ui/utils/toast.dart';
-import 'package:model_flight_logbook/ui/widgets/flight_session_status_info_widget.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
+import 'package:mfl_terminal/ui/screen/pilot_status/fragments/end_flight_session_form.dart';
+import 'package:mfl_terminal/ui/screen/pilot_status/fragments/pilot_messages_view.dart';
+import 'package:mfl_terminal/ui/utils/mfl_paddings.dart';
+import 'package:mfl_terminal/ui/utils/mfl_theme.dart';
+import 'package:mfl_terminal/ui/utils/toast.dart';
+import 'package:mfl_terminal/ui/widgets/flight_session_status_info_widget.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_scaffold.dart';
 
 class PilotStatusScreen extends StatefulWidget {
   const PilotStatusScreen({super.key, required this.pilotId});

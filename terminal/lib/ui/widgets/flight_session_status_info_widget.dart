@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:model_flight_logbook/domain/entities/pilot_status.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
+import 'package:mfl_terminal/domain/entities/pilot_status.dart';
+import 'package:mfl_terminal/ui/utils/mfl_paddings.dart';
 
 class FlightSessionStatusInfoWidget extends StatelessWidget {
   const FlightSessionStatusInfoWidget({

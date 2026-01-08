@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
+import 'package:mfl_terminal/ui/utils/mfl_theme.dart';
 
 class MflMessage extends StatefulWidget {
   const MflMessage({super.key, this.severity = MflMessageSeverity.info, this.text, this.onAcceptedChanged});

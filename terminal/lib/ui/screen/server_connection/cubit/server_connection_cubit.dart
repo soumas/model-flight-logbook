@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/domain/repositories/logbook_api_repo.dart';
-import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_state.dart';
-import 'package:model_flight_logbook/ui/utils/dio_exception_util.dart';
+import 'package:mfl_terminal/domain/entities/terminal_config.dart';
+import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
+import 'package:mfl_terminal/domain/repositories/logbook_api_repo.dart';
+import 'package:mfl_terminal/l10n/generated/app_localizations.dart';
+import 'package:mfl_terminal/ui/screen/server_connection/cubit/server_connection_state.dart';
+import 'package:mfl_terminal/ui/utils/dio_exception_util.dart';
 
 class ServerConnectionCubit extends Cubit<ServerConnectionState> {
   ServerConnectionCubit({required this.logbookApiRepo}) : super(ServerConnectionState());
@@ -42,7 +42,11 @@ class ServerConnectionCubit extends Cubit<ServerConnectionState> {
 
   submit() async {
     try {
-      await logbookApiRepo.checkTerminalConnection(apiEndpoint: state.selectedApiEndpoint, apiKey: state.selectedApiKey, terminalid: state.selectedConfig!.terminalid, pilotid: state.selectedPilotId);
+      await logbookApiRepo.checkTerminalConnection(
+          apiEndpoint: state.selectedApiEndpoint,
+          apiKey: state.selectedApiKey,
+          terminalid: state.selectedConfig!.terminalid,
+          pilotid: state.selectedPilotId);
       emit(
         state.copyWith(
           error: null,

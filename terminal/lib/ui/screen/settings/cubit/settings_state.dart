@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dart_mappable/dart_mappable.dart';
 
-import 'package:model_flight_logbook/domain/entities/settings.dart';
-import 'package:model_flight_logbook/mappable.dart';
+import 'package:mfl_terminal/domain/entities/settings.dart';
+import 'package:mfl_terminal/mappable.dart';
 
 part 'settings_state.mapper.dart';
 

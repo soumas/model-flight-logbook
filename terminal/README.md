@@ -1,4 +1,4 @@
-# model_flight_logbook
+# mfl_terminal
 
 User Interface to interact with mfl server
 
@@ -9,7 +9,7 @@ nano .config/autostart/mfl-terminal.desktop -->
 [Desktop Entry]
 Name=Mfl-Terminal
 Type=Application
-Exec=/home/pi/mfl/model-flight-logbook/terminal/build/linux/arm64/release/bundle/model_flight_logbook
+Exec=/home/pi/mfl/model-flight-logbook/terminal/build/linux/arm64/release/bundle/mfl_terminal
 Terminal=false
 
 ---------

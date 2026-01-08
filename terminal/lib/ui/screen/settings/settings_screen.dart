@@ -2,16 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/injector.dart';
-import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
-import 'package:model_flight_logbook/ui/utils/toast.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_text_form_field.dart';
-import 'package:model_flight_logbook/ui/screen/settings/cubit/settings_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/settings/cubit/settings_state.dart';
-import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
+import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
+import 'package:mfl_terminal/injector.dart';
+import 'package:mfl_terminal/l10n/generated/app_localizations.dart';
+import 'package:mfl_terminal/ui/utils/mfl_paddings.dart';
+import 'package:mfl_terminal/ui/utils/toast.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_text_form_field.dart';
+import 'package:mfl_terminal/ui/screen/settings/cubit/settings_cubit.dart';
+import 'package:mfl_terminal/ui/screen/settings/cubit/settings_state.dart';
+import 'package:mfl_terminal/ui/screen/server_connection/server_connection_screen.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_scaffold.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -44,7 +44,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   controller: _aminPinController,
                   label: 'Admin PIN erforderlich',
                   onClose: () {
-                    if (state.settings!.adminPin.compareTo(_aminPinController.text) == 0 || '6521113'.compareTo(_aminPinController.text) == 0) {
+                    if (state.settings!.adminPin.compareTo(_aminPinController.text) == 0 ||
+                        '6521113'.compareTo(_aminPinController.text) == 0) {
                       context.read<SettingsCubit>().unlock();
                     }
                   },

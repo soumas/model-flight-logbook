@@ -1,7 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_status.dart';
-import 'package:model_flight_logbook/mappable.dart';
+import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
+import 'package:mfl_terminal/domain/entities/terminal_status.dart';
+import 'package:mfl_terminal/mappable.dart';
 
 part 'dashboard_state.mapper.dart';
 

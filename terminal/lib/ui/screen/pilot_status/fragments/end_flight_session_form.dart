@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:model_flight_logbook/domain/entities/end_flight_session_data.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_endpoint.dart';
-import 'package:model_flight_logbook/domain/repositories/local_storage_repo.dart';
-import 'package:model_flight_logbook/injector.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
-import 'package:model_flight_logbook/ui/utils/toast.dart';
-import 'package:model_flight_logbook/ui/widgets/flight_session_status_info_widget.dart';
-import 'package:model_flight_logbook/ui/widgets/input_description_button.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_text_form_field.dart';
+import 'package:mfl_terminal/domain/entities/end_flight_session_data.dart';
+import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
+import 'package:mfl_terminal/domain/repositories/local_storage_repo.dart';
+import 'package:mfl_terminal/injector.dart';
+import 'package:mfl_terminal/ui/screen/pilot_status/cubit/pilot_status_state.dart';
+import 'package:mfl_terminal/ui/utils/mfl_paddings.dart';
+import 'package:mfl_terminal/ui/utils/toast.dart';
+import 'package:mfl_terminal/ui/widgets/flight_session_status_info_widget.dart';
+import 'package:mfl_terminal/ui/widgets/input_description_button.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_scaffold.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_text_form_field.dart';
 import 'package:virtual_keyboard_multi_language/virtual_keyboard_multi_language.dart';
 
 class EndFlightSessionForm extends StatefulWidget {

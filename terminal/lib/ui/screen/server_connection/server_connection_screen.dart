@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/constants.dart';
-import 'package:model_flight_logbook/domain/entities/terminal_config.dart';
-import 'package:model_flight_logbook/domain/enums/terminal_type.dart';
-import 'package:model_flight_logbook/injector.dart';
-import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_text_form_field.dart';
-import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/server_connection/cubit/server_connection_state.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_message.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
+import 'package:mfl_terminal/constants.dart';
+import 'package:mfl_terminal/domain/entities/terminal_config.dart';
+import 'package:mfl_terminal/domain/enums/terminal_type.dart';
+import 'package:mfl_terminal/injector.dart';
+import 'package:mfl_terminal/l10n/generated/app_localizations.dart';
+import 'package:mfl_terminal/ui/utils/mfl_paddings.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_text_form_field.dart';
+import 'package:mfl_terminal/ui/screen/server_connection/cubit/server_connection_cubit.dart';
+import 'package:mfl_terminal/ui/screen/server_connection/cubit/server_connection_state.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_message.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_scaffold.dart';
 
 class ServerConnectionScreen extends StatefulWidget {
   const ServerConnectionScreen({super.key});

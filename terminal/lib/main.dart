@@ -1,13 +1,13 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:model_flight_logbook/injector.dart';
-import 'package:model_flight_logbook/l10n/generated/app_localizations.dart';
-import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/dashboard_screen.dart';
-import 'package:model_flight_logbook/ui/screen/server_connection/server_connection_screen.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_scroll_behavior.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_theme.dart';
+import 'package:mfl_terminal/injector.dart';
+import 'package:mfl_terminal/l10n/generated/app_localizations.dart';
+import 'package:mfl_terminal/ui/screen/settings/settings_screen.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/dashboard_screen.dart';
+import 'package:mfl_terminal/ui/screen/server_connection/server_connection_screen.dart';
+import 'package:mfl_terminal/ui/utils/mfl_scroll_behavior.dart';
+import 'package:mfl_terminal/ui/utils/mfl_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:model_flight_logbook/domain/entities/flight_session.dart';
-import 'package:model_flight_logbook/injector.dart';
-import 'package:model_flight_logbook/ui/screen/flight_session_list/cubit/flight_session_list_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/flight_session_list/cubit/flight_session_list_state.dart';
-import 'package:model_flight_logbook/ui/screen/pilot_status/cubit/pilot_status_state.dart';
-import 'package:model_flight_logbook/ui/utils/mfl_paddings.dart';
-import 'package:model_flight_logbook/ui/widgets/flight_session_status_info_widget.dart';
-import 'package:model_flight_logbook/ui/widgets/mfl_scaffold.dart';
+import 'package:mfl_terminal/domain/entities/flight_session.dart';
+import 'package:mfl_terminal/injector.dart';
+import 'package:mfl_terminal/ui/screen/flight_session_list/cubit/flight_session_list_cubit.dart';
+import 'package:mfl_terminal/ui/screen/flight_session_list/cubit/flight_session_list_state.dart';
+import 'package:mfl_terminal/ui/screen/pilot_status/cubit/pilot_status_state.dart';
+import 'package:mfl_terminal/ui/utils/mfl_paddings.dart';
+import 'package:mfl_terminal/ui/widgets/flight_session_status_info_widget.dart';
+import 'package:mfl_terminal/ui/widgets/mfl_scaffold.dart';
 
 class PilotLogbookScreen extends StatefulWidget {
   const PilotLogbookScreen({

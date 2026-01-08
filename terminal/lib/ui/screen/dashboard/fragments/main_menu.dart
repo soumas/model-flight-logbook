@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:model_flight_logbook/ui/screen/dashboard/cubit/dashboard_cubit.dart';
-import 'package:model_flight_logbook/ui/screen/settings/settings_screen.dart';
+import 'package:mfl_terminal/ui/screen/dashboard/cubit/dashboard_cubit.dart';
+import 'package:mfl_terminal/ui/screen/settings/settings_screen.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({
@@ -25,7 +25,11 @@ class MainMenu extends StatelessWidget {
           if (state.endpointOptions.isNotEmpty) const Divider(),
           ...state.endpointOptions.map((opt) {
             return ListTile(
-              leading: (state.selectedEndpoint != null && state.selectedEndpoint!.apiEndpoint == opt.apiEndpoint && state.selectedEndpoint!.config.terminalid == opt.config.terminalid) ? const Icon(Icons.check_box_outlined) : const Icon(Icons.check_box_outline_blank),
+              leading: (state.selectedEndpoint != null &&
+                      state.selectedEndpoint!.apiEndpoint == opt.apiEndpoint &&
+                      state.selectedEndpoint!.config.terminalid == opt.config.terminalid)
+                  ? const Icon(Icons.check_box_outlined)
+                  : const Icon(Icons.check_box_outline_blank),
               title: Text(opt.config.airportname),
               subtitle: Text(opt.config.terminalname),
               onTap: () {
