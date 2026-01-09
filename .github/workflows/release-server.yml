@@ -19,6 +19,13 @@ jobs:
         echo "VERSION=${GITREV:4}" >> "$GITHUB_OUTPUT"
     - name: write version to versionfile
       run: echo "${{steps.get_version.outputs.VERSION }}" > "./version"
+    - name: build mfl-admin and deploy to server resources
+      run: |
+        sudo apt-get install -y npm
+        npm i -g npx
+        npm install -D vite
+        cd ../mfl-admin/
+        npx vite build
     - name: create zip
       run: |
         zip -r "./mfl-server.zip" ./api/* ./config/* ./db/* ./mailtemplates/* ./resources/* ./utils/* ./main.py ./log-config.ini ./requirements.txt ./server-config-default.ini ./server-config-template.ini ./version ./update.sh
