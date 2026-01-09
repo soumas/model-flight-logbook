@@ -7,6 +7,7 @@ import { LogbookService } from '../../service/LogbookService';
 const model = ref({});
 const errorMsg = ref('');
 const selctedYear = ref(new Date().getFullYear());
+const yearOptions = ref(Array.from({ length: new Date().getFullYear() - 2024 + 1 }, (_, i) => new Date().getFullYear() - i));
 
 watch(() => router.path, fetchData, { immediate: true });
 
@@ -111,7 +112,12 @@ function fetchData() {
                 model.value.sessionsCount = model.value.sessionsCount + 1;
                 // sessionDauerMinunten
                 if (e.end != null) {
-                    model.value.sessionDauerMinunten = model.value.sessionDauerMinunten + (e.end - e.start) / (1000 * 60);
+                    let minutes = (e.end - e.start) / (1000 * 60);
+                    if(minutes > 0) {
+                        model.value.sessionDauerMinunten = model.value.sessionDauerMinunten + minutes;
+                    } else {
+                        console.error("Session ID " + e.id + " hat negative Dauer: start=" + e.start + " end=" + e.end);
+                    }
                 }
                 // sessionsUniquePilots
                 if (!pilotSeen[e.pilotid]) {
@@ -152,8 +158,8 @@ function fetchData() {
 </script>
 <template>
     <div className="card">
-        <h1 style="float: left">Dashboard</h1>
-        <Button @click="fetchData" icon="pi pi-refresh" severity="secondary" style="float: right"></Button>
+        <h1 style="float: left">Dashboard</h1>  
+        <Select v-model="selctedYear" :options="yearOptions" v-on:change="fetchData" style="float: right" />
         <div style="clear: both"></div>
     </div>
     <div v-if="errorMsg.length > 0">
