@@ -56,8 +56,6 @@ class TerminalConfigDTO(BaseModel):
     maxNumFlights: str
 
 class TerminalStatusDTO(BaseModel):
-    utmStatus: str
-    utmBusy: bool
     operatinghourStart: Optional[datetime.datetime]=None
     operatinghourEnd: Optional[datetime.datetime]=None
     infoMessages: Optional[List[str]]=None

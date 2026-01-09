@@ -15,9 +15,6 @@ sudo apt install python3.11-dev
 # Das Modul "venv" ist normal vorinstalliert, aber nicht immer. Zur Sicherheit:
 sudo apt install python3-venv
 
-# firefox-esr fuer utm feature installieren
-sudo apt install firefox-esr
-
 # Installationsordner erstellen (beliebiges Verzeichnis, z.B. ~/mfl-server/)
 mkdir ~/mfl-server && cd ~/mfl-server
 
@@ -34,9 +31,6 @@ python -m pip install -r requirements.txt
 # konfigurieren (Optionen siehe https://github.com/soumas/model-flight-logbook/tree/main/server#konfiguration)
 mv server-config-template.ini server-config.ini
 nano server-config.ini 
-
-# chromedriver (am raspberry pi, ggf. auch auf anderen plattformen)
-sudo apt-get install chromium-chromedriver
 
 
 ```
@@ -122,12 +116,6 @@ pip install alembic
 pip install requests
 
 ```
-
-## Selenium (utm login)
-```shell
-pip install selenium
-```
-
 
 ## DB Migration
 ```shell

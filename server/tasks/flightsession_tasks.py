@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 import os
 from db.entities import FlightSessionEntity, PilotEntity
-from tasks.utm_tasks import trigger_utm_sync_task
 from utils.logger import log
 from utils.operatinghours_utils import findOperatinghourDayDefinition, isInOperatinghour
 from utils.scheduler import scheduler
@@ -39,21 +38,18 @@ def close_all_flightsessions_scheduler():
 
 @scheduler.scheduled_job('interval', id='close_all_flightsessions', max_instances=1, coalesce=True, minutes=9999999)
 def close_all_flightsessions():
-    try:
-        now = datetime.now()
-        for fsession in __findOpenFlightSession():
-            operatingHourDayDefinition = findOperatinghourDayDefinition(fsession.terminalid, now)
-            if operatingHourDayDefinition != None and not isInOperatinghour(operatingHourDayDefinition, now):
-                __closeFlightSession(fsession, operatingHourDayDefinition.end)
-                pilot = __findPilot(fsession.pilotid)
-                terminalconfig:TerminalConfig = config.terminals[fsession.terminalid]
-                send_mail(
-                    to=pilot.email, 
-                    bcc=config.logbook.admin_email, 
-                    subject='⚠ Aktiver Flugtag außerhalb der Betriebszeit', 
-                    body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Dein Flugtag vom ' + fsession.start.strftime('%d.%m.%Y') + ' (Checkin um ' + fsession.start.strftime('%H:%M') + ' Uhr) am Flugplatz "' + terminalconfig.airportname + '" wurde nicht vor Betriebsende (' + operatingHourDayDefinition.end.strftime('%H:%M') + ' Uhr) protokolliert und geschlossen.<br/><br/><strong>Wichtig!</strong> Bitte protokolliere und schließe künftige Flugtage verlässlich über das MFL Terminal bevor du den Flugplatz verlässt, damit wir als Verein durch eine lückenlose Aufzeichnung den gesetzlichen Anforderungen nachkommen können.<br/>')
-    finally:
-        trigger_utm_sync_task()
+    now = datetime.now()
+    for fsession in __findOpenFlightSession():
+        operatingHourDayDefinition = findOperatinghourDayDefinition(fsession.terminalid, now)
+        if operatingHourDayDefinition != None and not isInOperatinghour(operatingHourDayDefinition, now):
+            __closeFlightSession(fsession, operatingHourDayDefinition.end)
+            pilot = __findPilot(fsession.pilotid)
+            terminalconfig:TerminalConfig = config.terminals[fsession.terminalid]
+            send_mail(
+                to=pilot.email, 
+                bcc=config.logbook.admin_email, 
+                subject='⚠ Aktiver Flugtag außerhalb der Betriebszeit', 
+                body='Hallo ' + pilot.firstname + ' ' + pilot.lastname + '!<br/><br/>Dein Flugtag vom ' + fsession.start.strftime('%d.%m.%Y') + ' (Checkin um ' + fsession.start.strftime('%H:%M') + ' Uhr) am Flugplatz "' + terminalconfig.airportname + '" wurde nicht vor Betriebsende (' + operatingHourDayDefinition.end.strftime('%H:%M') + ' Uhr) protokolliert und geschlossen.<br/><br/><strong>Wichtig!</strong> Bitte protokolliere und schließe künftige Flugtage verlässlich über das MFL Terminal bevor du den Flugplatz verlässt, damit wir als Verein durch eine lückenlose Aufzeichnung den gesetzlichen Anforderungen nachkommen können.<br/>')
 
 def __closeFlightSession(fsession:FlightSessionEntity, end:datetime):
     db = SessionLocal()

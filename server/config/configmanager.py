@@ -50,14 +50,6 @@ class SmtpConfig:
         self.template_folder = _ini.get('smtp','template_folder')
         self.suppress_send = _ini.getboolean('smtp', 'suppress_send')
 
-class UtmConfig:
-    def __init__(self):
-        self.enabled = _ini.getboolean('utm','enabled')
-        self.username = _ini.get('utm','username')
-        self.password = _ini.get('utm','password')
-        self.max_altitude_m = _ini.get('utm','max_altitude_m')
-        self.mtom_g = _ini.get('utm','mtom_g')
-
 class TerminalConfig:
     def __init__(self, terminalid, airportname, terminaltype, apikey, airportkml, terminalname, max_altitude_m, max_altitude_without_observer_m, max_num_flights, operatinghourscsv, dashboard_info_messages, pilot_info_messages, pilot_warn_messages, pilot_error_messages):
         self.terminalid = terminalid
@@ -80,7 +72,6 @@ class Config:
         self.logbook = LogbookConfig()
         self.terminals : dict[str,TerminalConfig] = _buildTerminalDict()
         self.smtp = SmtpConfig()
-        self.utm = UtmConfig()
 
 def _buildTerminalDict():
     retdict:dict = dict()
@@ -123,9 +114,6 @@ def __check_configurations():
         log.warning('⚠  smtp.server is not defined --> define smtp configurations in order to enable email notifications')
     elif not config.smtp.from_email:
         log.error('⚠  smtp.from_email is not defined, but smtp.server is --> sending emails may not work')
-
-    if config.utm.enabled and (not config.utm.max_altitude_m or not config.utm.mtom_g or not config.utm.password or not config.utm.username):
-        log.error('⚠  utm feature is enabled but not all required utm configurations are availabe --> check out the docs')
 
     for terminalid in config.terminals:
         if config.terminals[terminalid].operatinghourscsv and not os.path.isfile(config.terminals[terminalid].operatinghourscsv):

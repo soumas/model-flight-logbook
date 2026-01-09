@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from db.entities import PilotEntity
 from utils.operatinghours_utils import findOperatinghourDayDefinition, isInOperatinghour, isNearOperatinghourEnd
-from utils.utm import check_utm_prmitted
 from utils.messages_utils import appendMessages
 from config.configmanager import config
 
@@ -51,14 +50,6 @@ def validateTakeoffPermission(terminalid:str, pilot:PilotEntity, allowNonePilot 
                 vr._errorMessagesPilot.append('Registrierung abgelaufen')
             elif(pilot.acRegistrationValidTo < datetime.now().date() + timedelta(days=30)):
                 vr._warnMessagesPilot.append('Deine Registrierung läuft am ' + pilot.acRegistrationValidTo.strftime('%d.%m.%Y') + ' ab! Denke daran, sie rechtzeitig zu verlängern.')
-
-        # utm
-        if config.utm.enabled:
-            if(check_utm_prmitted(pilot)):
-                vr._utmPermittedPilot = True
-            else:
-                vr._utmPermittedPilot = False
-                vr._infoMessagesPilot.append('Keine Flugfreigabeanforderung (UTM) über dieses Konto')
 
     elif allowNonePilot != True:
         raise Exception('validation without pilot not allowed!')

@@ -7,7 +7,6 @@ from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key
 from db.entities import FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
-from tasks.utm_tasks import trigger_utm_sync_task
 from utils.dbutils import commit_with_httpexceptionhandling
 from utils.send_mail import send_mail
 
@@ -128,7 +127,3 @@ def send_test_admin_notification(background_tasks:BackgroundTasks):
 @api.get("/admin/checkauth", dependencies=[Security(__adminauth)])
 def list_all_pilots(db: Session = Depends(get_db)):
     return "OK"
-
-@api.get("/admin/trigger_utm_sync", dependencies=[Security(__adminauth)])
-def trigger_utm_sync(db: Session = Depends(get_db)):
-    trigger_utm_sync_task()

@@ -10,13 +10,10 @@ from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, unknown_terminal, unknown_session
 from db.entities import FlightSessionEntity, PilotEntity
 from db.dbmanager import get_db
-from tasks.utm_tasks import UtmSyncStatus, trigger_utm_sync_task
 from utils.messages_utils import appendMessages
 from utils.operatinghours_utils import findOperatinghourDayDefinition
 from utils.send_mail import send_mail
-from tasks.utm_tasks import utmSyncStatusDataDict
 from utils.takeoff_permission_utils import validateTakeoffPermission
-from utils.utm import check_utm_prmitted
 
 def __specific_terminalauth(x_terminal:Annotated[str, Header()], api_key_header:str = Security(api_key_header)):
     if not x_terminal in config.terminals:
@@ -42,15 +39,7 @@ def check_terminal_connection(x_pilotid:Annotated[str | None, Header()] = None, 
 
 @api.get("/terminal/status", dependencies=[Security(__specific_terminalauth)], response_model=TerminalStatusDTO)
 def get_status(x_terminal:Annotated[str, Header()]):
-    
-    # UTM
-    global utmSyncStatusDataDict    
-    state = UtmSyncStatus.unknown if config.utm.enabled else UtmSyncStatus.disabled
-    busy = config.utm.enabled
-    if x_terminal in utmSyncStatusDataDict:
-        state = utmSyncStatusDataDict[x_terminal].status    
-        busy = utmSyncStatusDataDict[x_terminal].busy
-    
+       
     # Operating hours
     ohours = findOperatinghourDayDefinition(x_terminal, datetime.now())
     ohoursStart = ohours.start if ohours != None else None
@@ -61,8 +50,6 @@ def get_status(x_terminal:Annotated[str, Header()]):
     appendMessages(dashboardMessages, config.terminals[x_terminal].dashboard_info_messages)
 
     return TerminalStatusDTO(
-        utmStatus=state.name, 
-        utmBusy=busy, 
         operatinghourStart=ohoursStart, 
         operatinghourEnd=ohoursEnd,
         infoMessages=dashboardMessages,
@@ -98,7 +85,6 @@ def start_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated
     fsession.start = datetime.now()
     db.add(fsession)
     db.commit()
-    trigger_utm_sync_task();
 
 @api.post("/terminal/flightsession/end", dependencies=[Security(__specific_terminalauth)], response_model=None)
 def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[str, Header()], data:EndFlightSessionDTO, background_tasks:BackgroundTasks, db:Session = Depends(get_db)):  
@@ -113,7 +99,6 @@ def end_flightsession(x_pilotid:Annotated[str, Header()], x_terminal:Annotated[s
     fsession.comment = data.comment
     fsession.endedby = x_pilotid
     db.commit()
-    trigger_utm_sync_task()
     
     if(config.logbook.forward_comment and fsession.comment):
         send_mail(

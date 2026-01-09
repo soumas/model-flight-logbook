@@ -8,7 +8,6 @@ from utils.scheduler import scheduler
 from config.configmanager import config
 from db.dbmanager import execute_db_migration
 
-from tasks.utm_tasks import *
 from tasks.flightsession_tasks import *
 
 @asynccontextmanager
