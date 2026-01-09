@@ -6,6 +6,7 @@ import 'package:mfl_terminal/l10n/generated/app_localizations.dart';
 import 'package:mfl_terminal/ui/screen/settings/settings_screen.dart';
 import 'package:mfl_terminal/ui/screen/dashboard/dashboard_screen.dart';
 import 'package:mfl_terminal/ui/screen/server_connection/server_connection_screen.dart';
+import 'package:mfl_terminal/ui/utils/mfl_device_info.dart';
 import 'package:mfl_terminal/ui/utils/mfl_scroll_behavior.dart';
 import 'package:mfl_terminal/ui/utils/mfl_theme.dart';
 
@@ -13,6 +14,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Intl.defaultLocale = 'DE-de';
   await initInjector();
+  await injector.get<MflDeviceInfo>().init();
   runApp(const MainApp());
 }
 

@@ -16,7 +16,7 @@ initInjector() {
   // singletons
   injector.registerSingleton<LocalStorageRepo>(LocalStorageRepoImpl());
   injector.registerSingleton<LogbookApiRepo>(LogbookApiRepoImpl());
-  injector.registerSingleton<MflDeviceInfo>(MflDeviceInfo()..init());
+  injector.registerSingleton<MflDeviceInfo>(MflDeviceInfo());
 
   // factories
   injector.registerFactory<DashboardCubit>(() => DashboardCubit(localStorageRepo: injector.get(), logbookApiRepo: injector.get()));
