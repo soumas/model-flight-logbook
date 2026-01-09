@@ -8,14 +8,19 @@ const model = ref([]);
 const errorMsg = ref('');
 const filters = ref({ global: {} });
 const table = ref(null);
+const loading = ref(false);
 
 watch(() => router.path, fetchData, { immediate: true });
 
 function fetchData() {
     model.value = [];
+    loading.value = true;
     PilotService.get()
         .then((data) => (model.value = data))
-        .catch((e) => handleApiError(e, errorMsg));
+        .catch((e) => handleApiError(e, errorMsg))
+        .finally(() => {
+            loading.value = false;
+        });
 }
 
 function rowClick(e) {
@@ -80,13 +85,16 @@ function exportValue(obj) {
             selectionMode="multiple"
             @row-click="rowClick($event)"
             paginator
-            :rows="20"
+            :rows="9999"
             v-model:filters="filters"
             :globalFilterFields="['email', 'lastname', 'firstname', 'id', 'phonenumber']"
             :exportFunction="exportValue"
             export-filename="MFL PilotInnen"
         >
-            <template #empty><Message>Es wurde kein:e Pilot:in gefunden</Message></template>
+            <template #empty>
+                <div v-if="loading">Daten werden geladen ...</div>
+                <Message v-if="!loading">Es wurden keine Daten gefunden, welche den Filterkriterien entsprechen</Message>
+            </template>
             <template #paginatorcontainer="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords }">
                 <div class="flex items-center gap-4 py-1 px-2 justify-between">
                     <Button icon="pi pi-chevron-left" rounded text @click="prevPageCallback" :disabled="page === 0" />

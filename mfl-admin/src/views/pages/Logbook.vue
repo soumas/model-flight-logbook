@@ -11,11 +11,13 @@ const table = ref(null);
 const selctedYear = ref(new Date().getFullYear());
 const yearOptions = ref(Array.from({ length: new Date().getFullYear() - 2024 + 1 }, (_, i) => new Date().getFullYear() - i));
 const exportFilename = ref('MFL Flugbuch');
+const loading = ref(false);
 
 watch(() => router.path, fetchData, { immediate: true });
 
 function fetchData() {
     model.value = [];
+    loading.value = true;
     updateExportFilename();
     LogbookService.get(selctedYear.value)
         .then((data) => {
@@ -24,7 +26,10 @@ function fetchData() {
             });
             model.value = data;
         })
-        .catch((e) => handleApiError(e, errorMsg));
+        .catch((e) => handleApiError(e, errorMsg))
+        .finally(() => {
+            loading.value = false;
+        });
 }
 
 function updateExportFilename() {
@@ -86,13 +91,16 @@ function exportValue(obj) {
             selectionMode="multiple"
             @row-click="rowClick($event)"
             paginator
-            :rows="20"
+            :rows="9999"
             v-model:filters="filters"
             :globalFilterFields="['airport', 'pilotname', 'comment', 'start']"
             :exportFunction="exportValue"
             :export-filename="exportFilename"
         >
-            <template #empty><Message>Für den ausgewählten Zeitraum wurde kein Logbucheintrag gefunden</Message></template>
+            <template #empty>
+                <div v-if="loading">Daten werden geladen ...</div>
+                <Message v-if="!loading">Es wurden keine Daten gefunden, welche den Filterkriterien entsprechen</Message>
+            </template>
             <template #paginatorcontainer="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords, firstPageCallback, lastPageCallback }">
                 <div class="flex items-center gap-4 py-1 px-2 justify-between">
                     <Button icon="pi pi-angle-double-left" rounded text @click="firstPageCallback" :disabled="page === 0" />
