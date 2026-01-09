@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@master    
-    # - name: Build MFL terminal for linux x64
-    #   uses: ./.github/actions/build-mfl-terminal-linux
-    #   with:
-    #     arch: 'x64'
+    - name: Build MFL terminal for linux x64
+      uses: ./.github/actions/build-mfl-terminal-linux
+      with:
+        arch: 'x64'
