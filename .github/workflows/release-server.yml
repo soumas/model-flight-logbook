@@ -28,7 +28,7 @@ jobs:
         npx vite build
     - name: create zip
       run: |
-        zip -r "./mfl-server.zip" ./api/* ./config/* ./db/* ./mailtemplates/* ./resources/* ./utils/* ./main.py ./log-config.ini ./requirements.txt ./server-config-default.ini ./server-config-template.ini ./version ./update.sh
+        zip -r "./mfl-server.zip" ./api/* ./config/* ./db/* ./resources/* ./tasks/* ./utils/* ./main.py ./log-config.ini ./requirements.txt ./server-config-default.ini ./server-config-template.ini ./version 
     - name: Upload zip to release
       uses: softprops/action-gh-release@v2
       with: 
