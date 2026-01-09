@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+import { AppInfoService } from '../service/AppInfoService';
+
+</script>
 
 <template>
     <div class="layout-footer">
+        <div>Version: {{ AppInfoService.getVersion() }}</div>
         <div>powered by <a href="https://github.com/soumas/model-flight-logbook" target="_blank" rel="noopener noreferrer" class="text-primary font-bold hover:underline">Model Flight Logbook</a></div>
         <div>
             Theme SAKAI by
