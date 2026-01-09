@@ -13,10 +13,6 @@ runs:
       run: |
         GITREV="${GITHUB_REF/refs\/tags\//}"
         echo "VERSION=${GITREV:4}" >> "$GITHUB_OUTPUT"
-    - name: read dir content
-      shell: bash
-      working-directory: ./terminal
-      run: ls 
     - name: write version to pubspec.yaml
       shell: bash
       working-directory: ./terminal
@@ -54,8 +50,10 @@ runs:
       shell: bash
       working-directory: ./terminal
       run: |
-        zip -r "./mfl-terminal-linux-${{ inputs.arch }}.zip" ./build/linux/${{ inputs.arch }}/release/bundle/*
+        cd ./build/linux/${{ inputs.arch }}/release/bundle/
+        echo "${{steps.get_version.outputs.VERSION }}" > "./version"
+        zip -r "./mfl-terminal-linux-${{ inputs.arch }}.zip" .
     - name: Upload zip to release
       uses: softprops/action-gh-release@v2
       with: 
-        files: "./terminal/mfl-terminal-linux-${{ inputs.arch }}.zip"
+        files: "./terminal/build/linux/${{ inputs.arch }}/release/bundle/mfl-terminal-linux-${{ inputs.arch }}.zip"
