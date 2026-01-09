@@ -41,7 +41,7 @@ nano server-config.ini
 uvicorn main:app --port 8082 --host "0.0.0.0" --log-config log-config.ini
 
 # Nach Serverstart Testcall machen --> sendet Test-Email an die Admin-Adresse
-curl --header "x-api-key: your_secure_api_key" localhost:8082/admin/test/admin_notification
+curl --header "x-api-key: your_secure_api_key" localhost:8082/admin/admin_notification_test
 
 # Über einen Browser kann die API Dokumentation aufgerufen werden
 http://localhost:8082/docs
@@ -82,7 +82,14 @@ wget https://github.com/soumas/model-flight-logbook/releases/download/mfl-X.X.X/
 
 ```
 
+## NEU NEU NEU TODO
+```shell
+#!/bin/sh
 
+wget https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip
+python -m venv venv && source venv/bin/activate
+python -m pip install -r requirements.txt
+```
 
 ## Configuration
 Bevor der Server betrieben werden kann, sind einige Konfigurationen nötig. Alle Einstellungen sind in der Datei '**/config/server-config.ini**' zu definieren. **ACHTUNG**! Ändern Sie die Datei 'server-config *-defaults*.ini' nicht, da diese bei jedem Update überschrieben wird. Erstellen Sie stattdessen die genannte Datei (ohne '-defaults') um die Standardwerte mit Ihren Parametern zu überschreiben.

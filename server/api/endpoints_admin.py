@@ -111,10 +111,6 @@ def get_all_flightsessions(year: str, db: Session = Depends(get_db)):
     return sessions
 
 ########################### OTHERS #########################################
-
-
-    return db.query(FlightSessionEntity).filter(and_(FlightSessionEntity.pilotid == pilot.id,  func.strftime('%Y', FlightSessionEntity.start).in_([year]))).order_by(FlightSessionEntity.start.desc()).all()
-
 @api.get("/admin/admin_notification_test", dependencies=[Security(__adminauth)])
 def send_test_admin_notification(background_tasks:BackgroundTasks):
     send_mail(
