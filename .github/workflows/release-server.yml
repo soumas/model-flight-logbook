@@ -22,6 +22,7 @@ jobs:
     - name: build mfl-admin and deploy to server resources
       run: |
         cd ../mfl-admin/
+        sed -i.bak -E "s/VITE_MFLADMINVERSION=[0-9]+\.[0-9]+\.[0-9]+(\+[0-9]+)?/VITE_MFLADMINVERSION=${{steps.get_version.outputs.VERSION }}/g" .env.production && rm .env.production.bak        
         sudo apt-get install -y npm
         npm install -D vite
         npm install primevue @primeuix/themes
