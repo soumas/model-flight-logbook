@@ -89,6 +89,8 @@ wget https://github.com/soumas/model-flight-logbook/releases/download/mfl-X.X.X/
 wget https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip
 python -m venv venv && source venv/bin/activate
 python -m pip install -r requirements.txt
+
+###wget https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-terminal-linux-x64.zip && unzip -o mfl-terminal-linux-x64.zip && rm mfl-terminal-linux-x64.zip 
 ```
 
 ## Configuration
