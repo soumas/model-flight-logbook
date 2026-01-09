@@ -26,5 +26,5 @@ jobs:
       uses: softprops/action-gh-release@v2
       with: 
         files: |
-          "./server/mfl-server.zip" 
-          "./version"
+          ./server/mfl-server.zip
+          ./server/version
