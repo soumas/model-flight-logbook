@@ -1,15 +1,15 @@
-# name: release terminal linux-x64
-# on: 
-#   push:
-#     tags:
-#     - 'mfl-*'
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: checkout repo
-#       uses: actions/checkout@master    
-#     - name: Build MFL terminal for linux x64
-#       uses: ./.github/actions/build-mfl-terminal-linux
-#       with:
-#         arch: 'x64'
+name: release terminal linux-x64
+on: 
+  push:
+    tags:
+    - 'mfl-*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@master    
+    # - name: Build MFL terminal for linux x64
+    #   uses: ./.github/actions/build-mfl-terminal-linux
+    #   with:
+    #     arch: 'x64'

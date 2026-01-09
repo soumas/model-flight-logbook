@@ -1,15 +1,15 @@
-# name: release terminal linux-arm64
-# on: 
-#   push:
-#     tags:
-#     - 'mfl-*'
-# jobs:
-#   build:
-#     runs-on: ubuntu-24.04-arm
-#     steps:
-#     - name: checkout repo
-#       uses: actions/checkout@master    
-#     - name: Build MFL terminal for linux arm64
-#       uses: ./.github/actions/build-mfl-terminal-linux
-#       with:
-#         arch: 'arm64'
+name: release terminal linux-arm64
+on: 
+  push:
+    tags:
+    - 'mfl-*'
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@master    
+    # - name: Build MFL terminal for linux arm64
+    #   uses: ./.github/actions/build-mfl-terminal-linux
+    #   with:
+    #     arch: 'arm64'

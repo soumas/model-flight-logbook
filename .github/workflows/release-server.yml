@@ -21,9 +21,10 @@ jobs:
       run: echo "${{steps.get_version.outputs.VERSION }}" > "./version"
     - name: build mfl-admin and deploy to server resources
       run: |
+        cd ../mfl-admin/
         sudo apt-get install -y npm
         npm install -D vite
-        cd ../mfl-admin/
+        npm install primevue @primeuix/themes
         npx vite build
     - name: create zip
       run: |
