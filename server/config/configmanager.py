@@ -51,13 +51,12 @@ class SmtpConfig:
         self.suppress_send = _ini.getboolean('smtp', 'suppress_send')
 
 class TerminalConfig:
-    def __init__(self, terminalid, airportname, terminaltype, apikey, airportkml, terminalname, max_altitude_m, max_altitude_without_observer_m, max_num_flights, operatinghourscsv, dashboard_info_messages, pilot_info_messages, pilot_warn_messages, pilot_error_messages):
+    def __init__(self, terminalid, airportname, terminaltype, apikey, terminalname, max_altitude_m, max_altitude_without_observer_m, max_num_flights, operatinghourscsv, dashboard_info_messages, pilot_info_messages, pilot_warn_messages, pilot_error_messages):
         self.terminalid = terminalid
         self.terminaltype = terminaltype
         self.terminalname = terminalname
         self.apikey = apikey
         self.airportname = airportname
-        self.airportkml = airportkml
         self.max_altitude_m = max_altitude_m
         self.max_altitude_without_observer_m = max_altitude_without_observer_m
         self.max_num_flights = max_num_flights
@@ -83,7 +82,6 @@ def _buildTerminalDict():
                 terminalname = _ini.get(sectionname, 'terminalname'),
                 apikey = _ini.get(sectionname, 'apikey'),
                 airportname = _ini.get(sectionname, 'airportname'),
-                airportkml = _ini.get(sectionname, 'airportkml'),
                 max_altitude_m = _ini.get(sectionname, 'max_altitude_m', fallback=9999),
                 max_altitude_without_observer_m = _ini.get(sectionname, 'max_altitude_without_observer_m', fallback=9999),
                 max_num_flights = _ini.get(sectionname, 'max_num_flights', fallback=9999),
