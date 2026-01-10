@@ -23,16 +23,16 @@ if [ ! -d "$installdir" ]; then
     fi
 
     # download, unzip and cleanup latest terminal release
-    wget -q https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-terminal-linux-$arch.zip && unzip -qq -o mfl-terminal-linux-$arch.zip && rm mfl-terminal-linux-$arch.zip
+    wget https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-terminal-linux-$arch.zip && unzip -o mfl-terminal-linux-$arch.zip && rm mfl-terminal-linux-$arch.zip
 
     # create run-terminal script
-    wget -q -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/run-terminal.sh.tmpl
+    wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/run-terminal.sh.tmpl
     cp "./$tmpfilesdir/run-terminal.sh.tmpl" ./run-terminal.sh
     sed -i "s|ROOTPATH|${PWD//\//\\/}|g" ./run-terminal.sh
     chmod +x ./run-terminal.sh
 
     # prepare autostart entry
-    wget -q -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/mfl-terminal.desktop.tmpl    
+    wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/mfl-terminal.desktop.tmpl    
     cp "./$tmpfilesdir/mfl-terminal.desktop.tmpl" ./$autostartfilename
     startcommand="$PWD/run-terminal.sh"
     sed -i "s|COMMAND|$startcommand|g" ./$autostartfilename

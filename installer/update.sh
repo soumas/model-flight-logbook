@@ -15,8 +15,13 @@ fi
 echo "Latest MFL version is $latest_version"
 
 for dir in mfl*/; do
-    echo "Processing $dir"
+
     cd "$origdir"
+    if [ ! -d "$dir" ]; then
+        continue
+    fi
+
+    echo "Processing $dir"
     cd "$dir"
 
     installed_version=$(cat version)
@@ -52,7 +57,8 @@ for dir in mfl*/; do
 
         # restart terminal
         ./run-terminal.sh &
-    else
+
+    elif [[ "$dir" == mfl-server-*"/" ]]; then
         
         ########## SERVER UPDATE ##########
 
@@ -75,3 +81,5 @@ for dir in mfl*/; do
 
     fi
 done
+
+echo "Update process completed."
