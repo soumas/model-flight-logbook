@@ -24,5 +24,14 @@ if [ ! -d "$installdir" ]; then
     sudo systemctl enable $servicename
     sudo systemctl start $servicename
 else
-    echo "Directory $installdir already exists. Exiting installer."
+    echo "Directory $installdir already exists. Do you want to uninstall the server? (y/n)"
+    read userinput
+    if [ "$userinput" = "y" ]; then
+        sudo systemctl stop $servicename
+        sudo systemctl disable $servicename
+        sudo rm /etc/systemd/system/$servicename
+        sudo systemctl daemon-reload
+        sudo systemctl reset-failed
+        sudo rm -rf "$installdir"
+    fi
 fi

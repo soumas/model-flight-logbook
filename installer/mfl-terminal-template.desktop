@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=COMMAND
+Name=MFL-Terminal
+StartupNotify=true
+Terminal=false
+Type=Application

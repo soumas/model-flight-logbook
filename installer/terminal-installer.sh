@@ -24,5 +24,10 @@ if [ ! -d "$installdir" ]; then
     sed -i "s|COMMAND|$startcommand|g" ./$autostartfilename
     mv ./$autostartfilename $autostartfilepath
 else
-    echo "Directory $installdir already exists."
+    echo "Directory $installdir already exists. Do you want to uninstall the terminal? (y/n)"
+    read userinput
+    if [ "$userinput" = "y" ]; then
+        rm -rf "$installdir"
+        rm "$autostartfilepath"
+    fi
 fi

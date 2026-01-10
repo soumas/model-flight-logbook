@@ -1,0 +1,13 @@
+[Unit]
+Description=MFL Server PORT
+
+[Service]
+Type=simple
+WorkingDirectory=ROOTPATH/
+ExecStart=ROOTPATH/venv/bin/uvicorn main:app --port PORT --log-config log-config.ini
+Restart=always
+User=USER
+Group=GROUP
+
+[Install]
+WantedBy=multi-user.target
