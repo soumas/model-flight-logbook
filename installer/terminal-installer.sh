@@ -6,9 +6,12 @@ autostartfilename="mfl-terminal.desktop"
 autostartfilepath="$HOME/.config/autostart/$autostartfilename"
 
 if [ ! -d "$installdir" ]; then
+
+    # create target directory
     mkdir "$installdir"
     cd "$installdir"
 
+    # determine system architecture
     if [[ "$(uname -m)" == "x86_64" ]]; then
         arch="x64"
     elif [[ "$(uname -m)" == "aarch64" || "$(uname -m)" == "arm64" ]]; then
@@ -18,14 +21,24 @@ if [ ! -d "$installdir" ]; then
         exit 0
     fi
 
+    # download, unzip and cleanup latest terminal release
     wget https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-terminal-linux-$arch.zip && unzip -o mfl-terminal-linux-$arch.zip && rm mfl-terminal-linux-$arch.zip
-    wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/mfl-terminal-template.desktop
 
-    startcommand="$PWD/mfl_terminal --full-screen"
-    cp "./$tmpfilesdir/mfl-terminal-template.desktop" ./$autostartfilename
+    # create run-terminal script
+    wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/run-terminal.sh.tmpl
+    cp "./$tmpfilesdir/run-terminal.sh.tmpl" ./run-terminal.sh
+    chmod +x ./run-terminal.sh
+
+    # prepare autostart entry
+    wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/mfl-terminal.desktop.tmpl    
+    cp "./$tmpfilesdir/mfl-terminal.desktop.tmpl" ./$autostartfilename
+    startcommand="$PWD/run-terminal.sh"
     sed -i "s|COMMAND|$startcommand|g" ./$autostartfilename
+
+    # install autostart entry
     mv ./$autostartfilename $autostartfilepath
 
+    # cleanup
     rm -rf $tmpfilesdir
 else
     echo "Directory $installdir already exists. Do you want to uninstall the terminal? (y/n)"
