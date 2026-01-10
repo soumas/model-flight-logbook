@@ -1,18 +1,47 @@
 #!/bin/bash
 
+origdir=$(pwd)
+forceupdate=$1
+
+wget -q https://github.com/soumas/model-flight-logbook/releases/latest/download/version
+latest_version=$(cat version)
+rm version
+
+if [ -z "$latest_version" ]; then
+    echo "Could not determine latest MFL version. Exiting."
+    exit 1
+fi
+
+echo "Latest MFL version is $latest_version"
+
 for dir in mfl*/; do
     echo "Processing $dir"
+    cd "$origdir"
     cd "$dir"
-    if [ "$dir" = "mfl-terminal/" ]; then
+
+    installed_version=$(cat version)
+    if [ "$installed_version" = "$latest_version" ]; then        
+        if [ ! "$forceupdate" = "force" ]; then
+            echo "Already up to date. Skipping..."
+            continue
+        else 
+            echo "Already up to date but force flag is set, updating..."
+        fi
+    fi    
+
+    if [ "$dir" = "mfl-terminal/" ]; then        
+
         ########## TERMINAL UPDATE ##########
+        
         # determine system architecture
-        if [[ "$(uname -m)" == "x86_64" ]]; then
+        arch=$(uname -m)
+        if [[ "$arch" == "x86_64" ]]; then
             arch="x64"
-        elif [[ "$(uname -m)" == "aarch64" || "$(uname -m)" == "arm64" ]]; then
+        elif [[ "$arch" == "aarch64" || "$arch" == "arm64" ]]; then
             arch="arm64"
         else
             echo "System architecture $(uname -m) is not supported."
-            exit 0
+            exit 1
         fi
 
         # stop running terminal
@@ -22,16 +51,19 @@ for dir in mfl*/; do
         wget https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-terminal-linux-$arch.zip && unzip -o mfl-terminal-linux-$arch.zip && rm mfl-terminal-linux-$arch.zip
 
         # restart terminal
-        nohup ./run-terminal.sh &
+        ./run-terminal.sh &
     else
-        ########## SERVER UPDATE ##########        
+        
+        ########## SERVER UPDATE ##########
 
         # download, unzip and cleanup latest server release
         wget https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip
 
-        # stop running server
-        # TODO: Dynamically determine service name instead of hardcoding port 8082
-        sudo systemctl stop mfl-server-8082.service
+        # determine server port from directory name
+        port=$(echo "$dir" | grep -o 'mfl-server-[0-9]\+' | grep -o '[0-9]\+')
+
+        # stop server
+        sudo systemctl stop "mfl-server-$port.service"
 
         # init python venv and install requirements
         python -m venv venv
@@ -39,8 +71,7 @@ for dir in mfl*/; do
         python -m pip install -r requirements.txt
 
         # restart server
-        # TODO: Dynamically determine service name instead of hardcoding port 8082
-        sudo systemctl start mfl-server-8082.service
+        sudo systemctl start "mfl-server-$port.service"
+
     fi
-    cd ..
 done
