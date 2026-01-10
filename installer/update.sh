@@ -1,18 +1,22 @@
 #!/bin/bash
 
 origdir=$(pwd)
-forceupdate=$1
+param1=$1
 
-wget -q https://github.com/soumas/model-flight-logbook/releases/latest/download/version
-latest_version=$(cat version)
-rm version
+if [[ "$param1" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    target_version="$param1"
+else
+    wget -q https://github.com/soumas/model-flight-logbook/releases/latest/download/version
+    target_version=$(cat version)
+    rm version
+fi
 
-if [ -z "$latest_version" ]; then
+if [ -z "$target_version" ]; then
     echo "Could not determine latest MFL version. Exiting."
     exit 1
 fi
 
-echo "Latest MFL version is $latest_version"
+echo "Target version: $target_version"
 
 for dir in mfl*/; do
 
@@ -25,12 +29,12 @@ for dir in mfl*/; do
     cd "$dir"
 
     installed_version=$(cat version)
-    if [ "$installed_version" = "$latest_version" ]; then        
-        if [ ! "$forceupdate" = "force" ]; then
-            echo "Already up to date. Skipping..."
+    if [ "$installed_version" = "$target_version" ]; then        
+        if [ ! "$param1" = "force" ]; then
+            echo "Installed version is equal to target version. Skipping..."
             continue
         else 
-            echo "Already up to date but force flag is set, updating..."
+            echo "Installed version is equal to target version but force flag is set, updating..."
         fi
     fi    
 
@@ -53,7 +57,7 @@ for dir in mfl*/; do
         pkill mfl_terminal
 
         # download, unzip and cleanup latest terminal release
-        wget https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-terminal-linux-$arch.zip && unzip -o mfl-terminal-linux-$arch.zip && rm mfl-terminal-linux-$arch.zip
+        wget https://github.com/soumas/model-flight-logbook/releases/download/mfl-$target_version/mfl-terminal-linux-$arch.zip && unzip -o mfl-terminal-linux-$arch.zip && rm mfl-terminal-linux-$arch.zip
 
         # restart terminal
         ./run-terminal.sh &
@@ -63,7 +67,7 @@ for dir in mfl*/; do
         ########## SERVER UPDATE ##########
 
         # download, unzip and cleanup latest server release
-        wget https://github.com/soumas/model-flight-logbook/releases/latest/download/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip
+        wget https://github.com/soumas/model-flight-logbook/releases/download/mfl-$target_version/mfl-server.zip && unzip -o mfl-server.zip && rm mfl-server.zip
 
         # determine server port from directory name
         port=$(echo "$dir" | grep -o 'mfl-server-[0-9]\+' | grep -o '[0-9]\+')
