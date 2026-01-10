@@ -7,18 +7,18 @@ environment:
   sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
-  dart_mappable: 4.3.0
-  dio: 5.7.0
+  dart_mappable: 4.6.1
+  dio: 5.9.0
   flutter:
     sdk: flutter
-  flutter_bloc: 9.0.0
+  flutter_bloc: 9.1.1
   flutter_localizations:
     sdk: flutter
-  get_it: 8.0.3
+  get_it: 9.2.0
   intl: any
   package_info_plus: ^9.0.0
-  shared_preferences: 2.4.0
-  toastification: 2.3.0
+  shared_preferences: 2.5.4
+  toastification: 3.0.3
   virtual_keyboard_multi_language: 1.1.2
 
 dev_dependencies:

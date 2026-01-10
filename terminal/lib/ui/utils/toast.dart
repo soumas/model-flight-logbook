@@ -35,7 +35,7 @@ class Toast {
       description: Text(message, style: Theme.of(context).textTheme.titleLarge),
       autoCloseDuration: const Duration(seconds: 5),
       icon: icondata != null ? Icon(icondata, size: 38) : const SizedBox(),
-      closeButtonShowType: CloseButtonShowType.none,
+      closeButton: const ToastCloseButton(showType: CloseButtonShowType.none),
       alignment: const Alignment(0, 1),
       showProgressBar: false,
       closeOnClick: true,

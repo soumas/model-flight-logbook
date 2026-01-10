@@ -108,12 +108,6 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
               child2: Column(
                 children: [
                   FlightSessionStatusInfoWidget(pilotStatus: state.flightSessionStatus),
-                  if (!hasActiveSession && hasErrors) ...[
-                    const Text('Check-In verweigert!', style: TextStyle(color: kColorError, fontWeight: FontWeight.bold)),
-                  ],
-                  if (!hasActiveSession && !allWarningsAccepted) ...[
-                    const Text('Warnungen akzeptieren!', style: TextStyle(color: kColorWarning, fontWeight: FontWeight.bold)),
-                  ],
                   if (!hasActiveSession)
                     SizedBox(
                       width: double.infinity,
@@ -123,6 +117,12 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
                         icon: const Icon(Icons.login),
                       ),
                     ),
+                  if (!hasActiveSession && hasErrors) ...[
+                    const Text('Check-In verweigert!', style: TextStyle(color: kColorError, fontWeight: FontWeight.bold)),
+                  ],
+                  if (!hasActiveSession && !allWarningsAccepted) ...[
+                    const Text('Warnungen akzeptieren!', style: TextStyle(color: kColorWarning, fontWeight: FontWeight.bold)),
+                  ],
                   if (hasActiveSession)
                     SizedBox(
                       width: double.infinity,
