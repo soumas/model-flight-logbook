@@ -3,8 +3,8 @@ Description=MFL Server PORT
 
 [Service]
 Type=simple
-WorkingDirectory=ROOTPATH/
-ExecStart=ROOTPATH/venv/bin/uvicorn main:app --port PORT --log-config log-config.ini
+WorkingDirectory=ROOTPATH
+ExecStart=run-server.sh
 Restart=always
 User=USER
 Group=GROUP
