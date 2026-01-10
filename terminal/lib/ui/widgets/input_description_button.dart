@@ -29,9 +29,9 @@ class InputDescriptionButton extends StatelessWidget {
             },
           );
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.info_outline,
-          size: MediaQuery.of(context).size.height * 0.10,
+          size: 30,
         ),
       ),
     );

@@ -48,13 +48,8 @@ class _MflMessageState extends State<MflMessage> {
                     top: MflMessage.contentPadding,
                     right: MflMessage.contentPadding),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      'akzeptiert',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    const SizedBox(width: MflMessage.contentPadding),
                     Switch(
                       value: _isAccepted,
                       onChanged: (value) {
@@ -63,6 +58,11 @@ class _MflMessageState extends State<MflMessage> {
                           widget.onAcceptedChanged?.call(widget.text ?? '', _isAccepted);
                         });
                       },
+                    ),
+                    const SizedBox(width: MflMessage.contentPadding),
+                    Text(
+                      'akzeptieren',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: kColorFontMain.withAlpha(150)),
                     ),
                   ],
                 ),

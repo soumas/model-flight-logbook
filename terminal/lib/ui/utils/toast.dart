@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mfl_terminal/ui/utils/mfl_theme.dart';
 import 'package:toastification/toastification.dart';
 
 class Toast {
@@ -29,10 +30,10 @@ class Toast {
     );
   }
 
-  static show({required BuildContext context, required String message, ToastificationType? type, IconData? icondata}) {
+  static show({required BuildContext context, required String message, required ToastificationType type, IconData? icondata}) {
     toastification.show(
       context: context,
-      description: Text(message, style: Theme.of(context).textTheme.titleLarge),
+      description: Text(message, style: Theme.of(context).textTheme.titleLarge?.copyWith(color: kColorFontMain)),
       autoCloseDuration: const Duration(seconds: 5),
       icon: icondata != null ? Icon(icondata, size: 38) : const SizedBox(),
       closeButton: const ToastCloseButton(showType: CloseButtonShowType.none),
@@ -42,6 +43,9 @@ class Toast {
       dragToClose: true,
       pauseOnHover: false,
       type: type,
+      backgroundColor: kColorInputBg,
+      borderSide: const BorderSide(color: kColorFontMain, width: 1),
+      borderRadius: BorderRadius.circular(8),
     );
   }
 }
