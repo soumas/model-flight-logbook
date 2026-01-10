@@ -30,7 +30,7 @@ if [ ! -d "$installdir" ]; then
     chmod +x ./run-terminal.sh
 
     # prepare autostart entry
-    wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/mfl-terminal.desktop.tmpl    
+    wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/mfl-terminal.desktop.tmpl    
     cp "./$tmpfilesdir/mfl-terminal.desktop.tmpl" ./$autostartfilename
     startcommand="$PWD/run-terminal.sh"
     sed -i "s|COMMAND|$startcommand|g" ./$autostartfilename
@@ -40,6 +40,9 @@ if [ ! -d "$installdir" ]; then
 
     # cleanup
     rm -rf $tmpfilesdir
+
+    # start terminal
+    ./run-terminal.sh &
 else
     echo "Directory $installdir already exists. Do you want to uninstall the terminal? (y/n)"
     read userinput
