@@ -27,6 +27,7 @@ if [ ! -d "$installdir" ]; then
     # create run-terminal script
     wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/run-terminal.sh.tmpl
     cp "./$tmpfilesdir/run-terminal.sh.tmpl" ./run-terminal.sh
+    sed -i "s|ROOTPATH|${PWD//\//\\/}|g" ./run-terminal.sh
     chmod +x ./run-terminal.sh
 
     # prepare autostart entry
