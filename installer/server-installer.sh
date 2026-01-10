@@ -27,6 +27,7 @@ if [ ! -d "$installdir" ]; then
     wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/run-server.sh.tmpl
     cp "./$tmpfilesdir/run-server.sh.tmpl" ./run-server.sh
     sed -i "s|PORT|$serverport|g" ./run-server.sh
+    chmod +x ./run-server.sh
 
     # preapre systemd service files
     wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/mfl-server.service.tmpl    
