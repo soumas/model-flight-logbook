@@ -76,7 +76,7 @@ for dir in mfl*/; do
         sudo systemctl stop "mfl-server-$port.service"
 
         # init python venv and install requirements
-        python -m venv venv
+        # python -m venv venv
         source venv/bin/activate
         python -m pip install -r requirements.txt
 
