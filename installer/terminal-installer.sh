@@ -3,7 +3,7 @@
 installdir="mfl-terminal"
 tmpfilesdir="installertmp"
 autostartfilename="mfl-terminal.desktop"
-autostartfilepath="$HOME/.config/autostart/$autostartfilename"
+autostartfilepath="$HOME/.config/autostart/"
 
 if [ ! -d "$installdir" ]; then
 
@@ -38,7 +38,8 @@ if [ ! -d "$installdir" ]; then
     sed -i "s|COMMAND|$startcommand|g" ./$autostartfilename
 
     # install autostart entry
-    mv ./$autostartfilename $autostartfilepath
+    mkdir -p "$autostartfilepath"
+    mv ./$autostartfilename "$autostartfilepath/$autostartfilename"
 
     # cleanup
     rm -rf $tmpfilesdir
@@ -50,6 +51,6 @@ else
     read userinput
     if [ "$userinput" = "y" ]; then
         rm -rf "$installdir"
-        rm "$autostartfilepath"
+        rm "$autostartfilepath/$autostartfilename"
     fi
 fi
