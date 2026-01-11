@@ -16,12 +16,15 @@ class TerminalInfoWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.3), textAlign: TextAlign.center),
         Text(state.selectedEndpoint?.config.terminalname ?? '',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: kColorFontSub), textAlign: TextAlign.center),
-        if (state.terminalStatus?.operatinghourStart != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Text(
-                'Betriebszeit:  ${DateFormat.Hm().format(state.terminalStatus!.operatinghourStart!)} - ${DateFormat.Hm().format(state.terminalStatus!.operatinghourEnd!)}'),
+        if (state.terminalStatus?.operatinghourStart != null) ...[
+          const SizedBox(height: 30.0),
+          Text('Betriebszeit', style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.3), textAlign: TextAlign.center),
+          Text(
+            '${DateFormat.Hm().format(state.terminalStatus!.operatinghourStart!)} Uhr - ${DateFormat.Hm().format(state.terminalStatus!.operatinghourEnd!)} Uhr',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: kColorFontSub),
+            textAlign: TextAlign.center,
           ),
+        ]
       ],
     );
   }
