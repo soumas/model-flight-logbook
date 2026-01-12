@@ -9,7 +9,7 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 <br/>
 
-## 👩🏻‍✈️ Features für Pilot:innen
+## 👨‍✈️ Features für Pilot:innen
 
 - **Übersichtliches, touch-optimiertes Kiosk-Terminal**  
   Intuitive Bedienung – geeignet für Jung und Alt
