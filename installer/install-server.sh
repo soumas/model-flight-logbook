@@ -30,7 +30,7 @@ if [ ! -d "$installdir" ]; then
     chmod +x ./run-server.sh
 
     # preapre systemd service files
-    wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/mfl-server.service.tmpl    
+    wget -P $tmpfilesdir https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/files/mfl-server.service.tmpl
     cp "./$tmpfilesdir/mfl-server.service.tmpl" ./$servicename
     sed -i "s|PORT|$serverport|g" ./$servicename
     sed -i "s|ROOTPATH|${PWD//\//\\/}|g" ./$servicename
