@@ -7,8 +7,6 @@ Die Anwendung ist **einfach, übersichtlich und praxisnah** konzipiert und unter
 
 MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flugplatz** und bietet zusätzlich eine **Web-basierte Verwaltungs- und Auswertungsplattform**.
 
----
-
 ## 👨‍✈️ Features für Pilot:innen
 
 - 🖥️ **Übersichtliches, touch-optimiertes Kiosk-Terminal**  
@@ -36,8 +34,6 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 - 📧 **Export des persönlichen Flugbuchs**  
   Versand per E-Mail über das MFL Terminal
 
----
-
 ## 🏛️ Features für Vereinsvorstände
 
 - 🌐 **Web-basiertes Verwaltungsportal (MFL-Admin)**  
@@ -57,8 +53,6 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 - 🔄 **Automatische Beendigung vergessener Check-Outs**  
   Inklusive Benachrichtigung an die betroffene Pilot:in
-
----
 
 ## 🛠️ Features für Systemadministrator:innen
 
