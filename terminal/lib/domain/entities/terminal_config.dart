@@ -13,6 +13,7 @@ class TerminalConfig with TerminalConfigMappable {
   final int maxAltitudeM;
   final int maxAltitudeWithoutObserverM;
   final int maxNumFlights;
+  final bool showPilotIDOnDashboard;
   TerminalConfig({
     required this.terminalid,
     required this.terminaltype,
@@ -21,5 +22,6 @@ class TerminalConfig with TerminalConfigMappable {
     required this.maxAltitudeM,
     required this.maxAltitudeWithoutObserverM,
     required this.maxNumFlights,
+    required this.showPilotIDOnDashboard,
   });
 }

@@ -43,6 +43,10 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
   static int _$maxNumFlights(TerminalConfig v) => v.maxNumFlights;
   static const Field<TerminalConfig, int> _f$maxNumFlights =
       Field('maxNumFlights', _$maxNumFlights);
+  static bool _$showPilotIDOnDashboard(TerminalConfig v) =>
+      v.showPilotIDOnDashboard;
+  static const Field<TerminalConfig, bool> _f$showPilotIDOnDashboard =
+      Field('showPilotIDOnDashboard', _$showPilotIDOnDashboard);
 
   @override
   final MappableFields<TerminalConfig> fields = const {
@@ -53,6 +57,7 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
     #maxAltitudeM: _f$maxAltitudeM,
     #maxAltitudeWithoutObserverM: _f$maxAltitudeWithoutObserverM,
     #maxNumFlights: _f$maxNumFlights,
+    #showPilotIDOnDashboard: _f$showPilotIDOnDashboard,
   };
 
   static TerminalConfig _instantiate(DecodingData data) {
@@ -63,7 +68,8 @@ class TerminalConfigMapper extends ClassMapperBase<TerminalConfig> {
         terminalname: data.dec(_f$terminalname),
         maxAltitudeM: data.dec(_f$maxAltitudeM),
         maxAltitudeWithoutObserverM: data.dec(_f$maxAltitudeWithoutObserverM),
-        maxNumFlights: data.dec(_f$maxNumFlights));
+        maxNumFlights: data.dec(_f$maxNumFlights),
+        showPilotIDOnDashboard: data.dec(_f$showPilotIDOnDashboard));
   }
 
   @override
@@ -126,7 +132,8 @@ abstract class TerminalConfigCopyWith<$R, $In extends TerminalConfig, $Out>
       String? terminalname,
       int? maxAltitudeM,
       int? maxAltitudeWithoutObserverM,
-      int? maxNumFlights});
+      int? maxNumFlights,
+      bool? showPilotIDOnDashboard});
   TerminalConfigCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -147,7 +154,8 @@ class _TerminalConfigCopyWithImpl<$R, $Out>
           String? terminalname,
           int? maxAltitudeM,
           int? maxAltitudeWithoutObserverM,
-          int? maxNumFlights}) =>
+          int? maxNumFlights,
+          bool? showPilotIDOnDashboard}) =>
       $apply(FieldCopyWithData({
         if (terminalid != null) #terminalid: terminalid,
         if (terminaltype != null) #terminaltype: terminaltype,
@@ -156,7 +164,9 @@ class _TerminalConfigCopyWithImpl<$R, $Out>
         if (maxAltitudeM != null) #maxAltitudeM: maxAltitudeM,
         if (maxAltitudeWithoutObserverM != null)
           #maxAltitudeWithoutObserverM: maxAltitudeWithoutObserverM,
-        if (maxNumFlights != null) #maxNumFlights: maxNumFlights
+        if (maxNumFlights != null) #maxNumFlights: maxNumFlights,
+        if (showPilotIDOnDashboard != null)
+          #showPilotIDOnDashboard: showPilotIDOnDashboard
       }));
   @override
   TerminalConfig $make(CopyWithData data) => TerminalConfig(
@@ -167,7 +177,9 @@ class _TerminalConfigCopyWithImpl<$R, $Out>
       maxAltitudeM: data.get(#maxAltitudeM, or: $value.maxAltitudeM),
       maxAltitudeWithoutObserverM: data.get(#maxAltitudeWithoutObserverM,
           or: $value.maxAltitudeWithoutObserverM),
-      maxNumFlights: data.get(#maxNumFlights, or: $value.maxNumFlights));
+      maxNumFlights: data.get(#maxNumFlights, or: $value.maxNumFlights),
+      showPilotIDOnDashboard:
+          data.get(#showPilotIDOnDashboard, or: $value.showPilotIDOnDashboard));
 
   @override
   TerminalConfigCopyWith<$R2, TerminalConfig, $Out2> $chain<$R2, $Out2>(

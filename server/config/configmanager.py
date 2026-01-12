@@ -50,7 +50,7 @@ class SmtpConfig:
         self.suppress_send = _ini.getboolean('smtp', 'suppress_send')
 
 class TerminalConfig:
-    def __init__(self, terminalid, airportname, terminaltype, apikey, terminalname, max_altitude_m, max_altitude_without_observer_m, max_num_flights, operatinghourscsv, dashboard_info_messages, pilot_info_messages, pilot_warn_messages, pilot_error_messages):
+    def __init__(self, terminalid, airportname, terminaltype, apikey, terminalname, max_altitude_m, max_altitude_without_observer_m, max_num_flights, operatinghourscsv, dashboard_info_messages, dashboard_show_pilotid, pilot_info_messages, pilot_warn_messages, pilot_error_messages):
         self.terminalid = terminalid
         self.terminaltype = terminaltype
         self.terminalname = terminalname
@@ -61,6 +61,7 @@ class TerminalConfig:
         self.max_num_flights = max_num_flights
         self.operatinghourscsv = operatinghourscsv
         self.dashboard_info_messages = dashboard_info_messages
+        self.dashboard_show_pilotid = dashboard_show_pilotid
         self.pilot_info_messages = pilot_info_messages
         self.pilot_warn_messages = pilot_warn_messages
         self.pilot_error_messages = pilot_error_messages
@@ -86,6 +87,7 @@ def _buildTerminalDict():
                 max_num_flights = _ini.get(sectionname, 'max_num_flights', fallback=9999),
                 operatinghourscsv = _ini.get(sectionname, 'operatinghourscsv', fallback=None),
                 dashboard_info_messages = _ini.get(sectionname, 'dashboard_info_messages', fallback=None),
+                dashboard_show_pilotid = _ini.getboolean(sectionname, 'dashboard_show_pilotid', fallback=False),
                 pilot_info_messages = _ini.get(sectionname, 'pilot_info_messages', fallback=None),
                 pilot_warn_messages = _ini.get(sectionname, 'pilot_warn_messages', fallback=None),
                 pilot_error_messages = _ini.get(sectionname, 'pilot_error_messages', fallback=None),

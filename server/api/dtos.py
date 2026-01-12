@@ -54,6 +54,7 @@ class TerminalConfigDTO(BaseModel):
     maxAltitudeM: str
     maxAltitudeWithoutObserverM: str
     maxNumFlights: str
+    showPilotIDOnDashboard: bool
 
 class TerminalStatusDTO(BaseModel):
     operatinghourStart: Optional[datetime.datetime]=None

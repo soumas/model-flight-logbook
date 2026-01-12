@@ -51,9 +51,12 @@ class _DashboardViewState extends State<DashboardView> {
           transitionDuration: Duration.zero,
           reverseTransitionDuration: Duration.zero,
         ));
+      } else if (event.logicalKey == LogicalKeyboardKey.backspace) {
+        _input = _input.isNotEmpty ? _input.substring(0, _input.length - 1) : '';
       } else {
         _input += event.character ?? '';
       }
+      setState(() {});
     }
 
     return false;
@@ -61,12 +64,35 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    return const MflScaffold(
+    return MflScaffold(
       //itle: 'Model Flight Logbook',
       showBackgroundImage: true,
-      endDrawer: MainMenu(),
-      child1: GlobalMessagesView(),
-      child2: Column(children: [UhrWidget(), SizedBox(height: 30), TerminalInfoWidget(), SizedBox(height: 30)]),
+      endDrawer: const MainMenu(),
+      child1: const GlobalMessagesView(),
+      child2: Column(children: [
+        const UhrWidget(),
+        const SizedBox(height: 30),
+        const TerminalInfoWidget(),
+        const SizedBox(height: 40),
+        PilotIdDisplay(input: _input),
+      ]),
     );
+  }
+}
+
+class PilotIdDisplay extends StatelessWidget {
+  const PilotIdDisplay({
+    super.key,
+    required String input,
+  }) : _input = input;
+
+  final String _input;
+
+  @override
+  Widget build(BuildContext context) {
+    final state = context.watch<DashboardCubit>().state;
+    return state.selectedEndpoint?.config.showPilotIDOnDashboard ?? false
+        ? TextField(controller: TextEditingController(text: _input), enabled: false, textAlign: TextAlign.center, canRequestFocus: false)
+        : const SizedBox.shrink();
   }
 }

@@ -79,7 +79,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                         if ((value ?? '').isEmpty) {
                           return 'Dieses Feld darf nicht leer bleiben';
                         } else if (int.tryParse(value!) == null) {
-                          return 'Bitte geben Sie eine Ganzzahl ein.';
+                          return 'Ganzzahl erforderlich';
                         } else if (int.parse(value) < 0) {
                           return 'Kleinster Wert: 0';
                         } else if (int.parse(value) > _selectedEndpoint!.config.maxNumFlights) {
@@ -102,7 +102,7 @@ class _EndFlightSessionFormState extends State<EndFlightSessionForm> {
                         if ((value ?? '').isEmpty) {
                           return 'Dieses Feld darf nicht leer bleiben';
                         } else if (int.tryParse(value!) == null) {
-                          return 'Bitte geben Sie eine Ganzzahl ein';
+                          return 'Ganzzahl erforderlich';
                         } else if (int.parse(value) < 0) {
                           return 'Kleinster Wert: 0';
                         } else if (int.parse(value) > _selectedEndpoint!.config.maxAltitudeM) {

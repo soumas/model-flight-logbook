@@ -11,5 +11,6 @@ def get_terminal_config_list():
         terminalname=config.terminals[cfg].terminalname,
         maxAltitudeM=config.terminals[cfg].max_altitude_m,
         maxAltitudeWithoutObserverM=config.terminals[cfg].max_altitude_without_observer_m,
-        maxNumFlights=config.terminals[cfg].max_num_flights
+        maxNumFlights=config.terminals[cfg].max_num_flights,
+        showPilotIDOnDashboard=config.terminals[cfg].dashboard_show_pilotid
     ) for cfg in config.terminals]
