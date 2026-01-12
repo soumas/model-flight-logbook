@@ -2,10 +2,10 @@
 
 # Model Flight Logbook (MFL)
 
-**Model Flight Logbook (MFL)** ist ein digitales Flugbuch- und Check-In-System für Modellflugvereine.  
-Die Anwendung ist **einfach, übersichtlich und praxisnah** konzipiert und unterstützt Modellflugpilot:innen sowie Vereine bei der **Einhaltung der gesetzlichen Anforderungen in Österreich**.
+**Model Flight Logbook (MFL)** ist ein digitales Flugbuch für Modellflugvereine.  
+Die Anwendung ist **einfach, übersichtlich und praxisnah** konzipiert und unterstützt Pilot:innen sowie Vereine bei der **Einhaltung der gesetzlichen Anforderungen in Österreich**.
 
-MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flugplatz** sowie als **Web-basierte Verwaltungs- und Auswertungsplattform**.
+MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flugplatz** und bietet zusätzlich eine **Web-basierte Verwaltungs- und Auswertungsplattform**.
 
 ---
 
