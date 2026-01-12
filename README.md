@@ -69,7 +69,7 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
   Optional automatisierbar
 
 - **REST-API**  
-  Z. B. für den automatischen Abgleich von Pilot:innen mit einer bestehenden Vereinsdatenbank
+  Für den automatischen Abgleich von Pilot:innen mit einer bestehenden Vereinsdatenbank
 
 - **Unterstützung mehrerer Terminals pro Flugplatz**
 
