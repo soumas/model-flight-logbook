@@ -1,0 +1,379 @@
+{
+    "assets": {
+        "__type__": "Assets",
+        "colors": {
+            "__type__": "NamedColorList",
+            "name": "",
+            "uuid": "5b0b6c5e-5d3f-4d8f-b17c-d5ad306f4303",
+            "values": [
+            ]
+        },
+        "compositions": {
+            "__type__": "CompositionList",
+            "name": "",
+            "uuid": "a49bc4d7-ea88-4d22-a69a-de7ce2b9e0e7",
+            "values": [
+                {
+                    "__type__": "Composition",
+                    "animation": {
+                        "__type__": "AnimationContainer",
+                        "first_frame": 0,
+                        "last_frame": 175
+                    },
+                    "fps": 30,
+                    "group_color": "#00000000",
+                    "height": 1080,
+                    "locked": false,
+                    "name": "anim-2",
+                    "shapes": [
+                        {
+                            "__type__": "Layer",
+                            "animation": {
+                                "__type__": "AnimationContainer",
+                                "first_frame": 0,
+                                "last_frame": 175
+                            },
+                            "auto_orient": false,
+                            "group_color": "#00000000",
+                            "locked": false,
+                            "mask": {
+                                "__type__": "MaskSettings",
+                                "inverted": false,
+                                "mask": "NoMask"
+                            },
+                            "name": "Layer",
+                            "opacity": {
+                                "keyframes": [
+                                    {
+                                        "after": {
+                                            "x": 1,
+                                            "y": 1
+                                        },
+                                        "before": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "time": 0,
+                                        "value": 0
+                                    },
+                                    {
+                                        "after": {
+                                            "x": 1,
+                                            "y": 1
+                                        },
+                                        "before": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "time": 25,
+                                        "value": 1
+                                    },
+                                    {
+                                        "after": {
+                                            "x": 1,
+                                            "y": 1
+                                        },
+                                        "before": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "time": 150,
+                                        "value": 1
+                                    },
+                                    {
+                                        "after": {
+                                            "x": 1,
+                                            "y": 1
+                                        },
+                                        "before": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "time": 175,
+                                        "value": 0
+                                    }
+                                ]
+                            },
+                            "parent": null,
+                            "render": true,
+                            "shapes": [
+                                {
+                                    "__type__": "Group",
+                                    "auto_orient": false,
+                                    "group_color": "#00000000",
+                                    "locked": false,
+                                    "name": "Hintergrund",
+                                    "opacity": {
+                                        "value": 1
+                                    },
+                                    "shapes": [
+                                        {
+                                            "__type__": "Fill",
+                                            "color": {
+                                                "value": "#718c98"
+                                            },
+                                            "fill_rule": "NonZero",
+                                            "group_color": "#00d2ff",
+                                            "locked": false,
+                                            "name": "Fill",
+                                            "opacity": {
+                                                "value": 1
+                                            },
+                                            "use": null,
+                                            "uuid": "a255e371-211d-4aec-b5ce-89c9b5d44a9b",
+                                            "visible": true
+                                        },
+                                        {
+                                            "__type__": "Stroke",
+                                            "cap": "RoundCap",
+                                            "color": {
+                                                "value": "#79b7e0"
+                                            },
+                                            "group_color": "#00000000",
+                                            "join": "RoundJoin",
+                                            "locked": false,
+                                            "miter_limit": 0,
+                                            "name": "Stroke",
+                                            "opacity": {
+                                                "value": 1
+                                            },
+                                            "use": null,
+                                            "uuid": "77cad3ef-2c49-4a13-bb08-5125b7878257",
+                                            "visible": true,
+                                            "width": {
+                                                "value": 10
+                                            }
+                                        },
+                                        {
+                                            "__type__": "Rect",
+                                            "group_color": "#00000000",
+                                            "locked": false,
+                                            "name": "Rectangle 4",
+                                            "position": {
+                                                "value": {
+                                                    "x": 1428.0219987454725,
+                                                    "y": 278.72340907711293
+                                                }
+                                            },
+                                            "reversed": false,
+                                            "rounded": {
+                                                "value": 0
+                                            },
+                                            "size": {
+                                                "value": {
+                                                    "height": 276.9386940774166,
+                                                    "width": 929.6629044333388
+                                                }
+                                            },
+                                            "uuid": "6a33c789-843b-479c-9ba4-0a7dc14f9a64",
+                                            "visible": true
+                                        }
+                                    ],
+                                    "transform": {
+                                        "__type__": "Transform",
+                                        "anchor_point": {
+                                            "value": {
+                                                "x": 1343.3973412112261,
+                                                "y": 299.096011816839
+                                            }
+                                        },
+                                        "position": {
+                                            "value": {
+                                                "x": 42.73260339734247,
+                                                "y": 227.61163098919872
+                                            }
+                                        },
+                                        "rotation": {
+                                            "value": 0
+                                        },
+                                        "scale": {
+                                            "value": {
+                                                "x": 1,
+                                                "y": 1
+                                            }
+                                        }
+                                    },
+                                    "uuid": "c30acb0c-7730-40f1-826d-deb36678d63c",
+                                    "visible": true
+                                },
+                                {
+                                    "__type__": "Group",
+                                    "auto_orient": false,
+                                    "group_color": "#00000000",
+                                    "locked": false,
+                                    "name": "Text",
+                                    "opacity": {
+                                        "value": 1
+                                    },
+                                    "shapes": [
+                                        {
+                                            "__type__": "Fill",
+                                            "color": {
+                                                "value": "#e1f1f5"
+                                            },
+                                            "fill_rule": "NonZero",
+                                            "group_color": "#00000000",
+                                            "locked": false,
+                                            "name": "Fill",
+                                            "opacity": {
+                                                "value": 1
+                                            },
+                                            "use": null,
+                                            "uuid": "d0592b30-19c5-43f9-be7d-7d17fad4f150",
+                                            "visible": true
+                                        },
+                                        {
+                                            "__type__": "Stroke",
+                                            "cap": "RoundCap",
+                                            "color": {
+                                                "value": "#0d7459"
+                                            },
+                                            "group_color": "#00000000",
+                                            "join": "RoundJoin",
+                                            "locked": false,
+                                            "miter_limit": 0,
+                                            "name": "Stroke",
+                                            "opacity": {
+                                                "value": 1
+                                            },
+                                            "use": null,
+                                            "uuid": "39982469-e131-4155-b75e-a1271668c7c3",
+                                            "visible": false,
+                                            "width": {
+                                                "value": 20
+                                            }
+                                        },
+                                        {
+                                            "__type__": "TextShape",
+                                            "font": {
+                                                "__type__": "Font",
+                                                "family": "Soft Core",
+                                                "line_height": 1,
+                                                "size": 50.25,
+                                                "style": "Regular"
+                                            },
+                                            "group_color": "#00000000",
+                                            "locked": false,
+                                            "name": "Konfigurierbare Nachrichten\nauf dem Startbildschirm für\nallgemeine Informationen an\ndie Pilot:innen 1",
+                                            "path": null,
+                                            "path_offset": {
+                                                "value": 0
+                                            },
+                                            "position": {
+                                                "value": {
+                                                    "x": 1049.370753323486,
+                                                    "y": 106.45790251107829
+                                                }
+                                            },
+                                            "text": "Die Person ist nun am MFL System\nangemeldet und kann ihren Flugtag\nbeginnen. Danach: Check-Out",
+                                            "uuid": "813497d2-1eae-4491-aac3-f5d1087f142d",
+                                            "visible": true
+                                        }
+                                    ],
+                                    "transform": {
+                                        "__type__": "Transform",
+                                        "anchor_point": {
+                                            "value": {
+                                                "x": 1402.064907059657,
+                                                "y": 186.08598248090834
+                                            }
+                                        },
+                                        "position": {
+                                            "value": {
+                                                "x": 47.42455579197713,
+                                                "y": 231.83348253149407
+                                            }
+                                        },
+                                        "rotation": {
+                                            "value": 0
+                                        },
+                                        "scale": {
+                                            "value": {
+                                                "x": 1,
+                                                "y": 1
+                                            }
+                                        }
+                                    },
+                                    "uuid": "7dfb2fd8-5412-43aa-b1da-e16d269e60b2",
+                                    "visible": true
+                                }
+                            ],
+                            "transform": {
+                                "__type__": "Transform",
+                                "anchor_point": {
+                                    "value": {
+                                        "x": 960,
+                                        "y": 540
+                                    }
+                                },
+                                "position": {
+                                    "value": {
+                                        "x": 1416.6979666133832,
+                                        "y": 1151.2027117217376
+                                    }
+                                },
+                                "rotation": {
+                                    "value": 0
+                                },
+                                "scale": {
+                                    "value": {
+                                        "x": 1,
+                                        "y": 1
+                                    }
+                                }
+                            },
+                            "uuid": "86cecbdb-5208-4524-996d-4e97b73cf4b0",
+                            "visible": true
+                        }
+                    ],
+                    "uuid": "a1707288-5426-48ab-b148-b3a6089377c2",
+                    "visible": true,
+                    "width": 1920
+                }
+            ]
+        },
+        "fonts": {
+            "__type__": "FontList",
+            "name": "",
+            "uuid": "8560d019-4dc1-45d9-bf4c-43cbf4ab5a6e",
+            "values": [
+            ]
+        },
+        "gradient_colors": {
+            "__type__": "GradientColorsList",
+            "name": "",
+            "uuid": "6f4baf7a-8ba0-4e9b-b705-039614059593",
+            "values": [
+            ]
+        },
+        "gradients": {
+            "__type__": "GradientList",
+            "name": "",
+            "uuid": "dab347b8-d711-41e1-8a43-4f0aa7fa5569",
+            "values": [
+            ]
+        },
+        "images": {
+            "__type__": "BitmapList",
+            "name": "",
+            "uuid": "507e47f5-387b-4fa8-b9b4-473991bb5186",
+            "values": [
+            ]
+        },
+        "name": "",
+        "uuid": "e003de29-5b3e-4e37-b4ae-062805bbede5"
+    },
+    "format": {
+        "format_version": 8,
+        "generator": "Glaxnimate",
+        "generator_version": "0.5.4-7-ga6404e71"
+    },
+    "info": {
+        "author": "",
+        "description": "",
+        "keywords": [
+        ]
+    },
+    "metadata": {
+    }
+}
