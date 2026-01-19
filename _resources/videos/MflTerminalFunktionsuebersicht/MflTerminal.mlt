@@ -405,9 +405,9 @@ li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:142pt; font-weight:700; text-decoration: underline; color:#d5cbaf;&quot;&gt;MFL Terminal&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:46pt; font-weight:700; color:#d5cbaf;&quot;&gt;Die Stempeluhr für den &lt;/span&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:50pt; font-weight:700; color:#d5cbaf;&quot;&gt;Modellflugplatz&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'sans-serif'; font-size:42pt; font-weight:700; color:#d5cbaf;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:38pt; font-weight:700; color:#d5cbaf;&quot;&gt;Open Source Stempeluhr für den Modellflugplatz&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;right&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:35pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;right&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'sans-serif'; font-size:42pt; font-weight:700; color:#d5cbaf;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:70pt; font-weight:700; font-style:italic; color:#d5cbaf;&quot;&gt;Funktionsübersicht&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</property>
       <property name="shotcut:animIn">00:00:00.000</property>
       <property name="shotcut:animOut">00:00:00.000</property>
@@ -607,9 +607,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <transition id="transition1" out="00:00:00.567">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
       <property name="start">-1</property>
       <property name="accepts_blanks">1</property>
-      <property name="mlt_service">mix</property>
     </transition>
   </tractor>
   <producer id="producer9" in="00:00:00.000" out="03:59:59.967">
@@ -1954,7 +1954,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <track producer="playlist1"/>
     <track producer="playlist2"/>
     <track producer="playlist4"/>
-    <track producer="playlist5" hide="both"/>
+    <track producer="playlist5" hide="video"/>
     <track producer="playlist6"/>
     <transition id="transition12">
       <property name="a_track">0</property>
