@@ -78,8 +78,8 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 
 # Videos / Screenshots
-YouTube   
-[![MFL Terminal Funktionsübersicht](https://raw.githubusercontent.com/soumas/model-flight-logbook/refs/heads/main/_resources/videos/MflTerminalFunktionsuebersicht/youtube_titleimage.png)](https://www.youtube.com/watch?v=QN9n_aaGvsA)
+- **<a href="https://www.youtube.com/watch?v=QN9n_aaGvsA">MFL Terminal Funktionsübersicht (YouTube)</a>**
+
 
 # Setup
 TODO
