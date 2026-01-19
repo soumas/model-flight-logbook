@@ -78,7 +78,7 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 
 # Videos / Screenshots
-- **<a href="https://www.youtube.com/watch?v=QN9n_aaGvsA">MFL Terminal Funktionsübersicht (YouTube)</a>**
+- **<a target="_blank" href="https://www.youtube.com/watch?v=QN9n_aaGvsA">MFL Terminal Funktionsübersicht (YouTube)</a>**
 
 
 # Setup
