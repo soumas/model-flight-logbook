@@ -288,8 +288,8 @@
                                             "name": "Rectangle 1",
                                             "position": {
                                                 "value": {
-                                                    "x": 1128.9653386212349,
-                                                    "y": 565.5497946217197
+                                                    "x": 1109.86516287431,
+                                                    "y": 568.5656118449185
                                                 }
                                             },
                                             "reversed": false,
@@ -298,8 +298,8 @@
                                             },
                                             "size": {
                                                 "value": {
-                                                    "height": 289.5752170130106,
-                                                    "width": 966.9173832985971
+                                                    "height": 263.43813441195596,
+                                                    "width": 920.674852542885
                                                 }
                                             },
                                             "uuid": "c4926fde-25f3-4ece-9315-67a7768827dc",
@@ -402,7 +402,7 @@
                                                     "y": 182.10819770719706
                                                 }
                                             },
-                                            "text": "Die Anmeldung am MFL System ist\nabgeschlossen und der Flugbetrieb\nkann jetzt aufgenommen werden.",
+                                            "text": "Die Anmeldung am MFL System ist\nabgeschlossen und der Flugbetrieb\nkann jetzt aufgenommen werden",
                                             "uuid": "a202231b-7221-49fd-9009-042ba525210d",
                                             "visible": true
                                         }

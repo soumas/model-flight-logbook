@@ -157,16 +157,16 @@
                                                     "points": [
                                                         {
                                                             "pos": {
-                                                                "x": 459.6277695716393,
-                                                                "y": 670.8537666174299
+                                                                "x": 525.9757484820084,
+                                                                "y": 694.9803044030186
                                                             },
                                                             "tan_in": {
-                                                                "x": 459.6277695716393,
-                                                                "y": 670.8537666174299
+                                                                "x": 525.9757484820084,
+                                                                "y": 694.9803044030186
                                                             },
                                                             "tan_out": {
-                                                                "x": 459.6277695716393,
-                                                                "y": 670.8537666174299
+                                                                "x": 525.9757484820084,
+                                                                "y": 694.9803044030186
                                                             },
                                                             "type": 0
                                                         },
@@ -288,8 +288,8 @@
                                             "name": "Rectangle 2",
                                             "position": {
                                                 "value": {
-                                                    "x": 1627.285081240767,
-                                                    "y": 578.7592319054654
+                                                    "x": 1602.1532710474455,
+                                                    "y": 520.4534322569596
                                                 }
                                             },
                                             "reversed": false,
@@ -298,8 +298,8 @@
                                             },
                                             "size": {
                                                 "value": {
-                                                    "height": 315.9940915805023,
-                                                    "width": 953.0516986706039
+                                                    "height": 199.38249228348997,
+                                                    "width": 902.7880782839607
                                                 }
                                             },
                                             "uuid": "146a5844-fa1c-4df3-8416-d34dd78e46fe",
@@ -402,7 +402,7 @@
                                                     "y": 897.288035450517
                                                 }
                                             },
-                                            "text": "Tagesaktuelle Betriebszeiten von \nCMT bis CET oder benutzerdefiniert.\nAutomatisches Flugverbot ausser-\nhalb dieser Zeiten.",
+                                            "text": "Tagesaktuelle Betriebszeiten von \nCMT bis CET sind konfigurierbar",
                                             "uuid": "d2cb6951-1f2c-41c8-b8d6-89a3cae0f52b",
                                             "visible": true
                                         }
@@ -445,8 +445,8 @@
                                 },
                                 "position": {
                                     "value": {
-                                        "x": 1145.8788774002956,
-                                        "y": 551.8286558345643
+                                        "x": 1077.5203536744607,
+                                        "y": 501.5650354479211
                                     }
                                 },
                                 "rotation": {

@@ -192,8 +192,8 @@
     <entry producer="chain2" in="00:00:00.000" out="00:00:03.167"/>
     <entry producer="chain3" in="00:00:00.000" out="00:00:10.800"/>
   </playlist>
-  <producer id="black" in="00:00:00.000" out="00:03:44.733">
-    <property name="length">00:03:44.767</property>
+  <producer id="black" in="00:00:00.000" out="00:03:14.967">
+    <property name="length">00:03:15.000</property>
     <property name="eof">pause</property>
     <property name="resource">0</property>
     <property name="aspect_ratio">1</property>
@@ -202,7 +202,7 @@
     <property name="set.test_audio">0</property>
   </producer>
   <playlist id="background">
-    <entry producer="black" in="00:00:00.000" out="00:03:44.733"/>
+    <entry producer="black" in="00:00:00.000" out="00:03:14.967"/>
   </playlist>
   <producer id="producer0" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
@@ -216,13 +216,11 @@
     <property name="meta.media.width">3454</property>
     <property name="meta.media.height">2366</property>
     <property name="mlt_service">qimage</property>
-    <property name="creation_time">2025-05-23T23:37:04</property>
-    <property name="shotcut:skipConvert">1</property>
+    <property name="xml">was here</property>
     <property name="shotcut:hash">075d9ef344e26c45fa93e47cca169fdc</property>
     <property name="shotcut:caption">aircraft-1813731.jpg</property>
     <property name="meta.shotcut.vui">1</property>
-    <property name="xml">was here</property>
-    <filter id="filter0" out="00:03:44.733">
+    <filter id="filter0" in="00:00:07.433" out="00:03:23.467">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -241,7 +239,7 @@
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">Hintergrundbild</property>
     <property name="shotcut:lock">0</property>
-    <entry producer="producer0" in="00:00:00.000" out="00:03:44.733"/>
+    <entry producer="producer0" in="00:00:08.500" out="00:03:23.467"/>
   </playlist>
   <producer id="producer1" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
@@ -260,7 +258,8 @@
     <property name="shotcut:hash">09ffbf20750f4e214e07e002d9c818b3</property>
     <property name="shotcut:caption">Logo_video.svg</property>
     <property name="meta.shotcut.vui">1</property>
-    <filter id="filter1" out="00:03:23.067">
+    <property name="xml">was here</property>
+    <filter id="filter1" in="00:00:07.433" out="00:03:12.267">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -274,7 +273,7 @@
       <property name="shotcut:animOut">00:00:00.000</property>
       <property name="transition.threads">0</property>
     </filter>
-    <filter id="filter2" out="00:03:23.067">
+    <filter id="filter2" in="00:00:07.433" out="00:03:12.267">
       <property name="argument"></property>
       <property name="geometry">1163 865 729 257 1</property>
       <property name="family">Sans</property>
@@ -311,22 +310,56 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animIn">00:00:00.000</property>
       <property name="shotcut:animOut">00:00:00.000</property>
     </filter>
-    <filter id="filter3" out="00:03:23.067">
+    <filter id="filter3" in="00:00:07.433" out="00:03:12.267">
       <property name="start">1</property>
       <property name="level">1</property>
       <property name="mlt_service">brightness</property>
       <property name="shotcut:filter">fadeOutBrightness</property>
-      <property name="alpha">00:03:22.100=1;00:03:23.067=0</property>
+      <property name="alpha">00:03:03.867=1;00:03:04.833=0</property>
       <property name="shotcut:animOut">00:00:01.000</property>
+    </filter>
+  </producer>
+  <producer id="producer2" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">mfl_qr_code.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">800</property>
+    <property name="meta.media.height">800</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2026-01-19T20:42:42</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">a4337d5e0f3209938a5ce9373b564f30</property>
+    <property name="shotcut:caption">mfl_qr_code.png</property>
+    <property name="meta.shotcut.vui">1</property>
+    <filter id="filter4" out="00:00:09.933">
+      <property name="background">color:#00000000</property>
+      <property name="mlt_service">affine</property>
+      <property name="shotcut:filter">affineSizePosition</property>
+      <property name="transition.fix_rotate_x">0</property>
+      <property name="transition.fill">1</property>
+      <property name="transition.distort">0</property>
+      <property name="transition.rect">1276.92 138.599 500 500 1</property>
+      <property name="transition.valign">middle</property>
+      <property name="transition.halign">center</property>
+      <property name="shotcut:animIn">00:00:00.000</property>
+      <property name="shotcut:animOut">00:00:00.000</property>
+      <property name="transition.threads">0</property>
     </filter>
   </producer>
   <playlist id="playlist1">
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">Logo und Text</property>
     <property name="shotcut:lock">0</property>
-    <entry producer="producer1" in="00:00:00.000" out="00:03:23.067"/>
+    <entry producer="producer1" in="00:00:07.433" out="00:03:12.267"/>
+    <blank length="00:00:00.167"/>
+    <entry producer="producer2" in="00:00:00.000" out="00:00:09.933"/>
   </playlist>
-  <producer id="producer2" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer3" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">#00000000</property>
@@ -338,7 +371,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="xml">was here</property>
     <property name="seekable">1</property>
     <property name="meta.shotcut.vui">1</property>
-    <filter id="filter4" out="00:00:14.433">
+    <filter id="filter5" in="00:00:07.433" out="00:00:14.433">
       <property name="argument"></property>
       <property name="geometry">514 58 1351 792 1</property>
       <property name="family">Sans</property>
@@ -379,16 +412,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animIn">00:00:00.000</property>
       <property name="shotcut:animOut">00:00:00.000</property>
     </filter>
-    <filter id="filter5" out="00:00:14.433">
+    <filter id="filter6" in="00:00:07.433" out="00:00:14.433">
       <property name="start">1</property>
       <property name="level">1</property>
       <property name="mlt_service">brightness</property>
       <property name="shotcut:filter">fadeOutBrightness</property>
-      <property name="alpha">00:00:13.467=1;00:00:14.433=0</property>
+      <property name="alpha">00:00:06.033=1;00:00:07.000=0</property>
       <property name="shotcut:animOut">00:00:01.000</property>
     </filter>
   </producer>
-  <producer id="producer3" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer4" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_dashboard.png</property>
@@ -406,7 +439,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">Dashboard</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter6" out="00:00:50.700">
+    <filter id="filter7" out="00:00:51.133">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -420,7 +453,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animOut">00:00:00.000</property>
       <property name="transition.threads">0</property>
     </filter>
-    <filter id="filter7" out="00:00:50.533">
+    <filter id="filter8" out="00:00:51.133">
       <property name="start">1</property>
       <property name="level">00:00:00.000=0;00:00:00.367=1</property>
       <property name="mlt_service">brightness</property>
@@ -429,7 +462,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animIn">00:00:00.400</property>
     </filter>
   </producer>
-  <producer id="producer4" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer5" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_pilotstatus.png</property>
@@ -447,7 +480,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">mfl_terminal_pilotstatus.png</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter8" out="00:00:07.900">
+    <filter id="filter9" in="00:00:00.600" out="00:00:04.433">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -462,7 +495,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="transition.threads">0</property>
     </filter>
   </producer>
-  <producer id="producer5" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer6" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_flugbuchliste.png</property>
@@ -480,7 +513,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">mfl_terminal_flugbuchliste.png</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter9" out="00:00:15.167">
+    <filter id="filter10" out="00:00:16.533">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -495,7 +528,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="transition.threads">0</property>
     </filter>
   </producer>
-  <producer id="producer6" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer7" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_pilotstatus.png</property>
@@ -513,38 +546,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">mfl_terminal_pilotstatus.png</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter10" out="00:00:04.467">
-      <property name="background">color:#00000000</property>
-      <property name="mlt_service">affine</property>
-      <property name="shotcut:filter">affineSizePosition</property>
-      <property name="transition.fix_rotate_x">0</property>
-      <property name="transition.fill">1</property>
-      <property name="transition.distort">0</property>
-      <property name="transition.rect">168 99 1145 657.553 1</property>
-      <property name="transition.valign">middle</property>
-      <property name="transition.halign">center</property>
-      <property name="shotcut:animIn">00:00:00.000</property>
-      <property name="shotcut:animOut">00:00:00.000</property>
-      <property name="transition.threads">0</property>
-    </filter>
-  </producer>
-  <producer id="producer7" in="00:00:00.000" out="03:59:59.967">
-    <property name="length">04:00:00.000</property>
-    <property name="eof">pause</property>
-    <property name="resource">mfl_terminal_pilotstatus_infos.png</property>
-    <property name="ttl">1</property>
-    <property name="aspect_ratio">1</property>
-    <property name="meta.media.progressive">1</property>
-    <property name="seekable">1</property>
-    <property name="format">2</property>
-    <property name="meta.media.width">801</property>
-    <property name="meta.media.height">460</property>
-    <property name="mlt_service">qimage</property>
-    <property name="xml">was here</property>
-    <property name="shotcut:hash">7fd79bc58d7aa0303e161c6c92ae503a</property>
-    <property name="shotcut:caption">mfl_terminal_pilotstatus_infos.png</property>
-    <property name="meta.shotcut.vui">1</property>
-    <filter id="filter11" in="00:00:14.367" out="00:00:29.067">
+    <filter id="filter11" out="00:00:04.467">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -562,6 +564,57 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <producer id="producer8" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
+    <property name="resource">mfl_terminal_pilotstatus_infos.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">801</property>
+    <property name="meta.media.height">460</property>
+    <property name="mlt_service">qimage</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:hash">7fd79bc58d7aa0303e161c6c92ae503a</property>
+    <property name="shotcut:caption">mfl_terminal_pilotstatus_infos.png</property>
+    <property name="meta.shotcut.vui">1</property>
+    <filter id="filter12" in="00:00:15.833" out="00:00:29.067">
+      <property name="background">color:#00000000</property>
+      <property name="mlt_service">affine</property>
+      <property name="shotcut:filter">affineSizePosition</property>
+      <property name="transition.fix_rotate_x">0</property>
+      <property name="transition.fill">1</property>
+      <property name="transition.distort">0</property>
+      <property name="transition.rect">168 99 1145 657.553 1</property>
+      <property name="transition.valign">middle</property>
+      <property name="transition.halign">center</property>
+      <property name="shotcut:animIn">00:00:00.000</property>
+      <property name="shotcut:animOut">00:00:00.000</property>
+      <property name="transition.threads">0</property>
+    </filter>
+  </producer>
+  <tractor id="tractor0" in="00:00:00.000" out="00:00:00.567">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer7" in="00:00:03.900" out="00:00:04.467"/>
+    <track producer="producer8" in="00:00:15.833" out="00:00:16.400"/>
+    <transition id="transition0" out="00:00:00.567">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+      <property name="fix_background_alpha">1</property>
+    </transition>
+    <transition id="transition1" out="00:00:00.567">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+      <property name="mlt_service">mix</property>
+    </transition>
+  </tractor>
+  <producer id="producer9" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
     <property name="resource">mfl_terminal_pilotstatus_fehler.png</property>
     <property name="ttl">1</property>
     <property name="aspect_ratio">1</property>
@@ -577,14 +630,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">mfl_terminal_pilotstatus_fehler.png</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter12" in="00:00:02.800" out="00:00:17.800">
-      <property name="start">1</property>
-      <property name="level">00:00:00.000=0;00:00:00.967=1</property>
-      <property name="mlt_service">brightness</property>
-      <property name="shotcut:filter">fadeInBrightness</property>
-      <property name="alpha">1</property>
-      <property name="shotcut:animIn">00:00:01.000</property>
-    </filter>
     <filter id="filter13" in="00:00:02.800" out="00:00:17.800">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
@@ -602,8 +647,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
   </producer>
   <tractor id="tractor1" in="00:00:00.000" out="00:00:01.067">
     <property name="shotcut:transition">lumaMix</property>
-    <track producer="producer7" in="00:00:28.000" out="00:00:29.067"/>
-    <track producer="producer8" in="00:00:02.800" out="00:00:03.867"/>
+    <track producer="producer8" in="00:00:28.000" out="00:00:29.067"/>
+    <track producer="producer9" in="00:00:02.800" out="00:00:03.867"/>
     <transition id="transition2" out="00:00:01.067">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
@@ -620,7 +665,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="accepts_blanks">1</property>
     </transition>
   </tractor>
-  <producer id="producer9" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer10" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_pilotstatus_warnungen.png</property>
@@ -650,19 +695,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animOut">00:00:00.000</property>
       <property name="transition.threads">0</property>
     </filter>
-    <filter id="filter15" out="00:00:18.567">
-      <property name="start">1</property>
-      <property name="level">00:00:00.000=0;00:00:00.967=1</property>
-      <property name="mlt_service">brightness</property>
-      <property name="shotcut:filter">fadeInBrightness</property>
-      <property name="alpha">1</property>
-      <property name="shotcut:animIn">00:00:01.000</property>
-    </filter>
   </producer>
   <tractor id="tractor2" in="00:00:00.000" out="00:00:01.300">
     <property name="shotcut:transition">lumaMix</property>
-    <track producer="producer8" in="00:00:16.500" out="00:00:17.800"/>
-    <track producer="producer9" in="00:00:05.133" out="00:00:06.433"/>
+    <track producer="producer9" in="00:00:16.500" out="00:00:17.800"/>
+    <track producer="producer10" in="00:00:05.133" out="00:00:06.433"/>
     <transition id="transition4" out="00:00:01.300">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
@@ -743,7 +780,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="transition.threads">0</property>
     </filter>
   </chain>
-  <producer id="producer10" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer11" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_pilotstatus_warnungen_lastframe.png</property>
@@ -825,7 +862,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="transition.threads">0</property>
     </filter>
   </chain>
-  <producer id="producer11" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer12" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_dashboard.png</property>
@@ -843,7 +880,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">mfl_terminal_dashboard.png</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter18" in="00:00:03.533" out="00:00:23.067">
+    <filter id="filter18" in="00:00:03.533" out="00:00:17.033">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -858,7 +895,58 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="transition.threads">0</property>
     </filter>
   </producer>
-  <producer id="producer12" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer13" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">mfl_terminal_dashboard_1030.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">801</property>
+    <property name="meta.media.height">459</property>
+    <property name="mlt_service">qimage</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:hash">df2566ad57191e56b86ec3a42bbd9330</property>
+    <property name="shotcut:caption">mfl_terminal_dashboard_1030.png</property>
+    <property name="meta.shotcut.vui">1</property>
+    <filter id="filter15" out="00:00:02.800">
+      <property name="background">color:#00000000</property>
+      <property name="mlt_service">affine</property>
+      <property name="shotcut:filter">affineSizePosition</property>
+      <property name="transition.fix_rotate_x">0</property>
+      <property name="transition.fill">1</property>
+      <property name="transition.distort">0</property>
+      <property name="transition.rect">166.5 99 1150 658.989 1</property>
+      <property name="transition.valign">middle</property>
+      <property name="transition.halign">center</property>
+      <property name="shotcut:animIn">00:00:00.000</property>
+      <property name="shotcut:animOut">00:00:00.000</property>
+      <property name="transition.threads">0</property>
+    </filter>
+  </producer>
+  <tractor id="tractor3" in="00:00:00.000" out="00:00:00.467">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer12" in="00:00:16.567" out="00:00:17.033"/>
+    <track producer="producer13" in="00:00:00.000" out="00:00:00.467"/>
+    <transition id="transition6" out="00:00:00.467">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+      <property name="fix_background_alpha">1</property>
+    </transition>
+    <transition id="transition7" out="00:00:00.467">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer14" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_dashboard_1124.png</property>
@@ -870,18 +958,20 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="meta.media.width">801</property>
     <property name="meta.media.height">459</property>
     <property name="mlt_service">qimage</property>
-    <property name="xml">was here</property>
+    <property name="creation_time">2026-01-16T22:19:09</property>
+    <property name="shotcut:skipConvert">1</property>
     <property name="shotcut:hash">ac8f9726f2e298561f8154f291b98730</property>
     <property name="shotcut:caption">mfl_terminal_dashboard_1124.png</property>
     <property name="meta.shotcut.vui">1</property>
-    <filter id="filter19" out="00:00:02.967">
+    <property name="xml">was here</property>
+    <filter id="filter19" out="00:00:02.767">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
       <property name="transition.fix_rotate_x">0</property>
       <property name="transition.fill">1</property>
       <property name="transition.distort">0</property>
-      <property name="transition.rect">167 98.7136 1150 658.989 1</property>
+      <property name="transition.rect">167 99 1150 658.989 1</property>
       <property name="transition.valign">middle</property>
       <property name="transition.halign">center</property>
       <property name="shotcut:animIn">00:00:00.000</property>
@@ -889,7 +979,27 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="transition.threads">0</property>
     </filter>
   </producer>
-  <producer id="producer13" in="00:00:00.000" out="03:59:59.967">
+  <tractor id="tractor4" in="00:00:00.000" out="00:00:00.467">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer13" in="00:00:02.333" out="00:00:02.800"/>
+    <track producer="producer14" in="00:00:00.000" out="00:00:00.467"/>
+    <transition id="transition8" out="00:00:00.467">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+      <property name="fix_background_alpha">1</property>
+    </transition>
+    <transition id="transition9" out="00:00:00.467">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer15" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_dashboard_1216.png</property>
@@ -905,7 +1015,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:hash">50484d9c8acc6b74859b261a6d467f41</property>
     <property name="shotcut:caption">mfl_terminal_dashboard_1216.png</property>
     <property name="meta.shotcut.vui">1</property>
-    <filter id="filter20" out="00:00:03.333">
+    <filter id="filter20" in="00:00:00.167" out="00:00:03.333">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -920,7 +1030,27 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="transition.threads">0</property>
     </filter>
   </producer>
-  <producer id="producer14" in="00:00:00.000" out="03:59:59.967">
+  <tractor id="tractor5" in="00:00:00.000" out="00:00:00.467">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer14" in="00:00:02.300" out="00:00:02.767"/>
+    <track producer="producer15" in="00:00:00.167" out="00:00:00.633"/>
+    <transition id="transition10" out="00:00:00.467">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+      <property name="fix_background_alpha">1</property>
+    </transition>
+    <transition id="transition11" out="00:00:00.467">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer16" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_checkout.png</property>
@@ -938,7 +1068,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">mfl_terminal_checkout.png</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter21" out="00:00:04.733">
+    <filter id="filter21" out="00:00:03.433">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -953,7 +1083,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="transition.threads">0</property>
     </filter>
   </producer>
-  <producer id="producer15" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer17" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_checkout_rotokoll.png</property>
@@ -971,7 +1101,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">mfl_terminal_checkout_rotokoll.png</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter22" out="00:00:13.833">
+    <filter id="filter22" out="00:00:14.133">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -1050,7 +1180,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="transition.threads">0</property>
     </filter>
   </chain>
-  <producer id="producer16" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer18" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">mfl_terminal_dashboard_nach_checkout.png</property>
@@ -1076,7 +1206,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animOut">00:00:01.000</property>
     </filter>
   </producer>
-  <producer id="producer17" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer19" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">#00000000</property>
@@ -1088,9 +1218,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="xml">was here</property>
     <property name="seekable">1</property>
     <property name="meta.shotcut.vui">1</property>
-    <filter id="filter25" out="00:00:21.633">
+    <filter id="filter25" out="00:00:09.933">
       <property name="argument"></property>
-      <property name="geometry">623 704 1205 281 1</property>
+      <property name="geometry">640 712 1205 281 1</property>
       <property name="family">Sans</property>
       <property name="size">48</property>
       <property name="weight">400</property>
@@ -1121,12 +1251,12 @@ hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:85pt; font-weight:700; font-style:italic; color:#d5cbaf;&quot;&gt;Model Flight Logbook&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:37pt; font-weight:700; font-style:italic; color:#d5cbaf;&quot;&gt;https://github.com/soumas/model-flight-logbook&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</property>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:74pt; font-weight:700; font-style:italic; color:#d5cbaf;&quot;&gt;Model Flight Logbook&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'sans-serif'; font-size:32pt; font-weight:700; font-style:italic; color:#d5cbaf;&quot;&gt;https://github.com/soumas/model-flight-logbook&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</property>
       <property name="shotcut:animIn">00:00:00.000</property>
       <property name="shotcut:animOut">00:00:00.000</property>
     </filter>
-    <filter id="filter26" out="00:00:21.633">
+    <filter id="filter26" out="00:00:09.933">
       <property name="start">1</property>
       <property name="level">1</property>
       <property name="mlt_service">brightness</property>
@@ -1139,209 +1269,34 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">Terminal Screen</property>
     <property name="shotcut:lock">0</property>
-    <entry producer="producer2" in="00:00:00.000" out="00:00:14.433"/>
+    <entry producer="producer3" in="00:00:07.433" out="00:00:14.433"/>
     <blank length="00:00:00.333"/>
-    <entry producer="producer3" in="00:00:00.000" out="00:00:50.533"/>
-    <entry producer="producer4" in="00:00:00.000" out="00:00:07.900"/>
-    <entry producer="producer5" in="00:00:00.000" out="00:00:15.167"/>
-    <entry producer="producer6" in="00:00:00.000" out="00:00:04.467"/>
-    <entry producer="producer7" in="00:00:16.433" out="00:00:27.967"/>
+    <entry producer="producer4" in="00:00:00.000" out="00:00:51.133"/>
+    <entry producer="producer5" in="00:00:00.600" out="00:00:04.433"/>
+    <entry producer="producer6" in="00:00:00.000" out="00:00:16.533"/>
+    <entry producer="producer7" in="00:00:00.000" out="00:00:03.867"/>
+    <entry producer="tractor0" in="00:00:00.000" out="00:00:00.567"/>
+    <entry producer="producer8" in="00:00:16.433" out="00:00:27.967"/>
     <entry producer="tractor1" in="00:00:00.000" out="00:00:01.067"/>
-    <entry producer="producer8" in="00:00:03.900" out="00:00:16.467"/>
+    <entry producer="producer9" in="00:00:03.900" out="00:00:16.467"/>
     <entry producer="tractor2" in="00:00:00.000" out="00:00:01.300"/>
-    <entry producer="producer9" in="00:00:06.467" out="00:00:18.567"/>
+    <entry producer="producer10" in="00:00:06.467" out="00:00:18.567"/>
     <entry producer="chain4" in="00:00:00.000" out="00:00:02.467"/>
-    <entry producer="producer10" in="00:00:00.000" out="00:00:03.233"/>
+    <entry producer="producer11" in="00:00:00.000" out="00:00:03.233"/>
     <entry producer="chain5" in="00:00:00.000" out="00:00:03.100"/>
-    <entry producer="producer11" in="00:00:03.533" out="00:00:23.067"/>
-    <blank length="00:00:00.700"/>
-    <entry producer="producer12" in="00:00:00.000" out="00:00:02.967"/>
-    <entry producer="producer13" in="00:00:00.000" out="00:00:03.333"/>
-    <entry producer="producer14" in="00:00:00.000" out="00:00:04.733"/>
-    <entry producer="producer15" in="00:00:00.000" out="00:00:13.833"/>
+    <entry producer="producer12" in="00:00:03.533" out="00:00:16.533"/>
+    <entry producer="tractor3" in="00:00:00.000" out="00:00:00.467"/>
+    <entry producer="producer13" in="00:00:00.500" out="00:00:02.300"/>
+    <entry producer="tractor4" in="00:00:00.000" out="00:00:00.467"/>
+    <entry producer="producer14" in="00:00:00.500" out="00:00:02.267"/>
+    <entry producer="tractor5" in="00:00:00.000" out="00:00:00.467"/>
+    <entry producer="producer15" in="00:00:00.667" out="00:00:03.333"/>
+    <entry producer="producer16" in="00:00:00.000" out="00:00:03.433"/>
+    <entry producer="producer17" in="00:00:00.000" out="00:00:14.133"/>
     <entry producer="chain6" in="00:00:00.000" out="00:00:10.800"/>
-    <entry producer="producer16" in="00:00:01.100" out="00:00:05.500"/>
-    <blank length="00:00:01.933"/>
-    <entry producer="producer17" in="00:00:00.000" out="00:00:21.633"/>
-  </playlist>
-  <producer id="producer18" in="00:00:00.000" out="03:59:59.967">
-    <property name="length">04:00:00.000</property>
-    <property name="eof">pause</property>
-    <property name="resource">mfl_terminal_pilotstatus_infos.png</property>
-    <property name="ttl">1</property>
-    <property name="aspect_ratio">1</property>
-    <property name="meta.media.progressive">1</property>
-    <property name="seekable">1</property>
-    <property name="format">2</property>
-    <property name="meta.media.width">801</property>
-    <property name="meta.media.height">460</property>
-    <property name="mlt_service">qimage</property>
-    <property name="xml">was here</property>
-    <property name="shotcut:hash">7fd79bc58d7aa0303e161c6c92ae503a</property>
-    <property name="shotcut:caption">mfl_terminal_pilotstatus_infos.png</property>
-    <property name="meta.shotcut.vui">1</property>
-    <filter id="filter27" in="00:00:14.367" out="00:00:17.467">
-      <property name="background">color:#00000000</property>
-      <property name="mlt_service">affine</property>
-      <property name="shotcut:filter">affineSizePosition</property>
-      <property name="transition.fix_rotate_x">0</property>
-      <property name="transition.fill">1</property>
-      <property name="transition.distort">0</property>
-      <property name="transition.rect">168 99 1145 657.553 1</property>
-      <property name="transition.valign">middle</property>
-      <property name="transition.halign">center</property>
-      <property name="shotcut:animIn">00:00:00.000</property>
-      <property name="shotcut:animOut">00:00:00.000</property>
-      <property name="transition.threads">0</property>
-    </filter>
-    <filter id="filter28" in="00:00:16.433" out="00:00:17.467">
-      <property name="start">1</property>
-      <property name="level">1</property>
-      <property name="mlt_service">brightness</property>
-      <property name="shotcut:filter">fadeInBrightness</property>
-      <property name="alpha">00:00:00.000=0;00:00:00.967=1</property>
-      <property name="shotcut:animIn">00:00:01.000</property>
-    </filter>
-  </producer>
-  <producer id="producer19" in="00:00:00.000" out="03:59:59.967">
-    <property name="length">04:00:00.000</property>
-    <property name="eof">pause</property>
-    <property name="resource">mfl_terminal_dashboard_1030.png</property>
-    <property name="ttl">1</property>
-    <property name="aspect_ratio">1</property>
-    <property name="meta.media.progressive">1</property>
-    <property name="seekable">1</property>
-    <property name="format">2</property>
-    <property name="meta.media.width">801</property>
-    <property name="meta.media.height">459</property>
-    <property name="mlt_service">qimage</property>
-    <property name="xml">was here</property>
-    <property name="shotcut:hash">df2566ad57191e56b86ec3a42bbd9330</property>
-    <property name="shotcut:caption">mfl_terminal_dashboard_1030.png</property>
-    <property name="meta.shotcut.vui">1</property>
-    <filter id="filter29" out="00:00:02.967">
-      <property name="background">color:#00000000</property>
-      <property name="mlt_service">affine</property>
-      <property name="shotcut:filter">affineSizePosition</property>
-      <property name="transition.fix_rotate_x">0</property>
-      <property name="transition.fill">1</property>
-      <property name="transition.distort">0</property>
-      <property name="transition.rect">167 99 1150 658.989 1</property>
-      <property name="transition.valign">middle</property>
-      <property name="transition.halign">center</property>
-      <property name="shotcut:animIn">00:00:00.000</property>
-      <property name="shotcut:animOut">00:00:00.000</property>
-      <property name="transition.threads">0</property>
-    </filter>
-    <filter id="filter30" out="00:00:02.967">
-      <property name="start">1</property>
-      <property name="level">1</property>
-      <property name="mlt_service">brightness</property>
-      <property name="shotcut:filter">fadeInBrightness</property>
-      <property name="alpha">00:00:00.000=0;00:00:00.967=1</property>
-      <property name="shotcut:animIn">00:00:01.000</property>
-    </filter>
-    <filter id="filter31" out="00:00:02.967">
-      <property name="start">1</property>
-      <property name="level">1</property>
-      <property name="mlt_service">brightness</property>
-      <property name="shotcut:filter">fadeOutBrightness</property>
-      <property name="alpha">00:00:02.000=1;00:00:02.967=0</property>
-      <property name="shotcut:animOut">00:00:01.000</property>
-      <property name="shotcut:animIn">0</property>
-    </filter>
-  </producer>
-  <producer id="producer20" in="00:00:00.000" out="03:59:59.967">
-    <property name="length">04:00:00.000</property>
-    <property name="eof">pause</property>
-    <property name="resource">mfl_terminal_dashboard_1216.png</property>
-    <property name="ttl">1</property>
-    <property name="aspect_ratio">1</property>
-    <property name="meta.media.progressive">1</property>
-    <property name="seekable">1</property>
-    <property name="format">2</property>
-    <property name="meta.media.width">801</property>
-    <property name="meta.media.height">459</property>
-    <property name="mlt_service">qimage</property>
-    <property name="xml">was here</property>
-    <property name="shotcut:hash">50484d9c8acc6b74859b261a6d467f41</property>
-    <property name="shotcut:caption">mfl_terminal_dashboard_1216.png</property>
-    <property name="meta.shotcut.vui">1</property>
-    <filter id="filter32" out="00:00:00.967">
-      <property name="background">color:#00000000</property>
-      <property name="mlt_service">affine</property>
-      <property name="shotcut:filter">affineSizePosition</property>
-      <property name="transition.fix_rotate_x">0</property>
-      <property name="transition.fill">1</property>
-      <property name="transition.distort">0</property>
-      <property name="transition.rect">167 99 1150 658.989 1</property>
-      <property name="transition.valign">middle</property>
-      <property name="transition.halign">center</property>
-      <property name="shotcut:animIn">00:00:00.000</property>
-      <property name="shotcut:animOut">00:00:00.000</property>
-      <property name="transition.threads">0</property>
-    </filter>
-    <filter id="filter33" out="00:00:00.967">
-      <property name="start">1</property>
-      <property name="level">1</property>
-      <property name="mlt_service">brightness</property>
-      <property name="shotcut:filter">fadeInBrightness</property>
-      <property name="alpha">00:00:00.000=0;00:00:00.967=1</property>
-      <property name="shotcut:animIn">00:00:01.000</property>
-    </filter>
-  </producer>
-  <producer id="producer21" in="00:00:00.000" out="03:59:59.967">
-    <property name="length">04:00:00.000</property>
-    <property name="eof">pause</property>
-    <property name="resource">qrcode.svg</property>
-    <property name="ttl">1</property>
-    <property name="aspect_ratio">1</property>
-    <property name="meta.media.progressive">1</property>
-    <property name="seekable">1</property>
-    <property name="format">2</property>
-    <property name="meta.media.width">41</property>
-    <property name="meta.media.height">41</property>
-    <property name="mlt_service">qimage</property>
-    <property name="creation_time">2026-01-18T22:05:36</property>
-    <property name="shotcut:skipConvert">1</property>
-    <property name="shotcut:hash">af68519e6e6d6436ed7bb493c883de09</property>
-    <property name="shotcut:caption">qrcode.svg</property>
-    <property name="meta.shotcut.vui">1</property>
-    <filter id="filter34" out="00:00:21.633">
-      <property name="background">color:#00000000</property>
-      <property name="mlt_service">affine</property>
-      <property name="shotcut:filter">affineSizePosition</property>
-      <property name="transition.fix_rotate_x">0</property>
-      <property name="transition.fill">1</property>
-      <property name="transition.distort">0</property>
-      <property name="transition.rect">1298.82 164.118 450 450 1</property>
-      <property name="transition.valign">middle</property>
-      <property name="transition.halign">center</property>
-      <property name="shotcut:animIn">00:00:00.000</property>
-      <property name="shotcut:animOut">00:00:00.000</property>
-      <property name="transition.threads">0</property>
-    </filter>
-    <filter id="filter35" out="00:00:21.633">
-      <property name="start">1</property>
-      <property name="level">1</property>
-      <property name="mlt_service">brightness</property>
-      <property name="shotcut:filter">fadeInBrightness</property>
-      <property name="alpha">00:00:00.000=0;00:00:00.967=1</property>
-      <property name="shotcut:animIn">00:00:01.000</property>
-    </filter>
-  </producer>
-  <playlist id="playlist3">
-    <property name="shotcut:video">1</property>
-    <property name="shotcut:name">Terminal Screen 2</property>
-    <property name="shotcut:lock">0</property>
-    <blank length="00:01:31.933"/>
-    <entry producer="producer18" in="00:00:16.433" out="00:00:17.467"/>
-    <blank length="00:01:06.067"/>
-    <entry producer="producer19" in="00:00:00.000" out="00:00:02.967"/>
-    <blank length="00:00:01.033"/>
-    <entry producer="producer20" in="00:00:00.000" out="00:00:00.967"/>
-    <blank length="00:00:39.000"/>
-    <entry producer="producer21" in="00:00:00.000" out="00:00:21.633"/>
+    <entry producer="producer18" in="00:00:01.100" out="00:00:05.500"/>
+    <blank length="00:00:00.167"/>
+    <entry producer="producer19" in="00:00:00.000" out="00:00:09.933"/>
   </playlist>
   <producer id="producer22" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
@@ -1361,7 +1316,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">Terminal Rahmen</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter36" out="00:03:06.333">
+    <filter id="filter36" out="00:02:57.467">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -1375,70 +1330,62 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animOut">00:00:00.000</property>
       <property name="transition.threads">0</property>
     </filter>
-    <filter id="filter37" out="00:03:06.333">
+    <filter id="filter37" out="00:02:57.467">
       <property name="version">0.5</property>
       <property name="mlt_service">frei0r.bluescreen0r</property>
       <property name="threads">0</property>
       <property name="0">#00ef00</property>
       <property name="1">0.288</property>
     </filter>
-    <filter id="filter38" out="00:03:06.333">
+    <filter id="filter38" out="00:02:57.467">
       <property name="start">1</property>
       <property name="level">1</property>
       <property name="mlt_service">brightness</property>
       <property name="shotcut:filter">fadeOutBrightness</property>
-      <property name="alpha">00:03:05.367=1;00:03:06.333=0</property>
+      <property name="alpha">00:02:56.500=1;00:02:57.467=0</property>
       <property name="shotcut:animOut">00:00:01.000</property>
     </filter>
   </producer>
-  <producer id="producer23" in="00:00:00.000" out="03:59:59.967">
+  <producer id="producer20" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
-    <property name="resource">Logo.svg</property>
+    <property name="resource">mfl_logo.png</property>
     <property name="ttl">1</property>
     <property name="aspect_ratio">1</property>
     <property name="meta.media.progressive">1</property>
     <property name="seekable">1</property>
     <property name="format">2</property>
-    <property name="meta.media.width">220</property>
-    <property name="meta.media.height">220</property>
+    <property name="meta.media.width">800</property>
+    <property name="meta.media.height">800</property>
     <property name="mlt_service">qimage</property>
-    <property name="creation_time">2026-01-18T21:56:46</property>
+    <property name="creation_time">2026-01-19T20:42:56</property>
     <property name="shotcut:skipConvert">1</property>
-    <property name="shotcut:hash">a20bbcc332e3df6bdf3b0471e8e5e771</property>
-    <property name="shotcut:caption">Logo.svg</property>
+    <property name="shotcut:hash">b59821f3aebbbc6bac786b993708665e</property>
+    <property name="shotcut:caption">mfl_logo.png</property>
     <property name="meta.shotcut.vui">1</property>
-    <filter id="filter39" out="00:00:21.633">
+    <filter id="filter27" out="00:00:09.933">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
       <property name="transition.fix_rotate_x">0</property>
       <property name="transition.fill">1</property>
       <property name="transition.distort">0</property>
-      <property name="transition.rect">697.941 150.882 457.941 457.941 1</property>
+      <property name="transition.rect">713.064 139 500 500 1</property>
       <property name="transition.valign">middle</property>
       <property name="transition.halign">center</property>
       <property name="shotcut:animIn">00:00:00.000</property>
       <property name="shotcut:animOut">00:00:00.000</property>
       <property name="transition.threads">0</property>
     </filter>
-    <filter id="filter40" out="00:00:21.633">
-      <property name="start">1</property>
-      <property name="level">1</property>
-      <property name="mlt_service">brightness</property>
-      <property name="shotcut:filter">fadeInBrightness</property>
-      <property name="alpha">00:00:00.000=0;00:00:00.967=1</property>
-      <property name="shotcut:animIn">00:00:01.000</property>
-    </filter>
   </producer>
   <playlist id="playlist4">
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">Terminal Rahmen</property>
     <property name="shotcut:lock">0</property>
-    <blank length="00:00:14.800"/>
-    <entry producer="producer22" in="00:00:00.000" out="00:03:06.333"/>
-    <blank length="00:00:01.933"/>
-    <entry producer="producer23" in="00:00:00.000" out="00:00:21.633"/>
+    <blank length="00:00:07.367"/>
+    <entry producer="producer22" in="00:00:00.000" out="00:02:57.467"/>
+    <blank length="00:00:00.167"/>
+    <entry producer="producer20" in="00:00:00.000" out="00:00:09.933"/>
   </playlist>
   <chain id="chain7" out="00:02:16.567">
     <property name="length">00:02:16.600</property>
@@ -1518,32 +1465,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">Charm - Anno Domini Beats.mp3</property>
     <property name="xml">was here</property>
   </chain>
-  <chain id="chain10" out="00:02:16.567">
-    <property name="length">00:02:16.600</property>
-    <property name="eof">pause</property>
-    <property name="resource">/home/thomas/Development/github/soumas/model-flight-logbook/_resources/videos/Charm - Anno Domini Beats.mp3</property>
-    <property name="mlt_service">avformat-novalidate</property>
-    <property name="meta.media.nb_streams">1</property>
-    <property name="meta.media.0.stream.type">audio</property>
-    <property name="meta.media.0.codec.sample_fmt">fltp</property>
-    <property name="meta.media.0.codec.sample_rate">44100</property>
-    <property name="meta.media.0.codec.channels">2</property>
-    <property name="meta.media.0.codec.layout">stereo</property>
-    <property name="meta.media.0.codec.name">mp3float</property>
-    <property name="meta.media.0.codec.long_name">MP3 (MPEG audio layer 3)</property>
-    <property name="meta.media.0.codec.bit_rate">320000</property>
-    <property name="meta.attr.0.stream.encoder.markup">Lavf</property>
-    <property name="meta.attr.encoder.markup">Google</property>
-    <property name="seekable">1</property>
-    <property name="audio_index">0</property>
-    <property name="video_index">-1</property>
-    <property name="creation_time">2026-01-15T22:01:31</property>
-    <property name="astream">0</property>
-    <property name="shotcut:skipConvert">1</property>
-    <property name="shotcut:hash">77dfc86dccf245cd8198d93fa84e5409</property>
-    <property name="shotcut:caption">Charm - Anno Domini Beats.mp3</property>
-    <property name="xml">was here</property>
-  </chain>
   <chain id="chain12" out="00:02:16.567">
     <property name="length">00:02:16.600</property>
     <property name="eof">pause</property>
@@ -1574,11 +1495,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:audio">1</property>
     <property name="shotcut:name">A1</property>
     <property name="shotcut:lock">0</property>
-    <entry producer="chain7" in="00:00:00.000" out="00:00:22.067"/>
+    <entry producer="chain7" in="00:00:07.433" out="00:00:22.067"/>
     <entry producer="chain8" in="00:00:22.100" out="00:01:50.700"/>
-    <entry producer="chain9" in="00:00:22.100" out="00:01:50.700"/>
-    <entry producer="chain10" in="00:01:50.733" out="00:02:05.467"/>
-    <entry producer="chain12" in="00:02:05.667" out="00:02:16.267"/>
+    <entry producer="chain9" in="00:00:22.100" out="00:01:43.367"/>
+    <entry producer="chain12" in="00:02:10.900" out="00:02:16.267"/>
   </playlist>
   <producer id="producer24" in="00:00:00.000" out="00:00:09.967">
     <property name="length">00:00:10.000</property>
@@ -1853,10 +1773,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">anim-dashcheckedin.rawr</property>
     <property name="xml">was here</property>
   </producer>
-  <producer id="producer37" in="00:00:00.000" out="00:00:11.633">
-    <property name="length">00:00:11.667</property>
+  <producer id="producer21" in="00:00:00.000" out="00:00:06.633">
+    <property name="length">00:00:06.667</property>
     <property name="eof">loop</property>
-    <property name="resource">anim-dashcheckout.rawr</property>
+    <property name="resource">anim-clockfokus.rawr</property>
     <property name="background">#00000000</property>
     <property name="aspect_ratio">1</property>
     <property name="progressive">1</property>
@@ -1868,10 +1788,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="meta.media.frame_rate">30</property>
     <property name="first_frame">0</property>
     <property name="mlt_service">glaxnimate</property>
-    <property name="creation_time">2026-01-18T21:29:08</property>
+    <property name="creation_time">2026-01-19T17:58:56</property>
     <property name="shotcut:skipConvert">1</property>
-    <property name="shotcut:hash">8374dd2e842549e3f9f369b7e4cec908</property>
-    <property name="shotcut:caption">anim-dashcheckout.rawr</property>
+    <property name="shotcut:hash">08985df349addf04705af796f691a4d3</property>
+    <property name="shotcut:caption">anim-clockfokus.rawr</property>
     <property name="xml">was here</property>
   </producer>
   <producer id="producer38" in="00:00:00.000" out="00:00:02.367">
@@ -1977,12 +1897,13 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:skipConvert">1</property>
     <property name="shotcut:hash">0f05b56c9486b774f7ab7c1ede885ec2</property>
     <property name="shotcut:caption">anim-docheckouttouch.rawr</property>
+    <property name="xml">was here</property>
   </producer>
   <playlist id="playlist6">
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">Infoboxen</property>
     <property name="shotcut:lock">0</property>
-    <blank length="00:00:17.567"/>
+    <blank length="00:00:10.133"/>
     <entry producer="producer24" in="00:00:00.000" out="00:00:09.967"/>
     <blank length="00:00:02.000"/>
     <entry producer="producer25" in="00:00:00.000" out="00:00:09.967"/>
@@ -1991,9 +1912,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <blank length="00:00:02.000"/>
     <entry producer="producer27" in="00:00:00.000" out="00:00:09.967"/>
     <entry producer="producer28" in="00:00:00.000" out="00:00:02.367"/>
-    <blank length="00:00:04.633"/>
+    <blank length="00:00:01.800"/>
     <entry producer="producer29" in="00:00:00.000" out="00:00:01.167"/>
-    <blank length="00:00:03.567"/>
+    <blank length="00:00:04.300"/>
     <entry producer="producer30" in="00:00:00.000" out="00:00:09.967"/>
     <blank length="00:00:01.200"/>
     <entry producer="producer31" in="00:00:00.000" out="00:00:01.167"/>
@@ -2005,10 +1926,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <entry producer="producer34" in="00:00:00.000" out="00:00:09.967"/>
     <blank length="00:00:03.700"/>
     <entry producer="producer35" in="00:00:00.000" out="00:00:01.633"/>
-    <blank length="00:00:05.067"/>
+    <blank length="00:00:04.800"/>
     <entry producer="producer36" in="00:00:00.000" out="00:00:09.967"/>
-    <blank length="00:00:01.100"/>
-    <entry producer="producer37" in="00:00:00.000" out="00:00:11.633"/>
+    <blank length="00:00:00.900"/>
+    <entry producer="producer21" in="00:00:00.000" out="00:00:06.267"/>
     <entry producer="producer38" in="00:00:00.000" out="00:00:02.367"/>
     <blank length="00:00:01.433"/>
     <entry producer="producer39" in="00:00:00.000" out="00:00:01.633"/>
@@ -2016,34 +1937,33 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <entry producer="producer40" in="00:00:00.000" out="00:00:09.967"/>
     <blank length="00:00:00.967"/>
     <entry producer="producer41" in="00:00:00.000" out="00:00:01.167"/>
-    <blank length="00:00:08.533"/>
+    <blank length="00:00:07.800"/>
     <entry producer="producer42" in="00:00:00.000" out="00:00:01.167"/>
   </playlist>
-  <tractor id="tractor3" title="Shotcut version 26.1.6" in="00:00:00.000" out="00:03:44.733">
+  <tractor id="tractor6" title="Shotcut version 26.1.6" in="00:00:00.000" out="00:03:14.967">
     <property name="shotcut">1</property>
     <property name="shotcut:projectAudioChannels">2</property>
     <property name="shotcut:projectFolder">1</property>
     <property name="shotcut:processingMode">Native8Cpu</property>
-    <property name="shotcut:trackHeaderWidth">196</property>
-    <property name="shotcut:trackHeight">30</property>
-    <property name="shotcut:scaleFactor">0.922671</property>
+    <property name="shotcut:trackHeaderWidth">186</property>
+    <property name="shotcut:trackHeight">10</property>
+    <property name="shotcut:scaleFactor">2.16919</property>
     <property name="shotcut:skipConvert">0</property>
     <track producer="background"/>
     <track producer="playlist0"/>
     <track producer="playlist1"/>
     <track producer="playlist2"/>
-    <track producer="playlist3"/>
     <track producer="playlist4"/>
     <track producer="playlist5" hide="both"/>
     <track producer="playlist6"/>
-    <transition id="transition6">
+    <transition id="transition12">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="mlt_service">mix</property>
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition7">
+    <transition id="transition13">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="compositing">0</property>
@@ -2052,97 +1972,76 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="mlt_service">qtblend</property>
       <property name="disable">1</property>
     </transition>
-    <transition id="transition8">
-      <property name="a_track">0</property>
-      <property name="b_track">2</property>
-      <property name="mlt_service">mix</property>
-      <property name="always_active">1</property>
-      <property name="sum">1</property>
-    </transition>
-    <transition id="transition9">
-      <property name="a_track">1</property>
-      <property name="b_track">2</property>
-      <property name="compositing">0</property>
-      <property name="distort">0</property>
-      <property name="rotate_center">0</property>
-      <property name="mlt_service">qtblend</property>
-      <property name="1">normal</property>
-      <property name="disable">0</property>
-    </transition>
-    <transition id="transition10">
-      <property name="a_track">0</property>
-      <property name="b_track">3</property>
-      <property name="mlt_service">mix</property>
-      <property name="always_active">1</property>
-      <property name="sum">1</property>
-    </transition>
-    <transition id="transition11">
-      <property name="a_track">1</property>
-      <property name="b_track">3</property>
-      <property name="compositing">0</property>
-      <property name="distort">0</property>
-      <property name="rotate_center">0</property>
-      <property name="mlt_service">qtblend</property>
-      <property name="1">normal</property>
-      <property name="disable">0</property>
-    </transition>
-    <transition id="transition12">
-      <property name="a_track">0</property>
-      <property name="b_track">4</property>
-      <property name="mlt_service">mix</property>
-      <property name="always_active">1</property>
-      <property name="sum">1</property>
-    </transition>
-    <transition id="transition13">
-      <property name="a_track">1</property>
-      <property name="b_track">4</property>
-      <property name="compositing">0</property>
-      <property name="distort">0</property>
-      <property name="rotate_center">0</property>
-      <property name="mlt_service">qtblend</property>
-      <property name="1">normal</property>
-      <property name="disable">0</property>
-    </transition>
     <transition id="transition14">
       <property name="a_track">0</property>
-      <property name="b_track">5</property>
+      <property name="b_track">2</property>
       <property name="mlt_service">mix</property>
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
     <transition id="transition15">
       <property name="a_track">1</property>
-      <property name="b_track">5</property>
+      <property name="b_track">2</property>
       <property name="compositing">0</property>
       <property name="distort">0</property>
       <property name="rotate_center">0</property>
       <property name="mlt_service">qtblend</property>
       <property name="1">normal</property>
-      <property name="disable">0</property>
     </transition>
     <transition id="transition16">
+      <property name="a_track">0</property>
+      <property name="b_track">3</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition17">
+      <property name="a_track">1</property>
+      <property name="b_track">3</property>
+      <property name="compositing">0</property>
+      <property name="distort">0</property>
+      <property name="rotate_center">0</property>
+      <property name="mlt_service">qtblend</property>
+      <property name="1">normal</property>
+    </transition>
+    <transition id="transition18">
+      <property name="a_track">0</property>
+      <property name="b_track">4</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition19">
+      <property name="a_track">1</property>
+      <property name="b_track">4</property>
+      <property name="compositing">0</property>
+      <property name="distort">0</property>
+      <property name="rotate_center">0</property>
+      <property name="mlt_service">qtblend</property>
+      <property name="1">normal</property>
+    </transition>
+    <transition id="transition20">
+      <property name="a_track">0</property>
+      <property name="b_track">5</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition21">
       <property name="a_track">0</property>
       <property name="b_track">6</property>
       <property name="mlt_service">mix</property>
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition17">
-      <property name="a_track">0</property>
-      <property name="b_track">7</property>
-      <property name="mlt_service">mix</property>
-      <property name="always_active">1</property>
-      <property name="sum">1</property>
-    </transition>
-    <transition id="transition18">
+    <transition id="transition22">
       <property name="a_track">1</property>
-      <property name="b_track">7</property>
+      <property name="b_track">6</property>
       <property name="compositing">0</property>
       <property name="distort">0</property>
       <property name="rotate_center">0</property>
       <property name="mlt_service">qtblend</property>
       <property name="1">normal</property>
-      <property name="disable">0</property>
     </transition>
   </tractor>
 </mlt>

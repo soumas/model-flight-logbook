@@ -425,8 +425,8 @@
                                             "name": "Rectangle 2",
                                             "position": {
                                                 "value": {
-                                                    "x": 559.4776884220511,
-                                                    "y": 921.2100315480419
+                                                    "x": 685.529540273903,
+                                                    "y": 892.6100315480419
                                                 }
                                             },
                                             "reversed": false,
@@ -435,8 +435,8 @@
                                             },
                                             "size": {
                                                 "value": {
-                                                    "height": 257.3801812644749,
-                                                    "width": 787.7530134763031
+                                                    "height": 200.18018126447475,
+                                                    "width": 1039.8567171800069
                                                 }
                                             },
                                             "uuid": "146a5844-fa1c-4df3-8416-d34dd78e46fe",
@@ -539,7 +539,7 @@
                                                     "y": 478.21565731166913
                                                 }
                                             },
-                                            "text": "Warnungen müssen explizit\nakzeptiert werden, bevor ein \nCheck-In möglich ist",
+                                            "text": "Warnungen müssen explizit akzeptiert\nwerden, bevor ein Check-In möglich ist",
                                             "uuid": "7c9231b7-2726-48fb-ab26-3590034a00d8",
                                             "visible": true
                                         }
@@ -555,7 +555,7 @@
                                         "position": {
                                             "value": {
                                                 "x": 776.066581422256,
-                                                "y": 1301.7796527574474
+                                                "y": 1303.898171275966
                                             }
                                         },
                                         "rotation": {
@@ -617,7 +617,6 @@
                     "locked": false,
                     "name": "",
                     "shapes": [
-                        null
                     ],
                     "uuid": "ba992f41-e8f6-47ac-8eb9-d16a3fbac466",
                     "visible": true,
