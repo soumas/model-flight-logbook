@@ -9,7 +9,7 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 <br/>
 
-## 👨‍✈️ Features für Pilot:innen
+## 👨‍✈️ Für Pilot:innen
 
 - **Übersichtliches, touch-optimiertes Kiosk-Terminal**  
   Intuitive Bedienung – geeignet für Jung und Alt
@@ -38,7 +38,7 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 <br/>
 
-## 🏛️ Features für Vereinsvorstände
+## 🏛️ Für Vereinsvorstände
 
 - **Web-basiertes Verwaltungsportal (MFL-Admin)**  
   Zentrale Administration aller Piloten- und Flugdaten
@@ -60,7 +60,7 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 <br/>
 
-## 🛠️ Features für Systemadministrator:innen
+## 🛠️ Für Systemadministrator:innen
 
 - **Installations-Script für ein vollständiges Setup**  
   Schnelle und einfache Inbetriebnahme
@@ -78,7 +78,8 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 
 # Videos / Screenshots
-TODO
+YouTube   
+[![MFL Terminal Funktionsübersicht](https://raw.githubusercontent.com/soumas/model-flight-logbook/refs/heads/main/_resources/videos/MflTerminalFunktionsuebersicht/youtube_titleimage.png)](https://www.youtube.com/watch?v=QN9n_aaGvsA)
 
 # Setup
 TODO
