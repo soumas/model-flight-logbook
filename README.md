@@ -9,62 +9,62 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 ## Für Pilot:innen
 
-- **Übersichtliches, touch-optimiertes Kiosk-Terminal**  
+- **Übersichtliches, touch-optimiertes Kiosk-Terminal:**
   Intuitive Bedienung – geeignet für Jung und Alt
 
-- **Digitales Flugbuch per Check-In / Check-Out**  
+- **Digitales Flugbuch per Check-In / Check-Out:**
   Protokollierung der Anwesenheit und gesetzlich erforderlicher Informationen
 
-- **Flexible Benutzer-Identifizierung**  
+- **Flexible Benutzer-Identifizierung:**
   Anmeldung per RFID-Chip oder über sonstige Eingabegeräte (z. B. Tastatur, Ziffernblock, …)
 
-- **Dokumenten-Überwachung**  
+- **Dokumenten-Überwachung:**
   Warnungen am Terminal vor Ablauf des Drohnenführerscheins oder der Registrierung
 
-- **Automatisches Flugverbot**  
+- **Automatisches Flugverbot:**
   Bei fehlenden oder abgelaufenen Pflichtdokumenten
 
-- **Individuelle und globale Hinweise**  
+- **Individuelle und globale Hinweise:**
   Infos, Warnungen oder Flugverbotsmeldungen – global oder personenbezogen  
 
-- **Tagesaktuelle Betriebszeiten**  
+- **Tagesaktuelle Betriebszeiten:**
   Berücksichtigung der erlaubten Flugzeiten (CMT bis CET)  
 
-- **Export des persönlichen Flugbuchs**  
+- **Export des persönlichen Flugbuchs:**
   Versand per E-Mail über das MFL Terminal  
 
 ## Für Vereinsvorstände
 
-- **Web-basiertes Verwaltungsportal (MFL-Admin)**  
+- **Web-basiertes Verwaltungsportal (MFL-Admin):**
   Zentrale Administration aller Piloten- und Flugdaten
 
-- **CSV-Export des Flugbuchs**  
+- **CSV-Export des Flugbuchs:**
   Mit einem Klick, z. B. für behördliche Einreichungen
 
-- **Verwaltung von Infos, Warnungen und Flugverboten**  
+- **Verwaltung von Infos, Warnungen und Flugverboten:**
   Global oder pilotenspezifisch definierbar
 
-- **Aussagekräftige Jahresstatistiken**  
+- **Aussagekräftige Jahresstatistiken:**
   Übersicht über Auslastung, Flugzeiten und Aktivitäten
 
-- **E-Mail-Benachrichtigungen an den Administrator**  
+- **E-Mail-Benachrichtigungen an den Administrator:**
   Z.B. Bei Einträgen unter „Besondere Ereignisse“
 
-- **Automatische Beendigung vergessener Check-Outs**  
+- **Automatische Beendigung vergessener Check-Outs:**
   Inklusive Benachrichtigung an die betroffene Pilot:in
 
-- **Kostengünstig**  
+- **Kostengünstig:**
   MFL ist kostenlos und kann auf günstiger Hardware betrieben werden
 
 ## Für Systemadministrator:innen
 
-- **Installations-Script für ein vollständiges Setup**  
+- **Installations-Script für ein vollständiges Setup:**
   Schnelle und einfache Inbetriebnahme
 
-- **Update-Script für einfache Aktualisierungen**  
+- **Update-Script für einfache Aktualisierungen:**
   Per Cronjob automatisierbar
 
-- **REST-API**  
+- **REST-API:**
   Für die Anbindung an Fremdsysteme
 
 - **Unterstützung von komplexen Setups, wie:**  
