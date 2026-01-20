@@ -1,5 +1,6 @@
 
 # Model Flight Logbook (MFL)
+<br/>
 <img align="left" src="./terminal/_resources/images/Logo.svg" width="80" alt="MFL Logo">
 
 **Model Flight Logbook (MFL)** ist ein digitales Flugbuch für Modellflugvereine. 
