@@ -1,24 +1,27 @@
-<img src="./terminal/_resources/images/Logo.svg" width="100">
 
 # Model Flight Logbook (MFL)
+<img align="left" margin="10" src="./terminal/_resources/images/Logo.svg" width="80" alt="MFL Logo">
+<img align="left" margin="10" src="./_resources/images/transpix.png" width="16" height="85" alt="MFL Logo">
 
-**Model Flight Logbook (MFL)** ist ein digitales Flugbuch für Modellflugvereine.  
+**Model Flight Logbook (MFL)** ist ein digitales Flugbuch für Modellflugvereine. 
 Die Anwendung ist **einfach, übersichtlich und praxisnah** konzipiert und unterstützt Pilot:innen sowie Vereine bei der **Einhaltung der gesetzlichen Anforderungen in Österreich**.
 
 MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flugplatz** und bietet zusätzlich eine **Web-basierte Verwaltungs- und Auswertungsplattform**.
 
 <br/>
 
-## 👨‍✈️ Für Pilot:innen
+# Funktionen
+
+## Für Pilot:innen
 
 - **Übersichtliches, touch-optimiertes Kiosk-Terminal**  
   Intuitive Bedienung – geeignet für Jung und Alt
 
 - **Digitales Flugbuch per Check-In / Check-Out**  
-  Automatische Protokollierung von Anwesenheit und Flugzeiten
+  Protokollierung der Anwesenheit und gesetzlich erforderlicher Informationen
 
 - **Flexible Benutzer-Identifizierung**  
-  Anmeldung per RFID-Chip oder alternativ über Eingabegeräte (z. B. Tastatur, Ziffernblock, …)
+  Anmeldung per RFID-Chip oder über sonstige Eingabegeräte (z. B. Tastatur, Ziffernblock, …)
 
 - **Dokumenten-Überwachung**  
   Warnungen am Terminal vor Ablauf des Drohnenführerscheins oder der Registrierung
@@ -27,18 +30,15 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
   Bei fehlenden oder abgelaufenen Pflichtdokumenten
 
 - **Individuelle und globale Hinweise**  
-  Infos, Warnungen oder Flugverbotsmeldungen – global oder pilotenspezifisch
+  Infos, Warnungen oder Flugverbotsmeldungen – global oder personenbezogen  
 
 - **Tagesaktuelle Betriebszeiten**  
   Berücksichtigung der erlaubten Flugzeiten (CMT bis CET)  
-  Automatisches Flugverbot außerhalb dieser Zeiten
 
 - **Export des persönlichen Flugbuchs**  
-  Versand per E-Mail über das MFL Terminal
+  Versand per E-Mail über das MFL Terminal  
 
-<br/>
-
-## 🏛️ Für Vereinsvorstände
+## Für Vereinsvorstände
 
 - **Web-basiertes Verwaltungsportal (MFL-Admin)**  
   Zentrale Administration aller Piloten- und Flugdaten
@@ -52,34 +52,43 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 - **Aussagekräftige Jahresstatistiken**  
   Übersicht über Auslastung, Flugzeiten und Aktivitäten
 
-- **Sofortige E-Mail-Benachrichtigungen**  
-  Bei Einträgen unter „Besondere Ereignisse“
+- **E-Mail-Benachrichtigungen an den Administrator**  
+  Z.B. Bei Einträgen unter „Besondere Ereignisse“
 
 - **Automatische Beendigung vergessener Check-Outs**  
   Inklusive Benachrichtigung an die betroffene Pilot:in
 
-<br/>
-
-## 🛠️ Für Systemadministrator:innen
+## Für Systemadministrator:innen
 
 - **Installations-Script für ein vollständiges Setup**  
   Schnelle und einfache Inbetriebnahme
 
 - **Update-Script für einfache Aktualisierungen**  
-  Optional automatisierbar
+  Per Cronjob automatisierbar
 
 - **REST-API**  
-  Für den automatischen Abgleich von Pilot:innen mit einer bestehenden Vereinsdatenbank
+  Für die Anbindung an Fremdsysteme
 
-- **Unterstützung mehrerer Terminals pro Flugplatz**
+- **Unterstützung von komplexen Setups, wie:**  
+  - Mehrere MFL Terminals auf einem Flugplatz  
+  - Mehrere Flugplätze pro Verein (z.B. Tal- und Hangflugplatz)  
+  - Ein Terminal unterstützt mehrere Server (z.B. bei Flugplatz-Sharing)
 
-- **Unterstützung mehrerer Flugplätze pro Verein**  
-  (Advanced Setup)
-
+<br/>
 
 # Videos / Screenshots
-- **<a target="_blank" href="https://www.youtube.com/watch?v=QN9n_aaGvsA">MFL Terminal Funktionsübersicht (YouTube)</a>**
 
+<table>
+  <tr>
+    <td>
+      <a href="https://www.youtube.com/watch?v=kF_Z988H-uU" target="_blank"><img src="https://img.youtube.com/vi/kF_Z988H-uU/0.jpg" style="width:250;"><br/>YouTube öffnen</a></td>
+    <td>
+    <a href="https://www.youtube.com/watch?v=kF_Z988H-uU" target="_blank"><img src="https://img.youtube.com/vi/kF_Z988H-uU/0.jpg" style="width:250"><br/>YouTube öffnen</a>
+    </td>
+  </tr>
+</table>
+
+<br/>
 
 # Setup
 TODO

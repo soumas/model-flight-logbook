@@ -216,18 +216,19 @@
     <property name="meta.media.width">3454</property>
     <property name="meta.media.height">2366</property>
     <property name="mlt_service">qimage</property>
-    <property name="xml">was here</property>
+    <property name="creation_time">2025-05-23T23:37:04</property>
+    <property name="shotcut:skipConvert">1</property>
     <property name="shotcut:hash">075d9ef344e26c45fa93e47cca169fdc</property>
     <property name="shotcut:caption">aircraft-1813731.jpg</property>
     <property name="meta.shotcut.vui">1</property>
-    <filter id="filter0" in="00:00:07.433" out="00:03:08.800">
+    <filter id="filter0" out="00:03:08.800">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
       <property name="transition.fix_rotate_x">0</property>
       <property name="transition.fill">1</property>
       <property name="transition.distort">0</property>
-      <property name="transition.rect">-1191.16 -568.866 3270.06 2240 1</property>
+      <property name="transition.rect">-1191 -569 3270 2239.96 1</property>
       <property name="transition.valign">middle</property>
       <property name="transition.halign">center</property>
       <property name="shotcut:animIn">00:00:00.000</property>
@@ -1352,7 +1353,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="mlt_service">frei0r.bluescreen0r</property>
       <property name="threads">0</property>
       <property name="0">#00ef00</property>
-      <property name="1">0.288</property>
+      <property name="1">0.4</property>
     </filter>
     <filter id="filter38" out="00:02:56.267">
       <property name="start">1</property>
@@ -1765,8 +1766,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">anim-pilotinfo-warnings.rawr</property>
     <property name="xml">was here</property>
   </producer>
-  <producer id="producer35" in="00:00:00.000" out="00:00:01.633">
-    <property name="length">00:00:01.667</property>
+  <producer id="producer35" in="00:00:00.000" out="00:00:00.967">
+    <property name="length">00:00:01.000</property>
     <property name="eof">loop</property>
     <property name="resource">anim-docheckintouch.rawr</property>
     <property name="background">#00000000</property>
@@ -1849,8 +1850,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">anim-dorfidscan.rawr</property>
     <property name="xml">was here</property>
   </producer>
-  <producer id="producer39" in="00:00:00.000" out="00:00:01.633">
-    <property name="length">00:00:01.667</property>
+  <producer id="producer39" in="00:00:00.000" out="00:00:00.967">
+    <property name="length">00:00:01.000</property>
     <property name="eof">loop</property>
     <property name="resource">anim-docheckintouch.rawr</property>
     <property name="background">#00000000</property>
@@ -1912,8 +1913,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:caption">anim-doanzahlfluegetouch.rawr</property>
     <property name="xml">was here</property>
   </producer>
-  <producer id="producer42" in="00:00:00.000" out="00:00:01.167">
-    <property name="length">00:00:01.200</property>
+  <producer id="producer42" in="00:00:00.000" out="00:00:00.967">
+    <property name="length">00:00:01.000</property>
     <property name="eof">loop</property>
     <property name="resource">anim-docheckouttouch.rawr</property>
     <property name="background">#00000000</property>
@@ -1959,20 +1960,20 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <blank length="00:00:03.600"/>
     <entry producer="producer34" in="00:00:00.000" out="00:00:09.967"/>
     <blank length="00:00:03.700"/>
-    <entry producer="producer35" in="00:00:00.000" out="00:00:01.633"/>
-    <blank length="00:00:03.600"/>
+    <entry producer="producer35" in="00:00:00.000" out="00:00:00.967"/>
+    <blank length="00:00:04.267"/>
     <entry producer="producer36" in="00:00:00.000" out="00:00:09.967"/>
     <blank length="00:00:02.100"/>
     <entry producer="producer21" in="00:00:00.000" out="00:00:06.267"/>
     <entry producer="producer38" in="00:00:00.000" out="00:00:02.367"/>
     <blank length="00:00:01.433"/>
-    <entry producer="producer39" in="00:00:00.000" out="00:00:01.633"/>
-    <blank length="00:00:02.033"/>
+    <entry producer="producer39" in="00:00:00.000" out="00:00:00.967"/>
+    <blank length="00:00:02.700"/>
     <entry producer="producer40" in="00:00:00.000" out="00:00:09.967"/>
     <blank length="00:00:00.967"/>
     <entry producer="producer41" in="00:00:00.000" out="00:00:00.967"/>
     <blank length="00:00:08.000"/>
-    <entry producer="producer42" in="00:00:00.000" out="00:00:01.167"/>
+    <entry producer="producer42" in="00:00:00.000" out="00:00:00.967"/>
   </playlist>
   <tractor id="tractor6" title="Shotcut version 26.1.6" in="00:00:00.000" out="00:03:08.800">
     <property name="shotcut">1</property>
