@@ -7,8 +7,6 @@ Die Anwendung ist **einfach, übersichtlich und praxisnah** konzipiert und unter
 
 MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flugplatz** und bietet zusätzlich eine **Web-basierte Verwaltungs- und Auswertungsplattform**.
 
-<br/>
-
 ## Für Pilot:innen
 
 - **Übersichtliches, touch-optimiertes Kiosk-Terminal**  
@@ -55,6 +53,9 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 - **Automatische Beendigung vergessener Check-Outs**  
   Inklusive Benachrichtigung an die betroffene Pilot:in
 
+- **Kostengünstig**  
+  MFL ist kostenlos und kann auf günstiger Hardware betrieben werden
+
 ## Für Systemadministrator:innen
 
 - **Installations-Script für ein vollständiges Setup**  
@@ -75,7 +76,7 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 # Videos / Screenshots
 
-<table>
+<table border="0">
   <tr>
     <td>
       <a href="https://www.youtube.com/watch?v=kF_Z988H-uU" target="_blank"><img src="https://img.youtube.com/vi/kF_Z988H-uU/0.jpg" style="width:250;"><br/>YouTube öffnen</a></td>
@@ -87,8 +88,16 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
 
 <br/>
 
+# Anforderungen
+TODO
+* Person mit IT Kenntnissen TODO
+* Computernetzwerk TODO
+* Hardware für Standardsetup TODO
+
 # Setup
 TODO
+* Bau des Terminals TODO
+* Installation TODO
 
 # Disclaimer
 Der Haftungsausschluss ist grundsätzlich bereits über die verwendete Lizenz geregelt. Trotzdem weise ich an dieser Stelle noch einmal explizit darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt auf vollständiges Risiko des Betreibers.
