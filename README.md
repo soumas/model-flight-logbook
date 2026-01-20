@@ -81,7 +81,7 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
     <td >
       <a href="https://www.youtube.com/watch?v=kF_Z988H-uU" target="_blank"><img src="https://img.youtube.com/vi/kF_Z988H-uU/0.jpg" style="width:200;"><br/>YouTube öffnen</a></td>
     <td>
-    <a href="https://www.youtube.com/watch?v=kF_Z988H-uU" target="_blank"><img src="https://img.youtube.com/vi/kF_Z988H-uU/0.jpg" style="width:200"><br/>YouTube öffnen</a>
+    <a href="https://www.youtube.com/watch?v=kF_Z988H-uU" target="_blank"><img src="https://img.youtube.com/vi/kF_Z988H-uU/0.jpg" style="width:200"><br/>TODO YouTube öffnen</a>
     </td>
   </tr>
 </table>
