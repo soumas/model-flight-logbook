@@ -1,11 +1,105 @@
 <?xml version="1.0" standalone="no"?>
 <mlt LC_NUMERIC="C" version="7.36.1" title="Shotcut version 26.1.6" producer="main_bin">
   <profile description="HD 1080p 25 fps" width="1920" height="1080" progressive="1" sample_aspect_num="1" sample_aspect_den="1" display_aspect_num="16" display_aspect_den="9" frame_rate_num="30" frame_rate_den="1" colorspace="709"/>
+  <chain id="chain0" out="00:00:08.800">
+    <property name="length">00:00:08.833</property>
+    <property name="eof">pause</property>
+    <property name="resource">007_pilot_detail.mp4</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="meta.media.nb_streams">1</property>
+    <property name="meta.media.0.stream.type">video</property>
+    <property name="meta.media.0.stream.frame_rate">30</property>
+    <property name="meta.media.0.stream.sample_aspect_ratio">1</property>
+    <property name="meta.media.0.codec.width">1906</property>
+    <property name="meta.media.0.codec.height">1204</property>
+    <property name="meta.media.0.codec.rotate">0</property>
+    <property name="meta.media.0.codec.pix_fmt">yuv420p</property>
+    <property name="meta.media.0.codec.sample_aspect_ratio">1</property>
+    <property name="meta.media.0.codec.colorspace">709</property>
+    <property name="meta.media.0.codec.color_trc">1</property>
+    <property name="meta.media.0.codec.name">h264</property>
+    <property name="meta.media.0.codec.long_name">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</property>
+    <property name="meta.media.0.codec.bit_rate">13910620</property>
+    <property name="meta.attr.0.stream.handler_name.markup">VideoHandler</property>
+    <property name="meta.attr.0.stream.vendor_id.markup">[0][0][0][0]</property>
+    <property name="meta.attr.0.stream.encoder.markup">Lavc62.11.100 libx264</property>
+    <property name="meta.attr.major_brand.markup">isom</property>
+    <property name="meta.attr.minor_version.markup">512</property>
+    <property name="meta.attr.compatible_brands.markup">isomiso2avc1mp41</property>
+    <property name="meta.attr.encoder.markup">Lavf62.3.100</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="format">3</property>
+    <property name="audio_index">-1</property>
+    <property name="video_index">0</property>
+    <property name="creation_time">2026-01-21T21:31:52</property>
+    <property name="vstream">0</property>
+    <property name="meta.media.frame_rate_num">30</property>
+    <property name="meta.media.frame_rate_den">1</property>
+    <property name="meta.media.colorspace">709</property>
+    <property name="meta.media.color_trc">1</property>
+    <property name="meta.media.has_b_frames">0</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1204</property>
+    <property name="meta.media.aspect_ratio">1</property>
+    <property name="meta.media.color_range">mpeg</property>
+    <property name="shotcut:hash">98e6c61ceabfefc846127c0514996d00</property>
+    <property name="xml">was here</property>
+  </chain>
+  <chain id="chain1" out="00:00:11.400">
+    <property name="length">00:00:11.433</property>
+    <property name="eof">pause</property>
+    <property name="resource">008_pilot_detailNeu.mp4</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="meta.media.nb_streams">1</property>
+    <property name="meta.media.0.stream.type">video</property>
+    <property name="meta.media.0.stream.frame_rate">30</property>
+    <property name="meta.media.0.stream.sample_aspect_ratio">1</property>
+    <property name="meta.media.0.codec.width">1816</property>
+    <property name="meta.media.0.codec.height">1030</property>
+    <property name="meta.media.0.codec.rotate">0</property>
+    <property name="meta.media.0.codec.pix_fmt">yuv420p</property>
+    <property name="meta.media.0.codec.sample_aspect_ratio">1</property>
+    <property name="meta.media.0.codec.colorspace">709</property>
+    <property name="meta.media.0.codec.color_trc">1</property>
+    <property name="meta.media.0.codec.name">h264</property>
+    <property name="meta.media.0.codec.long_name">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</property>
+    <property name="meta.media.0.codec.bit_rate">8812746</property>
+    <property name="meta.attr.0.stream.handler_name.markup">VideoHandler</property>
+    <property name="meta.attr.0.stream.vendor_id.markup">[0][0][0][0]</property>
+    <property name="meta.attr.0.stream.encoder.markup">Lavc62.11.100 libx264</property>
+    <property name="meta.attr.major_brand.markup">isom</property>
+    <property name="meta.attr.minor_version.markup">512</property>
+    <property name="meta.attr.compatible_brands.markup">isomiso2avc1mp41</property>
+    <property name="meta.attr.encoder.markup">Lavf62.3.100</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="format">3</property>
+    <property name="audio_index">-1</property>
+    <property name="video_index">0</property>
+    <property name="creation_time">2026-01-21T22:48:19</property>
+    <property name="vstream">0</property>
+    <property name="meta.media.frame_rate_num">30</property>
+    <property name="meta.media.frame_rate_den">1</property>
+    <property name="meta.media.colorspace">709</property>
+    <property name="meta.media.color_trc">1</property>
+    <property name="meta.media.has_b_frames">0</property>
+    <property name="meta.media.width">1816</property>
+    <property name="meta.media.height">1030</property>
+    <property name="meta.media.aspect_ratio">1</property>
+    <property name="meta.media.color_range">mpeg</property>
+    <property name="shotcut:hash">e44fb506d1512a15f5d2856d368d7953</property>
+    <property name="xml">was here</property>
+  </chain>
   <playlist id="main_bin">
     <property name="xml_retain">1</property>
+    <entry producer="chain0" in="00:00:00.000" out="00:00:08.800"/>
+    <entry producer="chain1" in="00:00:00.000" out="00:00:11.400"/>
   </playlist>
-  <producer id="black" in="00:00:00.000" out="00:03:08.800">
-    <property name="length">00:03:08.833</property>
+  <producer id="black" in="00:00:00.000" out="00:03:07.933">
+    <property name="length">00:03:07.967</property>
     <property name="eof">pause</property>
     <property name="resource">0</property>
     <property name="aspect_ratio">1</property>
@@ -14,7 +108,7 @@
     <property name="set.test_audio">0</property>
   </producer>
   <playlist id="background">
-    <entry producer="black" in="00:00:00.000" out="00:03:08.800"/>
+    <entry producer="black" in="00:00:00.000" out="00:03:07.933"/>
   </playlist>
   <producer id="producer0" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
@@ -33,7 +127,7 @@
     <property name="shotcut:hash">075d9ef344e26c45fa93e47cca169fdc</property>
     <property name="shotcut:caption">aircraft-1813731.jpg</property>
     <property name="meta.shotcut.vui">1</property>
-    <filter id="filter0" out="00:03:08.800">
+    <filter id="filter0" out="00:02:20.700">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -52,7 +146,7 @@
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">Hintergrundbild</property>
     <property name="shotcut:lock">0</property>
-    <entry producer="producer0" in="00:00:00.000" out="00:03:08.800"/>
+    <entry producer="producer0" in="00:00:00.000" out="00:02:20.700"/>
   </playlist>
   <producer id="producer1" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
@@ -72,7 +166,7 @@
     <property name="shotcut:caption">Logo_video.svg</property>
     <property name="meta.shotcut.vui">1</property>
     <property name="xml">was here</property>
-    <filter id="filter1" in="00:00:07.433" out="00:03:11.067">
+    <filter id="filter1" in="00:00:07.433" out="00:01:25.133">
       <property name="background">color:#00000000</property>
       <property name="mlt_service">affine</property>
       <property name="shotcut:filter">affineSizePosition</property>
@@ -86,7 +180,7 @@
       <property name="shotcut:animOut">00:00:00.000</property>
       <property name="transition.threads">0</property>
     </filter>
-    <filter id="filter2" in="00:00:07.433" out="00:03:11.067">
+    <filter id="filter2" in="00:00:07.433" out="00:01:25.133">
       <property name="argument"></property>
       <property name="geometry">1163 865 729 257 1</property>
       <property name="family">Sans</property>
@@ -123,12 +217,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animIn">00:00:00.000</property>
       <property name="shotcut:animOut">00:00:00.000</property>
     </filter>
-    <filter id="filter3" in="00:00:07.433" out="00:03:11.067">
+    <filter id="filter3" in="00:00:07.433" out="00:01:25.133">
       <property name="start">1</property>
       <property name="level">1</property>
       <property name="mlt_service">brightness</property>
       <property name="shotcut:filter">fadeOutBrightness</property>
-      <property name="alpha">00:03:02.667=1;00:03:03.633=0</property>
+      <property name="alpha">00:01:16.733=1;00:01:17.700=0</property>
       <property name="shotcut:animOut">00:00:01.000</property>
     </filter>
   </producer>
@@ -185,8 +279,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">Logo und Text</property>
     <property name="shotcut:lock">0</property>
-    <entry producer="producer1" in="00:00:07.433" out="00:03:11.067"/>
-    <blank length="00:00:00.200"/>
+    <entry producer="producer1" in="00:00:07.433" out="00:01:25.133"/>
+    <blank length="00:00:01.200"/>
     <entry producer="producer2" in="00:00:00.000" out="00:00:04.933"/>
   </playlist>
   <chain id="chain7" out="00:02:16.567">
@@ -364,6 +458,232 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animOut">00:00:01.000</property>
     </filter>
   </producer>
+  <producer id="producer4" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">001_login.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1205</property>
+    <property name="mlt_service">qimage</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:hash">43b2fad74fe7fee0ad6925a36152efc1</property>
+    <property name="shotcut:caption">001_login.png</property>
+    <filter id="filter9" out="00:00:02.967">
+      <property name="start">1</property>
+      <property name="level">1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeInBrightness</property>
+      <property name="alpha">00:00:00.000=0;00:00:00.067=1</property>
+      <property name="shotcut:animIn">00:00:00.100</property>
+    </filter>
+    <filter id="filter10" out="00:00:02.967">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">00:00:00.000=-60;00:00:00.467=0</property>
+      <property name="channel_mask">-1</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeInVolume</property>
+      <property name="shotcut:animIn">15</property>
+    </filter>
+  </producer>
+  <producer id="producer5" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">002_login.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1205</property>
+    <property name="mlt_service">qimage</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:hash">7a5fbe81e69e6b6d767dfeb93d552562</property>
+    <property name="shotcut:caption">002_login.png</property>
+  </producer>
+  <tractor id="tractor0" in="00:00:00.000" out="00:00:00.467">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer4" in="00:00:02.500" out="00:00:02.967"/>
+    <track producer="producer5" in="00:00:00.000" out="00:00:00.467"/>
+    <transition id="transition0" out="00:00:00.467">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+      <property name="fix_background_alpha">1</property>
+    </transition>
+    <transition id="transition1" out="00:00:00.467">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer6" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">003_dashboard.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1205</property>
+    <property name="mlt_service">qimage</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:hash">9954ba7ff0b4a5e7bacfdaf191f6fe96</property>
+    <property name="shotcut:caption">003_dashboard.png</property>
+  </producer>
+  <producer id="producer7" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">004_pilot_list.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1205</property>
+    <property name="mlt_service">qimage</property>
+    <property name="xml">was here</property>
+    <property name="shotcut:hash">05334fd003b3742b1fc98d8413ac7118</property>
+    <property name="shotcut:caption">004_pilot_list.png</property>
+  </producer>
+  <producer id="producer8" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">005_pilot_list_filter.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1205</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2026-01-21T21:23:09</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">ec272e23d3e75a4d6c053aecdc110d8f</property>
+    <property name="shotcut:caption">005_pilot_list_filter.png</property>
+    <property name="xml">was here</property>
+  </producer>
+  <tractor id="tractor1" in="00:00:00.000" out="00:00:01.233">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer7" in="00:00:07.267" out="00:00:08.500"/>
+    <track producer="producer8" in="00:00:00.267" out="00:00:01.500"/>
+    <transition id="transition2" out="00:00:01.233">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+      <property name="fix_background_alpha">1</property>
+    </transition>
+    <transition id="transition3" out="00:00:01.233">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer9" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">006_pilot_detail.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1205</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2026-01-21T21:28:41</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">c18dd70021ceed4b90c7b61bc823d1e7</property>
+    <property name="shotcut:caption">006_pilot_detail.png</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer10" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">008_pilot_details.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1205</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2026-01-21T21:32:25</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">370a42448a85e6f10f059915f05480d2</property>
+    <property name="shotcut:caption">008_pilot_details.png</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer11" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">009_flugbuch_liste.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1205</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2026-01-21T21:34:15</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">2365dec250b95d950624546ad748c4b6</property>
+    <property name="shotcut:caption">009_flugbuch_liste.png</property>
+  </producer>
+  <producer id="producer12" in="00:00:00.000" out="03:59:59.967">
+    <property name="length">04:00:00.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">001_login.png</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="format">2</property>
+    <property name="meta.media.width">1906</property>
+    <property name="meta.media.height">1205</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2026-01-21T21:19:13</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">43b2fad74fe7fee0ad6925a36152efc1</property>
+    <property name="shotcut:caption">001_login.png</property>
+    <filter id="filter11" out="00:00:03.833">
+      <property name="start">1</property>
+      <property name="level">1</property>
+      <property name="mlt_service">brightness</property>
+      <property name="shotcut:filter">fadeOutBrightness</property>
+      <property name="alpha">00:00:03.367=1;00:00:03.833=0</property>
+      <property name="shotcut:animOut">15</property>
+    </filter>
+    <filter id="filter12" out="00:00:03.833">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">00:00:03.367=0;00:00:03.833=-60</property>
+      <property name="channel_mask">-1</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">fadeOutVolume</property>
+      <property name="shotcut:animOut">15</property>
+    </filter>
+  </producer>
   <producer id="producer19" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
@@ -427,10 +747,279 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">Content</property>
     <entry producer="producer3" in="00:00:07.433" out="00:00:14.433"/>
-    <blank length="00:02:56.833"/>
+    <blank length="00:00:00.367"/>
+    <entry producer="producer4" in="00:00:00.000" out="00:00:02.467"/>
+    <entry producer="tractor0" in="00:00:00.000" out="00:00:00.467"/>
+    <entry producer="producer5" in="00:00:00.500" out="00:00:02.967"/>
+    <entry producer="producer6" in="00:00:00.000" out="00:00:13.967"/>
+    <entry producer="producer7" in="00:00:00.000" out="00:00:07.233"/>
+    <entry producer="tractor1" in="00:00:00.000" out="00:00:01.233"/>
+    <entry producer="producer8" in="00:00:01.533" out="00:00:06.833"/>
+    <entry producer="producer9" in="00:00:00.000" out="00:00:04.467"/>
+    <entry producer="producer10" in="00:00:00.000" out="00:00:11.933"/>
+    <entry producer="producer11" in="00:00:00.000" out="00:00:14.100"/>
+    <entry producer="producer12" in="00:00:00.000" out="00:00:03.833"/>
+    <blank length="00:00:03.700"/>
     <entry producer="producer19" in="00:00:00.000" out="00:00:04.933"/>
   </playlist>
-  <producer id="producer20" in="00:00:00.000" out="03:59:59.967">
+  <chain id="chain2" out="00:00:11.400">
+    <property name="length">00:00:11.433</property>
+    <property name="eof">pause</property>
+    <property name="resource">008_pilot_detailNeu.mp4</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="meta.media.nb_streams">1</property>
+    <property name="meta.media.0.stream.type">video</property>
+    <property name="meta.media.0.stream.frame_rate">30</property>
+    <property name="meta.media.0.stream.sample_aspect_ratio">1</property>
+    <property name="meta.media.0.codec.width">1816</property>
+    <property name="meta.media.0.codec.height">1030</property>
+    <property name="meta.media.0.codec.rotate">0</property>
+    <property name="meta.media.0.codec.pix_fmt">yuv420p</property>
+    <property name="meta.media.0.codec.sample_aspect_ratio">1</property>
+    <property name="meta.media.0.codec.colorspace">709</property>
+    <property name="meta.media.0.codec.color_trc">1</property>
+    <property name="meta.media.0.codec.name">h264</property>
+    <property name="meta.media.0.codec.long_name">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</property>
+    <property name="meta.media.0.codec.bit_rate">8812746</property>
+    <property name="meta.attr.0.stream.handler_name.markup">VideoHandler</property>
+    <property name="meta.attr.0.stream.vendor_id.markup">[0][0][0][0]</property>
+    <property name="meta.attr.0.stream.encoder.markup">Lavc62.11.100 libx264</property>
+    <property name="meta.attr.major_brand.markup">isom</property>
+    <property name="meta.attr.minor_version.markup">512</property>
+    <property name="meta.attr.compatible_brands.markup">isomiso2avc1mp41</property>
+    <property name="meta.attr.encoder.markup">Lavf62.3.100</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="format">3</property>
+    <property name="audio_index">-1</property>
+    <property name="video_index">0</property>
+    <property name="creation_time">2026-01-21T22:48:19</property>
+    <property name="vstream">0</property>
+    <property name="meta.media.frame_rate_num">30</property>
+    <property name="meta.media.frame_rate_den">1</property>
+    <property name="meta.media.colorspace">709</property>
+    <property name="meta.media.color_trc">1</property>
+    <property name="meta.media.has_b_frames">0</property>
+    <property name="meta.media.width">1816</property>
+    <property name="meta.media.height">1030</property>
+    <property name="meta.media.aspect_ratio">1</property>
+    <property name="meta.media.color_range">mpeg</property>
+    <property name="shotcut:hash">e44fb506d1512a15f5d2856d368d7953</property>
+    <property name="shotcut:caption">008_pilot_detailNeu.mp4</property>
+    <property name="xml">was here</property>
+    <property name="meta.media.top_field_first">0</property>
+    <property name="meta.media.progressive">1</property>
+    <property name="meta.shotcut.vui">1</property>
+    <filter id="filter13" in="00:00:01.867" out="00:00:07.767">
+      <property name="background">color:#00000000</property>
+      <property name="mlt_service">affine</property>
+      <property name="shotcut:filter">affineSizePosition</property>
+      <property name="transition.fix_rotate_x">0</property>
+      <property name="transition.fill">1</property>
+      <property name="transition.distort">0</property>
+      <property name="transition.rect">145 115 1628.38 923.586 1</property>
+      <property name="transition.valign">middle</property>
+      <property name="transition.halign">center</property>
+      <property name="shotcut:animIn">00:00:00.000</property>
+      <property name="shotcut:animOut">00:00:00.000</property>
+      <property name="transition.threads">0</property>
+    </filter>
+  </chain>
+  <producer id="producer13" in="00:00:00.000" out="00:00:09.967">
+    <property name="length">00:00:10.000</property>
+    <property name="eof">loop</property>
+    <property name="resource">anim-info-flugbuchlist.rawr</property>
+    <property name="background">#00000000</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.width">1920</property>
+    <property name="meta.media.height">1080</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="meta.media.frame_rate">30</property>
+    <property name="first_frame">0</property>
+    <property name="mlt_service">glaxnimate</property>
+    <property name="creation_time">2026-01-21T22:35:56</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">612e014a91feb7ed02542af4a9e59604</property>
+    <property name="shotcut:caption">anim-info-flugbuchlist.rawr</property>
+  </producer>
+  <producer id="producer14" in="00:00:00.000" out="00:00:00.967">
+    <property name="length">36</property>
+    <property name="eof">loop</property>
+    <property name="resource">anim-tap-logout.rawr</property>
+    <property name="background">#00000000</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.width">1920</property>
+    <property name="meta.media.height">1080</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="meta.media.frame_rate">30</property>
+    <property name="first_frame">0</property>
+    <property name="mlt_service">glaxnimate</property>
+    <property name="creation_time">2026-01-21T22:02:42</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">6936a1ef74f586ff42ad17d977db36a6</property>
+    <property name="shotcut:caption">anim-tap-logout.rawr</property>
+    <property name="xml">was here</property>
+  </producer>
+  <playlist id="playlist3">
+    <property name="shotcut:video">1</property>
+    <property name="shotcut:name">Content2</property>
+    <blank length="00:00:43.933"/>
+    <entry producer="chain2" in="00:00:01.867" out="00:00:07.767"/>
+    <blank length="00:00:08.233"/>
+    <entry producer="producer13" in="00:00:00.000" out="00:00:09.967"/>
+    <blank length="00:00:01.467"/>
+    <entry producer="producer14" in="00:00:00.000" out="00:00:00.967"/>
+  </playlist>
+  <producer id="producer15" in="00:00:00.000" out="00:00:00.967">
+    <property name="length">00:00:01.000</property>
+    <property name="eof">loop</property>
+    <property name="resource">anim-tap-login.rawr</property>
+    <property name="background">#00000000</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.width">1920</property>
+    <property name="meta.media.height">1080</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="meta.media.frame_rate">30</property>
+    <property name="first_frame">0</property>
+    <property name="mlt_service">glaxnimate</property>
+    <property name="creation_time">2026-01-18T22:18:01</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">2f526e8fc648446125f1d740d9302b95</property>
+    <property name="shotcut:caption">anim-tap-login.rawr</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer16" in="00:00:00.000" out="00:00:09.967">
+    <property name="length">00:00:10.000</property>
+    <property name="eof">loop</property>
+    <property name="resource">anim-info-dashboard.rawr</property>
+    <property name="background">#00000000</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.width">1920</property>
+    <property name="meta.media.height">1080</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="meta.media.frame_rate">30</property>
+    <property name="first_frame">0</property>
+    <property name="mlt_service">glaxnimate</property>
+    <property name="creation_time">2026-01-17T09:28:53</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">55749160dbc4978a339c93eef2443550</property>
+    <property name="shotcut:caption">anim-info-dashboard.rawr</property>
+  </producer>
+  <producer id="producer17" in="00:00:00.000" out="00:00:00.967">
+    <property name="length">00:00:01.000</property>
+    <property name="eof">loop</property>
+    <property name="resource">anim-tap-pilotsmenu.rawr</property>
+    <property name="background">#00000000</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.width">1920</property>
+    <property name="meta.media.height">1080</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="meta.media.frame_rate">30</property>
+    <property name="first_frame">0</property>
+    <property name="mlt_service">glaxnimate</property>
+    <property name="creation_time">2026-01-21T22:02:42</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">6936a1ef74f586ff42ad17d977db36a6</property>
+    <property name="shotcut:caption">anim-tap-pilotsmenu.rawr</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer18" in="00:00:00.000" out="00:00:09.967">
+    <property name="length">00:00:10.000</property>
+    <property name="eof">loop</property>
+    <property name="resource">anim-info-pilotlist.rawr</property>
+    <property name="background">#00000000</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.width">1920</property>
+    <property name="meta.media.height">1080</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="meta.media.frame_rate">30</property>
+    <property name="first_frame">0</property>
+    <property name="mlt_service">glaxnimate</property>
+    <property name="creation_time">2026-01-21T22:30:32</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">9ca0de596e3d01bec00f04fcbb22855c</property>
+    <property name="shotcut:caption">anim-info-pilotlist.rawr</property>
+  </producer>
+  <producer id="producer20" in="00:00:00.000" out="00:00:01.167">
+    <property name="length">00:00:01.200</property>
+    <property name="eof">loop</property>
+    <property name="resource">anim-tap-pilotrow.rawr</property>
+    <property name="background">#00000000</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.width">1920</property>
+    <property name="meta.media.height">1080</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="meta.media.frame_rate">30</property>
+    <property name="first_frame">0</property>
+    <property name="mlt_service">glaxnimate</property>
+    <property name="creation_time">2026-01-21T22:02:42</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">6936a1ef74f586ff42ad17d977db36a6</property>
+    <property name="shotcut:caption">anim-tap-pilotrow.rawr</property>
+  </producer>
+  <producer id="producer21" in="00:00:00.000" out="00:00:09.967">
+    <property name="length">00:00:10.000</property>
+    <property name="eof">loop</property>
+    <property name="resource">anim-info-pilotdetail.rawr</property>
+    <property name="background">#00000000</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.width">1920</property>
+    <property name="meta.media.height">1080</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="meta.media.frame_rate">30</property>
+    <property name="first_frame">0</property>
+    <property name="mlt_service">glaxnimate</property>
+    <property name="creation_time">2026-01-21T22:35:56</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">612e014a91feb7ed02542af4a9e59604</property>
+    <property name="shotcut:caption">anim-info-pilotdetail.rawr</property>
+  </producer>
+  <producer id="producer22" in="00:00:00.000" out="00:00:01.167">
+    <property name="length">00:00:01.200</property>
+    <property name="eof">loop</property>
+    <property name="resource">anim-tap-flugbuch.rawr</property>
+    <property name="background">#00000000</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="meta.media.width">1920</property>
+    <property name="meta.media.height">1080</property>
+    <property name="meta.media.sample_aspect_num">1</property>
+    <property name="meta.media.sample_aspect_den">1</property>
+    <property name="meta.media.frame_rate">30</property>
+    <property name="first_frame">0</property>
+    <property name="mlt_service">glaxnimate</property>
+    <property name="creation_time">2026-01-21T22:02:42</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="shotcut:hash">6936a1ef74f586ff42ad17d977db36a6</property>
+    <property name="shotcut:caption">anim-tap-flugbuch.rawr</property>
+  </producer>
+  <producer id="producer23" in="00:00:00.000" out="03:59:59.967">
     <property name="length">04:00:00.000</property>
     <property name="eof">pause</property>
     <property name="resource">/home/thomas/Development/github/soumas/model-flight-logbook/_resources/videos/MflTerminalFunktionsuebersicht/mfl_logo.png</property>
@@ -462,7 +1051,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animOut">00:00:00.000</property>
       <property name="transition.threads">0</property>
     </filter>
-    <filter id="filter9" out="00:00:04.933">
+    <filter id="filter14" out="00:00:04.933">
       <property name="start">1</property>
       <property name="level">1</property>
       <property name="mlt_service">brightness</property>
@@ -470,7 +1059,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="alpha">00:00:00.000=0;00:00:00.967=1</property>
       <property name="shotcut:animIn">30</property>
     </filter>
-    <filter id="filter10" out="00:00:04.933">
+    <filter id="filter15" out="00:00:04.933">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="level">00:00:00.000=-60;00:00:00.967=0</property>
@@ -480,20 +1069,34 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="shotcut:animIn">30</property>
     </filter>
   </producer>
-  <playlist id="playlist3">
+  <playlist id="playlist4">
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">Overlays</property>
-    <blank length="00:03:03.867"/>
-    <entry producer="producer20" in="00:00:00.000" out="00:00:04.933"/>
+    <blank length="00:00:11.000"/>
+    <entry producer="producer15" in="00:00:00.000" out="00:00:00.967"/>
+    <blank length="00:00:02.167"/>
+    <entry producer="producer16" in="00:00:00.000" out="00:00:09.967"/>
+    <blank length="00:00:01.367"/>
+    <entry producer="producer17" in="00:00:00.000" out="00:00:00.967"/>
+    <blank length="00:00:01.533"/>
+    <entry producer="producer18" in="00:00:00.000" out="00:00:09.967"/>
+    <blank length="00:00:01.233"/>
+    <entry producer="producer20" in="00:00:00.000" out="00:00:01.167"/>
+    <blank length="00:00:02.467"/>
+    <entry producer="producer21" in="00:00:00.000" out="00:00:09.967"/>
+    <blank length="00:00:02.700"/>
+    <entry producer="producer22" in="00:00:00.000" out="00:00:01.167"/>
+    <blank length="00:00:22.067"/>
+    <entry producer="producer23" in="00:00:00.000" out="00:00:04.933"/>
   </playlist>
-  <tractor id="tractor6" title="Shotcut version 26.1.6" in="00:00:00.000" out="00:03:08.800">
+  <tractor id="tractor6" title="Shotcut version 26.1.6" in="00:00:00.000" out="00:03:07.933">
     <property name="shotcut">1</property>
     <property name="shotcut:projectAudioChannels">2</property>
     <property name="shotcut:projectFolder">1</property>
     <property name="shotcut:processingMode">Native8Cpu</property>
     <property name="shotcut:trackHeaderWidth">339</property>
     <property name="shotcut:trackHeight">10</property>
-    <property name="shotcut:scaleFactor">0.183274</property>
+    <property name="shotcut:scaleFactor">0.503038</property>
     <property name="shotcut:skipConvert">0</property>
     <track producer="background"/>
     <track producer="playlist0"/>
@@ -501,6 +1104,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <track producer="playlist5" hide="video"/>
     <track producer="playlist2"/>
     <track producer="playlist3"/>
+    <track producer="playlist4"/>
     <transition id="transition12">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
@@ -508,7 +1112,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition13">
+    <transition id="transition4">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="compositing">0</property>
@@ -524,7 +1128,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition15">
+    <transition id="transition5">
       <property name="a_track">1</property>
       <property name="b_track">2</property>
       <property name="compositing">0</property>
@@ -532,6 +1136,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="rotate_center">0</property>
       <property name="mlt_service">qtblend</property>
       <property name="1">normal</property>
+      <property name="disable">0</property>
     </transition>
     <transition id="transition20">
       <property name="a_track">0</property>
@@ -540,38 +1145,55 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition0">
+    <transition id="transition6">
       <property name="a_track">0</property>
       <property name="b_track">4</property>
       <property name="mlt_service">mix</property>
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition1">
+    <transition id="transition7">
       <property name="a_track">1</property>
       <property name="b_track">4</property>
       <property name="compositing">0</property>
       <property name="distort">0</property>
       <property name="rotate_center">0</property>
       <property name="mlt_service">qtblend</property>
-      <property name="threads">0</property>
+      <property name="1">normal</property>
       <property name="disable">0</property>
     </transition>
-    <transition id="transition2">
+    <transition id="transition8">
       <property name="a_track">0</property>
       <property name="b_track">5</property>
       <property name="mlt_service">mix</property>
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition3">
+    <transition id="transition9">
       <property name="a_track">1</property>
       <property name="b_track">5</property>
       <property name="compositing">0</property>
       <property name="distort">0</property>
       <property name="rotate_center">0</property>
       <property name="mlt_service">qtblend</property>
-      <property name="threads">0</property>
+      <property name="1">normal</property>
+      <property name="disable">0</property>
+    </transition>
+    <transition id="transition10">
+      <property name="a_track">0</property>
+      <property name="b_track">6</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition11">
+      <property name="a_track">1</property>
+      <property name="b_track">6</property>
+      <property name="compositing">0</property>
+      <property name="distort">0</property>
+      <property name="rotate_center">0</property>
+      <property name="mlt_service">qtblend</property>
+      <property name="1">normal</property>
       <property name="disable">0</property>
     </transition>
   </tractor>
