@@ -11,7 +11,7 @@ const { toggleMenu } = useLayout();
                 <i class="pi pi-bars"></i>
             </button>
             <router-link to="/" class="layout-topbar-logo">
-                <span>Model Flight Logbook Admin</span>
+                <span>MFL Admin</span>
             </router-link>
         </div>
     </div>
