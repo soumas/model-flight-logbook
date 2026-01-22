@@ -249,7 +249,7 @@
                                                 "__type__": "Font",
                                                 "family": "Soft Core",
                                                 "line_height": 1,
-                                                "size": 50.54999923706055,
+                                                "size": 49,
                                                 "style": "Regular"
                                             },
                                             "group_color": "#00000000",
@@ -265,7 +265,7 @@
                                                     "y": 478.21565731166913
                                                 }
                                             },
-                                            "text": "Formular für die Bearbeitung bzw. Löschung von Pilot:innen",
+                                            "text": "Formular für die Bearbeitung von Stammadaten und Nachrichten",
                                             "uuid": "7c9231b7-2726-48fb-ab26-3590034a00d8",
                                             "visible": true
                                         }
@@ -280,7 +280,7 @@
                                         },
                                         "position": {
                                             "value": {
-                                                "x": 141.35259053606478,
+                                                "x": 107.17332867314735,
                                                 "y": 1503.0372135463451
                                             }
                                         },

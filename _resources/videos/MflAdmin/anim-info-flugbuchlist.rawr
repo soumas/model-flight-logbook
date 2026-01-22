@@ -265,7 +265,7 @@
                                                     "y": 478.21565731166913
                                                 }
                                             },
-                                            "text": "Flugbuch mit Filter- und Exportfunktion (für austro control)",
+                                            "text": "Flugbuch mit Filter- und Exportfunktion (z.B. für Einreichung)",
                                             "uuid": "7c9231b7-2726-48fb-ab26-3590034a00d8",
                                             "visible": true
                                         }
@@ -280,8 +280,8 @@
                                         },
                                         "position": {
                                             "value": {
-                                                "x": 129.84353621010905,
-                                                "y": 1507.6408352767276
+                                                "x": 119.79081213278039,
+                                                "y": 1501.6092008303303
                                             }
                                         },
                                         "rotation": {
