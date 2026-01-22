@@ -72,7 +72,7 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
   - Mehrere Flugplätze pro Verein (z.B. Tal- und Hangflugplatz)  
   - Ein Terminal unterstützt mehrere Server (z.B. bei Flugplatz-Sharing)
 
-# Erklärvideos
+# Videos
 
 <table >
   <tr>
