@@ -1,0 +1,7 @@
+Files "mfl_terminal_v3_stand_arm.stl", "mfl_terminal_v3_stand_connector.stl" and "mfl_terminal_v3_stand_screw.stl" are provided under the following licence:
+This thing was created by Thingiverse user Gavitka, and is licensed under Creative Commons - Attribution
+
+Heavy duty mounting system by Gavitka on Thingiverse: https://www.thingiverse.com/thing:4664236
+
+Summary:
+Heavy duty, joint-locking mounting system. Adapts to stock mounting systemCAD source:https://cad.onshape.com/documents/174e55e163610a403d8be97b/w/df00e3ac86eb42bfb502b90c/e/3223e83c4918a474ded435a5
