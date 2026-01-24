@@ -1,7 +1,7 @@
 
 # Model Flight Logbook
-<img src="./_resources/images/mfl_terminal_rendering.png" width="400" alt="MFL Logo"><br/>
-<img align="left" src="./terminal/_resources/images/Logo.svg" width="80" alt="MFL Logo">
+<img align="left" src="./_resources/images/mfl_terminal_rendering.png" width="600" alt="MFL Logo">
+<img align="right" src="./terminal/_resources/images/Logo.svg" width="80" alt="MFL Logo">
 
 Das **Model Flight Logbook (MFL)** ist ein digitales Flugbuch für Modellflugvereine. 
 Die Anwendung ist **einfach, übersichtlich und praxisnah** konzipiert und unterstützt Pilot:innen sowie Vereine bei der **Einhaltung der gesetzlichen Anforderungen in Österreich**.
