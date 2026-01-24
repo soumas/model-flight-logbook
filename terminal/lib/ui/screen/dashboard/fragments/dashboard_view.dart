@@ -92,7 +92,12 @@ class PilotIdDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<DashboardCubit>().state;
     return state.selectedEndpoint?.config.showPilotIDOnDashboard ?? false
-        ? TextField(controller: TextEditingController(text: _input), enabled: false, textAlign: TextAlign.center, canRequestFocus: false)
+        ? TextField(
+            controller: TextEditingController(text: _input),
+            enabled: false,
+            textAlign: TextAlign.center,
+            canRequestFocus: false,
+            decoration: const InputDecoration(hintText: 'Bitte anmelden ...'))
         : const SizedBox.shrink();
   }
 }
