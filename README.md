@@ -7,7 +7,7 @@ Die Anwendung ist **einfach, übersichtlich und praxisnah** konzipiert und unter
 
 MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flugplatz** und bietet zusätzlich eine **Web-basierte Verwaltungs- und Auswertungsplattform**.
 
-# Funktionen
+# Features
 ## Für Pilot:innen / Mitglieder
 - **Übersichtliches, touch-optimiertes Kiosk-Terminal**  
   Intuitive Bedienung – geeignet für Jung und Alt
@@ -55,8 +55,8 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
   - Ein Terminal unterstützt mehrere Server (z.B. bei Flugplatz-Sharing)
 
 ## Videos
-<a href="https://www.youtube.com/watch?v=kF_Z988H-uU" target="_blank">Funktionsübersicht "MFL Terminal" auf YouTube anschauen</a>  
-<a href="https://www.youtube.com/watch?v=mCskDqg9cJ4" target="_blank">Funktionsübersicht "MFL Admin" auf YouTube anschauen</a>  
+<a href="https://www.youtube.com/watch?v=kF_Z988H-uU" target="_blank">Funktionsübersicht "🎥 MFL Terminal" auf YouTube anschauen</a>  
+<a href="https://www.youtube.com/watch?v=mCskDqg9cJ4" target="_blank">Funktionsübersicht "🎥 MFL Admin" auf YouTube anschauen</a>  
 
 # Anforderungen
 TODO
