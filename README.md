@@ -54,9 +54,10 @@ MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flug
   - Mehrere Flugplätze pro Verein (z.B. Tal- und Hangflugplatz)  
   - Ein Terminal unterstützt mehrere Server (z.B. bei Flugplatz-Sharing)
 
-## 🎥 Videos
-<a href="https://www.youtube.com/watch?v=kF_Z988H-uU" target="_blank">"MFL Terminal Funktionsübersicht" auf YouTube anschauen</a>  
-<a href="https://www.youtube.com/watch?v=mCskDqg9cJ4" target="_blank">"MFL Admin Funktionsübersicht" auf YouTube anschauen</a>  
+## Produktvideos
+  [🎥 MFL Terminal Funktionsübersicht (YouTube)](https://www.youtube.com/watch?v=kF_Z988H-uU)  
+  [🎥 MFL Admin Funktionsübersicht (YouTube)](https://www.youtube.com/watch?v=mCskDqg9cJ4)  
+  
 
 # Anforderungen
 TODO
