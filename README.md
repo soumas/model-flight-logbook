@@ -8,6 +8,9 @@ Die Anwendung ist ***einfach, übersichtlich und praxisnah*** konzipiert und unt
 MFL eignet sich insbesondere für den Einsatz als ***Touch-Kiosk-Terminal am Flugplatz*** und bietet zusätzlich eine ***Web-basierte Verwaltungs- und Auswertungsplattform***.
 
 # Features
+## Feature-Videos
+  [***🎥  MFL Terminal Funktionsübersicht (YouTube)***](https://www.youtube.com/watch?v=kF_Z988H-uU)  
+  [***🎥  MFL Admin Funktionsübersicht (YouTube***)](https://www.youtube.com/watch?v=mCskDqg9cJ4)  
 ## Für Pilot:innen / Mitglieder
 - ***Übersichtliches, touch-optimiertes Kiosk-Terminal***  
   Intuitive Bedienung – geeignet für Jung und Alt
@@ -54,9 +57,6 @@ MFL eignet sich insbesondere für den Einsatz als ***Touch-Kiosk-Terminal am Flu
   - Mehrere Flugplätze pro Verein (z.B. Tal- und Hangflugplatz)  
   - Ein Terminal unterstützt mehrere Server (z.B. bei Flugplatz-Sharing)
 
-## Videos
-  [***🎥  MFL Terminal Funktionsübersicht (YouTube)***](https://www.youtube.com/watch?v=kF_Z988H-uU)  
-  [***🎥  MFL Admin Funktionsübersicht (YouTube***)](https://www.youtube.com/watch?v=mCskDqg9cJ4)  
   
 # Anforderungen
 Aufgrund der gewählten Systemarchitektur und der eingesetzten Technologien kann das MFL-System in unterschiedlichsten Konfigurationen betrieben werden – beispielsweise vollständig lokal auf einem einzelnen PC, mit einem Server im Internet oder auf verschiedenen Betriebssystemen wie Windows, Linux, Android oder iOS.
@@ -73,12 +73,27 @@ Die Installation und der Betrieb von MFL sind grundsätzlich einfach. Trotzdem i
 MFL sollte nach Möglichkeit Zugriff zum Internet haben. Eine rechtskonforme Flugbuchführung ist zwar auch ohne möglich, allerdings gibt es gravierende Einschränkungen. Neben der Notwendigkeit eines zusätzlichen RTC-Modules (damit der Raspberry Pi die Zeit nicht vergisst), aufwändiger Wartung (Updates) und fehlenden E-Mail Benachrichtigungen ist die ***Datensicherung*** das Hauptproblem.
 
 ## Hardware
-Für den Aufbau des MFL Systems sind folgende Hardware-Komponenten erforderlich:
-* ****Raspberry Pi 4 model B****
-* Computernetzwerk TODO
-* Hardware für Standardsetup TODO
+Für den Aufbau des MFL Systems sind folgende Hardware-Komponenten erforderlich.
+* ***Raspberry Pi 4 model B***  
+Grundsätzlich kann jedes Raspberry Pi Modell verwendet werden, welches das Betriebssystem "Raspberry Pi OS 64-bit" unterstützt und mit dem Touch Display kompatibel ist.  
+https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+* ***SD Karte***  
+Auch wenn MFL nur wenig Speicherbedarf hat, empfiehlt es sich eine SD Kart mit mindestens 32 GB Speicher einzusetzen. Außerdem sollte auf eine gute Qualität und Temperaturbeständigkeit geachtet werden, um MFL auch im unklimatisierter Umgebung möglichst lange ohne Aufall betreiben zu können.
+* ***Raspberry Pi 7″ Touch Display (800 x 480 Pixel)***  
+Das originale Touch Display (Version 1) harmoniert perfekt mit dem Raspberry Pi 4 model B und hat mit 800 x 480 Pixel eine optimale Auflösung. Kein Setup und problemloser Betrieb.
+https://www.raspberrypi.com/products/raspberry-pi-touch-display/
+* ***USB RFID-Scanner***  
+Der RFID Scanner wird per USB an den Raspberry Pi angeschlossen  
+https://www.neuftech.net/products/40
+* ***MFL Terminal Gehäuse***  
+Die 3D-Druckdateien für das originale MFL Terminal Gehäuse stehen auf thingiverse.com zur Verfügung. Der Druck ist nicht sonderlich schwierig und wird unter Befolgung der Hinweise bestimmt problemlos klappen. Wer keinen passenden 3D-Drucker hat aber trotzdem das originale Gehäuse haben möchte, möge sich gerne an office@soumasoft.com wenden. 
+https://www.thingiverse.com/thing:7279187  
+Alternativ kann natürlich jedes andere Gehäuse verwendet werden, in dem das Display und der Raspberry Pi Platz finden.   
+* ***Diverse Kleinteile***  
+ Für die Befestigung des Terminals, den Einbau in das Gehäuse und die Verkabelung sind diverse Kleinteile nötig, die aber teilweise vom Setup abhängig sind und hier wohl nicht vollständig aufgelistet werden können.
 
-# Setup
+# Installationsanleitung
+## Hardware
 TODO
 * Bau des Terminals TODO
 * Installation TODO
