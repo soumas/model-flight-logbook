@@ -61,9 +61,7 @@ MFL eignet sich insbesondere für den Einsatz als ***Touch-Kiosk-Terminal am Flu
 # Anforderungen
 Aufgrund der gewählten Systemarchitektur und der eingesetzten Technologien kann das MFL-System in unterschiedlichsten Konfigurationen betrieben werden – beispielsweise vollständig lokal auf einem einzelnen PC, mit einem Server im Internet oder auf verschiedenen Betriebssystemen wie Windows, Linux, Android oder iOS.
 
-Um die Dokumentation übersichtlich und die Komplexität möglichst gering zu halten, wird im Folgenden ausschließlich ein Setup beschrieben, die für die Mehrzahl der Modellflugvereine geeignet sein sollte.
-
-Fragen zu alternativen Setups oder abweichenden Betriebsformen können gerne über GitHub gestellt werden. Bitte dazu ein Issue mit dem Label "help wanted" eröffnen.
+Um die Dokumentation übersichtlich und die Komplexität möglichst gering zu halten, wird im Folgenden ausschließlich ein einziges Setup beschrieben, welches für die Mehrzahl der Modellflugvereine geeignet sein sollte. Fragen zu alternativen Setups oder abweichenden Betriebsformen können gerne über GitHub gestellt werden. Bitte dazu einen Issue mit dem Label "help wanted" eröffnen.
 
 ## Rahmenbedingungen
 ### Installation, Wartung und Betrieb
@@ -78,9 +76,9 @@ Für den Aufbau des MFL Systems sind folgende Hardware-Komponenten erforderlich.
 Grundsätzlich kann jedes Raspberry Pi Modell verwendet werden, welches das Betriebssystem "Raspberry Pi OS 64-bit" unterstützt und mit dem Touch Display kompatibel ist.  
 https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
 * ***SD Karte***  
-Auch wenn MFL nur wenig Speicherbedarf hat, empfiehlt es sich eine SD Kart mit mindestens 32 GB Speicher einzusetzen. Außerdem sollte auf eine gute Qualität und Temperaturbeständigkeit geachtet werden, um MFL auch im unklimatisierter Umgebung möglichst lange ohne Aufall betreiben zu können.
+Auch wenn MFL nur wenig Speicherbedarf hat, empfiehlt es sich eine SD Kart mit mindestens 32 GB Speicher einzusetzen. Außerdem sollte auf eine gute Qualität und Temperaturbeständigkeit geachtet werden, um MFL auch in unklimatisierter Umgebung möglichst lange ohne Aufall betreiben zu können.
 * ***Raspberry Pi 7″ Touch Display (800 x 480 Pixel)***  
-Das originale Touch Display (Version 1) harmoniert perfekt mit dem Raspberry Pi 4 model B und hat mit 800 x 480 Pixel eine optimale Auflösung. Kein Setup und problemloser Betrieb.
+Das originale Touch Display (Version 1) harmoniert perfekt mit dem Raspberry Pi 4 model B und hat mit 800 x 480 Pixel eine optimale Auflösung. Kein Setup und problemloser Betrieb.  
 https://www.raspberrypi.com/products/raspberry-pi-touch-display/
 * ***USB RFID-Scanner***  
 Der RFID Scanner wird per USB an den Raspberry Pi angeschlossen  
@@ -92,7 +90,15 @@ Alternativ kann natürlich jedes andere Gehäuse verwendet werden, in dem das Di
 * ***Diverse Kleinteile***  
  Für die Befestigung des Terminals, den Einbau in das Gehäuse und die Verkabelung sind diverse Kleinteile nötig, die aber teilweise vom Setup abhängig sind und hier wohl nicht vollständig aufgelistet werden können.
 
-# Installationsanleitung
+# Installation Raspberry Pi
+1. Touch Display an Raspberry Pi anschließen  
+[***🎥  Videoanleitung - Raspberry Pi Touch Display anschließen (YouTube***)](https://youtu.be/8CQM9AOY8sQ)  
+https://www.raspberrypi.com/documentation/accessories/display.html
+2. Raspberry Pi OS (64-bit) auf die SD Karte übertragen  (z.B. über Imager)
+https://www.raspberrypi.com/software/
+3. SD Karte in den Raspberry Pi einstecken und das Gerät einschalten
+
+
 ## Hardware
 TODO
 * Bau des Terminals TODO
