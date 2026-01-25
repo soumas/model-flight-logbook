@@ -1,67 +1,80 @@
 
 # Model Flight Logbook
-<img align="center" src="./_resources/images/github_hero.jpg" alt="MFL Terminal Hero image" style="border-radius: 20px;"><br/>
+<img align="center" src="./_resources/images/github_hero.webp" alt="MFL Terminal Hero image" style="border-radius: 20px;"><br/>
 
-Das **Model Flight Logbook (MFL)** ist ein digitales Flugbuch für Modellflugvereine. 
-Die Anwendung ist **einfach, übersichtlich und praxisnah** konzipiert und unterstützt Pilot:innen sowie Vereine bei der **Einhaltung der gesetzlichen Anforderungen in Österreich**.
+Das ***Model Flight Logbook (MFL)*** ist ein digitales Flugbuch für Modellflugvereine. 
+Die Anwendung ist ***einfach, übersichtlich und praxisnah*** konzipiert und unterstützt Pilot:innen sowie Vereine bei der ***Einhaltung der gesetzlichen Anforderungen in Österreich***.
 
-MFL eignet sich insbesondere für den Einsatz als **Touch-Kiosk-Terminal am Flugplatz** und bietet zusätzlich eine **Web-basierte Verwaltungs- und Auswertungsplattform**.
+MFL eignet sich insbesondere für den Einsatz als ***Touch-Kiosk-Terminal am Flugplatz*** und bietet zusätzlich eine ***Web-basierte Verwaltungs- und Auswertungsplattform***.
 
 # Features
 ## Für Pilot:innen / Mitglieder
-- **Übersichtliches, touch-optimiertes Kiosk-Terminal**  
+- ***Übersichtliches, touch-optimiertes Kiosk-Terminal***  
   Intuitive Bedienung – geeignet für Jung und Alt
-- **Digitales Flugbuch per Check-In / Check-Out**  
+- ***Digitales Flugbuch per Check-In / Check-Out***  
   Protokollierung der Anwesenheit und gesetzlich erforderlicher Informationen
-- **Flexible Benutzer-Identifizierung**  
+- ***Flexible Benutzer-Identifizierung***  
   Anmeldung per RFID-Chip oder über sonstige Eingabegeräte (z. B. Tastatur, Ziffernblock, …)
-- **Dokumenten-Überwachung**  
+- ***Dokumenten-Überwachung***  
   Warnungen am Terminal vor Ablauf des Drohnenführerscheins oder der Registrierung
-- **Automatisches Flugverbot**  
+- ***Automatisches Flugverbot***  
   Bei fehlenden oder abgelaufenen Pflichtdokumenten
-- **Individuelle und globale Hinweise**  
+- ***Individuelle und globale Hinweise***  
   Infos, Warnungen oder Flugverbotsmeldungen – global oder personenbezogen  
-- **Tagesaktuelle Betriebszeiten**  
+- ***Tagesaktuelle Betriebszeiten***  
   Berücksichtigung der erlaubten Flugzeiten (CMT bis CET)  
-- **Export des persönlichen Flugbuchs**  
+- ***Export des persönlichen Flugbuchs***  
   Versand per E-Mail über das MFL Terminal  
 
 ## Für Vereinsvorstände
-- **Web-basiertes Verwaltungsportal (MFL-Admin)**  
+- ***Web-basiertes Verwaltungsportal (MFL-Admin)***  
   Zentrale Administration aller Piloten- und Flugdaten
-- **CSV-Export des Flugbuchs**  
+- ***CSV-Export des Flugbuchs***  
   Mit einem Klick, z. B. für behördliche Einreichungen
-- **Verwaltung von Infos, Warnungen und Flugverboten**  
+- ***Verwaltung von Infos, Warnungen und Flugverboten***  
   Global oder pilotenspezifisch definierbar
-- **Aussagekräftige Jahresstatistiken**  
+- ***Aussagekräftige Jahresstatistiken***  
   Übersicht über Auslastung, Flugzeiten und Aktivitäten
-- **E-Mail-Benachrichtigungen an den Administrator**  
+- ***E-Mail-Benachrichtigungen an den Administrator***  
   Z.B. Bei Einträgen unter „Besondere Ereignisse“
-- **Automatische Beendigung vergessener Check-Outs**  
+- ***Automatische Beendigung vergessener Check-Outs***  
   Inklusive Benachrichtigung an die betroffene Pilot:in
-- **Kostengünstig**  
+- ***Kostengünstig***  
   MFL ist kostenlos und kann auf günstiger Hardware betrieben werden
 
 ## Für Systemadministrator:innen
-- **Installations-Script für ein vollständiges Setup**  
+- ***Installations-Script für ein vollständiges Setup***  
   Schnelle und einfache Inbetriebnahme
-- **Update-Script für einfache Aktualisierungen**  
+- ***Update-Script für einfache Aktualisierungen***  
   Per Cronjob automatisierbar
-- **REST-API**  
+- ***REST-API***  
   Für die Anbindung an Fremdsysteme
-- **Unterstützung von komplexen Setups, wie:**  
+- ***Unterstützung von komplexen Setups, wie:***  
   - Mehrere MFL Terminals auf einem Flugplatz  
   - Mehrere Flugplätze pro Verein (z.B. Tal- und Hangflugplatz)  
   - Ein Terminal unterstützt mehrere Server (z.B. bei Flugplatz-Sharing)
 
-## Produktvideos
-  [🎥  MFL Terminal Funktionsübersicht (YouTube)](https://www.youtube.com/watch?v=kF_Z988H-uU)  
-  [🎥  MFL Admin Funktionsübersicht (YouTube)](https://www.youtube.com/watch?v=mCskDqg9cJ4)  
+## Videos
+  [***🎥  MFL Terminal Funktionsübersicht (YouTube)***](https://www.youtube.com/watch?v=kF_Z988H-uU)  
+  [***🎥  MFL Admin Funktionsübersicht (YouTube***)](https://www.youtube.com/watch?v=mCskDqg9cJ4)  
   
-
 # Anforderungen
-TODO
-* Person mit IT Kenntnissen TODO
+Aufgrund der gewählten Systemarchitektur und der eingesetzten Technologien kann das MFL-System in unterschiedlichsten Konfigurationen betrieben werden – beispielsweise vollständig lokal auf einem einzelnen PC, mit einem Server im Internet oder auf verschiedenen Betriebssystemen wie Windows, Linux, Android oder iOS.
+
+Um die Dokumentation übersichtlich und die Komplexität möglichst gering zu halten, wird im Folgenden ausschließlich ein Setup beschrieben, die für die Mehrzahl der Modellflugvereine geeignet sein sollte.
+
+Fragen zu alternativen Setups oder abweichenden Betriebsformen können gerne über GitHub gestellt werden. Bitte dazu ein Issue mit dem Label "help wanted" eröffnen.
+
+## Rahmenbedingungen
+### Installation, Wartung und Betrieb
+Die Installation und der Betrieb von MFL sind grundsätzlich einfach. Trotzdem ist ein gewisses Maß an IT Verständnis nötig, um das System mit gutem Gewissen warten und einsetzen zu können. Es ist also Grundvoraussetzung, dass es jemanden im Verein gibt der sich um das System kümmert. Diese Person muss kein Experte sein, aber einen Raspberry Pi aufzusetzen und in ein Netzwerk zu hängen sollte sie beherrschen. Auch Schlagwörter wie Linux, SSH und crontab sollten ihr nicht gänzlich unbekannt sein.
+
+### Infrastruktur
+MFL sollte nach Möglichkeit Zugriff zum Internet haben. Eine rechtskonforme Flugbuchführung ist zwar auch ohne möglich, allerdings gibt es gravierende Einschränkungen. Neben der Notwendigkeit eines zusätzlichen RTC-Modules (damit der Raspberry Pi die Zeit nicht vergisst), aufwändiger Wartung (Updates) und fehlenden E-Mail Benachrichtigungen ist die ***Datensicherung*** das Hauptproblem.
+
+## Hardware
+Für den Aufbau des MFL Systems sind folgende Hardware-Komponenten erforderlich:
+* ****Raspberry Pi 4 model B****
 * Computernetzwerk TODO
 * Hardware für Standardsetup TODO
 
@@ -69,6 +82,18 @@ TODO
 TODO
 * Bau des Terminals TODO
 * Installation TODO
+* Backup TODO
+
+# Themen (TMP)
+* Datenschutz & DSGVO
+* Backup!!
+
+# Betrieb
+
+## Backup
+Die MFL Flugbuch-Daten werden gesammelt in einer SQLite-Datenbank gespeichert. SQLite ist ein sehr populäres Datenbanksystem, welches alle Informationen in einer einzigen Datei speichert. Ein Backup kann also denkbar einfach durchgeführt werden, indem man diese eine Datei auf einem externen Speicher sichert. Ein weiterer Vorteil dieser Architektur ist es, dass man die Datenbank-Datei mit jedem SQLite-fähigen Datenbankbrowser öffnen kann. So kann notfalls auch ohne MFL darauf zugegriffen werden.
+
+***⚡⚡⚡ Achtung ⚡⚡⚡*** Ein tägliches Backup der Flugbuch-Daten ist ein absolutes must have! Die Austro Control kann Auszüge davon bekanntlich anfordern und dann müssen die Daten verfügbar sein! Meine langjährige Erfahrung zeigt, dass die SD Karten in einem Raspberry Pi früher oder später kaputt werden - insbesondere wenn das Gerät in einem unklimatisierten Umfeld betrieben wird, wie bei Vereinshütten/Ladehütten häufig der Fall ist. Mit einem tagesaktuellen Datenbank-Backup und ggf. sogar einem Backup der MFL Serverkonfiguration ist das kein Problem und die Wiederherstellung eine Arbeit von maximal einer Stunde.
 
 # Disclaimer
 Der Haftungsausschluss ist grundsätzlich bereits über die verwendete Lizenz geregelt. Trotzdem weise ich an dieser Stelle noch einmal explizit darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt auf vollständiges Risiko des Betreibers.
