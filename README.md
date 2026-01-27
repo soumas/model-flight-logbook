@@ -95,10 +95,34 @@ Alternativ kann natürlich jedes andere Gehäuse verwendet werden, in dem das Di
 1. ***Touch Display an Raspberry Pi anschließen***  
 [🎥  Videoanleitung - Raspberry Pi Touch Display anschließen (YouTube)](https://youtu.be/rG4MDcAez1c)  
 [📖 Originale Dokumentation (raspberrypi.com)](https://www.raspberrypi.com/documentation/accessories/display.html)
-2. ***"Raspberry Pi OS (64-bit)" installieren***   
+2. ***"Raspberry Pi OS (64-bit)" installieren***    
 https://www.raspberrypi.com/software/
 
 ## MFL Installation  
+Die Installation aller MFL Komponenten (MFL-Server inkl. MFL-Admin & MFL-Terminal) erfolgt durch ein einiziges Installationsscript. Dieses läuft vollautomatisch mit einer Ausnahme: während des Installationsvorgangs öffnet sich eine Server-Konfigurationsdatei welche mit entsprechenden Angaben ergänzt werden muss. Um hierfür vorbereitet zu sein, machen Sie sich vorab mit allen Servereinstellungen vertraut:
+
+### MFL-Server Konfigurationsoptionen
+| Kategorie | Schlüssel | Standardwert | Beschreibung |
+| ---       | ---       | ---          | ---          |
+| logbook   |           |              |              |
+|           | dburl     | sqlite:///./data.db | Connectionstring für die Datenbank. Muss nur überschreiben werden, wenn die SQLite Datenbank unter einem anderen Pfad liegt oder überhaupt ein anderes DBM verwendet wird. |
+|           | apikey_admin | admin | Api-Key (Passwort) für administrative Endpunkte und den MFL-Admin |
+|           | admin_email |            | E-Mail Adresse an die Systemnachrichten gesendet werden |
+|           | forward_comment | True | Bleibt das Bemerkungsfeld beim Beenden eines Flugtages nicht leer, so wird eine Nachricht an den Systemadministrator versendet ('False' um Feature zu deaktivieren) |
+|           | debug       | False      | Erweitertes Logging für Analyse und Fehlersuche |
+|||||
+| smtp      |             |            |               |
+|           | server      |            | SMTP Serveradresse für Mailversand |
+|           | port        | 465        | SMTP Port |
+|           | username    |            | SMTP Server Benutzername |
+|           | password    |            | SMTP Server Passwort |
+|           | from_email  |            | Versender E-Mail Adresse |
+|           | from_name   |            | Versender Name |
+|           | starttls    | False      | Verwende starttle für Mailversand |
+|           | ssl_tls     | True       | Verwende ssl_tls für Mailversand |
+|           | ssl_tls     | True       | Verwende ssl_tls für Mailversand |
+
+
 Per SSH oder VNC auf den Raspberry Pi verbinden und folgende Befehle in der Bash ausführen:
 
 ```bash
