@@ -101,11 +101,11 @@ https://www.raspberrypi.com/software/
 ## MFL Installation  
 Die Installation aller MFL Komponenten (MFL-Server inkl. MFL-Admin & MFL-Terminal) erfolgt durch ein einiziges Installationsscript. Dieses läuft vollautomatisch mit einer Ausnahme: während des Installationsvorgangs öffnet sich eine Server-Konfigurationsdatei welche mit entsprechenden Angaben ergänzt werden muss. Um hierfür vorbereitet zu sein, machen Sie sich vorab mit allen Servereinstellungen vertraut:
 
-### MFL-Server Konfigurationsoptionen
+### MFL-Servereinstellungen
 | Kategorie | Schlüssel | Standardwert | Beschreibung |
 | ---       | ---       | ---          | ---          |
-| logbook   | dburl     | sqlite:///./data.db | Connectionstring für die Datenbank. Muss nur überschreiben werden, wenn die SQLite Datenbank unter einem anderen Pfad liegt oder überhaupt ein anderes DBM verwendet wird. |
-|           | apikey_admin | admin | Api-Key (Passwort) für administrative Endpunkte und den MFL-Admin |
+| logbook   | dburl     | sqlite:///./data.db | Connectionstring für die Datenbank. Muss nur überschreiben werden, wenn die SQLite Datenbank unter einem anderen Pfad liegt oder ein anderes DBMS verwendet wird. |
+|           | apikey_admin | admin | Api-Key (Passwort) für administrative Endpunkte und den MFL-Admin ⚠️ Unbedingt anpassen! |
 |           | admin_email |            | E-Mail Adresse an die Systemnachrichten gesendet werden |
 |           | forward_comment | True | Bleibt das Bemerkungsfeld beim Beenden eines Flugtages nicht leer, so wird eine Nachricht an den Systemadministrator versendet ('False' um Feature zu deaktivieren) |
 |           | debug       | False      | Erweitertes Logging für Analyse und Fehlersuche |
@@ -117,7 +117,7 @@ Die Installation aller MFL Komponenten (MFL-Server inkl. MFL-Admin & MFL-Termina
 |           | from_name   |            | Versender Name |
 |           | starttls    | False      | Verwende starttle für Mailversand |
 |           | ssl_tls     | True       | Verwende ssl_tls für Mailversand |
-|           | ssl_tls     | True       | Verwende ssl_tls für Mailversand |
+|           | use_credentials | True   | Sollen standard  |
 
 
 Per SSH oder VNC auf den Raspberry Pi verbinden und folgende Befehle in der Bash ausführen:
