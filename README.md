@@ -104,15 +104,12 @@ Die Installation aller MFL Komponenten (MFL-Server inkl. MFL-Admin & MFL-Termina
 ### MFL-Server Konfigurationsoptionen
 | Kategorie | Schlüssel | Standardwert | Beschreibung |
 | ---       | ---       | ---          | ---          |
-| logbook   |           |              |              |
-|           | dburl     | sqlite:///./data.db | Connectionstring für die Datenbank. Muss nur überschreiben werden, wenn die SQLite Datenbank unter einem anderen Pfad liegt oder überhaupt ein anderes DBM verwendet wird. |
+| logbook   | dburl     | sqlite:///./data.db | Connectionstring für die Datenbank. Muss nur überschreiben werden, wenn die SQLite Datenbank unter einem anderen Pfad liegt oder überhaupt ein anderes DBM verwendet wird. |
 |           | apikey_admin | admin | Api-Key (Passwort) für administrative Endpunkte und den MFL-Admin |
 |           | admin_email |            | E-Mail Adresse an die Systemnachrichten gesendet werden |
 |           | forward_comment | True | Bleibt das Bemerkungsfeld beim Beenden eines Flugtages nicht leer, so wird eine Nachricht an den Systemadministrator versendet ('False' um Feature zu deaktivieren) |
 |           | debug       | False      | Erweitertes Logging für Analyse und Fehlersuche |
-|||||
-| smtp      |             |            |               |
-|           | server      |            | SMTP Serveradresse für Mailversand |
+| smtp      | server      |            | SMTP Serveradresse für Mailversand |
 |           | port        | 465        | SMTP Port |
 |           | username    |            | SMTP Server Benutzername |
 |           | password    |            | SMTP Server Passwort |
