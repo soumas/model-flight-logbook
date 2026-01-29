@@ -1,3 +1,0 @@
-79b7e0 Rahmen
-718c98 Hintergrund
-e1f1f5 Schrift

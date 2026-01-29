@@ -7,6 +7,9 @@ Die Anwendung ist ***einfach, übersichtlich und praxisnah*** konzipiert und unt
 
 MFL eignet sich insbesondere für den Einsatz als ***Touch-Kiosk-Terminal am Flugplatz*** und bietet zusätzlich eine ***Web-basierte Verwaltungs- und Auswertungsplattform***.
 
+# ⚠  ⚠  ⚠  UNDER CONSTRUCTION  ⚠  ⚠  ⚠ 
+Ich arbeite mit Hochdruck daran, alle Unterlagen fertigzustellen... bitte bis dahin noch warten :)
+
 # Features
 ## Feature-Videos
   [***🎥  MFL Terminal Funktionsübersicht (YouTube)***](https://www.youtube.com/watch?v=kF_Z988H-uU)  
@@ -61,7 +64,7 @@ MFL eignet sich insbesondere für den Einsatz als ***Touch-Kiosk-Terminal am Flu
 # Anforderungen
 Aufgrund der gewählten Systemarchitektur und der eingesetzten Technologien kann das MFL-System in unterschiedlichsten Konfigurationen betrieben werden – beispielsweise vollständig lokal auf einem einzelnen PC, mit einem Server im Internet oder auf verschiedenen Betriebssystemen wie Windows, Linux, Android oder iOS.
 
-Um die Dokumentation übersichtlich und die Komplexität möglichst gering zu halten, wird im Folgenden ausschließlich ein einziges Setup beschrieben, welches für die Mehrzahl der Modellflugvereine geeignet sein sollte. Fragen zu alternativen Setups oder abweichenden Betriebsformen können gerne über GitHub gestellt werden. Bitte dazu einen Issue mit dem Label "help wanted" eröffnen.
+Um die Dokumentation übersichtlich und die Komplexität möglichst gering zu halten, wird im Folgenden ausschließlich ein einziges Setup beschrieben, welches für die Mehrzahl der Modellflugvereine geeignet sein sollte. Fragen zu alternativen Setups oder abweichenden Betriebsformen können gerne über [GitHub Discussions](https://github.com/soumas/model-flight-logbook/discussions/categories/q-a) gestellt werden.
 
 ## Rahmenbedingungen
 ### Installation, Wartung und Betrieb
@@ -94,8 +97,10 @@ Alternativ kann natürlich jedes andere Gehäuse verwendet werden, in dem das Di
 ## Raspberry Pi vorbereiten
 1. ***Touch Display an Raspberry Pi anschließen***  
 [🎥  Videoanleitung - Raspberry Pi Touch Display anschließen (YouTube)](https://youtu.be/rG4MDcAez1c)  
-[📖 Originale Dokumentation (raspberrypi.com)](https://www.raspberrypi.com/documentation/accessories/display.html)
-2. ***"Raspberry Pi OS (64-bit)" installieren***    
+[📖 Originale Dokumentation (raspberrypi.com)](https://www.raspberrypi.com/documentation/accessories/display.html)  
+2. ***"Raspberry Pi OS (64-bit)" installieren***  
+🛈 Tip: SSH aktivieren & verwenden (Touch ist zu umständlich für administrative Tätigkeiten, ```sudo raspi-config``` --> Interface Options)  
+🛈 Tip: "Screen Blanking" aktivieren damit sich das Display bei Inaktivität ausschalet (```sudo raspi-config``` --> Display Options)  
 https://www.raspberrypi.com/software/
 
 ## MFL Installation  
@@ -123,7 +128,11 @@ password = mailbox_passwort
 ```
 
 ### MFL-Servereinstellungen
+<<<<<<< HEAD
 Alle Servereinstellungen werden folgend gelistet. Bitte prüfen ob die Standardwerte - insbesondere Maximal zulässige Flughöhe usw. - mit den Vorgaben des betroffenen Flugplatzes übereinstimmen und überschreiben Sie sie ggf. in der server-config.ini-Datei.
+=======
+Alle Servereinstellungen werden folgend gelistet. Bitte prüfen, ob die Standardwerte - insbesondere Maximal zulässige Flughöhe usw. - mit den Vorgaben des betroffenen Flugplatzes übereinstimmen und überschreiben Sie sie ggf. in der server-config.ini-Datei.
+>>>>>>> c8a440a ( update README.md)
 | Kategorie/Schlüssel        | Standardwert               | Beschreibung       |
 | ---                | ---                        | ---                |
 | **[logbook]** |
@@ -168,34 +177,58 @@ Durch die Ausführung folgender Befehle wird sowol der MFL-Server als auch das M
 # system aktualisieren
 sudo apt update && sudo apt upgrade -y
 
-# Im Home-Verzeichnis den Unterordner "mfl" erstellen und hinein springen
+# Im Home-Verzeichnis den Unterordner "mfl" erstellen und hin navigieren
 mkdir ~/mfl && cd ~/mfl
 
 # mfl installationsscript herunterladen und ausführbar machen
 wget https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/install.sh && chmod +x install.sh
 
 # mfl-server und mfl-terminal installieren
-# Die Serverkonfig öffnet sich mit "nano". nano kann mit Str+x und anschließend Str+y + Enter beendet werden.
+# Die Server-Konfig öffnet sich mit dem Konsolen-Texteditor "nano". nano kann mit Strg+x und anschließend Strg+y + Enter beendet werden.
+# nach der Installation sollte sich das MFL Terminal automatisch öffnen
 ./install.sh
 
+# der installer kann abschließend gelöscht werden
+rm install.sh
+
+# Note: Durch die erneute Ausführung des install-Scripts kann MFL vollständig deinstalliert werden (Achtung, auch Config und DB werden gelöscht)
 ```
 
 # Betrieb
 
-## Updates
-
-
 ## Backup
-Die MFL Flugbuch-Daten werden gesammelt in einer SQLite-Datenbank gespeichert. SQLite ist ein sehr populäres Datenbanksystem, welches alle Informationen in einer einzigen Datei speichert. Ein Backup kann also denkbar einfach durchgeführt werden, indem man diese eine Datei auf einem externen Speicher sichert. Ein weiterer Vorteil dieser Architektur ist es, dass man die Datenbank-Datei mit jedem SQLite-fähigen Datenbankbrowser öffnen kann. So kann notfalls auch ohne MFL darauf zugegriffen werden.
+Die MFL Flugbuch-Daten werden gesammelt in einer SQLite-Datenbank gespeichert. SQLite ist ein sehr populäres Datenbanksystem, welches alle Informationen in einer einzigen Datei speichert. Diese Datei kann nicht nur von MFL, sondern notfalls auch mit jedem SQLite-fähigen Datenbankbrowser geöffnet werden. Im Optimalfall wird die Datei über das Internet regelmäßig auf einen externen Speicher übertragen (SFTP, Cloud, ...).  
+Bei einer MFL Standardinstallation (wie oben beschrieben) befindet sich diese Datei hier: 
+* **~/mfl/mfl-server-8082/data.db**
 
-***⚡⚡⚡ Achtung ⚡⚡⚡*** Ein tägliches Backup der Flugbuch-Daten ist ein absolutes must have! Die Austro Control kann Auszüge davon bekanntlich anfordern und dann müssen die Daten verfügbar sein! Meine langjährige Erfahrung zeigt, dass die SD Karten in einem Raspberry Pi früher oder später kaputt werden - insbesondere wenn das Gerät in einem unklimatisierten Umfeld betrieben wird, wie bei Vereinshütten/Ladehütten häufig der Fall ist. Mit einem tagesaktuellen Datenbank-Backup und ggf. sogar einem Backup der MFL Serverkonfiguration ist das kein Problem und die Wiederherstellung eine Arbeit von maximal einer Stunde.
+***⚡⚡⚡ Achtung ⚡⚡⚡*** Ein tägliches Backup dieser Datei ist ein absolutes **must have**! Die Austro Control kann bekanntlich Auszüge davon anfordern und dann **müssen** die Daten verfügbar sein! Meine Erfahrung zeigt, dass die microSD Karten im Raspberry Pi früher oder später kaputt werden - insbesondere dann, wenn das Gerät in einem unklimatisierten Umfeld betrieben wird, wie es bei Vereinshütten häufig der Fall ist. Mit einem tagesaktuellen Datenbank-Backup ist das kein Problem und die Wiederherstellung im Handumdrehen erledigt.  
 
+Nice to have ist auch eine einmalige Sicherung der Datei ~/mfl/mfl-server-8082/server-config.ini damit man sich die Konfigurationswerte bei der Wiederherstellung nicht wieder mühsam zusammensuchen muss.
 
-# Themen (TMP)
-* Datenschutz & DSGVO
-* Backup!!
+## Updates
+Tip: Um aktiv informiert zu werden wenn es ein neues Release gibt, bitte eine kurze Nachricht mit Vereinsbezeichnung und E-Mail an office@soumasoft.com senden  
 
+Durch die Ausführung folgender Befehle wird sowol der MFL-Server als auch das MFL-Terminal auf die aktuellste Version gehoben. 
+Während des Vorganges wirden sowohl das Terminal als auch der Server neu gestartet.
+```bash
+# system aktualisieren
+sudo apt update && sudo apt upgrade -y
+
+# Im den Unterordner "mfl" wechseln
+cd ~/mfl
+
+# ⚠ NUR BEIM ERSTEN UPDATE NÖTIG ⚠ mfl updatescript herunterladen und ausführbar machen
+wget https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/update.sh && chmod +x update.sh
+
+# Update durchführen
+./update.sh
+
+```
+
+# Fragen oder Anregungen?
+Bitte gerne über [GitHub Discussions](https://github.com/soumas/model-flight-logbook/discussions/categories/q-a) oder an office@soumasoft.com
 
 # Disclaimer
-Der Haftungsausschluss ist grundsätzlich bereits über die verwendete Lizenz geregelt. Trotzdem weise ich an dieser Stelle noch einmal explizit darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt auf vollständiges Risiko des Betreibers.
+Der Haftungsausschluss ist grundsätzlich bereits über die verwendete Lizenz geregelt. Trotzdem weise ich an dieser Stelle noch einmal explizit darauf hin, dass es sich hier um ein privates Projekt handelt. Keines der Funktionalitäten wurde mit öffentlichen Stellen abgestimmt. Der Einsatz des Systems erfolgt auf vollständiges Risiko des Betreibers.  
+Bitte beachten, dass sich in der Datenbank-Datei personenbezogene Informationen der Vereinsmitglieder befinden. Insofern ist darauf zu achten, dass sowohl MFL an sich als auch der Backup-Vorgang DSGVO konform betrieben werden.
 
