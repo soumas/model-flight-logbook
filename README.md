@@ -124,42 +124,41 @@ password = mailbox_passwort
 
 ### MFL-Servereinstellungen
 Alle Einstellungsmöglichkeiten werden folgend gelistet. Bitte prüfen ob die Standardwerte - insbesondere Maximal zulässige Flughöhe usw. - mit den Vorgaben des betroffenen Flugplatzes übereinstimmen und überschreiben Sie sie gegebenenfalls in der server-config.ini-Datei.
-| Kategorie | Schlüssel        | Standardwert               | Beschreibung       |
-| ---       | ---              | ---                        | ---                |
-| logbook |
-|           | dburl            | sqlite:///./data.db        | Database URL (siehe [SQLAlchemy Documentation](https://docs.sqlalchemy.org/en/21/core/engines.html)) |
-|           | apikey_admin     | admin                      | Api-Key (Passwort) für administrative Endpunkte und den MFL-Admin |
-|           | admin_email      |                            | E-Mail Adresse, an die Systemnachrichten gesendet werden |
-|           | forward_comment  | True                       | Bleibt das Bemerkungsfeld beim Beenden eines Flugtages nicht leer, so wird eine Nachricht an den Systemadministrator versendet ('False' um Feature zu deaktivieren) |
-|           | debug            | False                      | Erweitertes Logging für Analyse und Fehlersuche |
-| smtp   |
-|           | server           |                            | Serveradresse       |
-|           | port             | 465                        | Port                |
-|           | username         |                            | Benutzername        |
-|           | password         |                            | Passwort            |
-|           | from_email       |                            | Versender E-Mail Adresse |
-|           | from_name        |                            | Versender Name      |
-|           | starttls         | False                      | Verwende starttle für Mailversand |
-|           | ssl_tls          | True                       | Verwende ssl_tls für Mailversand |
-|           | use_credentials  | True                       | Login an SMT Server erforderlich |
-|           | validate_certs   | True                       | Zertifikatsprüfung durchführen |
-|           | timeout          | 60                         | Maximale Zeit (in Sekunden) für den Verbindungaufbau zum SMT Server |
-|           | template_folder  | ./resources/mailtemplates/ | Ordner mit E-Mail Vorlagen für den Mailversand |
-|           | suppress_send    | False                      | Unterbindet den Mailversand |
-| terminalconfig_[ID]           |
-|           | apikey           |                            | Api-Key (Passwort) mit dem sich das Terminal am Server authentifizieren muss |
-|           | terminaltype     |                            | Art des MFL Terminals (aktuell wird nur 'multiuser' unterstützt)  |
-|           | airportname      |                            | Bezeichnung des Flugplatzes |
-|           | terminalname     |                            | Bezeichnung des Terminals |
-|           | max_altitude_m   | 150                        | Maximal zulässige Flughöhe in Meter (mit Luftraumbeobachter) |
-|           | max_altitude_without_observer_m | 119         | Maximal zulässige Flughöhe in Meter (ohne Luftraumbeobachter) |
-|           | max_num_flights  | 25                         | Maximalanzahl an Flügen für einen Logbucheintrag |
-|           | operatinghourscsv | ./resources/operatinghours/AUSTRIA_MIN.csv  | Pfad zur Betriebszeiten CSV Datei |
-|           | dashboard_show_pilotid | False                | Definiert, ob die Piloten-ID während der Eingabe auf dem Dashboard angezeigt werden soll |
-|           | dashboard_info_messages |                     | Info-Nachrichten auf dem Dashboard (mehrere durch Beistrich getrennt) |
-|           | pilot_info_messages |                         | Info-Nachrichten an alle Piloten (mehrere durch Beistrich getrennt) |
-|           | pilot_warn_messages |                         | Warn-Nachrichten an alle Piloten (mehrere durch Beistrich getrennt) |
-|           | pilot_error_messages |                        | Flugverbots-Nachrichten an alle Piloten (mehrere durch Beistrich getrennt) |
+| Kategorie.Schlüssel        | Standardwert               | Beschreibung       |
+| ---              | ---                        | ---                |
+| logbook.dburl            | sqlite:///./data.db        | Database URL (siehe [SQLAlchemy Documentation](https://docs.sqlalchemy.org/en/21/core/engines.html)) |
+| logbook.apikey_admin     | admin                      | Api-Key (Passwort) für administrative Endpunkte und den MFL-Admin |
+| logbook.admin_email      |                            | E-Mail Adresse, an die Systemnachrichten gesendet werden |
+| logbook.forward_comment  | True                       | Bleibt das Bemerkungsfeld beim Beenden eines Flugtages nicht leer, so wird eine Nachricht an den Systemadministrator versendet ('False' um Feature zu deaktivieren) |
+| logbook.debug            | False                      | Erweitertes Logging für Analyse und Fehlersuche |
+| ----- |
+| smtp.server           |                            | Serveradresse       |
+| smtp.port             | 465                        | Port                |
+| smtp.username         |                            | Benutzername        |
+| smtp.password         |                            | Passwort            |
+| smtp.from_email       |                            | Versender E-Mail Adresse |
+| smtp.from_name        |                            | Versender Name      |
+| smtp.starttls         | False                      | Verwende starttle für Mailversand |
+| smtp.ssl_tls          | True                       | Verwende ssl_tls für Mailversand |
+| smtp.use_credentials  | True                       | Login an SMT Server erforderlich |
+| smtp.validate_certs   | True                       | Zertifikatsprüfung durchführen |
+| smtp.timeout          | 60                         | Maximale Zeit (in Sekunden) für den Verbindungaufbau zum SMT Server |
+| smtp.template_folder  | ./resources/mailtemplates/ | Ordner mit E-Mail Vorlagen für den Mailversand |
+| smtp.suppress_send    | False                      | Unterbindet den Mailversand |
+| ----- |
+| terminalconfig_ID.apikey           |                            | Api-Key (Passwort) mit dem sich das Terminal am Server authentifizieren muss |
+| terminalconfig_ID.terminaltype     |                            | Art des MFL Terminals (aktuell wird nur 'multiuser' unterstützt)  |
+| terminalconfig_ID.airportname      |                            | Bezeichnung des Flugplatzes |
+| terminalconfig_ID.terminalname     |                            | Bezeichnung des Terminals |
+| terminalconfig_ID.max_altitude_m   | 150                        | Maximal zulässige Flughöhe in Meter (mit Luftraumbeobachter) |
+| terminalconfig_ID.max_altitude_without_observer_m | 119         | Maximal zulässige Flughöhe in Meter (ohne Luftraumbeobachter) |
+| terminalconfig_ID.max_num_flights  | 25                         | Maximalanzahl an Flügen für einen Logbucheintrag |
+| terminalconfig_ID.operatinghourscsv | ./resources/operatinghours/AUSTRIA_MIN.csv  | Pfad zur Betriebszeiten CSV Datei |
+| terminalconfig_ID.dashboard_show_pilotid | False                | Definiert, ob die Piloten-ID während der Eingabe auf dem Dashboard angezeigt werden soll |
+| terminalconfig_ID.dashboard_info_messages |                     | Info-Nachrichten auf dem Dashboard (mehrere durch Beistrich getrennt) |
+| terminalconfig_ID.pilot_info_messages |                         | Info-Nachrichten an alle Piloten (mehrere durch Beistrich getrennt) |
+| terminalconfig_ID.pilot_warn_messages |                         | Warn-Nachrichten an alle Piloten (mehrere durch Beistrich getrennt) |
+| terminalconfig_ID.pilot_error_messages |                        | Flugverbots-Nachrichten an alle Piloten (mehrere durch Beistrich getrennt) |
 
 ### Installationsscript ausführn
 Durch die Ausführung folgender Befehle wird sowol der MFL-Server als auch das MFL-Terminal installiert. 
