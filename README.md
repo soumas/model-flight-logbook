@@ -102,7 +102,7 @@ https://www.raspberrypi.com/software/
 Die Installation aller MFL Komponenten (MFL-Server inkl. MFL-Admin & MFL-Terminal) erfolgt durch ein einiziges Installationsscript. Dieses läuft vollautomatisch mit einer Ausnahme: während des Installationsvorgangs öffnet sich eine Server-Konfigurationsdatei welche mit entsprechenden Angaben ergänzt werden muss. Um hierfür vorbereitet zu sein, machen Sie sich vorab mit allen Servereinstellungen vertraut.
 
 ### Beispiel einer server-config.ini Datei
-Viele Konfigurationen sind mit Standardwerten versehen und müssen deshalb nicht angegeben werden. Folgendes Beispiel zeigt den vollständigen Inhalt einer Konfigurationsdatei:
+Die meisten Konfigurationen sind mit Standardwerten versehen und müssen deshalb nicht angegeben werden. Folgendes Beispiel zeigt eine minimale aber vollständige Konfigurationsdatei:
 
 ```ini
 [logbook]
@@ -123,7 +123,7 @@ password = mailbox_passwort
 ```
 
 ### MFL-Servereinstellungen
-Alle Einstellungsmöglichkeiten werden folgend gelistet. Bitte prüfen ob die Standardwerte - insbesondere Maximal zulässige Flughöhe usw. - mit den Vorgaben des betroffenen Flugplatzes übereinstimmen und überschreiben Sie sie gegebenenfalls in der server-config.ini-Datei.
+Alle Servereinstellungen werden folgend gelistet. Bitte prüfen ob die Standardwerte - insbesondere Maximal zulässige Flughöhe usw. - mit den Vorgaben des betroffenen Flugplatzes übereinstimmen und überschreiben Sie sie ggf. in der server-config.ini-Datei.
 | Kategorie/Schlüssel        | Standardwert               | Beschreibung       |
 | ---                | ---                        | ---                |
 | **[logbook]** |
