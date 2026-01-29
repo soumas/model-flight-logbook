@@ -84,7 +84,7 @@ https://www.raspberrypi.com/products/raspberry-pi-touch-display/
 Der RFID Scanner wird per USB an den Raspberry Pi angeschlossen  
 https://www.neuftech.net/products/40
 * ***MFL Terminal Gehäuse***  
-Die 3D-Druckdateien für das originale MFL Terminal Gehäuse stehen auf thingiverse.com zur Verfügung. Der Druck ist nicht sonderlich schwierig und wird unter Befolgung der Hinweise bestimmt problemlos klappen. Wer keinen passenden 3D-Drucker hat aber trotzdem das originale Gehäuse haben möchte, möge sich gerne an office@soumasoft.com wenden. 
+Die 3D-Druckdateien für das originale MFL Terminal Gehäuse stehen auf thingiverse.com zur Verfügung. Der Druck ist nicht sonderlich schwierig und wird unter Befolgung der Hinweise bestimmt problemlos klappen. Wer keinen passenden 3D-Drucker hat aber trotzdem das originale Gehäuse haben möchte, möge sich gerne an office@soumasoft.com wenden.  
 https://www.thingiverse.com/thing:7279187  
 Alternativ kann natürlich jedes andere Gehäuse verwendet werden, in dem das Display und der Raspberry Pi Platz finden.   
 * ***Diverse Kleinteile***  
