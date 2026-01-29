@@ -99,28 +99,70 @@ Alternativ kann natürlich jedes andere Gehäuse verwendet werden, in dem das Di
 https://www.raspberrypi.com/software/
 
 ## MFL Installation  
-Die Installation aller MFL Komponenten (MFL-Server inkl. MFL-Admin & MFL-Terminal) erfolgt durch ein einiziges Installationsscript. Dieses läuft vollautomatisch mit einer Ausnahme: während des Installationsvorgangs öffnet sich eine Server-Konfigurationsdatei welche mit entsprechenden Angaben ergänzt werden muss. Um hierfür vorbereitet zu sein, machen Sie sich vorab mit allen Servereinstellungen vertraut:
+Die Installation aller MFL Komponenten (MFL-Server inkl. MFL-Admin & MFL-Terminal) erfolgt durch ein einiziges Installationsscript. Dieses läuft vollautomatisch mit einer Ausnahme: während des Installationsvorgangs öffnet sich eine Server-Konfigurationsdatei welche mit entsprechenden Angaben ergänzt werden muss. Um hierfür vorbereitet zu sein, machen Sie sich vorab mit allen Servereinstellungen vertraut.
+
+### Beispiel einer server-config.ini Datei
+Viele Konfigurationen sind mit Standardwerten versehen und müssen deshalb nicht angegeben werden. Folgendes Beispiel zeigt den vollständigen Inhalt einer Konfigurationsdatei:
+
+```ini
+[logbook]
+apikey_admin = SiChErEsPwD%!X72$
+admin_email = admin@mbc-modellflug.at
+
+[terminalconfig_terminal1]
+terminalname = Terminal 1
+apikey = P@ssWo&tFuerTe+min$l1
+airportname = Airport MBC Modellflug
+
+[smtp]
+server = smtp.mbc-modellflug.at
+from_email = admin@mbc-modellflug.at
+username = mailbox_benutzername
+password = mailbox_passwort
+
+```
 
 ### MFL-Servereinstellungen
-| Kategorie | Schlüssel | Standardwert | Beschreibung |
-| ---       | ---       | ---          | ---          |
-| logbook   | dburl     | sqlite:///./data.db | Connectionstring für die Datenbank. Muss nur überschreiben werden, wenn die SQLite Datenbank unter einem anderen Pfad liegt oder ein anderes DBMS verwendet wird. |
-|           | apikey_admin | admin | Api-Key (Passwort) für administrative Endpunkte und den MFL-Admin ⚠️ Unbedingt anpassen! |
-|           | admin_email |            | E-Mail Adresse an die Systemnachrichten gesendet werden |
-|           | forward_comment | True | Bleibt das Bemerkungsfeld beim Beenden eines Flugtages nicht leer, so wird eine Nachricht an den Systemadministrator versendet ('False' um Feature zu deaktivieren) |
-|           | debug       | False      | Erweitertes Logging für Analyse und Fehlersuche |
-| smtp      | server      |            | SMTP Serveradresse für Mailversand |
-|           | port        | 465        | SMTP Port |
-|           | username    |            | SMTP Server Benutzername |
-|           | password    |            | SMTP Server Passwort |
-|           | from_email  |            | Versender E-Mail Adresse |
-|           | from_name   |            | Versender Name |
-|           | starttls    | False      | Verwende starttle für Mailversand |
-|           | ssl_tls     | True       | Verwende ssl_tls für Mailversand |
-|           | use_credentials | True   | Sollen standard  |
+Alle Einstellungsmöglichkeiten werden folgend gelistet. Bitte prüfen ob die Standardwerte - insbesondere Maximal zulässige Flughöhe usw. - mit den Vorgaben des betroffenen Flugplatzes übereinstimmen und überschreiben Sie sie gegebenenfalls in der server-config.ini-Datei.
+| Kategorie | Schlüssel        | Standardwert               | Beschreibung       |
+| ---       | ---              | ---                        | ---                |
+| logbook |
+|           | dburl            | sqlite:///./data.db        | Database URL (siehe [SQLAlchemy Documentation](https://docs.sqlalchemy.org/en/21/core/engines.html)) |
+|           | apikey_admin     | admin                      | Api-Key (Passwort) für administrative Endpunkte und den MFL-Admin |
+|           | admin_email      |                            | E-Mail Adresse, an die Systemnachrichten gesendet werden |
+|           | forward_comment  | True                       | Bleibt das Bemerkungsfeld beim Beenden eines Flugtages nicht leer, so wird eine Nachricht an den Systemadministrator versendet ('False' um Feature zu deaktivieren) |
+|           | debug            | False                      | Erweitertes Logging für Analyse und Fehlersuche |
+| smtp   |
+|           | server           |                            | Serveradresse       |
+|           | port             | 465                        | Port                |
+|           | username         |                            | Benutzername        |
+|           | password         |                            | Passwort            |
+|           | from_email       |                            | Versender E-Mail Adresse |
+|           | from_name        |                            | Versender Name      |
+|           | starttls         | False                      | Verwende starttle für Mailversand |
+|           | ssl_tls          | True                       | Verwende ssl_tls für Mailversand |
+|           | use_credentials  | True                       | Login an SMT Server erforderlich |
+|           | validate_certs   | True                       | Zertifikatsprüfung durchführen |
+|           | timeout          | 60                         | Maximale Zeit (in Sekunden) für den Verbindungaufbau zum SMT Server |
+|           | template_folder  | ./resources/mailtemplates/ | Ordner mit E-Mail Vorlagen für den Mailversand |
+|           | suppress_send    | False                      | Unterbindet den Mailversand |
+| terminalconfig_[ID]           |
+|           | apikey           |                            | Api-Key (Passwort) mit dem sich das Terminal am Server authentifizieren muss |
+|           | terminaltype     |                            | Art des MFL Terminals (aktuell wird nur 'multiuser' unterstützt)  |
+|           | airportname      |                            | Bezeichnung des Flugplatzes |
+|           | terminalname     |                            | Bezeichnung des Terminals |
+|           | max_altitude_m   | 150                        | Maximal zulässige Flughöhe in Meter (mit Luftraumbeobachter) |
+|           | max_altitude_without_observer_m | 119         | Maximal zulässige Flughöhe in Meter (ohne Luftraumbeobachter) |
+|           | max_num_flights  | 25                         | Maximalanzahl an Flügen für einen Logbucheintrag |
+|           | operatinghourscsv | ./resources/operatinghours/AUSTRIA_MIN.csv  | Pfad zur Betriebszeiten CSV Datei |
+|           | dashboard_show_pilotid | False                | Definiert, ob die Piloten-ID während der Eingabe auf dem Dashboard angezeigt werden soll |
+|           | dashboard_info_messages |                     | Info-Nachrichten auf dem Dashboard (mehrere durch Beistrich getrennt) |
+|           | pilot_info_messages |                         | Info-Nachrichten an alle Piloten (mehrere durch Beistrich getrennt) |
+|           | pilot_warn_messages |                         | Warn-Nachrichten an alle Piloten (mehrere durch Beistrich getrennt) |
+|           | pilot_error_messages |                        | Flugverbots-Nachrichten an alle Piloten (mehrere durch Beistrich getrennt) |
 
-
-Per SSH oder VNC auf den Raspberry Pi verbinden und folgende Befehle in der Bash ausführen:
+### Installationsscript ausführn
+Durch die Ausführung folgender Befehle wird sowol der MFL-Server als auch das MFL-Terminal installiert. 
 
 ```bash
 # system aktualisieren
@@ -132,14 +174,9 @@ mkdir ~/mfl && cd ~/mfl
 # mfl installationsscript herunterladen und ausführbar machen
 wget https://github.com/soumas/model-flight-logbook/raw/refs/heads/main/installer/install.sh && chmod +x install.sh
 
-# mfl-server (Port 80) und mfl-terminal installieren
-# TODO !!!!! während der Installation ist die Server-Konfiguration vorzunehmen 
-./install.sh 80
-
-
-
-# nach erfolgreicher Installation kann das Installationsscript wieder gelöscht werden
-rm install.sh
+# mfl-server und mfl-terminal installieren
+# Die Serverkonfig öffnet sich mit "nano". nano kann mit Str+x und anschließend Str+y + Enter beendet werden.
+./install.sh
 
 ```
 
