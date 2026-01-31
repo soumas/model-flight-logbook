@@ -128,11 +128,9 @@ password = mailbox_passwort
 ```
 
 ### MFL-Servereinstellungen
-<<<<<<< HEAD
-Alle Servereinstellungen werden folgend gelistet. Bitte prüfen ob die Standardwerte - insbesondere Maximal zulässige Flughöhe usw. - mit den Vorgaben des betroffenen Flugplatzes übereinstimmen und überschreiben Sie sie ggf. in der server-config.ini-Datei.
-=======
+
 Alle Servereinstellungen werden folgend gelistet. Bitte prüfen, ob die Standardwerte - insbesondere Maximal zulässige Flughöhe usw. - mit den Vorgaben des betroffenen Flugplatzes übereinstimmen und überschreiben Sie sie ggf. in der server-config.ini-Datei.
->>>>>>> c8a440a ( update README.md)
+
 | Kategorie/Schlüssel        | Standardwert               | Beschreibung       |
 | ---                | ---                        | ---                |
 | **[logbook]** |
