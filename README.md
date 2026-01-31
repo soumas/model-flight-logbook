@@ -99,8 +99,8 @@ Alternativ kann natürlich jedes andere Gehäuse verwendet werden, in dem das Di
 [🎥  Videoanleitung - Raspberry Pi Touch Display anschließen (YouTube)](https://youtu.be/rG4MDcAez1c)  
 [📖 Originale Dokumentation (raspberrypi.com)](https://www.raspberrypi.com/documentation/accessories/display.html)  
 2. ***"Raspberry Pi OS (64-bit)" installieren***  
-🛈 Tip: SSH aktivieren & verwenden (Touch ist zu umständlich für administrative Tätigkeiten, ```sudo raspi-config``` --> Interface Options)  
-🛈 Tip: "Screen Blanking" aktivieren damit sich das Display bei Inaktivität ausschalet (```sudo raspi-config``` --> Display Options)  
+🛈 Tipp: SSH aktivieren & verwenden (Touch ist zu umständlich für administrative Tätigkeiten, ```sudo raspi-config``` --> Interface Options)  
+🛈 Tipp: "Screen Blanking" aktivieren damit sich das Display bei Inaktivität ausschalet (```sudo raspi-config``` --> Display Options)  
 https://www.raspberrypi.com/software/
 
 ## MFL Installation  
@@ -204,7 +204,7 @@ Bei einer MFL Standardinstallation (wie oben beschrieben) befindet sich diese Da
 Nice to have ist auch eine einmalige Sicherung der Datei ~/mfl/mfl-server-8082/server-config.ini damit man sich die Konfigurationswerte bei der Wiederherstellung nicht wieder mühsam zusammensuchen muss.
 
 ## Updates
-Tip: Um aktiv informiert zu werden wenn es ein neues Release gibt, bitte eine kurze Nachricht mit Vereinsbezeichnung und E-Mail an office@soumasoft.com senden  
+🛈 Tipp: Um aktiv informiert zu werden wenn es ein neues Release gibt, bitte eine kurze Nachricht mit Vereinsbezeichnung und E-Mail an office@soumasoft.com senden  
 
 Durch die Ausführung folgender Befehle wird sowol der MFL-Server als auch das MFL-Terminal auf die aktuellste Version gehoben. 
 Während des Vorganges wirden sowohl das Terminal als auch der Server neu gestartet.
