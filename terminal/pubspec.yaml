@@ -8,16 +8,16 @@ environment:
 
 dependencies:
   dart_mappable: 4.6.1
-  dio: 5.9.0
+  dio: 5.9.1
   flutter:
     sdk: flutter
   flutter_bloc: 9.1.1
   flutter_localizations:
     sdk: flutter
+  flutter_secure_storage: ^10.0.0
   get_it: 9.2.0
   intl: any
   package_info_plus: ^9.0.0
-  shared_preferences: 2.5.4
   toastification: 3.0.3
   virtual_keyboard_multi_language: 1.1.2
 
@@ -25,8 +25,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  build_runner: ^2.4.11
-  dart_mappable_builder: ^4.2.3
+  build_runner: ^2.10.5
+  dart_mappable_builder: ^4.6.4
 
 flutter:
   generate: true

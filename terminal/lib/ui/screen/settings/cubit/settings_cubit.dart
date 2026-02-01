@@ -35,18 +35,18 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
   }
 
-  void setAdminPinAndSave(String value) {
+  void setAdminPinAndSave(String value) async {
     emit(state.copyWith(settings: state.settings!.copyWith(adminPin: value)));
-    save();
+    await save();
   }
 
-  void deleteEndpointAndSave(TerminalEndpoint endpoint) {
+  void deleteEndpointAndSave(TerminalEndpoint endpoint) async {
     final lst = [...state.settings!.terminalEndpoints];
     lst.removeWhere((existingep) =>
         endpoint.apiEndpoint.compareTo(existingep.apiEndpoint) == 0 &&
         endpoint.config.terminalid.compareTo(existingep.config.terminalid) == 0);
     emit(state.copyWith(settings: state.settings!.copyWith(terminalEndpoints: lst)));
-    save();
+    await save();
   }
 
   Future<bool> reloadEndpointAndSave(TerminalEndpoint endpoint) async {
@@ -60,7 +60,7 @@ class SettingsCubit extends Cubit<SettingsState> {
           updated = true;
         }
       }
-      save();
+      await save();
       return updated;
     } catch (e) {
       // log it mal

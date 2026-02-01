@@ -10,7 +10,8 @@ class MainMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<DashboardCubit>().state;
+    final cubit = context.watch<DashboardCubit>();
+    final state = cubit.state;
     return Drawer(
       width: MediaQuery.of(context).size.width * 0.8,
       child: ListView(
@@ -45,9 +46,7 @@ class MainMenu extends StatelessWidget {
             onTap: () async {
               Navigator.of(context).pop();
               await Navigator.of(context).pushNamed(SettingsScreen.route);
-              if (context.mounted) {
-                context.read<DashboardCubit>().init();
-              }
+              cubit.init();
             },
           ),
         ],

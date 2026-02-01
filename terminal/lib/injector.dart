@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mfl_terminal/data/repositories/logbook_api_repo_impl.dart';
 import 'package:mfl_terminal/domain/repositories/logbook_api_repo.dart';
 import 'package:mfl_terminal/ui/screen/dashboard/cubit/dashboard_cubit.dart';
@@ -17,6 +18,7 @@ initInjector() {
   injector.registerSingleton<LocalStorageRepo>(LocalStorageRepoImpl());
   injector.registerSingleton<LogbookApiRepo>(LogbookApiRepoImpl());
   injector.registerSingleton<MflDeviceInfo>(MflDeviceInfo());
+  injector.registerSingleton<FlutterSecureStorage>(const FlutterSecureStorage());
 
   // factories
   injector.registerFactory<DashboardCubit>(() => DashboardCubit(localStorageRepo: injector.get(), logbookApiRepo: injector.get()));
