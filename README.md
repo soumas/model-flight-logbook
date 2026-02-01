@@ -89,7 +89,7 @@ Produktbeispiel: https://www.neuftech.net/products/40
 * ***MFL Terminal Gehäuse***  
 Die 3D-Druckdateien für das originale MFL Terminal Gehäuse stehen auf thingiverse.com zur Verfügung. Der Druck ist nicht sonderlich schwierig und wird unter Befolgung der Hinweise auf thingiverse.com bestimmt problemlos klappen. Wer keinen passenden 3D-Drucker hat aber trotzdem das originale Gehäuse haben möchte, möge sich gerne an office@soumasoft.com wenden.  
 Alternativ kann natürlich jedes andere Gehäuse verwendet werden, in dem das Display und der Raspberry Pi Platz finden.   
-[🎥  Videoanleitung - MFL Terminal zusammenbauen](https://youtu.be/KYi7MMMhIOI)  
+[🎥  Videoanleitung - MFL Terminal zusammenbauen (YouTube)](https://youtu.be/KYi7MMMhIOI)  
 [📁  https://www.thingiverse.com/thing:7279187](https://www.thingiverse.com/thing:7279187)  
 
 * ***Diverse Kleinteile***  
