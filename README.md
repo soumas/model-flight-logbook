@@ -12,8 +12,8 @@ Ich arbeite mit Hochdruck daran, alle Unterlagen fertigzustellen... bitte bis da
 
 # Features
 ## Feature-Videos
-  [***🎥  MFL Terminal Funktionsübersicht (YouTube)***](https://www.youtube.com/watch?v=kF_Z988H-uU)  
-  [***🎥  MFL Admin Funktionsübersicht (YouTube***)](https://www.youtube.com/watch?v=mCskDqg9cJ4)  
+  [🎥  MFL Terminal Funktionsübersicht (YouTube)](https://www.youtube.com/watch?v=kF_Z988H-uU)  
+  [🎥  MFL Admin Funktionsübersicht (YouTube)](https://www.youtube.com/watch?v=mCskDqg9cJ4)  
 ## Für Pilot:innen / Mitglieder
 - ***Übersichtliches, touch-optimiertes Kiosk-Terminal***  
   Intuitive Bedienung – geeignet für Jung und Alt
