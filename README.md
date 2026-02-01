@@ -79,7 +79,7 @@ Für den Aufbau des MFL Systems sind folgende Hardware-Komponenten erforderlich.
 Grundsätzlich kann jedes Raspberry Pi Modell verwendet werden, welches das Betriebssystem "Raspberry Pi OS 64-bit" unterstützt und mit dem Touch Display kompatibel ist.  
 https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
 * ***microSD Karte***  
-Auch wenn MFL nur wenig Speicherbedarf hat, empfiehlt es sich eine microSD mit mindestens 32 GB Speicher einzusetzen. Außerdem sollte auf eine gute Qualität und Temperaturbeständigkeit geachtet werden, um MFL auch in unklimatisierter Umgebung möglichst lange ohne Aufall betreiben zu können.
+Auch wenn MFL nur wenig Speicherbedarf hat, empfiehlt es sich eine microSD mit mindestens 32 GB Speicher einzusetzen. Außerdem sollte auf eine gute Qualität und Temperaturbeständigkeit geachtet werden, um MFL auch in unklimatisierter Umgebung möglichst lange ohne Ausfall (mehr dazu unter "Backup") betreiben zu können.
 * ***Raspberry Pi 7″ Touch Display (800 x 480 Pixel)***  
 Das originale Touch Display (Version 1) harmoniert perfekt mit dem Raspberry Pi 4 model B und hat mit 800 x 480 Pixel eine optimale Auflösung. Kein Setup und problemloser Betrieb.  
 https://www.raspberrypi.com/products/raspberry-pi-touch-display/
