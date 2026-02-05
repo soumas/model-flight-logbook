@@ -1,6 +1,8 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -21,17 +23,26 @@ class EndFlightSessionDataMapper extends ClassMapperBase<EndFlightSessionData> {
   final String id = 'EndFlightSessionData';
 
   static int _$takeoffcount(EndFlightSessionData v) => v.takeoffcount;
-  static const Field<EndFlightSessionData, int> _f$takeoffcount =
-      Field('takeoffcount', _$takeoffcount);
+  static const Field<EndFlightSessionData, int> _f$takeoffcount = Field(
+    'takeoffcount',
+    _$takeoffcount,
+  );
   static int _$maxAltitude(EndFlightSessionData v) => v.maxAltitude;
-  static const Field<EndFlightSessionData, int> _f$maxAltitude =
-      Field('maxAltitude', _$maxAltitude);
+  static const Field<EndFlightSessionData, int> _f$maxAltitude = Field(
+    'maxAltitude',
+    _$maxAltitude,
+  );
   static bool _$airspaceObserver(EndFlightSessionData v) => v.airspaceObserver;
-  static const Field<EndFlightSessionData, bool> _f$airspaceObserver =
-      Field('airspaceObserver', _$airspaceObserver);
+  static const Field<EndFlightSessionData, bool> _f$airspaceObserver = Field(
+    'airspaceObserver',
+    _$airspaceObserver,
+  );
   static String? _$comment(EndFlightSessionData v) => v.comment;
-  static const Field<EndFlightSessionData, String> _f$comment =
-      Field('comment', _$comment, opt: true);
+  static const Field<EndFlightSessionData, String> _f$comment = Field(
+    'comment',
+    _$comment,
+    opt: true,
+  );
 
   @override
   final MappableFields<EndFlightSessionData> fields = const {
@@ -43,10 +54,11 @@ class EndFlightSessionDataMapper extends ClassMapperBase<EndFlightSessionData> {
 
   static EndFlightSessionData _instantiate(DecodingData data) {
     return EndFlightSessionData(
-        takeoffcount: data.dec(_f$takeoffcount),
-        maxAltitude: data.dec(_f$maxAltitude),
-        airspaceObserver: data.dec(_f$airspaceObserver),
-        comment: data.dec(_f$comment));
+      takeoffcount: data.dec(_f$takeoffcount),
+      maxAltitude: data.dec(_f$maxAltitude),
+      airspaceObserver: data.dec(_f$airspaceObserver),
+      comment: data.dec(_f$comment),
+    );
   }
 
   @override
@@ -72,47 +84,62 @@ mixin EndFlightSessionDataMappable {
         .encodeMap<EndFlightSessionData>(this as EndFlightSessionData);
   }
 
-  EndFlightSessionDataCopyWith<EndFlightSessionData, EndFlightSessionData,
-          EndFlightSessionData>
-      get copyWith => _EndFlightSessionDataCopyWithImpl(
-          this as EndFlightSessionData, $identity, $identity);
+  EndFlightSessionDataCopyWith<
+    EndFlightSessionData,
+    EndFlightSessionData,
+    EndFlightSessionData
+  >
+  get copyWith =>
+      _EndFlightSessionDataCopyWithImpl<
+        EndFlightSessionData,
+        EndFlightSessionData
+      >(this as EndFlightSessionData, $identity, $identity);
   @override
   String toString() {
-    return EndFlightSessionDataMapper.ensureInitialized()
-        .stringifyValue(this as EndFlightSessionData);
+    return EndFlightSessionDataMapper.ensureInitialized().stringifyValue(
+      this as EndFlightSessionData,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return EndFlightSessionDataMapper.ensureInitialized()
-        .equalsValue(this as EndFlightSessionData, other);
+    return EndFlightSessionDataMapper.ensureInitialized().equalsValue(
+      this as EndFlightSessionData,
+      other,
+    );
   }
 
   @override
   int get hashCode {
-    return EndFlightSessionDataMapper.ensureInitialized()
-        .hashValue(this as EndFlightSessionData);
+    return EndFlightSessionDataMapper.ensureInitialized().hashValue(
+      this as EndFlightSessionData,
+    );
   }
 }
 
 extension EndFlightSessionDataValueCopy<$R, $Out>
     on ObjectCopyWith<$R, EndFlightSessionData, $Out> {
   EndFlightSessionDataCopyWith<$R, EndFlightSessionData, $Out>
-      get $asEndFlightSessionData =>
-          $base.as((v, t, t2) => _EndFlightSessionDataCopyWithImpl(v, t, t2));
+  get $asEndFlightSessionData => $base.as(
+    (v, t, t2) => _EndFlightSessionDataCopyWithImpl<$R, $Out>(v, t, t2),
+  );
 }
 
 abstract class EndFlightSessionDataCopyWith<
-    $R,
-    $In extends EndFlightSessionData,
-    $Out> implements ClassCopyWith<$R, $In, $Out> {
-  $R call(
-      {int? takeoffcount,
-      int? maxAltitude,
-      bool? airspaceObserver,
-      String? comment});
+  $R,
+  $In extends EndFlightSessionData,
+  $Out
+>
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({
+    int? takeoffcount,
+    int? maxAltitude,
+    bool? airspaceObserver,
+    String? comment,
+  });
   EndFlightSessionDataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-      Then<$Out2, $R2> t);
+    Then<$Out2, $R2> t,
+  );
 }
 
 class _EndFlightSessionDataCopyWithImpl<$R, $Out>
@@ -124,27 +151,30 @@ class _EndFlightSessionDataCopyWithImpl<$R, $Out>
   late final ClassMapperBase<EndFlightSessionData> $mapper =
       EndFlightSessionDataMapper.ensureInitialized();
   @override
-  $R call(
-          {int? takeoffcount,
-          int? maxAltitude,
-          bool? airspaceObserver,
-          Object? comment = $none}) =>
-      $apply(FieldCopyWithData({
-        if (takeoffcount != null) #takeoffcount: takeoffcount,
-        if (maxAltitude != null) #maxAltitude: maxAltitude,
-        if (airspaceObserver != null) #airspaceObserver: airspaceObserver,
-        if (comment != $none) #comment: comment
-      }));
+  $R call({
+    int? takeoffcount,
+    int? maxAltitude,
+    bool? airspaceObserver,
+    Object? comment = $none,
+  }) => $apply(
+    FieldCopyWithData({
+      if (takeoffcount != null) #takeoffcount: takeoffcount,
+      if (maxAltitude != null) #maxAltitude: maxAltitude,
+      if (airspaceObserver != null) #airspaceObserver: airspaceObserver,
+      if (comment != $none) #comment: comment,
+    }),
+  );
   @override
   EndFlightSessionData $make(CopyWithData data) => EndFlightSessionData(
-      takeoffcount: data.get(#takeoffcount, or: $value.takeoffcount),
-      maxAltitude: data.get(#maxAltitude, or: $value.maxAltitude),
-      airspaceObserver:
-          data.get(#airspaceObserver, or: $value.airspaceObserver),
-      comment: data.get(#comment, or: $value.comment));
+    takeoffcount: data.get(#takeoffcount, or: $value.takeoffcount),
+    maxAltitude: data.get(#maxAltitude, or: $value.maxAltitude),
+    airspaceObserver: data.get(#airspaceObserver, or: $value.airspaceObserver),
+    comment: data.get(#comment, or: $value.comment),
+  );
 
   @override
   EndFlightSessionDataCopyWith<$R2, EndFlightSessionData, $Out2>
-      $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-          _EndFlightSessionDataCopyWithImpl($value, $cast, t);
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _EndFlightSessionDataCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
+

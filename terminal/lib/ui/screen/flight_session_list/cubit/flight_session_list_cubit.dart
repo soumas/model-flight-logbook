@@ -17,7 +17,7 @@ class FlightSessionListCubit extends Cubit<FlightSessionListState> {
           endpoint: await PilotStatusCubit.loadSelectedEndpoint(localStorageRepo), pilotid: pilotId, year: year);
       emit(state.copyWith(flightSessions: sessionLst));
     } catch (e) {
-      // TODO
+      // log it mal oder so
       emit(state.copyWith(loading: false));
     } finally {
       emit(state.copyWith(loading: false));

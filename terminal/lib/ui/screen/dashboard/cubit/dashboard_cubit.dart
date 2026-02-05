@@ -4,7 +4,9 @@ import 'package:mfl_terminal/domain/entities/terminal_endpoint.dart';
 import 'package:mfl_terminal/domain/entities/terminal_status.dart';
 import 'package:mfl_terminal/domain/repositories/local_storage_repo.dart';
 import 'package:mfl_terminal/domain/repositories/logbook_api_repo.dart';
+import 'package:mfl_terminal/injector.dart';
 import 'package:mfl_terminal/ui/screen/dashboard/cubit/dashboard_state.dart';
+import 'package:mfl_terminal/ui/screen/settings/cubit/settings_cubit.dart';
 
 class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit({
@@ -18,7 +20,23 @@ class DashboardCubit extends Cubit<DashboardState> {
   Future init() async {
     try {
       emit(DashboardState());
-      final settings = await localStorageRepo.loadSettings();
+
+      // update all terminal endpoints
+      var settings = await localStorageRepo.loadSettings();
+      for (var te in settings.terminalEndpoints) {
+        try {
+          // dirty hack to fetch current config for all endponts on startup
+          final uglySettingsCubit = injector.get<SettingsCubit>();
+          await uglySettingsCubit.load();
+          await uglySettingsCubit.reloadEndpointAndSave(te);
+          await localStorageRepo.saveSelectedTerminalEndpoint(null);
+        } catch (e) {
+          // log it mal
+        }
+      }
+
+      settings = await localStorageRepo.loadSettings();
+      // load selected endpoint
       var selectedEndpoint = await localStorageRepo.loadSelectedTerminalEndpoint();
       if (selectedEndpoint == null && settings.terminalEndpoints.isNotEmpty) {
         selectedEndpoint = settings.terminalEndpoints.first;

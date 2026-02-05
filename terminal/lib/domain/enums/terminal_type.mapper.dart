@@ -1,6 +1,8 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 // ignore_for_file: type=lint
+// ignore_for_file: invalid_use_of_protected_member
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
@@ -25,9 +27,9 @@ class TerminalTypeMapper extends EnumMapper<TerminalType> {
   @override
   TerminalType decode(dynamic value) {
     switch (value) {
-      case 'singleuser':
+      case r'singleuser':
         return TerminalType.singleuser;
-      case 'multiuser':
+      case r'multiuser':
         return TerminalType.multiuser;
       default:
         throw MapperException.unknownEnumValue(value);
@@ -38,9 +40,9 @@ class TerminalTypeMapper extends EnumMapper<TerminalType> {
   dynamic encode(TerminalType self) {
     switch (self) {
       case TerminalType.singleuser:
-        return 'singleuser';
+        return r'singleuser';
       case TerminalType.multiuser:
-        return 'multiuser';
+        return r'multiuser';
     }
   }
 }
@@ -51,3 +53,4 @@ extension TerminalTypeMapperExtension on TerminalType {
     return MapperContainer.globals.toValue<TerminalType>(this) as String;
   }
 }
+
