@@ -23,7 +23,9 @@ def findOperatinghourDayDefinition(terminalid:str, refdate:datetime):
     return _getNearestOperatinghourDefinition(terminalid, refdate)
 
 def isInOperatinghour(ohDefinition:OperatingHourDayDefinition, timestamp:datetime):
-    return ohDefinition.start <= timestamp and ohDefinition.end >= timestamp
+    ohDefinitionStart = datetime(timestamp.year, timestamp.month, timestamp.day, ohDefinition.start.hour, ohDefinition.start.minute, ohDefinition.start.second)
+    ohDefinitionEnd = datetime(timestamp.year, timestamp.month, timestamp.day, ohDefinition.end.hour, ohDefinition.end.minute, ohDefinition.end.second)
+    return ohDefinitionStart <= timestamp and ohDefinitionEnd >= timestamp
 
 def isNearOperatinghourEnd(ohDefinition:OperatingHourDayDefinition, timestamp:datetime):
     return not isInOperatinghour(ohDefinition, timestamp + timedelta(minutes=30))

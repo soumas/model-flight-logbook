@@ -29,7 +29,6 @@ class DashboardCubit extends Cubit<DashboardState> {
           final uglySettingsCubit = injector.get<SettingsCubit>();
           await uglySettingsCubit.load();
           await uglySettingsCubit.reloadEndpointAndSave(te);
-          await localStorageRepo.saveSelectedTerminalEndpoint(null);
         } catch (e) {
           // log it mal
         }
