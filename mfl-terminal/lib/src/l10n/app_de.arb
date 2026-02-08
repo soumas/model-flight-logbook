@@ -1,0 +1,19 @@
+{
+  "productname": "Model Flight Logbook",
+  "versiontag": "Version: {version}",
+  "close": "Schließen",
+
+  "mainMenuSettings":"Einstellungen",
+
+  "validationRequired":"Pflichtfeld",
+  "validationNoMatch":"Stimmt nicht überein",
+  "validationMinLength":"Minimale Länge: {minLength}",
+  "validationMaxLength":"Maximale Länge: {maxLength}",
+  "validationEmail":"Ungültige E-Mail Adresse",
+  "validationUrl":"Ungültige URL",
+
+  "endpointFormFieldTitle":"Bezeichnung",
+  "endpointFormFieldServerUrl":"Server URL",
+  "endpointFormFieldTerminalId":"Termina ID",
+  "endpointFormFieldApiKey":"API Key"
+}

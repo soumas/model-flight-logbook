@@ -1,0 +1,36 @@
+name: mfl_terminal
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  dart_mappable: ^4.6.1
+  dio: ^5.9.1
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_secure_storage: ^10.0.0
+  get_it: 9.2.0
+  intl: any
+  package_info_plus: ^9.0.0
+  provider: ^6.1.5+1
+  toastification: 3.0.3
+  virtual_keyboard_multi_language: 1.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.11.0
+  dart_mappable_builder: ^4.6.4
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/images/mfl_logo_slim.png
+    - assets/images/bg_image.jpg

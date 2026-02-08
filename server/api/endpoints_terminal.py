@@ -4,7 +4,7 @@ from fastapi import Depends, Security, BackgroundTasks
 from fastapi.params import Header
 from requests import Session
 from sqlalchemy import and_, func, or_
-from api.dtos import EndFlightSessionDTO, FlightSessionDTO, FlightSessionStatusDTO, TerminalStatusDTO
+from api.dtos import EndFlightSessionDTO, FlightSessionDTO, FlightSessionStatusDTO, TerminalDetailsDTO, TerminalStatusDTO
 from config.configmanager import config
 from api.apimanager import api, api_key_header
 from api.exceptions import invalid_api_key, active_flightsession_found, unknown_pilot, flightsession_not_found, inactive_pilot, unknown_terminal, unknown_session
@@ -55,6 +55,30 @@ def get_status(x_terminal:Annotated[str, Header()]):
         infoMessages=dashboardMessages,
     )
 
+@api.get("/terminal/details", dependencies=[Security(__specific_terminalauth)], response_model=TerminalDetailsDTO)
+def get_status(x_terminal:Annotated[str, Header()]):
+       
+    # Operating hours
+    ohours = findOperatinghourDayDefinition(x_terminal, datetime.now())
+    ohoursStart = ohours.start if ohours != None else None
+    ohoursEnd = ohours.end if ohours != None else None
+
+    # dashboard messages
+    dashboardMessages = []
+    appendMessages(dashboardMessages, config.terminals[x_terminal].dashboard_info_messages)
+
+    return TerminalDetailsDTO(
+        terminaltype=config.terminals[x_terminal].terminaltype,
+        airportname=config.terminals[x_terminal].airportname,
+        terminalname=config.terminals[x_terminal].terminalname,
+        maxAltitudeM=config.terminals[x_terminal].max_altitude_m,
+        maxAltitudeWithoutObserverM=config.terminals[x_terminal].max_altitude_without_observer_m,
+        maxNumFlights=config.terminals[x_terminal].max_num_flights,
+        showPilotIDOnDashboard=config.terminals[x_terminal].dashboard_show_pilotid,
+        operatinghourStart=ohoursStart, 
+        operatinghourEnd=ohoursEnd,
+        dashboardMessages=dashboardMessages,
+    )
 
 @api.get("/terminal/flightsession/status", dependencies=[Security(__specific_terminalauth)], response_model=FlightSessionStatusDTO)
 def get_flightsession_status(x_terminal:Annotated[str, Header()], x_pilotid:Annotated[str, Header()], db:Session = Depends(get_db)):

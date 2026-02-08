@@ -63,3 +63,15 @@ class TerminalStatusDTO(BaseModel):
     warnMessages: Optional[List[str]]=None
     errorMessages: Optional[List[str]]=None
     
+
+class TerminalDetailsDTO(BaseModel):
+    terminaltype : str
+    airportname: str
+    terminalname: str
+    maxAltitudeM: str
+    maxAltitudeWithoutObserverM: str
+    maxNumFlights: str
+    showPilotIDOnDashboard: bool
+    operatinghourStart: Optional[datetime.datetime]=None
+    operatinghourEnd: Optional[datetime.datetime]=None
+    dashboardMessages: Optional[List[str]]=None    
