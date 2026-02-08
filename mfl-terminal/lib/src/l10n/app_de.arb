@@ -15,5 +15,16 @@
   "endpointFormFieldTitle":"Bezeichnung",
   "endpointFormFieldServerUrl":"Server URL",
   "endpointFormFieldTerminalId":"Termina ID",
-  "endpointFormFieldApiKey":"API Key"
+  "endpointFormFieldApiKey":"API Key",
+
+  "apiResponseReasonInvalidApiKey": "Ungültiger Api Key",
+  "apiResponseReasonFlightsessionNotFound": "Der angeforderte Flugbucheintrag wurde nicht gefunden",
+  "apiResponseReasonUnknownPilot": "Pilot unbekannt",
+  "apiResponseReasonUnknownTerminal": "Terminal unbekannt",
+  "apiResponseReasonInactivePilot": "Pilot inaktiv",
+  "apiResponseReasonActiveFlightsessionFound": "Es wurde ein aktiver Flugbucheintrag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.",
+  "exceptionTimeout":"Zeitüberschreitung",
+  "exceptionBadResponse":"Ungültige Antwort",
+  "exceptionConnectionError":"Fehler beim Verbindungsaufbau",
+  "exceptionUnknown":"Unbekannter Kommunikationsfehler"
 }

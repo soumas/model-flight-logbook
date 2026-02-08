@@ -21,8 +21,8 @@ class MenuEndpointList extends StatelessWidget {
               title: Text(endpoint.title),
               subtitle: Text(endpoint.serverurl),
               onTap: () {
-                // Navigator.of(context).pop();
-                context.read<GlobalActiveEndpointState>().activeEndpoint.value = endpoint;
+                Navigator.of(context).pop();
+                context.read<GlobalActiveEndpointState>().setActiveEndpoint(endpoint);
               },
             );
           },

@@ -55,4 +55,36 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get endpointFormFieldApiKey => 'API Key';
+
+  @override
+  String get apiResponseReasonInvalidApiKey => 'Ungültiger Api Key';
+
+  @override
+  String get apiResponseReasonFlightsessionNotFound =>
+      'Der angeforderte Flugbucheintrag wurde nicht gefunden';
+
+  @override
+  String get apiResponseReasonUnknownPilot => 'Pilot unbekannt';
+
+  @override
+  String get apiResponseReasonUnknownTerminal => 'Terminal unbekannt';
+
+  @override
+  String get apiResponseReasonInactivePilot => 'Pilot inaktiv';
+
+  @override
+  String get apiResponseReasonActiveFlightsessionFound =>
+      'Es wurde ein aktiver Flugbucheintrag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.';
+
+  @override
+  String get exceptionTimeout => 'Zeitüberschreitung';
+
+  @override
+  String get exceptionBadResponse => 'Ungültige Antwort';
+
+  @override
+  String get exceptionConnectionError => 'Fehler beim Verbindungsaufbau';
+
+  @override
+  String get exceptionUnknown => 'Unbekannter Kommunikationsfehler';
 }

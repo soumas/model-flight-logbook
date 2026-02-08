@@ -177,6 +177,66 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'API Key'**
   String get endpointFormFieldApiKey;
+
+  /// No description provided for @apiResponseReasonInvalidApiKey.
+  ///
+  /// In de, this message translates to:
+  /// **'Ungültiger Api Key'**
+  String get apiResponseReasonInvalidApiKey;
+
+  /// No description provided for @apiResponseReasonFlightsessionNotFound.
+  ///
+  /// In de, this message translates to:
+  /// **'Der angeforderte Flugbucheintrag wurde nicht gefunden'**
+  String get apiResponseReasonFlightsessionNotFound;
+
+  /// No description provided for @apiResponseReasonUnknownPilot.
+  ///
+  /// In de, this message translates to:
+  /// **'Pilot unbekannt'**
+  String get apiResponseReasonUnknownPilot;
+
+  /// No description provided for @apiResponseReasonUnknownTerminal.
+  ///
+  /// In de, this message translates to:
+  /// **'Terminal unbekannt'**
+  String get apiResponseReasonUnknownTerminal;
+
+  /// No description provided for @apiResponseReasonInactivePilot.
+  ///
+  /// In de, this message translates to:
+  /// **'Pilot inaktiv'**
+  String get apiResponseReasonInactivePilot;
+
+  /// No description provided for @apiResponseReasonActiveFlightsessionFound.
+  ///
+  /// In de, this message translates to:
+  /// **'Es wurde ein aktiver Flugbucheintrag gefunden. Beende diesen, bevor du die Aktion erneut ausführst.'**
+  String get apiResponseReasonActiveFlightsessionFound;
+
+  /// No description provided for @exceptionTimeout.
+  ///
+  /// In de, this message translates to:
+  /// **'Zeitüberschreitung'**
+  String get exceptionTimeout;
+
+  /// No description provided for @exceptionBadResponse.
+  ///
+  /// In de, this message translates to:
+  /// **'Ungültige Antwort'**
+  String get exceptionBadResponse;
+
+  /// No description provided for @exceptionConnectionError.
+  ///
+  /// In de, this message translates to:
+  /// **'Fehler beim Verbindungsaufbau'**
+  String get exceptionConnectionError;
+
+  /// No description provided for @exceptionUnknown.
+  ///
+  /// In de, this message translates to:
+  /// **'Unbekannter Kommunikationsfehler'**
+  String get exceptionUnknown;
 }
 
 class _AppLocalizationsDelegate

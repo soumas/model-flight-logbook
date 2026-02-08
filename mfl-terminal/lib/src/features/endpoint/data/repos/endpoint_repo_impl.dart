@@ -12,7 +12,7 @@ class EndpointRepoImpl extends EndpointRepo {
   final _storage = FlutterSecureStorage();
 
   @override
-  Future<void> addEndpoint(Endpoint endpoint) async {
+  Future<Endpoint> addEndpoint(Endpoint endpoint) async {
     return updateEndpoint(endpoint);
   }
 
@@ -44,16 +44,18 @@ class EndpointRepoImpl extends EndpointRepo {
   }
 
   @override
-  Future<void> setActiveEndpoint(Endpoint endpoint) {
-    return _storage.write(key: _storageKeyActive, value: jsonEncode(EndpointDto.fromEntity(endpoint).toMap()));
+  Future<Endpoint> setActiveEndpoint(Endpoint endpoint) async {
+    await _storage.write(key: _storageKeyActive, value: jsonEncode(EndpointDto.fromEntity(endpoint).toMap()));
+    return endpoint;
   }
 
   @override
-  Future<void> updateEndpoint(Endpoint endpoint) async {
+  Future<Endpoint> updateEndpoint(Endpoint endpoint) async {
     final lst = await getEndpoints();
     lst.remove(endpoint);
     lst.add(endpoint);
-    return _writeEndpoints(lst);
+    await _writeEndpoints(lst);
+    return Future.value(endpoint);
   }
 
   Future<void> _writeEndpoints(Set<Endpoint> endpoints) {
