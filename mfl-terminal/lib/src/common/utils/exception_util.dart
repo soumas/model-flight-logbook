@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mfl_terminal/src/l10n/generated/app_localizations.dart';
 
 class ExceptionUtil {
-  static String getUiMessage(dynamic e, BuildContext context) {
+  static String getUiMessage(BuildContext context, dynamic e) {
     final localizations = AppLocalizations.of(context)!;
     if (e is DioException) {
       try {

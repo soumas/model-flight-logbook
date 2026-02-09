@@ -6,8 +6,9 @@ import 'package:mfl_terminal/src/common/utils/mfl_device_info.dart';
 import 'package:mfl_terminal/src/common/utils/mfl_scroll_behavior.dart';
 import 'package:mfl_terminal/src/common/utils/mfl_theme.dart';
 import 'package:mfl_terminal/src/l10n/generated/app_localizations.dart';
+import 'package:mfl_terminal/src/screens/admin/endpoint_detail_screen.dart';
 import 'package:mfl_terminal/src/screens/dashboard_screen.dart';
-import 'package:mfl_terminal/src/screens/settings_screen.dart';
+import 'package:mfl_terminal/src/screens/admin/settings_screen.dart';
 
 class MflApp extends StatelessWidget {
   const MflApp({super.key});
@@ -24,7 +25,11 @@ class MflApp extends StatelessWidget {
       scrollBehavior: MflScrollBehavior(),
       theme: mflThemeData,
       debugShowCheckedModeBanner: false,
-      routes: {DashboardScreen.route: (context) => const DashboardScreen(), SettingsScreen.route: (context) => const SettingsScreen()},
+      routes: {
+        DashboardScreen.route: (context) => const DashboardScreen(),
+        SettingsScreen.route: (context) => const SettingsScreen(),
+        EndpointDetailScreen.route: (context) => const EndpointDetailScreen(),
+      },
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
         GlobalWidgetsLocalizations.delegate,

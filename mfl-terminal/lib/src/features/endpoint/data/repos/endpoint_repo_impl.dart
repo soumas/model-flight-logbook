@@ -12,11 +12,6 @@ class EndpointRepoImpl extends EndpointRepo {
   final _storage = FlutterSecureStorage();
 
   @override
-  Future<Endpoint> addEndpoint(Endpoint endpoint) async {
-    return updateEndpoint(endpoint);
-  }
-
-  @override
   Future<void> deleteEndpoint(Endpoint endpoint) async {
     final lst = await getEndpoints();
     lst.remove(endpoint);
@@ -50,7 +45,7 @@ class EndpointRepoImpl extends EndpointRepo {
   }
 
   @override
-  Future<Endpoint> updateEndpoint(Endpoint endpoint) async {
+  Future<Endpoint> addOrUpdateEndpoint(Endpoint endpoint) async {
     final lst = await getEndpoints();
     lst.remove(endpoint);
     lst.add(endpoint);

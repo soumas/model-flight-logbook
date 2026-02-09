@@ -16,6 +16,10 @@
   "endpointFormFieldServerUrl":"Server URL",
   "endpointFormFieldTerminalId":"Termina ID",
   "endpointFormFieldApiKey":"API Key",
+  
+  "settingsEndpoints":"Verbindungen",
+  "settingsAddEndpoint":"Verbindung hinzufügen",
+  "settingsEditEndpoint":"Verbindung bearbeiten",
 
   "apiResponseReasonInvalidApiKey": "Ungültiger Api Key",
   "apiResponseReasonFlightsessionNotFound": "Der angeforderte Flugbucheintrag wurde nicht gefunden",

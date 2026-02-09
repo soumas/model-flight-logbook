@@ -4,21 +4,24 @@ import 'package:mfl_terminal/src/features/endpoint/domain/entities/endpoint.dart
 import 'package:mfl_terminal/src/features/endpoint/domain/repos/endpoint_repo.dart';
 
 class GlobalEndpointsListState extends ChangeNotifier {
-  ValueNotifier<Set<Endpoint>> endpoints = ValueNotifier({});
+  Set<Endpoint> endpoints = {};
 
   Future<void> load() async {
-    injector.get<EndpointRepo>().getEndpoints().then((value) => endpoints.value = value);
+    endpoints = await injector.get<EndpointRepo>().getEndpoints();
     notifyListeners();
   }
 
-  Future<void> deleteEndpoint(Endpoint endpoint) async {
+  Future<void> delete(Endpoint endpoint) async {
     await injector.get<EndpointRepo>().deleteEndpoint(endpoint);
     return load();
   }
 
-  @override
-  void dispose() {
-    endpoints.dispose();
-    super.dispose();
+  Future<void> addOrUpdate(Endpoint endpoint) async {
+    await injector.get<EndpointRepo>().addOrUpdateEndpoint(endpoint);
+    return load();
+  }
+
+  Future<void> ping(Endpoint endpoint) async {
+    await injector.get<EndpointRepo>().ping(endpoint);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mfl_terminal/src/common/utils/formvalidator.dart';
-import 'package:mfl_terminal/src/features/endpoint/ui/add_endpoint_form/add_endpoint_form_backing.dart';
+import 'package:mfl_terminal/src/features/endpoint/ui/add_endpoint_form/endpoint_form_backing.dart';
 import 'package:mfl_terminal/src/l10n/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +15,7 @@ class _ApiKeyFieldState extends State<ApiKeyField> {
   var _obscureText = true;
   @override
   Widget build(BuildContext context) {
-    final state = context.read<AddEndpointFormBacking>().apikey;
+    final state = context.read<EndpointFormBacking>().apikey;
     return TextFormField(
       decoration: InputDecoration(
         labelText: AppLocalizations.of(context)!.endpointFormFieldApiKey,
@@ -32,6 +32,7 @@ class _ApiKeyFieldState extends State<ApiKeyField> {
       onChanged: (value) => state.value = value,
       obscureText: _obscureText,
       validator: FormValidator(context).required().build(),
+      autovalidateMode: AutovalidateMode.onUnfocus,
     );
   }
 }

@@ -16,7 +16,7 @@ class EndpointErrorMessage extends StatelessWidget {
           return SizedBox.shrink();
         } else {
           final endpoint = injector.get<GlobalActiveEndpointState>().activeEndpoint.value;
-          final message = ExceptionUtil.getUiMessage(error, context);
+          final message = ExceptionUtil.getUiMessage(context, error);
           return MflMessage(
             severity: MflMessageSeverity.error,
             text: 'Die Verbindung mit ${endpoint?.serverurl}, ${endpoint?.terminalid}, konnte nicht hergestellt werden. Details: $message',

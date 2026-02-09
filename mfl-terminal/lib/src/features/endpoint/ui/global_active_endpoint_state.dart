@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mfl_terminal/src/common/utils/mfl_injector.dart';
 import 'package:mfl_terminal/src/features/endpoint/domain/entities/endpoint.dart';
-import 'package:mfl_terminal/src/features/endpoint/ui/global_endpointslist_state.dart';
 import 'package:mfl_terminal/src/features/terminaldetail/domain/entities/terminal_details.dart';
 import 'package:mfl_terminal/src/features/endpoint/domain/repos/endpoint_repo.dart';
 import 'package:mfl_terminal/src/features/terminaldetail/domain/repos/terminal_detail_repo.dart';
@@ -34,13 +33,14 @@ class GlobalActiveEndpointState extends ChangeNotifier {
       activeTerminalDetailsUpdateError.value = null;
       activeTerminalDetails.value = details;
 
-      if (activeEndpoint.value != null && details != null) {
-        final title = '${details.airportname} (${details.terminalname})';
-        if (activeEndpoint.value!.title != title) {
-          activeEndpoint.value = await injector.get<EndpointRepo>().updateEndpoint(activeEndpoint.value!.copyWith(title: title));
-          injector.get<GlobalEndpointsListState>().load();
-        }
-      }
+      // TODO
+      // if (activeEndpoint.value != null && details != null) {
+      //   final title = '${details.airportname} (${details.terminalname})';
+      //   if (activeEndpoint.value!.title != title) {
+      //     activeEndpoint.value = await injector.get<EndpointRepo>().updateEndpoint(activeEndpoint.value!.copyWith(title: title));
+      //     injector.get<GlobalEndpointsListState>().load();
+      //   }
+      // }
     } catch (e) {
       activeTerminalDetailsUpdateError.value = e;
       activeTerminalDetails.value = null;

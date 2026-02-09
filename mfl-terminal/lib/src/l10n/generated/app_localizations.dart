@@ -178,6 +178,24 @@ abstract class AppLocalizations {
   /// **'API Key'**
   String get endpointFormFieldApiKey;
 
+  /// No description provided for @settingsEndpoints.
+  ///
+  /// In de, this message translates to:
+  /// **'Verbindungen'**
+  String get settingsEndpoints;
+
+  /// No description provided for @settingsAddEndpoint.
+  ///
+  /// In de, this message translates to:
+  /// **'Verbindung hinzufügen'**
+  String get settingsAddEndpoint;
+
+  /// No description provided for @settingsEditEndpoint.
+  ///
+  /// In de, this message translates to:
+  /// **'Verbindung bearbeiten'**
+  String get settingsEditEndpoint;
+
   /// No description provided for @apiResponseReasonInvalidApiKey.
   ///
   /// In de, this message translates to:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mfl_terminal/src/features/endpoint/ui/endpoint_list/menu_endpoint_list.dart';
 import 'package:mfl_terminal/src/l10n/generated/app_localizations.dart';
-import 'package:mfl_terminal/src/screens/settings_screen.dart';
+import 'package:mfl_terminal/src/screens/admin/settings_screen.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key});

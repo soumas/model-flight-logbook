@@ -57,6 +57,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get endpointFormFieldApiKey => 'API Key';
 
   @override
+  String get settingsEndpoints => 'Verbindungen';
+
+  @override
+  String get settingsAddEndpoint => 'Verbindung hinzufügen';
+
+  @override
+  String get settingsEditEndpoint => 'Verbindung bearbeiten';
+
+  @override
   String get apiResponseReasonInvalidApiKey => 'Ungültiger Api Key';
 
   @override
