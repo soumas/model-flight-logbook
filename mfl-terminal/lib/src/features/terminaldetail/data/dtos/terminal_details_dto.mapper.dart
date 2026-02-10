@@ -15,7 +15,6 @@ class TerminalDetailsDtoMapper extends ClassMapperBase<TerminalDetailsDto> {
   static TerminalDetailsDtoMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = TerminalDetailsDtoMapper._());
-      TerminalDetailsMapper.ensureInitialized();
       TerminalTypeMapper.ensureInitialized();
     }
     return _instance!;
@@ -57,10 +56,10 @@ class TerminalDetailsDtoMapper extends ClassMapperBase<TerminalDetailsDto> {
       v.showPilotIDOnDashboard;
   static const Field<TerminalDetailsDto, bool> _f$showPilotIDOnDashboard =
       Field('showPilotIDOnDashboard', _$showPilotIDOnDashboard);
-  static List<String>? _$dashboardMessages(TerminalDetailsDto v) =>
-      v.dashboardMessages;
-  static const Field<TerminalDetailsDto, List<String>> _f$dashboardMessages =
-      Field('dashboardMessages', _$dashboardMessages, opt: true);
+  static DateTime? _$operatinghourStart(TerminalDetailsDto v) =>
+      v.operatinghourStart;
+  static const Field<TerminalDetailsDto, DateTime> _f$operatinghourStart =
+      Field('operatinghourStart', _$operatinghourStart, opt: true);
   static DateTime? _$operatinghourEnd(TerminalDetailsDto v) =>
       v.operatinghourEnd;
   static const Field<TerminalDetailsDto, DateTime> _f$operatinghourEnd = Field(
@@ -68,10 +67,10 @@ class TerminalDetailsDtoMapper extends ClassMapperBase<TerminalDetailsDto> {
     _$operatinghourEnd,
     opt: true,
   );
-  static DateTime? _$operatinghourStart(TerminalDetailsDto v) =>
-      v.operatinghourStart;
-  static const Field<TerminalDetailsDto, DateTime> _f$operatinghourStart =
-      Field('operatinghourStart', _$operatinghourStart, opt: true);
+  static List<String>? _$dashboardMessages(TerminalDetailsDto v) =>
+      v.dashboardMessages;
+  static const Field<TerminalDetailsDto, List<String>> _f$dashboardMessages =
+      Field('dashboardMessages', _$dashboardMessages, opt: true);
 
   @override
   final MappableFields<TerminalDetailsDto> fields = const {
@@ -82,9 +81,9 @@ class TerminalDetailsDtoMapper extends ClassMapperBase<TerminalDetailsDto> {
     #maxAltitudeWithoutObserverM: _f$maxAltitudeWithoutObserverM,
     #maxNumFlights: _f$maxNumFlights,
     #showPilotIDOnDashboard: _f$showPilotIDOnDashboard,
-    #dashboardMessages: _f$dashboardMessages,
-    #operatinghourEnd: _f$operatinghourEnd,
     #operatinghourStart: _f$operatinghourStart,
+    #operatinghourEnd: _f$operatinghourEnd,
+    #dashboardMessages: _f$dashboardMessages,
   };
 
   static TerminalDetailsDto _instantiate(DecodingData data) {
@@ -96,9 +95,9 @@ class TerminalDetailsDtoMapper extends ClassMapperBase<TerminalDetailsDto> {
       maxAltitudeWithoutObserverM: data.dec(_f$maxAltitudeWithoutObserverM),
       maxNumFlights: data.dec(_f$maxNumFlights),
       showPilotIDOnDashboard: data.dec(_f$showPilotIDOnDashboard),
-      dashboardMessages: data.dec(_f$dashboardMessages),
-      operatinghourEnd: data.dec(_f$operatinghourEnd),
       operatinghourStart: data.dec(_f$operatinghourStart),
+      operatinghourEnd: data.dec(_f$operatinghourEnd),
+      dashboardMessages: data.dec(_f$dashboardMessages),
     );
   }
 

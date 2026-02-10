@@ -2,6 +2,11 @@
   "productname": "Model Flight Logbook",
   "versiontag": "Version: {version}",
   "close": "Schließen",
+  "error":"Fehler",
+  "saveAnyway":"Trotzdem speichern",
+  "cancel":"Abbrechen",
+  "add":"Hinzufügen",
+  "save":"Speichern",
 
   "mainMenuSettings":"Einstellungen",
 

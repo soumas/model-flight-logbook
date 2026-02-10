@@ -20,6 +20,7 @@ class SettingsScreen extends StatelessWidget {
           Text(AppLocalizations.of(context)!.settingsEndpoints, style: Theme.of(context).textTheme.headlineLarge),
           const Divider(),
           const AdminEndpointList(),
+          SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).pushNamed(EndpointDetailScreen.route);

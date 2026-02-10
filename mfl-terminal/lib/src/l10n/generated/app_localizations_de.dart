@@ -20,6 +20,21 @@ class AppLocalizationsDe extends AppLocalizations {
   String get close => 'Schließen';
 
   @override
+  String get error => 'Fehler';
+
+  @override
+  String get saveAnyway => 'Trotzdem speichern';
+
+  @override
+  String get cancel => 'Abbrechen';
+
+  @override
+  String get add => 'Hinzufügen';
+
+  @override
+  String get save => 'Speichern';
+
+  @override
   String get mainMenuSettings => 'Einstellungen';
 
   @override

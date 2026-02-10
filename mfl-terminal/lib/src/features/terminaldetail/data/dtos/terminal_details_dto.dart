@@ -6,18 +6,42 @@ import 'package:mfl_terminal/src/features/terminaldetail/domain/entities/termina
 part 'terminal_details_dto.mapper.dart';
 
 @mappableDto
-class TerminalDetailsDto extends TerminalDetails with TerminalDetailsDtoMappable {
+class TerminalDetailsDto with TerminalDetailsDtoMappable {
   TerminalDetailsDto({
-    required super.terminaltype,
-    required super.airportname,
-    required super.terminalname,
-    required super.maxAltitudeM,
-    required super.maxAltitudeWithoutObserverM,
-    required super.maxNumFlights,
-    required super.showPilotIDOnDashboard,
-    super.dashboardMessages,
-    super.operatinghourEnd,
-    super.operatinghourStart,
+    required this.terminaltype,
+    required this.airportname,
+    required this.terminalname,
+    required this.maxAltitudeM,
+    required this.maxAltitudeWithoutObserverM,
+    required this.maxNumFlights,
+    required this.showPilotIDOnDashboard,
+    this.operatinghourStart,
+    this.operatinghourEnd,
+    this.dashboardMessages,
   });
-  TerminalDetails toEntity() => this as TerminalDetails;
+  final TerminalType terminaltype;
+  final String airportname;
+  final String terminalname;
+  final int maxAltitudeM;
+  final int maxAltitudeWithoutObserverM;
+  final int maxNumFlights;
+  final bool showPilotIDOnDashboard;
+  final DateTime? operatinghourStart;
+  final DateTime? operatinghourEnd;
+  final List<String>? dashboardMessages;
+
+  TerminalDetails toEntity() {
+    return TerminalDetails(
+      terminaltype: terminaltype,
+      airportname: airportname,
+      terminalname: terminalname,
+      maxAltitudeM: maxAltitudeM,
+      maxAltitudeWithoutObserverM: maxAltitudeWithoutObserverM,
+      maxNumFlights: maxNumFlights,
+      showPilotIDOnDashboard: showPilotIDOnDashboard,
+      operatinghourStart: operatinghourStart,
+      operatinghourEnd: operatinghourEnd,
+      dashboardMessages: dashboardMessages,
+    );
+  }
 }

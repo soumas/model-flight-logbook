@@ -11,8 +11,8 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => GlobalEndpointsListState()..load()),
-        ChangeNotifierProvider(create: (_) => injector.get<GlobalActiveEndpointState>()),
+        ChangeNotifierProvider(create: (_) => injector.get<GlobalEndpointsListState>()..load()),
+        ChangeNotifierProvider(create: (_) => injector.get<GlobalActiveEndpointState>()..load()),
       ],
       child: const MflApp(),
     ),

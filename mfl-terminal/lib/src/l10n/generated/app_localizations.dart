@@ -112,6 +112,36 @@ abstract class AppLocalizations {
   /// **'Schließen'**
   String get close;
 
+  /// No description provided for @error.
+  ///
+  /// In de, this message translates to:
+  /// **'Fehler'**
+  String get error;
+
+  /// No description provided for @saveAnyway.
+  ///
+  /// In de, this message translates to:
+  /// **'Trotzdem speichern'**
+  String get saveAnyway;
+
+  /// No description provided for @cancel.
+  ///
+  /// In de, this message translates to:
+  /// **'Abbrechen'**
+  String get cancel;
+
+  /// No description provided for @add.
+  ///
+  /// In de, this message translates to:
+  /// **'Hinzufügen'**
+  String get add;
+
+  /// No description provided for @save.
+  ///
+  /// In de, this message translates to:
+  /// **'Speichern'**
+  String get save;
+
   /// No description provided for @mainMenuSettings.
   ///
   /// In de, this message translates to:
