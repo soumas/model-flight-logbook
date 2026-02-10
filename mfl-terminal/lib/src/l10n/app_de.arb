@@ -7,6 +7,7 @@
   "cancel":"Abbrechen",
   "add":"Hinzufügen",
   "save":"Speichern",
+  "delete":"Löschen",
 
   "mainMenuSettings":"Einstellungen",
 
@@ -25,6 +26,9 @@
   "settingsEndpoints":"Verbindungen",
   "settingsAddEndpoint":"Verbindung hinzufügen",
   "settingsEditEndpoint":"Verbindung bearbeiten",
+  "settingsDeleteEndpointConfirmation":"Möchten Sie die Verbindung '{name}' wirklich löschen?",
+  "settingsAdminpin":"Admin PIN",
+  "settingsOthers":"Sonstiges",
 
   "apiResponseReasonInvalidApiKey": "Ungültiger Api Key",
   "apiResponseReasonFlightsessionNotFound": "Der angeforderte Flugbucheintrag wurde nicht gefunden",

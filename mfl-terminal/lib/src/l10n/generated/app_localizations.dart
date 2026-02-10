@@ -142,6 +142,12 @@ abstract class AppLocalizations {
   /// **'Speichern'**
   String get save;
 
+  /// No description provided for @delete.
+  ///
+  /// In de, this message translates to:
+  /// **'Löschen'**
+  String get delete;
+
   /// No description provided for @mainMenuSettings.
   ///
   /// In de, this message translates to:
@@ -225,6 +231,24 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Verbindung bearbeiten'**
   String get settingsEditEndpoint;
+
+  /// No description provided for @settingsDeleteEndpointConfirmation.
+  ///
+  /// In de, this message translates to:
+  /// **'Möchten Sie die Verbindung \'{name}\' wirklich löschen?'**
+  String settingsDeleteEndpointConfirmation(Object name);
+
+  /// No description provided for @settingsAdminpin.
+  ///
+  /// In de, this message translates to:
+  /// **'Admin PIN'**
+  String get settingsAdminpin;
+
+  /// No description provided for @settingsOthers.
+  ///
+  /// In de, this message translates to:
+  /// **'Sonstiges'**
+  String get settingsOthers;
 
   /// No description provided for @apiResponseReasonInvalidApiKey.
   ///

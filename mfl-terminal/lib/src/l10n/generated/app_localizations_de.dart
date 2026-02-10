@@ -35,6 +35,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get save => 'Speichern';
 
   @override
+  String get delete => 'Löschen';
+
+  @override
   String get mainMenuSettings => 'Einstellungen';
 
   @override
@@ -79,6 +82,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsEditEndpoint => 'Verbindung bearbeiten';
+
+  @override
+  String settingsDeleteEndpointConfirmation(Object name) {
+    return 'Möchten Sie die Verbindung \'$name\' wirklich löschen?';
+  }
+
+  @override
+  String get settingsAdminpin => 'Admin PIN';
+
+  @override
+  String get settingsOthers => 'Sonstiges';
 
   @override
   String get apiResponseReasonInvalidApiKey => 'Ungültiger Api Key';
