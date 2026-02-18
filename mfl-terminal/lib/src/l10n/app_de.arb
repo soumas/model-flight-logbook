@@ -39,5 +39,5 @@
   "exceptionTimeout":"Zeitüberschreitung",
   "exceptionBadResponse":"Ungültige Antwort",
   "exceptionConnectionError":"Fehler beim Verbindungsaufbau",
-  "exceptionUnknown":"Unbekannter Kommunikationsfehler"
+  "exceptionUnknown":"Unbekannter Fehler"
 }

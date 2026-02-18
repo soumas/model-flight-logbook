@@ -30,7 +30,7 @@ class ExceptionUtil {
           return e.message ?? localizations.exceptionUnknown;
       }
     }
-    return localizations.exceptionUnknown;
+    return e is String ? e : localizations.exceptionUnknown;
   }
 }
 

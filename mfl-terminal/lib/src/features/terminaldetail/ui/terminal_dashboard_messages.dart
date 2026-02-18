@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mfl_terminal/src/common/utils/mfl_injector.dart';
 import 'package:mfl_terminal/src/common/widgets/mfl_messages_column.dart';
-import 'package:mfl_terminal/src/features/endpoint/ui/global_active_endpoint_state.dart';
+import 'package:mfl_terminal/src/features/endpoint/ui/global_endpoint_state.dart';
 import 'package:mfl_terminal/src/features/terminaldetail/domain/entities/terminal_details.dart';
 
 class TerminalDashboardMessages extends StatelessWidget {
@@ -10,7 +10,7 @@ class TerminalDashboardMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<TerminalDetails?>(
-      valueListenable: injector.get<GlobalActiveEndpointState>().activeTerminalDetails,
+      valueListenable: injector.get<GlobalEndpointState>().activeTerminalDetails,
       builder: (context, value, child) {
         return value == null
             ? const SizedBox.shrink()

@@ -307,7 +307,7 @@ abstract class AppLocalizations {
   /// No description provided for @exceptionUnknown.
   ///
   /// In de, this message translates to:
-  /// **'Unbekannter Kommunikationsfehler'**
+  /// **'Unbekannter Fehler'**
   String get exceptionUnknown;
 }
 

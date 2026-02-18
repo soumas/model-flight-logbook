@@ -3,14 +3,14 @@ import 'package:mfl_terminal/src/features/endpoint/domain/entities/endpoint.dart
 
 class EndpointFormBacking {
   final formKey = GlobalKey<FormState>();
-  bool isCreate = true;
+  String? currentEditID;
   ValueNotifier<String> title = ValueNotifier('');
   ValueNotifier<String> serverurl = ValueNotifier('');
   ValueNotifier<String> terminalid = ValueNotifier('');
   ValueNotifier<String> apikey = ValueNotifier('');
 
   EndpointFormBacking({Endpoint? entity}) {
-    isCreate = entity == null;
+    currentEditID = entity?.id;
     if (entity != null) {
       title.value = entity.title;
       serverurl.value = entity.serverurl;
@@ -18,6 +18,8 @@ class EndpointFormBacking {
       apikey.value = entity.apikey;
     }
   }
+
+  bool get isCreate => currentEditID == null;
 
   void dispose() {
     title.dispose();

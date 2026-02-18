@@ -5,7 +5,7 @@ class FormValidator {
   FormValidator(this.context);
 
   static final RegExp _emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9\-\_]+(\.[a-zA-Z]+)*$");
-  static final RegExp _urlRegExp = RegExp(r'https?:\/\/([a-z0-9\-\_]+\.?)+[a-z0-9]{2,}(:\d+)?(\/\S*)?');
+  static final RegExp _urlRegExp = RegExp(r'https?:\/\/(([a-z0-9\-\_]+\.?)+[a-z0-9]{2,}|(\d{1,3}\.?){4})(:\d+)?(\/\S*)?');
 
   final BuildContext context;
   final List<String? Function(String? value)> validations = [];

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mfl_terminal/src/common/utils/mfl_injector.dart';
 import 'package:mfl_terminal/src/features/endpoint/domain/entities/endpoint.dart';
 import 'package:mfl_terminal/src/features/endpoint/domain/repos/endpoint_repo.dart';
+import 'package:mfl_terminal/src/features/endpoint/ui/global_endpoint_state.dart';
 
 class GlobalEndpointsListState extends ChangeNotifier {
   Set<Endpoint> endpoints = {};
@@ -13,12 +14,14 @@ class GlobalEndpointsListState extends ChangeNotifier {
 
   Future<void> delete(Endpoint endpoint) async {
     await injector.get<EndpointRepo>().deleteEndpoint(endpoint);
-    return load();
+    await load();
+    injector.get<GlobalEndpointState>().setActiveEndpoint(null);
   }
 
   Future<void> addOrUpdate(Endpoint endpoint) async {
     await injector.get<EndpointRepo>().addOrUpdateEndpoint(endpoint);
-    return load();
+    await load();
+    injector.get<GlobalEndpointState>().setActiveEndpoint(endpoint);
   }
 
   Future<void> ping(Endpoint endpoint) async {

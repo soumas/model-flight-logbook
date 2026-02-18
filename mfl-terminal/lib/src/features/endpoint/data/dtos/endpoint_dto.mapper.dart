@@ -15,7 +15,6 @@ class EndpointDtoMapper extends ClassMapperBase<EndpointDto> {
   static EndpointDtoMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EndpointDtoMapper._());
-      EndpointMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -23,6 +22,8 @@ class EndpointDtoMapper extends ClassMapperBase<EndpointDto> {
   @override
   final String id = 'EndpointDto';
 
+  static String _$id(EndpointDto v) => v.id;
+  static const Field<EndpointDto, String> _f$id = Field('id', _$id);
   static String _$title(EndpointDto v) => v.title;
   static const Field<EndpointDto, String> _f$title = Field('title', _$title);
   static String _$serverurl(EndpointDto v) => v.serverurl;
@@ -40,6 +41,7 @@ class EndpointDtoMapper extends ClassMapperBase<EndpointDto> {
 
   @override
   final MappableFields<EndpointDto> fields = const {
+    #id: _f$id,
     #title: _f$title,
     #serverurl: _f$serverurl,
     #terminalid: _f$terminalid,
@@ -48,6 +50,7 @@ class EndpointDtoMapper extends ClassMapperBase<EndpointDto> {
 
   static EndpointDto _instantiate(DecodingData data) {
     return EndpointDto(
+      id: data.dec(_f$id),
       title: data.dec(_f$title),
       serverurl: data.dec(_f$serverurl),
       terminalid: data.dec(_f$terminalid),

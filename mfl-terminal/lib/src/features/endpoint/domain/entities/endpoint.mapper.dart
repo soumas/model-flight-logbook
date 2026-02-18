@@ -22,6 +22,8 @@ class EndpointMapper extends ClassMapperBase<Endpoint> {
   @override
   final String id = 'Endpoint';
 
+  static String _$id(Endpoint v) => v.id;
+  static const Field<Endpoint, String> _f$id = Field('id', _$id);
   static String _$title(Endpoint v) => v.title;
   static const Field<Endpoint, String> _f$title = Field('title', _$title);
   static String _$serverurl(Endpoint v) => v.serverurl;
@@ -39,6 +41,7 @@ class EndpointMapper extends ClassMapperBase<Endpoint> {
 
   @override
   final MappableFields<Endpoint> fields = const {
+    #id: _f$id,
     #title: _f$title,
     #serverurl: _f$serverurl,
     #terminalid: _f$terminalid,
@@ -47,6 +50,7 @@ class EndpointMapper extends ClassMapperBase<Endpoint> {
 
   static Endpoint _instantiate(DecodingData data) {
     return Endpoint(
+      id: data.dec(_f$id),
       title: data.dec(_f$title),
       serverurl: data.dec(_f$serverurl),
       terminalid: data.dec(_f$terminalid),
@@ -92,6 +96,7 @@ extension EndpointValueCopy<$R, $Out> on ObjectCopyWith<$R, Endpoint, $Out> {
 abstract class EndpointCopyWith<$R, $In extends Endpoint, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call({
+    String? id,
     String? title,
     String? serverurl,
     String? terminalid,
@@ -110,12 +115,14 @@ class _EndpointCopyWithImpl<$R, $Out>
       EndpointMapper.ensureInitialized();
   @override
   $R call({
+    String? id,
     String? title,
     String? serverurl,
     String? terminalid,
     String? apikey,
   }) => $apply(
     FieldCopyWithData({
+      if (id != null) #id: id,
       if (title != null) #title: title,
       if (serverurl != null) #serverurl: serverurl,
       if (terminalid != null) #terminalid: terminalid,
@@ -124,6 +131,7 @@ class _EndpointCopyWithImpl<$R, $Out>
   );
   @override
   Endpoint $make(CopyWithData data) => Endpoint(
+    id: data.get(#id, or: $value.id),
     title: data.get(#title, or: $value.title),
     serverurl: data.get(#serverurl, or: $value.serverurl),
     terminalid: data.get(#terminalid, or: $value.terminalid),

@@ -6,28 +6,24 @@ part 'endpoint_dto.mapper.dart';
 
 @mappableDto
 class EndpointDto with EndpointDtoMappable {
-  EndpointDto({required this.title, required this.serverurl, required this.terminalid, required this.apikey});
+  EndpointDto({required this.id, required this.title, required this.serverurl, required this.terminalid, required this.apikey});
+  final String id;
   final String title;
   final String serverurl;
   final String terminalid;
   final String apikey;
 
   Endpoint toEntity() {
-    return Endpoint(title: title, serverurl: serverurl, terminalid: terminalid, apikey: apikey);
+    return Endpoint(id: id, title: title, serverurl: serverurl, terminalid: terminalid, apikey: apikey);
   }
 
   static EndpointDto fromEntity(Endpoint entity) {
-    return EndpointDto(title: entity.title, serverurl: entity.serverurl, terminalid: entity.terminalid, apikey: entity.apikey);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is EndpointDto && other.serverurl == serverurl && other.terminalid == terminalid;
-  }
-
-  @override
-  int get hashCode {
-    return serverurl.hashCode ^ terminalid.hashCode;
+    return EndpointDto(
+      id: entity.id,
+      title: entity.title,
+      serverurl: entity.serverurl,
+      terminalid: entity.terminalid,
+      apikey: entity.apikey,
+    );
   }
 }

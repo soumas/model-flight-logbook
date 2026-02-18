@@ -124,5 +124,5 @@ class AppLocalizationsDe extends AppLocalizations {
   String get exceptionConnectionError => 'Fehler beim Verbindungsaufbau';
 
   @override
-  String get exceptionUnknown => 'Unbekannter Kommunikationsfehler';
+  String get exceptionUnknown => 'Unbekannter Fehler';
 }

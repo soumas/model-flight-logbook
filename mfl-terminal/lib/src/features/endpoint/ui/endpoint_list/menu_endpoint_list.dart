@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mfl_terminal/src/common/utils/mfl_injector.dart';
 import 'package:mfl_terminal/src/features/endpoint/ui/endpoint_list/endpoint_list.dart';
-import 'package:mfl_terminal/src/features/endpoint/ui/global_active_endpoint_state.dart';
+import 'package:mfl_terminal/src/features/endpoint/ui/global_endpoint_state.dart';
 import 'package:provider/provider.dart';
 
 class MenuEndpointList extends StatelessWidget {
@@ -10,7 +10,7 @@ class MenuEndpointList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: injector.get<GlobalActiveEndpointState>().activeEndpoint,
+      valueListenable: injector.get<GlobalEndpointState>().activeEndpoint,
       builder: (context, value, child) {
         return EndpointList(
           rowBuilder: (context, endpoint) {
@@ -22,7 +22,7 @@ class MenuEndpointList extends StatelessWidget {
               subtitle: Text(endpoint.serverurl),
               onTap: () {
                 Navigator.of(context).pop();
-                context.read<GlobalActiveEndpointState>().setActiveEndpoint(endpoint);
+                context.read<GlobalEndpointState>().setActiveEndpoint(endpoint);
               },
             );
           },

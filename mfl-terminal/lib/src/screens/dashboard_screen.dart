@@ -5,7 +5,7 @@ import 'package:mfl_terminal/src/common/widgets/main_menu.dart';
 import 'package:mfl_terminal/src/common/widgets/mfl_scaffold.dart';
 import 'package:mfl_terminal/src/common/widgets/uhr_widget.dart';
 import 'package:mfl_terminal/src/features/endpoint/ui/endpoint_error_message.dart';
-import 'package:mfl_terminal/src/features/endpoint/ui/global_active_endpoint_state.dart';
+import 'package:mfl_terminal/src/features/endpoint/ui/global_endpoint_state.dart';
 import 'package:mfl_terminal/src/features/terminaldetail/ui/operating_hours_display.dart';
 import 'package:mfl_terminal/src/features/terminaldetail/ui/terminal_dashboard_messages.dart';
 import 'package:mfl_terminal/src/features/terminaldetail/ui/terminal_name_display.dart';
@@ -86,7 +86,7 @@ class PilotIdDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: injector.get<GlobalActiveEndpointState>().activeTerminalDetails,
+      valueListenable: injector.get<GlobalEndpointState>().activeTerminalDetails,
       builder: (context, value, child) {
         return value?.showPilotIDOnDashboard ?? false
             ? TextField(

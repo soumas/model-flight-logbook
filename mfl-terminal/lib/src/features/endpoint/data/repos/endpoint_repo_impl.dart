@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mfl_terminal/src/common/utils/storage.dart';
 import 'package:mfl_terminal/src/features/endpoint/data/dtos/endpoint_dto.dart';
 import 'package:mfl_terminal/src/features/endpoint/domain/entities/endpoint.dart';
 import 'package:mfl_terminal/src/features/endpoint/domain/repos/endpoint_repo.dart';
@@ -9,7 +9,25 @@ import 'package:mfl_terminal/src/features/endpoint/domain/repos/endpoint_repo.da
 class EndpointRepoImpl extends EndpointRepo {
   final _storageKeyList = 'endpoints';
   final _storageKeyActive = 'active_endpoint';
-  final _storage = FlutterSecureStorage();
+
+  @override
+  Future<Set<Endpoint>> getEndpoints() async {
+    String? json = await storage.read(key: _storageKeyList);
+    if (json != null) {
+      return (jsonDecode(json) as List).map((e) => EndpointDtoMapper.fromMap(e).toEntity()).toSet();
+    } else {
+      return {};
+    }
+  }
+
+  @override
+  Future<void> setActiveEndpointId(String? endpointId) async {
+    if (endpointId != null) {
+      await storage.write(key: _storageKeyActive, value: endpointId);
+    } else {
+      await storage.delete(key: _storageKeyActive);
+    }
+  }
 
   @override
   Future<void> deleteEndpoint(Endpoint endpoint) async {
@@ -20,41 +38,26 @@ class EndpointRepoImpl extends EndpointRepo {
 
   @override
   Future<Endpoint?> getActiveEndpoint() async {
-    String? json = await _storage.read(key: _storageKeyActive);
-    if (json != null) {
-      return EndpointDtoMapper.fromMap(jsonDecode(json)).toEntity();
+    String? id = await storage.read(key: _storageKeyActive);
+    final lst = await getEndpoints();
+    if (id != null && lst.any((e) => e.id == id)) {
+      return lst.firstWhere((e) => e.id == id);
     } else {
       return null;
     }
   }
 
   @override
-  Future<Set<Endpoint>> getEndpoints() async {
-    String? json = await _storage.read(key: _storageKeyList);
-    if (json != null) {
-      return (jsonDecode(json) as List).map((e) => EndpointDtoMapper.fromMap(e).toEntity()).toSet();
-    } else {
-      return {};
-    }
-  }
-
-  @override
-  Future<Endpoint> setActiveEndpoint(Endpoint endpoint) async {
-    await _storage.write(key: _storageKeyActive, value: jsonEncode(EndpointDto.fromEntity(endpoint).toMap()));
-    return endpoint;
-  }
-
-  @override
   Future<Endpoint> addOrUpdateEndpoint(Endpoint endpoint) async {
     final lst = await getEndpoints();
-    lst.remove(endpoint);
+    lst.removeWhere((existingEp) => existingEp.id == endpoint.id);
     lst.add(endpoint);
     await _writeEndpoints(lst);
     return Future.value(endpoint);
   }
 
-  Future<void> _writeEndpoints(Set<Endpoint> endpoints) {
-    return _storage.write(key: _storageKeyList, value: jsonEncode(endpoints.map((e) => EndpointDto.fromEntity(e).toMap()).toList()));
+  Future<void> _writeEndpoints(Set<Endpoint> endpoints) async {
+    return await storage.write(key: _storageKeyList, value: jsonEncode(endpoints.map((e) => EndpointDto.fromEntity(e).toMap()).toList()));
   }
 
   @override

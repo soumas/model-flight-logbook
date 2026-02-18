@@ -74,6 +74,7 @@ class EndpointForm extends StatelessWidget {
     final backing = context.read<EndpointFormBacking>();
     if (backing.formKey.currentState!.validate()) {
       return Endpoint(
+        id: backing.currentEditID ?? DateTime.now().millisecondsSinceEpoch.toString(),
         title: backing.title.value,
         serverurl: backing.serverurl.value,
         terminalid: backing.terminalid.value,
