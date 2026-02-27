@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
     - name: checkout repo
-      uses: actions/checkout@master    
+      uses: actions/checkout@master
+      with:
+        ref: 'mfl-1.0.21-hotfix01'
     - name: Build MFL terminal for linux arm64
       uses: ./.github/actions/build-mfl-terminal-linux
       with:
