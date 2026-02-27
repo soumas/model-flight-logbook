@@ -38,6 +38,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get delete => 'Löschen';
 
   @override
+  String get saveSuccess => 'Erfolgreich gespeichert';
+
+  @override
   String get mainMenuSettings => 'Einstellungen';
 
   @override
@@ -89,10 +92,21 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get settingsOthers => 'Sonstiges';
+
+  @override
   String get settingsAdminpin => 'Admin PIN';
 
   @override
-  String get settingsOthers => 'Sonstiges';
+  String get settingsAdminpinForgotten =>
+      'Wenn Sie den Admin PIN vergessen haben, können Sie den Screen mit einem Terminal API-Key freischalten.';
+
+  @override
+  String get settingsAdminpinText =>
+      'Setzen Sie einen Admin PIN um diese Administrationsmaske vor unerwünschten Zugriffen zu schützen. Um den Admin PIN zurückzusetzen setzen Sie einen leeren Admin PIN.';
+
+  @override
+  String get settingsAdminpinInvalid => 'Ungültiger Admin PIN';
 
   @override
   String get apiResponseReasonInvalidApiKey => 'Ungültiger Api Key';

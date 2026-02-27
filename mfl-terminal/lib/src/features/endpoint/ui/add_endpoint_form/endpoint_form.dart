@@ -27,13 +27,9 @@ class EndpointForm extends StatelessWidget {
           key: context.read<EndpointFormBacking>().formKey,
           child: Column(
             children: [
-              const SizedBox(height: 16),
               const TitleField(),
-              const SizedBox(height: 16),
               const ServerUrlField(),
-              const SizedBox(height: 16),
               const TerminalIdField(),
-              const SizedBox(height: 16),
               const ApiKeyField(),
               const SizedBox(height: 16),
               Row(
@@ -62,7 +58,7 @@ class EndpointForm extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
             ],
           ),
         );

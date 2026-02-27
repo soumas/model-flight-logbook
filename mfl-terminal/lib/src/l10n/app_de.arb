@@ -8,6 +8,7 @@
   "add":"Hinzufügen",
   "save":"Speichern",
   "delete":"Löschen",
+  "saveSuccess":"Erfolgreich gespeichert",
 
   "mainMenuSettings":"Einstellungen",
 
@@ -26,9 +27,12 @@
   "settingsEndpoints":"Verbindungen",
   "settingsAddEndpoint":"Verbindung hinzufügen",
   "settingsEditEndpoint":"Verbindung bearbeiten",
-  "settingsDeleteEndpointConfirmation":"Möchten Sie die Verbindung '{name}' wirklich löschen?",
-  "settingsAdminpin":"Admin PIN",
+  "settingsDeleteEndpointConfirmation":"Möchten Sie die Verbindung '{name}' wirklich löschen?",  
   "settingsOthers":"Sonstiges",
+  "settingsAdminpin":"Admin PIN",
+  "settingsAdminpinForgotten":"Wenn Sie den Admin PIN vergessen haben, können Sie den Screen mit einem Terminal API-Key freischalten.",
+  "settingsAdminpinText":"Setzen Sie einen Admin PIN um diese Administrationsmaske vor unerwünschten Zugriffen zu schützen. Um den Admin PIN zurückzusetzen setzen Sie einen leeren Admin PIN.",
+  "settingsAdminpinInvalid":"Ungültiger Admin PIN",
 
   "apiResponseReasonInvalidApiKey": "Ungültiger Api Key",
   "apiResponseReasonFlightsessionNotFound": "Der angeforderte Flugbucheintrag wurde nicht gefunden",

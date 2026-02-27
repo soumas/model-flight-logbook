@@ -148,6 +148,12 @@ abstract class AppLocalizations {
   /// **'Löschen'**
   String get delete;
 
+  /// No description provided for @saveSuccess.
+  ///
+  /// In de, this message translates to:
+  /// **'Erfolgreich gespeichert'**
+  String get saveSuccess;
+
   /// No description provided for @mainMenuSettings.
   ///
   /// In de, this message translates to:
@@ -238,17 +244,35 @@ abstract class AppLocalizations {
   /// **'Möchten Sie die Verbindung \'{name}\' wirklich löschen?'**
   String settingsDeleteEndpointConfirmation(Object name);
 
+  /// No description provided for @settingsOthers.
+  ///
+  /// In de, this message translates to:
+  /// **'Sonstiges'**
+  String get settingsOthers;
+
   /// No description provided for @settingsAdminpin.
   ///
   /// In de, this message translates to:
   /// **'Admin PIN'**
   String get settingsAdminpin;
 
-  /// No description provided for @settingsOthers.
+  /// No description provided for @settingsAdminpinForgotten.
   ///
   /// In de, this message translates to:
-  /// **'Sonstiges'**
-  String get settingsOthers;
+  /// **'Wenn Sie den Admin PIN vergessen haben, können Sie den Screen mit einem Terminal API-Key freischalten.'**
+  String get settingsAdminpinForgotten;
+
+  /// No description provided for @settingsAdminpinText.
+  ///
+  /// In de, this message translates to:
+  /// **'Setzen Sie einen Admin PIN um diese Administrationsmaske vor unerwünschten Zugriffen zu schützen. Um den Admin PIN zurückzusetzen setzen Sie einen leeren Admin PIN.'**
+  String get settingsAdminpinText;
+
+  /// No description provided for @settingsAdminpinInvalid.
+  ///
+  /// In de, this message translates to:
+  /// **'Ungültiger Admin PIN'**
+  String get settingsAdminpinInvalid;
 
   /// No description provided for @apiResponseReasonInvalidApiKey.
   ///
