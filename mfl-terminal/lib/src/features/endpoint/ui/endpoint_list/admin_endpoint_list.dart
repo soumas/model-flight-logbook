@@ -53,7 +53,7 @@ class AdminEndpointList extends StatelessWidget {
             );
           },
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 15),
         ElevatedButton(
           onPressed: () {
             Navigator.of(context).pushNamed(EndpointDetailScreen.route);

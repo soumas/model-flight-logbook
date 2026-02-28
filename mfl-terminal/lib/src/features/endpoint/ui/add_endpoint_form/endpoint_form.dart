@@ -31,7 +31,7 @@ class EndpointForm extends StatelessWidget {
               const ServerUrlField(),
               const TerminalIdField(),
               const ApiKeyField(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 15),
               Row(
                 children: [
                   ElevatedButton(
@@ -58,7 +58,7 @@ class EndpointForm extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 30),
             ],
           ),
         );
