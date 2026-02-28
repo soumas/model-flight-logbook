@@ -12,10 +12,9 @@ class ApiKeyField extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.read<EndpointFormBacking>().apikey;
     return MflTextFormField(
-      description: 'bla bla bla',
       label: AppLocalizations.of(context)!.endpointFormFieldApiKey,
       value: state,
-      onChanged: (value) => state.value = value,
+      onAccept: (value) => state.value = value,
       obscureText: true,
       validator: FormValidator(context).required().build(),
     );

@@ -14,7 +14,7 @@ class ServerUrlField extends StatelessWidget {
     return MflTextFormField(
       label: AppLocalizations.of(context)!.endpointFormFieldServerUrl,
       value: state,
-      onChanged: (value) => state.value = value,
+      onAccept: (value) => state.value = value,
       validator: FormValidator(context).required().url().build(),
       readOnly: !context.read<EndpointFormBacking>().isCreate,
     );

@@ -13,16 +13,22 @@ class AdminpinUnlockForm extends StatelessWidget {
     return Consumer<AdminpinUnlockedState>(
       builder: (context, adminpinState, child) {
         // settingsAdminpinSave
-        return MflTextFormField(
-          label: AppLocalizations.of(context)!.settingsAdminpin,
-          obscureText: true,
-          description: AppLocalizations.of(context)!.settingsAdminpinForgotten,
-          onChanged: (value) {
-            adminpinState.unlock(value);
-            if (adminpinState.value != true) {
-              Toast.error(context: context, message: AppLocalizations.of(context)!.settingsAdminpinInvalid);
-            }
-          },
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(AppLocalizations.of(context)!.settingsAdminpinUnlockText),
+            MflTextFormField(
+              label: AppLocalizations.of(context)!.settingsAdminpin,
+              obscureText: true,
+              description: AppLocalizations.of(context)!.settingsAdminpinForgotten,
+              onAccept: (value) {
+                adminpinState.unlock(value);
+                if (adminpinState.value != true) {
+                  Toast.error(context: context, message: AppLocalizations.of(context)!.settingsAdminpinInvalid);
+                }
+              },
+            ),
+          ],
         );
       },
     );

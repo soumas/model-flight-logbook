@@ -7,8 +7,10 @@
   "cancel":"Abbrechen",
   "add":"Hinzufügen",
   "save":"Speichern",
+  "takeOver":"Übernehmen",
   "delete":"Löschen",
   "saveSuccess":"Erfolgreich gespeichert",
+  "functionNotSupported":"Diese Funktion wird nicht unterstützt",
 
   "mainMenuSettings":"Einstellungen",
 
@@ -33,6 +35,9 @@
   "settingsAdminpinForgotten":"Wenn Sie den Admin PIN vergessen haben, können Sie den Screen mit einem Terminal API-Key freischalten.",
   "settingsAdminpinText":"Setzen Sie einen Admin PIN um diese Administrationsmaske vor unerwünschten Zugriffen zu schützen. Um den Admin PIN zurückzusetzen setzen Sie einen leeren Admin PIN.",
   "settingsAdminpinInvalid":"Ungültiger Admin PIN",
+  "settingsAdminpinUnlockText":"Bitte geben Sie den Admin PIN ein, um auf die Einstellungen zu gelangen.",
+  "settingsAdminpinSaved":"Admin PIN gespeichert",
+  "settingsAdminpinResetted":"Admin PIN zurückgesetzt",
 
   "apiResponseReasonInvalidApiKey": "Ungültiger Api Key",
   "apiResponseReasonFlightsessionNotFound": "Der angeforderte Flugbucheintrag wurde nicht gefunden",

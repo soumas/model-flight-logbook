@@ -35,10 +35,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get save => 'Speichern';
 
   @override
+  String get takeOver => 'Übernehmen';
+
+  @override
   String get delete => 'Löschen';
 
   @override
   String get saveSuccess => 'Erfolgreich gespeichert';
+
+  @override
+  String get functionNotSupported => 'Diese Funktion wird nicht unterstützt';
 
   @override
   String get mainMenuSettings => 'Einstellungen';
@@ -107,6 +113,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsAdminpinInvalid => 'Ungültiger Admin PIN';
+
+  @override
+  String get settingsAdminpinUnlockText =>
+      'Bitte geben Sie den Admin PIN ein, um auf die Einstellungen zu gelangen.';
+
+  @override
+  String get settingsAdminpinSaved => 'Admin PIN gespeichert';
+
+  @override
+  String get settingsAdminpinResetted => 'Admin PIN zurückgesetzt';
 
   @override
   String get apiResponseReasonInvalidApiKey => 'Ungültiger Api Key';

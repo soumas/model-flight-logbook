@@ -14,7 +14,7 @@ class TerminalIdField extends StatelessWidget {
     return MflTextFormField(
       label: AppLocalizations.of(context)!.endpointFormFieldTerminalId,
       value: state,
-      onChanged: (value) => state.value = value,
+      onAccept: (value) => state.value = value,
       validator: FormValidator(context).required().build(),
       readOnly: !context.read<EndpointFormBacking>().isCreate,
     );

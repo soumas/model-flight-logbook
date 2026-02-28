@@ -14,7 +14,7 @@ class TitleField extends StatelessWidget {
     return MflTextFormField(
       label: AppLocalizations.of(context)!.endpointFormFieldTitle,
       value: state,
-      onChanged: (value) => state.value = value,
+      onAccept: (value) => state.value = value,
       validator: FormValidator(context).required().build(),
     );
   }

@@ -142,6 +142,12 @@ abstract class AppLocalizations {
   /// **'Speichern'**
   String get save;
 
+  /// No description provided for @takeOver.
+  ///
+  /// In de, this message translates to:
+  /// **'Übernehmen'**
+  String get takeOver;
+
   /// No description provided for @delete.
   ///
   /// In de, this message translates to:
@@ -153,6 +159,12 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Erfolgreich gespeichert'**
   String get saveSuccess;
+
+  /// No description provided for @functionNotSupported.
+  ///
+  /// In de, this message translates to:
+  /// **'Diese Funktion wird nicht unterstützt'**
+  String get functionNotSupported;
 
   /// No description provided for @mainMenuSettings.
   ///
@@ -273,6 +285,24 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Ungültiger Admin PIN'**
   String get settingsAdminpinInvalid;
+
+  /// No description provided for @settingsAdminpinUnlockText.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte geben Sie den Admin PIN ein, um auf die Einstellungen zu gelangen.'**
+  String get settingsAdminpinUnlockText;
+
+  /// No description provided for @settingsAdminpinSaved.
+  ///
+  /// In de, this message translates to:
+  /// **'Admin PIN gespeichert'**
+  String get settingsAdminpinSaved;
+
+  /// No description provided for @settingsAdminpinResetted.
+  ///
+  /// In de, this message translates to:
+  /// **'Admin PIN zurückgesetzt'**
+  String get settingsAdminpinResetted;
 
   /// No description provided for @apiResponseReasonInvalidApiKey.
   ///

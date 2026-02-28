@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:mfl_terminal/src/common/utils/toast.dart';
 import 'package:mfl_terminal/src/common/widgets/mfl_scaffold.dart';
 import 'package:mfl_terminal/src/features/adminpin/ui/adminpin_unlock_form.dart';
 import 'package:mfl_terminal/src/features/adminpin/ui/adminpin_unlocked_state.dart';
@@ -21,8 +24,11 @@ class SettingsScreen extends StatelessWidget {
         create: (BuildContext context) => AdminpinUnlockedState()..init(),
         child: Consumer<AdminpinUnlockedState>(
           builder: (BuildContext context, AdminpinUnlockedState value, Widget? child) {
-            return value.value
-                ? Column(
+            return Stack(
+              children: [
+                Offstage(
+                  offstage: !value.value,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(AppLocalizations.of(context)!.settingsEndpoints, style: Theme.of(context).textTheme.headlineLarge),
@@ -35,10 +41,23 @@ class SettingsScreen extends StatelessWidget {
                       const SizedBox(height: 32),
                       Text(AppLocalizations.of(context)!.settingsOthers, style: Theme.of(context).textTheme.headlineLarge),
                       const Divider(),
-                      Text('TODO'),
+                      ElevatedButton(
+                        onPressed: () {
+                          try {
+                            exit(0);
+                          } on UnsupportedError {
+                            Toast.error(context: context, message: AppLocalizations.of(context)!.functionNotSupported);
+                          }
+                        },
+                        child: const Text('Terminal beenden'),
+                      ),
+                      const SizedBox(height: 32),
                     ],
-                  )
-                : const AdminpinUnlockForm();
+                  ),
+                ),
+                Offstage(offstage: value.value, child: const AdminpinUnlockForm()),
+              ],
+            );
           },
         ),
       ),

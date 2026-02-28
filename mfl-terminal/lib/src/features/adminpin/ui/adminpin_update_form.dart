@@ -18,21 +18,19 @@ class AdminpinUpdateForm extends StatelessWidget {
             children: [
               MflTextFormField(
                 label: AppLocalizations.of(context)!.settingsAdminpin,
-                onChanged: (value) => context.read<AdminpinUpdateFormBacking>().pin.value = value,
+                onAccept: (value) async {
+                  context.read<AdminpinUpdateFormBacking>().pin.value = value;
+                  await context.read<AdminpinUpdateFormBacking>().save();
+                  if (context.mounted) {
+                    final msg = value.isEmpty
+                        ? AppLocalizations.of(context)!.settingsAdminpinResetted
+                        : AppLocalizations.of(context)!.settingsAdminpinSaved;
+                    Toast.success(context: context, message: msg);
+                  }
+                },
                 value: context.read<AdminpinUpdateFormBacking>().pin,
                 obscureText: true,
                 description: AppLocalizations.of(context)!.settingsAdminpinText,
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: ElevatedButton.icon(
-                  onPressed: () async {
-                    await context.read<AdminpinUpdateFormBacking>().save();
-                    if (context.mounted) Toast.success(context: context, message: AppLocalizations.of(context)!.saveSuccess);
-                  },
-                  label: Text(AppLocalizations.of(context)!.save),
-                  icon: Icon(Icons.save),
-                ),
               ),
             ],
           );
