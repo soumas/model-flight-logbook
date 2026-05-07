@@ -26,7 +26,20 @@ class _PilotStatusScreenState extends State<PilotStatusScreen> {
   @override
   Widget build(BuildContext context) {
     return MflScaffold(
-      child1: ElevatedButton(onPressed: Navigator.of(context).pop, child: Text('test')),
+      child1: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => Container(height: 200, child: Center(child: Text('Pilot ID: ${widget.pilotId}'))),
+              );
+            },
+            child: Text('bottom up'),
+          ),
+          ElevatedButton(onPressed: Navigator.of(context).pop, child: Text('zurück')),
+        ],
+      ),
       child2: LinearProgressIndicator(value: 1 / _autoCloseDurationSeconds * _autoCloseRemainingSeconds),
     );
   }
